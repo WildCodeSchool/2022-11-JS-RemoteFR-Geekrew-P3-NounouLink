@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> cb9a8bef537f5e1ade35138ea2743e865eca2d22
 function App() {
   return (
     <div className="text-yellow-400 flex">
@@ -12,7 +8,6 @@ function App() {
         c'est moche
       </p>
     </div>
-
   );
 }
 
