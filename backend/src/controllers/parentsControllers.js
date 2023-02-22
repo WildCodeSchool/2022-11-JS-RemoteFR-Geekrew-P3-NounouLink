@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.parent
+  models.parents
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,8 +13,8 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.parent
-    .find(req.params.idparent)
+  models.parents
+    .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -29,14 +29,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const parent = req.body;
+  const parents = req.body;
 
   // TODO validations (length, format...)
 
-  parent.idparent = parseInt(req.params.id, 10);
+  parents.idparents = parseInt(req.params.id, 10);
 
-  models.parent
-    .update(parent)
+  models.parents
+    .update(parents)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -51,12 +51,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const parent = req.body;
+  const parents = req.body;
 
   // TODO validations (length, format...)
 
-  models.parent
-    .insert(parent)
+  models.parents
+    .insert(parents)
     .then(([result]) => {
       res.location(`/parents/${result.insertId}`).sendStatus(201);
     })
@@ -67,8 +67,8 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.parent
-    .delete(req.params.idparent)
+  models.parents
+    .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

@@ -19,13 +19,13 @@ class ParentsManager extends AbstractManager {
 
   update(parents) {
     return this.database.query(
-      `update ${this.table} set numcaf = ? , autsortie = ? ,droitimage = ?, users_iduser = ? , where idparent = ?`,
+      `update ${this.table} set numcaf = ? , autsortie = ? ,droitimage = ?, users_iduser = ? , where idparents = ?`,
       [
         parents.numcaf,
         parents.autsortie,
         parents.droitimage,
         parents.users_iduser,
-        parents.idparent,
+        parents.idparents,
       ]
     );
   }

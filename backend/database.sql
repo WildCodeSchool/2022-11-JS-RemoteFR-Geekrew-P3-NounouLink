@@ -84,15 +84,15 @@ DROP TABLE IF EXISTS `favoris`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favoris` (
   `idfavoris` int NOT NULL AUTO_INCREMENT,
-  `parents_idparent` int NOT NULL,
+  `parents_idparents` int NOT NULL,
   `parents_users_iduser` int NOT NULL,
   `nounous_idnounou` int NOT NULL,
   `nounous_users_iduser` int NOT NULL,
-  PRIMARY KEY (`idfavoris`,`parents_idparent`,`parents_users_iduser`,`nounous_idnounou`,`nounous_users_iduser`),
-  KEY `fk_favoris_parents1_idx` (`parents_idparent`,`parents_users_iduser`),
+  PRIMARY KEY (`idfavoris`,`parents_idparents`,`parents_users_iduser`,`nounous_idnounou`,`nounous_users_iduser`),
+  KEY `fk_favoris_parents1_idx` (`parents_idparents`,`parents_users_iduser`),
   KEY `fk_favoris_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
   CONSTRAINT `fk_favoris_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
-  CONSTRAINT `fk_favoris_parents1` FOREIGN KEY (`parents_idparent`, `parents_users_iduser`) REFERENCES `parents` (`idparent`, `users_iduser`)
+  CONSTRAINT `fk_favoris_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_iduser`) REFERENCES `parents` (`idparents`, `users_iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -185,30 +185,30 @@ LOCK TABLES `nounous_has_services` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `parent_has_enfants`
+-- Table structure for table `parents_has_enfants`
 --
 
-DROP TABLE IF EXISTS `parent_has_enfants`;
+DROP TABLE IF EXISTS `parents_has_enfants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `parent_has_enfants` (
-  `parent_idparent` int NOT NULL,
+CREATE TABLE `parents_has_enfants` (
+  `parents_idparents` int NOT NULL,
   `enfants_idenfants` int NOT NULL,
-  PRIMARY KEY (`parent_idparent`,`enfants_idenfants`),
-  KEY `fk_parent_has_enfants_enfants1_idx` (`enfants_idenfants`),
-  KEY `fk_parent_has_enfants_parent_idx` (`parent_idparent`),
-  CONSTRAINT `fk_parent_has_enfants_enfants1` FOREIGN KEY (`enfants_idenfants`) REFERENCES `enfants` (`idenfants`),
-  CONSTRAINT `fk_parent_has_enfants_parent` FOREIGN KEY (`parent_idparent`) REFERENCES `parents` (`idparent`)
+  PRIMARY KEY (`parents_idparents`,`enfants_idenfants`),
+  KEY `fk_parents_has_enfants_enfants1_idx` (`enfants_idenfants`),
+  KEY `fk_parents_has_enfants_parents_idx` (`parents_idparents`),
+  CONSTRAINT `fk_parents_has_enfants_enfants1` FOREIGN KEY (`enfants_idenfants`) REFERENCES `enfants` (`idenfants`),
+  CONSTRAINT `fk_parents_has_enfants_parents` FOREIGN KEY (`parents_idparents`) REFERENCES `parents` (`idparents`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `parent_has_enfants`
+-- Dumping data for table `parents_has_enfants`
 --
 
-LOCK TABLES `parent_has_enfants` WRITE;
-/*!40000 ALTER TABLE `parent_has_enfants` DISABLE KEYS */;
-/*!40000 ALTER TABLE `parent_has_enfants` ENABLE KEYS */;
+LOCK TABLES `parents_has_enfants` WRITE;
+/*!40000 ALTER TABLE `parents_has_enfants` DISABLE KEYS */;
+/*!40000 ALTER TABLE `parents_has_enfants` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -219,12 +219,12 @@ DROP TABLE IF EXISTS `parents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `parents` (
-  `idparent` int NOT NULL AUTO_INCREMENT,
+  `idparents` int NOT NULL AUTO_INCREMENT,
   `numcaf` varchar(45) DEFAULT NULL,
   `autsortie` varchar(45) DEFAULT NULL,
   `droitimage` varchar(45) DEFAULT NULL,
   `users_iduser` int NOT NULL,
-  PRIMARY KEY (`idparent`,`users_iduser`),
+  PRIMARY KEY (`idparents`,`users_iduser`),
   KEY `fk_parent_users1_idx` (`users_iduser`),
   CONSTRAINT `fk_parent_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -247,7 +247,7 @@ DROP TABLE IF EXISTS `reservations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reservations` (
-  `parents_idparent` int NOT NULL,
+  `parents_idparents` int NOT NULL,
   `parents_users_iduser` int NOT NULL,
   `nounous_idnounou` int NOT NULL,
   `nounous_users_iduser` int NOT NULL,
@@ -256,11 +256,11 @@ CREATE TABLE `reservations` (
   `enddate` datetime DEFAULT NULL,
   `frequence` tinyint DEFAULT NULL,
   `flexibility` tinyint DEFAULT NULL,
-  PRIMARY KEY (`parents_idparent`,`parents_users_iduser`,`nounous_idnounou`,`nounous_users_iduser`),
+  PRIMARY KEY (`parents_idparents`,`parents_users_iduser`,`nounous_idnounou`,`nounous_users_iduser`),
   KEY `fk_parents_has_nounous_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
-  KEY `fk_parents_has_nounous_parents1_idx` (`parents_idparent`,`parents_users_iduser`),
+  KEY `fk_parents_has_nounous_parents1_idx` (`parents_idparents`,`parents_users_iduser`),
   CONSTRAINT `fk_parents_has_nounous_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
-  CONSTRAINT `fk_parents_has_nounous_parents1` FOREIGN KEY (`parents_idparent`, `parents_users_iduser`) REFERENCES `parents` (`idparent`, `users_iduser`)
+  CONSTRAINT `fk_parents_has_nounous_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_iduser`) REFERENCES `parents` (`idparents`, `users_iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

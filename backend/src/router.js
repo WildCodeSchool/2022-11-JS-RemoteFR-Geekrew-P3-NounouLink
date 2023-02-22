@@ -7,7 +7,7 @@ const crenauxControllers = require("./controllers/crenauxControllers");
 const enfantsControllers = require("./controllers/enfantsControllers");
 const favorisControllers = require("./controllers/favorisControllers");
 const nounousControllers = require("./controllers/nounousControllers");
-const parentControllers = require("./controllers/parentControllers");
+const parentsControllers = require("./controllers/parentsControllers");
 const reservationsControllers = require("./controllers/reservationsControllers");
 const servicesControllers = require("./controllers/servicesControllers");
 const superutilisateurControllers = require("./controllers/superutilisateurControllers");
@@ -43,11 +43,11 @@ router.put("/nounous/:id", nounousControllers.edit);
 router.post("/nounous", nounousControllers.add);
 router.delete("/nounous/:id", nounousControllers.destroy);
 
-router.get("/parents", parentControllers.browse);
-router.get("/parents/:idparent", parentControllers.read);
-router.put("/parents/:id", parentControllers.edit);
-router.post("/parents", parentControllers.add);
-router.delete("/parents/:id", parentControllers.destroy);
+router.get("/parents", parentsControllers.browse);
+router.get("/parents/:id", parentsControllers.read);
+router.put("/parents/:id", parentsControllers.edit);
+router.post("/parents", parentsControllers.add);
+router.delete("/parents/:id", parentsControllers.destroy);
 
 router.get("/reservations", reservationsControllers.browse);
 router.get("/reservations/:id", reservationsControllers.read);

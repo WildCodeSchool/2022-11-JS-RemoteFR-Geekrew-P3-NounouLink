@@ -49,10 +49,10 @@ const NounousManager = require("./NounousManager");
 models.nounous = new NounousManager();
 models.nounous.setDatabase(pool);
 
-const ParentManager = require("./ParentManager");
+const ParentsManager = require("./ParentsManager");
 
-models.parent = new ParentManager();
-models.parent.setDatabase(pool);
+models.parents = new ParentsManager();
+models.parents.setDatabase(pool);
 
 const EnfantsManager = require("./EnfantsManager");
 
