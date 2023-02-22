@@ -34,6 +34,53 @@ const ItemManager = require("./ItemManager");
 models.item = new ItemManager();
 models.item.setDatabase(pool);
 
+const SuperutilisateurManager = require("./SuperutilisateurManager");
+
+models.superutilisateur = new SuperutilisateurManager();
+models.superutilisateur.setDatabase(pool);
+
+const UsersManager = require("./UsersManager");
+
+models.users = new UsersManager();
+models.users.setDatabase(pool);
+
+const NounousManager = require("./NounousManager");
+
+models.nounous = new NounousManager();
+models.nounous.setDatabase(pool);
+
+const ParentManager = require("./ParentManager");
+
+models.parent = new ParentManager();
+models.parent.setDatabase(pool);
+
+const EnfantsManager = require("./EnfantsManager");
+
+models.enfants = new EnfantsManager();
+models.enfants.setDatabase(pool);
+
+const ReservationsManager = require("./ReservationsManager");
+
+models.reservation = new ReservationsManager();
+models.reservation.setDatabase(pool);
+
+const FavorisManager = require("./FavorisManager");
+
+models.favoris = new FavorisManager();
+models.favoris.setDatabase(pool);
+
+const CrenauxManager = require("./CrenauxManager");
+
+models.crenaux = new CrenauxManager();
+models.crenaux.setDatabase(pool);
+
+const ServicesManager = require("./ServicesManager");
+
+models.services = new ServicesManager();
+models.services.setDatabase(pool);
+
+// export models
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
