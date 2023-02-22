@@ -33,7 +33,7 @@ CREATE TABLE `crenaux` (
   PRIMARY KEY (`idcrenaux`,`nounous_idnounou`,`nounous_users_iduser`),
   KEY `fk_crenaux_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
   CONSTRAINT `fk_crenaux_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='	';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='	';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `enfants` (
   `assurance` varchar(45) DEFAULT NULL,
   `carnetsante` tinyint DEFAULT NULL,
   PRIMARY KEY (`idenfants`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `favoris` (
   KEY `fk_favoris_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
   CONSTRAINT `fk_favoris_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
   CONSTRAINT `fk_favoris_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_iduser`) REFERENCES `parents` (`idparents`, `users_iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `nounous` (
   PRIMARY KEY (`idnounou`,`users_iduser`),
   KEY `fk_nounous_users1_idx` (`users_iduser`),
   CONSTRAINT `fk_nounous_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ CREATE TABLE `nounous_has_services` (
   KEY `fk_nounous_has_services_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
   CONSTRAINT `fk_nounous_has_services_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
   CONSTRAINT `fk_nounous_has_services_services1` FOREIGN KEY (`services_idservices`) REFERENCES `services` (`idservices`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +199,7 @@ CREATE TABLE `parents_has_enfants` (
   KEY `fk_parents_has_enfants_parents_idx` (`parents_idparents`),
   CONSTRAINT `fk_parents_has_enfants_enfants1` FOREIGN KEY (`enfants_idenfants`) REFERENCES `enfants` (`idenfants`),
   CONSTRAINT `fk_parents_has_enfants_parents` FOREIGN KEY (`parents_idparents`) REFERENCES `parents` (`idparents`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +227,7 @@ CREATE TABLE `parents` (
   PRIMARY KEY (`idparents`,`users_iduser`),
   KEY `fk_parent_users1_idx` (`users_iduser`),
   CONSTRAINT `fk_parent_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,7 +261,7 @@ CREATE TABLE `reservations` (
   KEY `fk_parents_has_nounous_parents1_idx` (`parents_idparents`,`parents_users_iduser`),
   CONSTRAINT `fk_parents_has_nounous_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
   CONSTRAINT `fk_parents_has_nounous_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_iduser`) REFERENCES `parents` (`idparents`, `users_iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +284,7 @@ CREATE TABLE `services` (
   `idservices` int NOT NULL AUTO_INCREMENT,
   `serviceName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idservices`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +310,7 @@ CREATE TABLE `superutilisateur` (
   PRIMARY KEY (`idsuperutilisateur`,`users_iduser`),
   KEY `fk_superutilisateur_users1_idx` (`users_iduser`),
   CONSTRAINT `fk_superutilisateur_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +339,7 @@ CREATE TABLE `users` (
   `phone` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
