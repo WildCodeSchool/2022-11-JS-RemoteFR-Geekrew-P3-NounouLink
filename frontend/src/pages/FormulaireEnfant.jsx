@@ -1,30 +1,53 @@
-/* import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function FromulaireEnfant() {
+function FormulaireEnfant() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const [canwalk, setCanWalk] = useState(false);
-  const [allergies, setAllergies] = useState("");
+  const [allergie, setAllergie] = useState("");
   const [medecinTraitant, setMedecinTraitant] = useState("");
   const [assurance, setAssurance] = useState(null);
-  const [enfantId, setEnfantId] = useState(null);
+  const [carnetsante, setCarnetSante] = useState(null);
+  const [idenfants, setIdEnfants] = useState(null);
+
+  useEffect(() => {
+    if (idenfants) {
+      axios
+        .get(`/api/enfants/${idenfants}`)
+        .then((response) => {
+          const data = response.data;
+          setFirstname(data.firstname);
+          setLastname(data.lastname);
+          setBirthDate(data.birthdate);
+          setCanWalk(data.canwalk);
+          setAllergie(data.allergie);
+          setMedecinTraitant(data.medecinTraitant);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert(
+            "Une erreur est survenue lors de la récupération des données de l'enfant."
+          );
+        });
+    }
+  }, [idenfants]);
 
   useEffect(() => {
     const formData = new FormData();
     formData.append("assurance", assurance);
 
-    if (enfantId && assurance) {
+    if (idenfants && assurance) {
       axios
-        .post(`/api/enfants/${enfantId}/upload`, formData)
+        .post(`/api/enfants/${idenfants}/upload`, formData)
         .then(() => alert("Le fichier a été enregistré avec succès !"))
         .catch((error) => {
           console.error(error);
           alert("Une erreur est survenue lors de l'enregistrement du fichier.");
         });
     }
-  }, [enfantId, assurance]);
+  }, [idenfants, assurance]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,15 +57,15 @@ function FromulaireEnfant() {
       lastname,
       birthdate,
       canwalk,
-      allergies,
+      allergie,
       assurance,
       carnetsante,
     };
 
     axios
-      .post("/api/enfants", dossierEnfant)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, dossierEnfant)
       .then((response) => {
-        setEnfantId(response.data.id);
+        setIdEnfants(response.data.id);
         alert("Le dossier a été enregistré avec succès !");
       })
       .catch((error) => {
@@ -53,7 +76,8 @@ function FromulaireEnfant() {
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
-    setAssurance(file), setCarnetSante(file);
+    setAssurance(file);
+    setCarnetSante(file);
   };
 
   return (
@@ -64,35 +88,41 @@ function FromulaireEnfant() {
           className="text-grey-input grid gap-4 justify-center "
           onSubmit={handleSubmit}
         >
-          <input
-            className="border-solid border-2 border-grey-input"
-            type="text"
-            id="firstname"
-            value={firstname}
-            onChange={(event) => setFirstname(event.target.value)}
-            required
-            placeholder="nom"
-          />
-          <input
-            className="border-solid border-2 border-grey-input"
-            type="text"
-            id="lastname"
-            value={lastname}
-            onChange={(event) => setLastname(event.target.value)}
-            required
-            placeholder="Prénom"
-          />
-          <input
-            className="border-solid border-2 border-grey-input"
-            type="date"
-            id="birthdate"
-            value={birthdate}
-            onChange={(event) => setBirthDate(event.target.value)}
-            required
-            placeholder="date de naissance"
-          />
+          <label htmlFor="firstname">
+            <input
+              className="border-solid border-2 border-grey-input"
+              type="text"
+              id="firstname"
+              value={firstname}
+              onChange={(event) => setFirstname(event.target.value)}
+              required
+              placeholder="nom"
+            />
+          </label>
+          <label htmlFor="lastname">
+            <input
+              className="border-solid border-2 border-grey-input"
+              type="text"
+              id="lastname"
+              value={lastname}
+              onChange={(event) => setLastname(event.target.value)}
+              required
+              placeholder="Prénom"
+            />
+          </label>
+          <label htmlFor="birthdate">
+            <input
+              className="border-solid border-2 border-grey-input"
+              type="date"
+              id="birthdate"
+              value={birthdate}
+              onChange={(event) => setBirthDate(event.target.value)}
+              required
+              placeholder="date de naissance"
+            />
+          </label>
 
-          <label>Marche :</label>
+          <label htmlFor="canwalk">Marche :</label>
           <input
             className="border-solid border-2 border-grey-input"
             type="checkbox"
@@ -102,17 +132,17 @@ function FromulaireEnfant() {
             placeholder="marche"
           />
 
-          <label>Allergies :</label>
+          <label htmlFor="allergie">Allergies :</label>
           <input
             className="border-solid border-2 border-grey-input"
             type="text"
-            id="allergies"
-            value={allergies}
-            onChange={(event) => setAllergies(event.target.value)}
+            id="allergie"
+            value={allergie}
+            onChange={(event) => setAllergie(event.target.value)}
             placeholder="allergies"
           />
 
-          <label>Médecin traitant :</label>
+          <label htmlFor="medecinTraitant">Médecin traitant :</label>
           <input
             className="border-solid border-2 border-grey-input"
             type="text"
@@ -121,10 +151,10 @@ function FromulaireEnfant() {
             onChange={(event) => setMedecinTraitant(event.target.value)}
           />
 
-          <label>Assurance :</label>
+          <label htmlFor="Assurance">Assurance :</label>
           <input type="file" id="assurance" onChange={handleUpload} />
 
-          <label>carnet santé : </label>
+          <label htmlFor="carnetsante">carnet santé : </label>
           <input type="file" id="carnetsante" onChange={handleUpload} />
 
           <button type="submit">Enregistrer</button>
@@ -133,4 +163,4 @@ function FromulaireEnfant() {
     </div>
   );
 }
-export default FromulaireEnfant; */
+export default FormulaireEnfant;
