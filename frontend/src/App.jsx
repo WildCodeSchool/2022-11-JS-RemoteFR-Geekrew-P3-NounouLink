@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./assets/logo.svg";
 import next from "./assets/next.svg";
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
+  const [password, setPassword] = useState("");
+
+  const isValidEmail = (mail) => {
+    return /^[\w-_.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(mail);
+  };
+
+  const handleEmailChange = (event) => {
+    if (!isValidEmail(event.target.value)) {
+      setError("Email is invalid");
+    } else {
+      setError(null);
+    }
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
     <div className="gradient-linear flex flex-col items-center justify-between py-8 h-full w-full font-nunito text-white">
       <img src={logo} alt="logo NounouLink" />
@@ -14,7 +35,10 @@ function App() {
             name="email"
             id="email"
             placeholder="Adresse mail"
+            value={email}
+            onChange={handleEmailChange}
           />
+          {error && <h2 className="text-red-500">{error}</h2>}
         </label>
         <label className="mix-blend-screen" htmlFor="password">
           <input
@@ -23,6 +47,8 @@ function App() {
             name="password"
             id="password"
             placeholder="Mot de passe"
+            value={password}
+            onChange={handlePasswordChange}
           />
         </label>
         <button className="btn-purple" type="button">
