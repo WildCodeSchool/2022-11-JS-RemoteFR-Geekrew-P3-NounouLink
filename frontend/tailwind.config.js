@@ -11,6 +11,7 @@ module.exports = {
         grey: "#4B5D68",
         "dark-blue": "#212353",
         purple: "#7E72F2",
+        "dark-purple": "#882BFF",
         pink: "#F063A7",
         green: "#2DCD7A",
         "purple-linear":
@@ -27,6 +28,13 @@ module.exports = {
       },
       dropShadow: {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",
+      },
+      gridTemplateRows: {
+        // Simple 8 row grid
+        8: "repeat(8, minmax(0, 1fr))",
+
+        // Complex site-specific row configuration
+        connexion: "9.8rem minmax(0, 1fr) 6.25rem",
       },
     },
   },

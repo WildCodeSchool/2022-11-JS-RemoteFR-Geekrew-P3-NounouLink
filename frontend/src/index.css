@@ -23,9 +23,9 @@ body,
 }
 
 .btn-purple {
-  @apply bg-purple rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+  @apply bg-dark-purple rounded-xl text-white w-[300px] h-[70px] max-md:landscape:h-[50px]  drop-shadow-button font-nunito font-extrabold text-2xl;
 }
 
 .btn-orange {
-  @apply bg-orange rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+  @apply bg-orange rounded-xl text-white w-[300px] h-[70px] max-md:landscape:h-[50px] drop-shadow-button font-nunito font-extrabold text-2xl;
 }
