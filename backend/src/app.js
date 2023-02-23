@@ -26,7 +26,7 @@ app.use(
 
 const router = require("./router");
 
-app.use(router);
+app.use("/api", router);
 
 // serve the `backend/public` folder for public resources
 
