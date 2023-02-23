@@ -3,3 +3,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply box-border m-0 p-0;
+}
+
+html,
+body,
+#root {
+  @apply h-full;
+}
+
+#root {
+  @apply flex flex-col;
+}
+
+.gradient-linear {
+  @apply bg-gradient-to-br from-gradient-purple to-gradient-pink;
+}
+
+.btn-purple {
+  @apply bg-purple rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+}
+
+.btn-orange {
+  @apply bg-orange rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+}
