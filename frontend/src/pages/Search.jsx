@@ -4,7 +4,7 @@ function Search() {
   const [type, setType] = useState("text");
 
   const handleTypeFocus = (e) => {
-    setType((e.target.type = "date"));
+    setType((e.target.type = "datetime-local"));
   };
   const handleTypeBlur = (e) => {
     setType((e.target.type = "text"));
@@ -15,7 +15,7 @@ function Search() {
       <h1 className="font-bold text-3xl col-start-2 col-end-10 row-start-2 justify-self-center">
         Garde d’enfant à la demande
       </h1>
-      <form className="col-start-2 col-end-10 row-start-3 row-end-9 flex flex-col h-full justify-evenly justify-self-center">
+      <form className=" col-start-2 col-end-10 row-start-3 row-end-9 flex flex-col h-full justify-evenly justify-self-center">
         <label htmlFor="child">
           <select name="child" id="child" className="input">
             <option className="text-white">Enfant concerné</option>
