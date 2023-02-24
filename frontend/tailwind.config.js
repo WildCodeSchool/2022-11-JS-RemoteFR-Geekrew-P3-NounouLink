@@ -11,6 +11,7 @@ module.exports = {
         grey: "#4B5D68",
         "dark-blue": "#212353",
         purple: "#7E72F2",
+        "dark-purple": "#882BFF",
         pink: "#F063A7",
         green: "#2DCD7A",
         "purple-linear":
@@ -19,11 +20,59 @@ module.exports = {
         "light-grey": "#E8E8E8",
         "purple-toggle": "#BB6BD9",
         "grey-placeholder": "#9696A0",
-        "grey-input": "#B4B4BB",
+        "grey-input": "#DFDEDE",
         "transparent-purple": "rgba(148, 137, 251, 0.3)",
         "light-blue": "#F1F5F7",
         "gradient-purple": "rgba(71, 79, 255, 0.9)",
         "gradient-pink": "#E37ACC",
+      },
+      dropShadow: {
+        button: "0 20px 40px rgba(0, 0, 0, 0.1)",
+      },
+      gridTemplateRows: {
+        7: "repeat(7, minmax(0, 1fr))",
+        8: "repeat(8, minmax(0, 1fr))",
+        10: "repeat(10, minmax(0, 1fr))",
+
+        // Complex site-specific row configuration
+        connexion: "9.8rem minmax(0, 1fr) 6.25rem",
+      },
+      gridTemplateCols: {
+        // Simple 8 row grid
+        8: "repeat(8, minmax(0, 1fr))",
+        10: "repeat(10, minmax(0, 1fr))",
+      },
+      gridRowStart: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
+      },
+      gridRowEnd: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
+      },
+      gridColStart: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
+      },
+      gridColEnd: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
       },
     },
   },
