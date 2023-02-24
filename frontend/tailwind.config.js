@@ -32,6 +32,7 @@ module.exports = {
         "gradient-purple": "rgba(71, 79, 255, 0.9)",
         "gradient-pink": "#E37ACC",
         black: "#1D0042",
+        darkPurple: "#882AFF",
       },
       dropShadow: {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",

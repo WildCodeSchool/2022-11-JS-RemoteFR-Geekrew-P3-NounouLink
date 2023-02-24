@@ -50,7 +50,7 @@ function CreationCompte() {
 
       <div>
         <form
-          className="text-grey-input grid gap-7 space-between justify-center"
+          className="text-grey-input grid gap-7 space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto "
           onSubmit={handleSubmit}
         >
           <select
@@ -118,7 +118,7 @@ function CreationCompte() {
             required
             placeholder="Mot de passe"
           />
-          <button className="btn-purple" type="submit">
+          <button className="btn-purple md:ml-auto" type="submit">
             Créer mon compte
           </button>
         </form>
