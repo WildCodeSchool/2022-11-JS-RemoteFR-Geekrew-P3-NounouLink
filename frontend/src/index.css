@@ -30,6 +30,6 @@ body,
   @apply bg-orange rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
 }
 
-.btn-rounded-purple{
+.btn-rounded-purple {
   @apply bg-darkPurple rounded-full text-white w-[180px] h-[70px] drop-shadow-button font-nunito font-bold text-2xl;
 }
