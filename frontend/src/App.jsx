@@ -1,13 +1,19 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Accueil from "./pages/Accueil";
+import Connexion from "./pages/Connexion";
+
 function App() {
   return (
-    <div className="text-yellow-400 flex">
-      <h1 className="text-3xl bg-red-800 font-bold underline font-nunito">
-        Hello world!
-      </h1>
-      <p className="bg-gradient-to-br from-gradient-purple to-gradient-pink">
-        c'est moche
-      </p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/accueil" element={<Accueil />} />
+          <Route path="/connexion" element={<Connexion />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
