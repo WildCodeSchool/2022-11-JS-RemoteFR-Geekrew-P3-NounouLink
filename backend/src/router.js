@@ -3,14 +3,14 @@ const express = require("express");
 const router = express.Router();
 
 const itemControllers = require("./controllers/itemControllers");
-const crenauxControllers = require("./controllers/crenauxControllers");
-const enfantsControllers = require("./controllers/enfantsControllers");
-const favorisControllers = require("./controllers/favorisControllers");
-const nounousControllers = require("./controllers/nounousControllers");
+const slotsControllers = require("./controllers/slotsControllers");
+const childrenControllers = require("./controllers/childrenControllers");
+const favoritesControllers = require("./controllers/favoritesControllers");
+const nanniesControllers = require("./controllers/nanniesControllers");
 const parentsControllers = require("./controllers/parentsControllers");
 const reservationsControllers = require("./controllers/reservationsControllers");
 const servicesControllers = require("./controllers/servicesControllers");
-const superutilisateurControllers = require("./controllers/superutilisateurControllers");
+const superusersControllers = require("./controllers/superusersControllers");
 const userControllers = require("./controllers/userControllers");
 
 router.get("/items", itemControllers.browse);
@@ -19,29 +19,29 @@ router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
-router.get("/crenaux", crenauxControllers.browse);
-router.get("/crenaux/:id", crenauxControllers.read);
-router.put("/crenaux/:id", crenauxControllers.edit);
-router.post("/crenaux", crenauxControllers.add);
-router.delete("/crenaux/:id", crenauxControllers.destroy);
+router.get("/creneaux", slotsControllers.browse);
+router.get("/creneaux/:id", slotsControllers.read);
+router.put("/creneaux/:id", slotsControllers.edit);
+router.post("/creneaux", slotsControllers.add);
+router.delete("/creneaux/:id", slotsControllers.destroy);
 
-router.get("/enfants", enfantsControllers.browse);
-router.get("/enfants/:id", enfantsControllers.read);
-router.put("/enfants/:id", enfantsControllers.edit);
-router.post("/enfants", enfantsControllers.add);
-router.delete("/enfants/:id", enfantsControllers.destroy);
+router.get("/enfants", childrenControllers.browse);
+router.get("/enfants/:id", childrenControllers.read);
+router.put("/enfants/:id", childrenControllers.edit);
+router.post("/enfants", childrenControllers.add);
+router.delete("/enfants/:id", childrenControllers.destroy);
 
-router.get("/favoris", favorisControllers.browse);
-router.get("/favoris/:id", favorisControllers.read);
-router.put("/favoris/:id", favorisControllers.edit);
-router.post("/favoris", favorisControllers.add);
-router.delete("/favoris/:id", favorisControllers.destroy);
+router.get("/favoris", favoritesControllers.browse);
+router.get("/favoris/:id", favoritesControllers.read);
+router.put("/favoris/:id", favoritesControllers.edit);
+router.post("/favoris", favoritesControllers.add);
+router.delete("/favoris/:id", favoritesControllers.destroy);
 
-router.get("/nounous", nounousControllers.browse);
-router.get("/nounous/:id", nounousControllers.read);
-router.put("/nounous/:id", nounousControllers.edit);
-router.post("/nounous", nounousControllers.add);
-router.delete("/nounous/:id", nounousControllers.destroy);
+router.get("/nounous", nanniesControllers.browse);
+router.get("/nounous/:id", nanniesControllers.read);
+router.put("/nounous/:id", nanniesControllers.edit);
+router.post("/nounous", nanniesControllers.add);
+router.delete("/nounous/:id", nanniesControllers.destroy);
 
 router.get("/parents", parentsControllers.browse);
 router.get("/parents/:id", parentsControllers.read);
@@ -61,11 +61,11 @@ router.put("/services/:id", servicesControllers.edit);
 router.post("/services", servicesControllers.add);
 router.delete("/services/:id", servicesControllers.destroy);
 
-router.get("/superutilisateurs", superutilisateurControllers.browse);
-router.get("/superutilisateurs/:id", superutilisateurControllers.read);
-router.put("/superutilisateurs/:id", superutilisateurControllers.edit);
-router.post("/superutilisateurs", superutilisateurControllers.add);
-router.delete("/superutilisateurs/:id", superutilisateurControllers.destroy);
+router.get("/superutilisateurs", superusersControllers.browse);
+router.get("/superutilisateurs/:id", superusersControllers.read);
+router.put("/superutilisateurs/:id", superusersControllers.edit);
+router.post("/superutilisateurs", superusersControllers.add);
+router.delete("/superutilisateurs/:id", superusersControllers.destroy);
 
 router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);

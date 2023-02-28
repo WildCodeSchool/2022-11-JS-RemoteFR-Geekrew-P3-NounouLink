@@ -7,24 +7,24 @@ class ParentsManager extends AbstractManager {
 
   insert(parents) {
     return this.database.query(
-      `insert into ${this.table} (numcaf,autsortie,droitimage, users_iduser) values (?,?,?,?)`,
+      `insert into ${this.table} (numcaf,autsortie,droitimage, users_idusers) values (?,?,?,?)`,
       [
         parents.numcaf,
         parents.autsortie,
         parents.droitimage,
-        parents.users_iduser,
+        parents.users_idusers,
       ]
     );
   }
 
   update(parents) {
     return this.database.query(
-      `update ${this.table} set numcaf = ? , autsortie = ? ,droitimage = ?, users_iduser = ?  where idparents = ?`,
+      `update ${this.table} set numcaf = ? , autsortie = ? ,droitimage = ?, users_idusers = ?  where idparents = ?`,
       [
         parents.numcaf,
         parents.autsortie,
         parents.droitimage,
-        parents.users_iduser,
+        parents.users_idusers,
         parents.idparents,
       ]
     );
