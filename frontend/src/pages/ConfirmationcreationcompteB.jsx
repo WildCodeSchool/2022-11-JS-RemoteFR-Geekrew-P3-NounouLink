@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import logogroupe from "../assets/logogroupe.svg";
 import hero from "../assets/hero.svg";
-import Next from "../assets/next.svg";
+import Next from "../assets/Next.svg";
 
 function ConfirmationcréationcompteB() {
   const navigate = useNavigate();

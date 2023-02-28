@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import chevron from "../assets/chevron-left.svg";
 
@@ -12,11 +11,6 @@ function CreationCompte() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("");
-
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/FormulaireEnfant");
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -123,11 +117,7 @@ function CreationCompte() {
             required
             placeholder="Mot de passe"
           />
-          <button
-            className="btn-purple md:ml-auto"
-            type="submit"
-            onClick={handleClick}
-          >
+          <button className="btn-purple md:ml-auto" type="submit">
             Créer mon compte
           </button>
         </form>
