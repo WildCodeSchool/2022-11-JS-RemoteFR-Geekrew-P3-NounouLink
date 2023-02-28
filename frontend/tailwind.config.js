@@ -33,7 +33,6 @@ module.exports = {
         7: "repeat(7, minmax(0, 1fr))",
         8: "repeat(8, minmax(0, 1fr))",
         10: "repeat(10, minmax(0, 1fr))",
-
         // Complex site-specific row configuration
         connexion: "9.8rem minmax(0, 1fr) 6.25rem",
       },
