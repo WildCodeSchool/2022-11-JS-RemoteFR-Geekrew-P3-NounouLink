@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.favoris
+  models.nannies
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +13,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.favoris
+  models.nannies
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -29,14 +29,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const favoris = req.body;
+  const nannies = req.body;
 
   // TODO validations (length, format...)
 
-  favoris.idfavoris = parseInt(req.params.id, 10);
+  nannies.idnannies = parseInt(req.params.id, 10);
 
-  models.favoris
-    .update(favoris)
+  models.nannies
+    .update(nannies)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -51,14 +51,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const favoris = req.body;
+  const nannies = req.body;
 
   // TODO validations (length, format...)
 
-  models.favoris
-    .insert(favoris)
+  models.nannies
+    .insert(nannies)
     .then(([result]) => {
-      res.location(`/favoris/${result.insertId}`).sendStatus(201);
+      res.location(`/nannies/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,7 +67,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.favoris
+  models.nannies
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
