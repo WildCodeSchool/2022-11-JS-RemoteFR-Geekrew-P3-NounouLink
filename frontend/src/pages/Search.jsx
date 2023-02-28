@@ -11,10 +11,12 @@ function Search() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}api/children`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
       .then((response) => {
-        return setDataChildren(response.name);
+        setDataChildren(response.data);
+        return response.data;
       });
+
     // .catch((error) => {
     //   console.log(error.request);
     // });
@@ -62,9 +64,9 @@ function Search() {
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center">
         <label htmlFor="child">
           <select name="child" id="child" className="input">
-            {dataChildren.name.map((child) => (
-              <option className="text-white" value={child}>
-                {child}
+            {dataChildren.map((child) => (
+              <option className="text-white" value={child.firstname}>
+                {child.firstname}
               </option>
             ))}
           </select>
