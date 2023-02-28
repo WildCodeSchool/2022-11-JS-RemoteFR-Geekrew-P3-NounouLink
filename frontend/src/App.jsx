@@ -13,10 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/accueil" element={<Accueil />} />
         <Route path="/connexion" element={<Connexion />} />
-        <Route
-          path="/confirmationcreationcompte"
-          element={<ConfirmationcreationCompteB />}
-        />
+        <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
       </Routes>
     </BrowserRouter>
   );
