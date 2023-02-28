@@ -39,9 +39,6 @@ module.exports = {
       dropShadow: {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",
       },
-      dropShadow: {
-        button: "0 20px 40px rgba(0, 0, 0, 0.1)",
-      },
       gridTemplateRows: {
         7: "repeat(7, minmax(0, 1fr))",
         8: "repeat(8, minmax(0, 1fr))",
