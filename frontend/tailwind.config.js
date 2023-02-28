@@ -30,11 +30,48 @@ module.exports = {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",
       },
       gridTemplateRows: {
-        // Simple 8 row grid
+        7: "repeat(7, minmax(0, 1fr))",
         8: "repeat(8, minmax(0, 1fr))",
-
+        10: "repeat(10, minmax(0, 1fr))",
         // Complex site-specific row configuration
         connexion: "9.8rem minmax(0, 1fr) 6.25rem",
+      },
+      gridTemplateCols: {
+        // Simple 8 row grid
+        8: "repeat(8, minmax(0, 1fr))",
+        10: "repeat(10, minmax(0, 1fr))",
+      },
+      gridRowStart: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
+      },
+      gridRowEnd: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
+      },
+      gridColStart: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
+      },
+      gridColEnd: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+        13: "13",
       },
     },
   },

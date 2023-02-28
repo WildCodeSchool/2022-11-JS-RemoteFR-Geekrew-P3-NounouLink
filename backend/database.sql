@@ -275,28 +275,28 @@ LOCK TABLES `slots` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `superutilisateur`
+-- Table structure for table `superusers`
 --
 
-DROP TABLE IF EXISTS `superutilisateur`;
+DROP TABLE IF EXISTS `superusers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `superutilisateur` (
-  `idsuperutilisateur` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `superusers` (
+  `idsuperusers` int NOT NULL AUTO_INCREMENT,
   `users_idusers` int NOT NULL,
-  PRIMARY KEY (`idsuperutilisateur`,`users_idusers`),
-  KEY `fk_superutilisateur_users1_idx` (`users_idusers`),
-  CONSTRAINT `fk_superutilisateur_users1` FOREIGN KEY (`users_idusers`) REFERENCES `users` (`idusers`)
+  PRIMARY KEY (`idsuperusers`,`users_idusers`),
+  KEY `fk_superusers_users1_idx` (`users_idusers`),
+  CONSTRAINT `fk_superusers_users1` FOREIGN KEY (`users_idusers`) REFERENCES `users` (`idusers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `superutilisateur`
+-- Dumping data for table `superusers`
 --
 
-LOCK TABLES `superutilisateur` WRITE;
-/*!40000 ALTER TABLE `superutilisateur` DISABLE KEYS */;
-/*!40000 ALTER TABLE `superutilisateur` ENABLE KEYS */;
+LOCK TABLES `superusers` WRITE;
+/*!40000 ALTER TABLE `superusers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `superusers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -310,7 +310,7 @@ CREATE TABLE `users` (
   `idusers` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `type` enum('parent','ass_mat','superutilisateur') COLLATE utf8mb4_general_ci NOT NULL,
+  `type` enum('parent','ass_mat','superusers') COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(155) COLLATE utf8mb4_general_ci NOT NULL,
   `adress` varchar(155) COLLATE utf8mb4_general_ci NOT NULL,
   `phone` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
@@ -325,7 +325,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'nanny','super','ass_mat','supern@.com','12 rue du coin','0606060606','turlututu'),(3,'loris','chastanet','parent','lchastanet@plop.com','25 avenue de toto','0708080606','hashed'),(4,'super','utilisateur','superutilisateur','trobien.com','onditpas','06.48.48.48.48','root');
+INSERT INTO `users` VALUES (2,'nanny','super','ass_mat','supern@.com','12 rue du coin','0606060606','turlututu'),(3,'loris','chastanet','parent','lchastanet@plop.com','25 avenue de toto','0708080606','hashed'),(4,'super','utilisateur','superusers','trobien.com','onditpas','06.48.48.48.48','root');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
