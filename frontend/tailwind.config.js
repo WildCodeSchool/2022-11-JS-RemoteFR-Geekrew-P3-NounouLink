@@ -7,6 +7,14 @@ module.exports = {
         nunito: ["Nunito", "sans-serif"],
         "red-hat": ["Red Hat Text", "sans-serif"],
       },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        mds: "800px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
       colors: {
         grey: "#4B5D68",
         "dark-blue": "#212353",
@@ -25,6 +33,11 @@ module.exports = {
         "light-blue": "#F1F5F7",
         "gradient-purple": "rgba(71, 79, 255, 0.9)",
         "gradient-pink": "#E37ACC",
+        black: "#1D0042",
+        darkPurple: "#882AFF",
+      },
+      dropShadow: {
+        button: "0 20px 40px rgba(0, 0, 0, 0.1)",
       },
       dropShadow: {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",

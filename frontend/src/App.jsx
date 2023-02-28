@@ -1,17 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+
 import Accueil from "./pages/Accueil";
-import Connexion from "./pages/Connexion";
+import CreationCompte from "./pages/CreationCompte";
+import ConfirmationcreationCompteB from "./pages/ConfirmationcreationcompteB";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route>
-          <Route path="/" element={<Home />} />
-          <Route path="/accueil" element={<Accueil />} />
-          <Route path="/connexion" element={<Connexion />} />
-        </Route>
+        <Route path="/accueil" element={<Accueil />} />
+        <Route path="/CreationCompte" element={<CreationCompte />} />
+        <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
       </Routes>
     </BrowserRouter>
   );
