@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Validation from "../components/Validation";
-import { UploadValidation } from "../components/UploadValidation";
+import UploadValidation from "../components/UploadValidation";
 import btnbaby1 from "../assets/formulaire/Baby1.svg";
 import btnbaby2 from "../assets/formulaire/Baby2.svg";
 import plusCircle from "../assets/formulaire/plus-circle.svg";
@@ -12,8 +12,6 @@ import blocInscription from "../assets/formulaire/Brique-Inscription.svg";
 import chevronWhite from "../assets/chevron-white.svg";
 
 function FormulaireEnfant() {
-  /* const [currentPage, setCurrentPage] = useState(1); 
-  const [babyPage, setBabyPage] = useState(10); */
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [birthdate, setBirthDate] = useState("");
@@ -23,7 +21,6 @@ function FormulaireEnfant() {
   const [assurance, setAssurance] = useState(null);
   const [carnetsante, setCarnetSante] = useState(null);
   const [idenfants, setIdEnfants] = useState(null);
-  /* const [enfants, setEnfants] = useState([]); */
 
   useEffect(() => {
     if (idenfants) {
@@ -86,28 +83,6 @@ function FormulaireEnfant() {
         alert("Une erreur est survenue lors de l'enregistrement du dossier.");
       });
   };
-  /* if (idenfants) {
-      axios
-        .put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/enfants/${idenfants}`,
-          dossierEnfant
-        )
-        .then(() => alert("Le dossier a été modifié avec succès !"))
-        .catch((error) => {
-          console.error(error);
-          alert("Une erreur est survenue lors de la modification du dossier.");
-        }); */
-  /* } else {
-      window.confirm("Êtes-vous sûr de vouloir supprimer cet enfant ?");
-      axios
-        .delete(`/api/enfants/${idenfants}`)
-        .then(() => alert("L'enfant a été supprimé avec succès !"))
-        .catch((error) => {
-          console.error(error);
-          alert("Une erreur est survenue lors de la suppression de l'enfant.");
-        });
-    }
-  }; */
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
