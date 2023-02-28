@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
 import btnbaby1 from "../assets/formulaire/Baby1.svg";
 import btnbaby2 from "../assets/formulaire/Baby2.svg";
 import plusCircle from "../assets/formulaire/plus-circle.svg";
-import blocParent from "../assets/formulaire/Brique-Parents.svg";
-import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
-import blocInscription from "../assets/formulaire/Brique-Inscription.svg";
-import chevronWhite from "../assets/chevron-white.svg";
 
 function FormulaireParent() {
   const [firstname, setFirstname] = useState("");
@@ -98,19 +95,7 @@ function FormulaireParent() {
 
   return (
     <div>
-      <div className="flex flex-row justify-center  text-white bg-purple pt-10">
-        <img src={chevronWhite} alt="chevron" />
-        <p className="text-2xl">
-          {" "}
-          Ed Canaan <br />
-          Papa Poule
-        </p>
-      </div>
-      <div className="flex flex-row justify-evenly bg-gradient-purple pb-8 pt-2">
-        <img src={blocParent} alt="bloc parent" />
-        <img src={blocEnfant} alt="block enfant" />
-        <img src={blocInscription} alt="block inscription" />
-      </div>
+      <Navbar />
       <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20 ">
         Dossier Parent
       </p>
@@ -174,7 +159,7 @@ function FormulaireParent() {
         >
           <Validation isValid={adress !== ""} />{" "}
           <input
-            className="w-4/6 ml-8 p-3 h-6 border-grey-input rounded-lg lg:ml-[6.5rem] "
+            className="w-4/6 ml-7 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
             type="text"
             id="adress"
             checked={adress}

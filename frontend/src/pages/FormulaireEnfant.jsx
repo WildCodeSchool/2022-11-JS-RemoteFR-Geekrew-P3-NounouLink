@@ -7,10 +7,7 @@ import UploadValidation from "../components/UploadValidation";
 import btnbaby1 from "../assets/formulaire/Baby1.svg";
 import btnbaby2 from "../assets/formulaire/Baby2.svg";
 import plusCircle from "../assets/formulaire/plus-circle.svg";
-import blocParent from "../assets/formulaire/Brique-Parents.svg";
-import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
-import blocInscription from "../assets/formulaire/Brique-Inscription.svg";
-import chevronWhite from "../assets/chevron-white.svg";
+import Navbar from "../components/Navbar";
 
 function FormulaireEnfant() {
   const [firstname, setFirstname] = useState("");
@@ -109,24 +106,9 @@ function FormulaireEnfant() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center  text-white gradient-linear pt-10">
-        <div className="flex flex-row justify-center">
-          <img src={chevronWhite} alt="chevron" />
-          <p className="text-2xl">
-            {" "}
-            Ed Canaan <br />
-            Papa Poule
-          </p>
-        </div>
+      <Navbar />
 
-        <div className="flex flex-row justify-evenly  pb-8 pt-2">
-          <img src={blocParent} alt="bloc parent" />
-          <img src={blocEnfant} alt="block enfant" />
-          <img src={blocInscription} alt="block inscription" />
-        </div>
-      </div>
-
-      <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20 ">
+      <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20  ">
         Dossier enfants
       </p>
       <div className="flex flex-row justify-evenly pb-5 mx-5 lg:mx-24 lg:pb-10 lg:justify-evenly">

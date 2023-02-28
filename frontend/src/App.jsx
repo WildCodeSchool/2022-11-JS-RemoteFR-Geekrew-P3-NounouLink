@@ -16,8 +16,12 @@ function App() {
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/creationCompte" element={<CreationCompte />} />
         <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
-        <Route path="/FormulaireEnfants" element={<FormulaireEnfant />} />
-        <Route path="/FormulaireParents" element={<FormulaireParent />} />
+        <Route path="/FormulaireEnfant" element={<FormulaireEnfant />} />
+        <Route path="/FormulaireParent" element={<FormulaireParent />} />
+        <Route
+          path="/FormulaireInscription"
+          element={<FormulaireInscription />}
+        />
         <Route
           path="/FormulaireInscriotion"
           element={<FormulaireInscription />}
