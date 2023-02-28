@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ConfirmationcreationCompteB from "./pages/ConfirmationcreationcompteB";
 
 import Home from "./pages/Home";
+import CreationCompte from "./pages/CreationCompte";
+import FormulaireEnfant from "./pages/FormulaireEnfant";
 import Accueil from "./pages/Accueil";
-import Connexion from "./pages/Connexion";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/accueil" element={<Accueil />} />
-        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/CreationCompte" element={<CreationCompte />} />
         <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
+        <Route path="/FormulaireEnfant" element={<FormulaireEnfant />} />
       </Routes>
     </BrowserRouter>
   );
