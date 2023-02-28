@@ -16,16 +16,16 @@ function ConfirmationcréationcompteB() {
   return (
     <div className="gradient-linear flex flex-col  lg:flex lg:flex-row max-lg:landscape:flex-row lg:landscape:flex-row items-center justify-center h-full w-full font-nunito lg:landscape:text-xl  text-white">
       {" "}
-      <div className="	h-3/6  flex flex-col items-center justify-evenly  text-white lg:landscape:w-4/5 lg:landscape:scale-150 max-lg:landscape:scale-150 ">
+      <div className="	h-3/6  flex flex-col items-center justify-evenly  text-white lg:landscape:w-4/5 lg:landscape:scale-120 max-lg:landscape:scale-120  md:landscape:scale-110">
         <div className="flex justify-center lg:landscape:scale-150 ">
           <img src={logogroupe} alt="logo" />
         </div>
 
-        <p className="flex justify-center text-white text-3xl lg:landscape:scale-150 lg:landscape:mb-5">
+        <p className="flex justify-center  text-white text-3xl lg:landscape:scale-150 lg:landscape:mb-5 md:landscape:scale-100">
           NounouLink
         </p>
 
-        <div className="flex justify-center lg:landscape:scale-150">
+        <div className="flex justify-center lg:landscape:scale-120 md:landscape:scale-100 ">
           <img src={hero} alt="hero" />
         </div>
       </div>
