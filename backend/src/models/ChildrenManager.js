@@ -7,30 +7,30 @@ class ChildrenManager extends AbstractManager {
 
   insert(children) {
     return this.database.query(
-      `insert into ${this.table} (firstname,lastname,birthdate,canwalk,allergie,assurance,carnetsante) values (?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (firstname,lastname,birthdate,canwalk,allergie,insurance,healthbook) values (?, ?, ?, ?, ?, ?, ?)`,
       [
         children.firstname,
         children.lastname,
         children.birthdate,
         children.canwalk,
         children.allergie,
-        children.assurance,
-        children.carnetsante,
+        children.insurance,
+        children.healthbook,
       ]
     );
   }
 
   update(children) {
     return this.database.query(
-      `update ${this.table} set firstname = ?, lastname = ?, birthdate = ?, canwalk = ?, allergie = ?, assurance = ?, carnetsante = ? where idchildren = ?`,
+      `update ${this.table} set firstname = ?, lastname = ?, birthdate = ?, canwalk = ?, allergie = ?, insurance = ?, healthbook = ? where idchildren = ?`,
       [
         children.firstname,
         children.lastname,
         children.birthdate,
         children.canwalk,
         children.allergie,
-        children.assurance,
-        children.carnetsante,
+        children.insurance,
+        children.healthbook,
         children.idchildren,
       ]
     );
