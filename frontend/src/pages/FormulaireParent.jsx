@@ -52,7 +52,7 @@ function FormulaireParent() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const dossierParent = {
+    const parentFile = {
       firstname,
       lastname,
       email,
@@ -63,7 +63,7 @@ function FormulaireParent() {
     };
 
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, dossierParent)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, parentFile)
       .then((response) => {
         setIdParents(response.data.id);
         alert("Le dossier a été enregistré avec succès !");

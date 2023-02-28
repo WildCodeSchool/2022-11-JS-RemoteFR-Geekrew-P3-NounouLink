@@ -22,13 +22,20 @@ function FormulaireInscription() {
   /* const [enfants, setEnfants] = useState([]); */
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/FormulaireInscription");
+    navigate("/Recherche");
+  };
+
+  const inscriptionFile = {
+    numcaf,
+    autsortie,
+    droitimage,
+    personneConfiance,
   };
 
   useEffect(() => {
     if (idparents) {
       axios
-        .get(`/api/parents/${idparents}`)
+        .get(`/api/parents/${idparents}`, inscriptionFile)
         .then((response) => {
           const { data } = response;
           setNumcaf(data.numcaf);
@@ -49,7 +56,7 @@ function FormulaireInscription() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const dossierParent = {
+    const parentsFile = {
       numcaf,
       autsortie,
       droitimage,
@@ -57,7 +64,7 @@ function FormulaireInscription() {
     };
 
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, dossierParent)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, parentsFile)
       .then((response) => {
         setIdParents(response.data.id);
         alert("Le dossier a été enregistré avec succès !");

@@ -1,27 +1,29 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Accueil from "./pages/Accueil";
 import CreationCompte from "./pages/CreationCompte";
+import ConfirmationcreationCompteB from "./pages/ConfirmationcreationcompteB";
+import Connexion from "./pages/Connexion";
 import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
 import FormulaireInscription from "./pages/FormulaireInscription";
 
 function App() {
   return (
-    <main>
-      <BrowserRouter>
-        <div />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/CreationCompte" element={<CreationCompte />} />
-          <Route path="/FormulaireEnfant" element={<FormulaireEnfant />} />
-          <Route path="/FormulaireParent" element={<FormulaireParent />} />
-          <Route
-            path="/FormulaireInscription"
-            element={<FormulaireInscription />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/accueil" element={<Accueil />} />
+        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/creationCompte" element={<CreationCompte />} />
+        <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
+        <Route path="/FormulaireEnfants" element={<FormulaireEnfant />} />
+        <Route path="/FormulaireParents" element={<FormulaireParent />} />
+        <Route
+          path="/FormulaireInscriotion"
+          element={<FormulaireInscription />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

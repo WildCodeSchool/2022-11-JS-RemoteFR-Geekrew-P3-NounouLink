@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import greenVector from "../assets/formulaire/greenVector.svg";
 import grayVector from "../assets/formulaire/grayVector.svg";
 
-export function UploadValidation({ isValidate }) {
+function UploadValidation({ isValidate }) {
   return (
     <div>
       <span>
