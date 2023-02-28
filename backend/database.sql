@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for macos12 (x86_64)
 --
 -- Host: localhost    Database: baby_db
 -- ------------------------------------------------------
@@ -16,199 +16,146 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `crenaux`
+-- Table structure for table `children`
 --
 
-DROP TABLE IF EXISTS `crenaux`;
+DROP TABLE IF EXISTS `children`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `crenaux` (
-  `idcrenaux` int NOT NULL AUTO_INCREMENT,
-  `libelle_jour` enum('Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche') DEFAULT NULL,
-  `heure_debut` datetime DEFAULT NULL,
-  `heure_fin` datetime DEFAULT NULL,
-  `nbre_place` int DEFAULT NULL,
-  `nounous_idnounou` int NOT NULL,
-  `nounous_users_iduser` int NOT NULL,
-  PRIMARY KEY (`idcrenaux`,`nounous_idnounou`,`nounous_users_iduser`),
-  KEY `fk_crenaux_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
-  CONSTRAINT `fk_crenaux_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='	';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `crenaux`
---
-
-LOCK TABLES `crenaux` WRITE;
-/*!40000 ALTER TABLE `crenaux` DISABLE KEYS */;
-/*!40000 ALTER TABLE `crenaux` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `enfants`
---
-
-DROP TABLE IF EXISTS `enfants`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `enfants` (
-  `idenfants` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(45) DEFAULT NULL,
-  `lastname` varchar(45) DEFAULT NULL,
+CREATE TABLE `children` (
+  `idchildren` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `lastname` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `canwalk` tinyint DEFAULT NULL,
-  `allergie` varchar(255) DEFAULT NULL,
-  `assurance` varchar(45) DEFAULT NULL,
+  `allergie` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `assurance` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `carnetsante` tinyint DEFAULT NULL,
-  PRIMARY KEY (`idenfants`)
+  `parents_idparents` int NOT NULL,
+  `parents_users_idusers` int NOT NULL,
+  PRIMARY KEY (`idchildren`,`parents_idparents`,`parents_users_idusers`),
+  KEY `fk_children_parents1_idx` (`parents_idparents`,`parents_users_idusers`),
+  CONSTRAINT `fk_children_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_idusers`) REFERENCES `parents` (`idparents`, `users_idusers`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `enfants`
+-- Dumping data for table `children`
 --
 
-LOCK TABLES `enfants` WRITE;
-/*!40000 ALTER TABLE `enfants` DISABLE KEYS */;
-INSERT INTO `enfants` VALUES (1,'jean','valjean','2019-12-15',1,'noisette','222222',1);
-/*!40000 ALTER TABLE `enfants` ENABLE KEYS */;
+LOCK TABLES `children` WRITE;
+/*!40000 ALTER TABLE `children` DISABLE KEYS */;
+INSERT INTO `children` VALUES (1,'jean','valjean','2019-12-15',1,'noisette','222222',1,0,0);
+/*!40000 ALTER TABLE `children` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `favoris`
+-- Table structure for table `favorites`
 --
 
-DROP TABLE IF EXISTS `favoris`;
+DROP TABLE IF EXISTS `favorites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `favoris` (
-  `idfavoris` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `favorites` (
+  `idfavorites` int NOT NULL AUTO_INCREMENT,
   `parents_idparents` int NOT NULL,
-  `parents_users_iduser` int NOT NULL,
-  `nounous_idnounou` int NOT NULL,
-  `nounous_users_iduser` int NOT NULL,
-  PRIMARY KEY (`idfavoris`,`parents_idparents`,`parents_users_iduser`,`nounous_idnounou`,`nounous_users_iduser`),
-  KEY `fk_favoris_parents1_idx` (`parents_idparents`,`parents_users_iduser`),
-  KEY `fk_favoris_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
-  CONSTRAINT `fk_favoris_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
-  CONSTRAINT `fk_favoris_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_iduser`) REFERENCES `parents` (`idparents`, `users_iduser`)
+  `parents_users_idusers` int NOT NULL,
+  `nannies_idnannies` int NOT NULL,
+  `nannies_users_idusers` int NOT NULL,
+  PRIMARY KEY (`idfavorites`,`parents_idparents`,`parents_users_idusers`,`nannies_idnannies`,`nannies_users_idusers`),
+  KEY `fk_favorites_parents1_idx` (`parents_idparents`,`parents_users_idusers`),
+  KEY `fk_favorites_nannies1_idx` (`nannies_idnannies`,`nannies_users_idusers`),
+  CONSTRAINT `fk_favorites_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`),
+  CONSTRAINT `fk_favorites_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_idusers`) REFERENCES `parents` (`idparents`, `users_idusers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `favoris`
+-- Dumping data for table `favorites`
 --
 
-LOCK TABLES `favoris` WRITE;
-/*!40000 ALTER TABLE `favoris` DISABLE KEYS */;
-/*!40000 ALTER TABLE `favoris` ENABLE KEYS */;
+LOCK TABLES `favorites` WRITE;
+/*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `nounous`
+-- Table structure for table `nannies`
 --
 
-DROP TABLE IF EXISTS `nounous`;
+DROP TABLE IF EXISTS `nannies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nounous` (
-  `idnounou` int NOT NULL AUTO_INCREMENT,
-  `users_iduser` int NOT NULL,
+CREATE TABLE `nannies` (
+  `idnannies` int NOT NULL AUTO_INCREMENT,
+  `users_idusers` int NOT NULL,
   `note` int DEFAULT NULL,
-  `photos` varchar(255) DEFAULT NULL,
+  `photos` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tarif_horaire` int DEFAULT NULL,
-  `nom_annonce` varchar(150) DEFAULT NULL,
-  `adresse_garde` varchar(255) DEFAULT NULL,
-  `photo_profil` varchar(255) DEFAULT NULL,
-  `presentation` text,
+  `nom_annonce` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `adresse_garde` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `photo_profil` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `presentation` text COLLATE utf8mb4_general_ci,
   `psc1` tinyint DEFAULT NULL,
   `pedagogie` tinyint DEFAULT NULL,
-  `niveau_diplome` varchar(45) DEFAULT NULL,
+  `niveau_diplome` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `experience` int DEFAULT NULL,
   `hygiene` tinyint DEFAULT NULL,
   `heures_sup` int DEFAULT NULL,
   `tarif_majore` int DEFAULT NULL,
   `prix_kilometre` int DEFAULT NULL,
   `tarif_repas` int DEFAULT NULL,
-  `assurance_habitation` varchar(255) DEFAULT NULL,
-  `assurance_auto` varchar(255) DEFAULT NULL,
-  `piece_identite` varchar(255) DEFAULT NULL,
-  `attestation_secu` varchar(255) DEFAULT NULL,
-  `justificatif_domicile` varchar(255) DEFAULT NULL,
-  `diplome` varchar(255) DEFAULT NULL,
+  `assurance_habitation` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `assurance_auto` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `piece_identite` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `attestation_secu` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `justificatif_domicile` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `diplome` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `numero_aggrement` int DEFAULT NULL,
   `date_aggrement` date DEFAULT NULL,
   `places_maxi` int DEFAULT NULL,
-  PRIMARY KEY (`idnounou`,`users_iduser`),
-  KEY `fk_nounous_users1_idx` (`users_iduser`),
-  CONSTRAINT `fk_nounous_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
+  PRIMARY KEY (`idnannies`,`users_idusers`),
+  KEY `fk_nannies_users1_idx` (`users_idusers`),
+  CONSTRAINT `fk_nannies_users1` FOREIGN KEY (`users_idusers`) REFERENCES `users` (`idusers`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `nounous`
+-- Dumping data for table `nannies`
 --
 
-LOCK TABLES `nounous` WRITE;
-/*!40000 ALTER TABLE `nounous` DISABLE KEYS */;
-INSERT INTO `nounous` VALUES (1,2,5,'ddd',25,'the best','rue victoire','oooo','je suis la meilleure',1,1,'laclasse',50,0,15,25,15,5,'ssss','222','22222','2222','22222','2222',222222,'1975-12-01',4);
-/*!40000 ALTER TABLE `nounous` ENABLE KEYS */;
+LOCK TABLES `nannies` WRITE;
+/*!40000 ALTER TABLE `nannies` DISABLE KEYS */;
+INSERT INTO `nannies` VALUES (1,2,5,'ddd',25,'the best','rue victoire','oooo','je suis la meilleure',1,1,'laclasse',50,0,15,25,15,5,'ssss','222','22222','2222','22222','2222',222222,'1975-12-01',4);
+/*!40000 ALTER TABLE `nannies` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `nounous_has_services`
+-- Table structure for table `nannies_has_services`
 --
 
-DROP TABLE IF EXISTS `nounous_has_services`;
+DROP TABLE IF EXISTS `nannies_has_services`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nounous_has_services` (
-  `nounous_idnounou` int NOT NULL,
-  `nounous_users_iduser` int NOT NULL,
+CREATE TABLE `nannies_has_services` (
+  `nannies_idnannies` int NOT NULL,
+  `nannies_users_idusers` int NOT NULL,
   `services_idservices` int NOT NULL,
-  PRIMARY KEY (`nounous_idnounou`,`nounous_users_iduser`,`services_idservices`),
-  KEY `fk_nounous_has_services_services1_idx` (`services_idservices`),
-  KEY `fk_nounous_has_services_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
-  CONSTRAINT `fk_nounous_has_services_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
-  CONSTRAINT `fk_nounous_has_services_services1` FOREIGN KEY (`services_idservices`) REFERENCES `services` (`idservices`)
+  PRIMARY KEY (`nannies_idnannies`,`nannies_users_idusers`,`services_idservices`),
+  KEY `fk_nannies_has_services_services1_idx` (`services_idservices`),
+  KEY `fk_nannies_has_services_nannies1_idx` (`nannies_idnannies`,`nannies_users_idusers`),
+  CONSTRAINT `fk_nannies_has_services_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`),
+  CONSTRAINT `fk_nannies_has_services_services1` FOREIGN KEY (`services_idservices`) REFERENCES `services` (`idservices`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `nounous_has_services`
+-- Dumping data for table `nannies_has_services`
 --
 
-LOCK TABLES `nounous_has_services` WRITE;
-/*!40000 ALTER TABLE `nounous_has_services` DISABLE KEYS */;
-/*!40000 ALTER TABLE `nounous_has_services` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `parents_has_enfants`
---
-
-DROP TABLE IF EXISTS `parents_has_enfants`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `parents_has_enfants` (
-  `parents_idparents` int NOT NULL,
-  `enfants_idenfants` int NOT NULL,
-  PRIMARY KEY (`parents_idparents`,`enfants_idenfants`),
-  KEY `fk_parents_has_enfants_enfants1_idx` (`enfants_idenfants`),
-  KEY `fk_parents_has_enfants_parents_idx` (`parents_idparents`),
-  CONSTRAINT `fk_parents_has_enfants_enfants1` FOREIGN KEY (`enfants_idenfants`) REFERENCES `enfants` (`idenfants`),
-  CONSTRAINT `fk_parents_has_enfants_parents` FOREIGN KEY (`parents_idparents`) REFERENCES `parents` (`idparents`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `parents_has_enfants`
---
-
-LOCK TABLES `parents_has_enfants` WRITE;
-/*!40000 ALTER TABLE `parents_has_enfants` DISABLE KEYS */;
-/*!40000 ALTER TABLE `parents_has_enfants` ENABLE KEYS */;
+LOCK TABLES `nannies_has_services` WRITE;
+/*!40000 ALTER TABLE `nannies_has_services` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nannies_has_services` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,13 +167,13 @@ DROP TABLE IF EXISTS `parents`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `parents` (
   `idparents` int NOT NULL AUTO_INCREMENT,
-  `numcaf` varchar(45) DEFAULT NULL,
-  `autsortie` varchar(45) DEFAULT NULL,
-  `droitimage` varchar(45) DEFAULT NULL,
-  `users_iduser` int NOT NULL,
-  PRIMARY KEY (`idparents`,`users_iduser`),
-  KEY `fk_parent_users1_idx` (`users_iduser`),
-  CONSTRAINT `fk_parent_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
+  `numcaf` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `autsortie` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `droitimage` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `users_idusers` int NOT NULL,
+  PRIMARY KEY (`idparents`,`users_idusers`),
+  KEY `fk_parent_users1_idx` (`users_idusers`),
+  CONSTRAINT `fk_parent_users1` FOREIGN KEY (`users_idusers`) REFERENCES `users` (`idusers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,19 +195,19 @@ DROP TABLE IF EXISTS `reservations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reservations` (
   `parents_idparents` int NOT NULL,
-  `parents_users_iduser` int NOT NULL,
-  `nounous_idnounou` int NOT NULL,
-  `nounous_users_iduser` int NOT NULL,
+  `parents_users_idusers` int NOT NULL,
+  `nannies_idnannies` int NOT NULL,
+  `nannies_users_idusers` int NOT NULL,
   `reservationok` tinyint DEFAULT NULL,
   `startdate` datetime DEFAULT NULL,
   `enddate` datetime DEFAULT NULL,
   `frequence` tinyint DEFAULT NULL,
   `flexibility` tinyint DEFAULT NULL,
-  PRIMARY KEY (`parents_idparents`,`parents_users_iduser`,`nounous_idnounou`,`nounous_users_iduser`),
-  KEY `fk_parents_has_nounous_nounous1_idx` (`nounous_idnounou`,`nounous_users_iduser`),
-  KEY `fk_parents_has_nounous_parents1_idx` (`parents_idparents`,`parents_users_iduser`),
-  CONSTRAINT `fk_parents_has_nounous_nounous1` FOREIGN KEY (`nounous_idnounou`, `nounous_users_iduser`) REFERENCES `nounous` (`idnounou`, `users_iduser`),
-  CONSTRAINT `fk_parents_has_nounous_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_iduser`) REFERENCES `parents` (`idparents`, `users_iduser`)
+  PRIMARY KEY (`parents_idparents`,`parents_users_idusers`,`nannies_idnannies`,`nannies_users_idusers`),
+  KEY `fk_parents_has_nannies_nannies1_idx` (`nannies_idnannies`,`nannies_users_idusers`),
+  KEY `fk_parents_has_nannies_parents1_idx` (`parents_idparents`,`parents_users_idusers`),
+  CONSTRAINT `fk_parents_has_nannies_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`),
+  CONSTRAINT `fk_parents_has_nannies_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_idusers`) REFERENCES `parents` (`idparents`, `users_idusers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -282,7 +229,7 @@ DROP TABLE IF EXISTS `services`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `services` (
   `idservices` int NOT NULL AUTO_INCREMENT,
-  `serviceName` varchar(255) DEFAULT NULL,
+  `serviceName` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`idservices`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -298,6 +245,36 @@ INSERT INTO `services` VALUES (1,'sortie'),(2,'jardin'),(3,'repas'),(4,'animaux'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `slots`
+--
+
+DROP TABLE IF EXISTS `slots`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `slots` (
+  `idslots` int NOT NULL AUTO_INCREMENT,
+  `libelle_jour` enum('Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `heure_debut` datetime DEFAULT NULL,
+  `heure_fin` datetime DEFAULT NULL,
+  `nbre_place` int DEFAULT NULL,
+  `nannies_idnannies` int NOT NULL,
+  `nannies_users_idusers` int NOT NULL,
+  PRIMARY KEY (`idslots`,`nannies_idnannies`,`nannies_users_idusers`),
+  KEY `fk_slots_nannies1_idx` (`nannies_idnannies`,`nannies_users_idusers`),
+  CONSTRAINT `fk_slots_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='	';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `slots`
+--
+
+LOCK TABLES `slots` WRITE;
+/*!40000 ALTER TABLE `slots` DISABLE KEYS */;
+/*!40000 ALTER TABLE `slots` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `superutilisateur`
 --
 
@@ -306,10 +283,10 @@ DROP TABLE IF EXISTS `superutilisateur`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `superutilisateur` (
   `idsuperutilisateur` int NOT NULL AUTO_INCREMENT,
-  `users_iduser` int NOT NULL,
-  PRIMARY KEY (`idsuperutilisateur`,`users_iduser`),
-  KEY `fk_superutilisateur_users1_idx` (`users_iduser`),
-  CONSTRAINT `fk_superutilisateur_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`)
+  `users_idusers` int NOT NULL,
+  PRIMARY KEY (`idsuperutilisateur`,`users_idusers`),
+  KEY `fk_superutilisateur_users1_idx` (`users_idusers`),
+  CONSTRAINT `fk_superutilisateur_users1` FOREIGN KEY (`users_idusers`) REFERENCES `users` (`idusers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -330,15 +307,15 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `iduser` int NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(45) NOT NULL,
-  `lastname` varchar(45) NOT NULL,
-  `type` enum('parent','ass_mat','superutilisateur') NOT NULL,
-  `email` varchar(155) NOT NULL,
-  `adress` varchar(155) NOT NULL,
-  `phone` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`iduser`)
+  `idusers` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` enum('parent','ass_mat','superutilisateur') COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(155) COLLATE utf8mb4_general_ci NOT NULL,
+  `adress` varchar(155) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`idusers`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -361,4 +338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-21 17:16:04
+-- Dump completed on 2023-02-28 10:56:23

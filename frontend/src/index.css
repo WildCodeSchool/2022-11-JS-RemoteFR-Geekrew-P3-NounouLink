@@ -5,13 +5,12 @@
 @tailwind utilities;
 
 * {
-    @apply box-border m-0 p-0;
+  @apply box-border m-0 p-0;
 }
 
 html,
 body,
 #root {
-
   @apply h-full;
 }
 
@@ -30,4 +29,3 @@ body,
 .btn-orange {
   @apply bg-orange rounded-xl text-white w-[300px] h-[70px] max-md:landscape:h-[50px] drop-shadow-button font-nunito font-extrabold text-2xl;
 }
-
