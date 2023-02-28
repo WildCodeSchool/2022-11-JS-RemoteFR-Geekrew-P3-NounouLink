@@ -1,22 +1,41 @@
-import React, { useState } from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 
 function Search() {
   const [type, setType] = useState("text");
+  const [dataChildren, setDataChildren] = useState([]);
+  const [dataAdress, setDataAdress] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_URL}api/users`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.request);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}api/children`)
+      .then((response) => {
+        return setDataChildren(response.name);
+      });
+    // .catch((error) => {
+    //   console.log(error.request);
+    // });
+
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}api/users`)
+      .then((response) => {
+        return setDataAdress(response.adress);
+      });
+    // .catch((error) => {
+    //   console.log(error.request);
+    // });
+
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}api/reservations`);
+    // .then((response) => {
+    //   console.log(response.data);
+    // })
+    // .catch((error) => {
+    //   console.log(error.request);
+    // });
+  }, []);
 
   const handleTypeFocus = (e) => {
     setType((e.target.type = "datetime-local"));
@@ -43,7 +62,11 @@ function Search() {
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center">
         <label htmlFor="child">
           <select name="child" id="child" className="input">
-            <option className="text-white">Enfant concerné</option>
+            {dataChildren.name.map((child) => (
+              <option className="text-white" value={child}>
+                {child}
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="address">
@@ -52,6 +75,7 @@ function Search() {
             id="address"
             placeholder="Adresse"
             className="input"
+            value={dataAdress}
           />
         </label>
         <label htmlFor="frequency">
