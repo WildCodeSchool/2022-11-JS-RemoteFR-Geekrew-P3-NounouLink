@@ -29,3 +29,7 @@ body,
 .btn-orange {
   @apply bg-orange rounded-xl text-white w-[300px] h-[70px] max-md:landscape:h-[50px] drop-shadow-button font-nunito font-extrabold text-2xl;
 }
+
+.input {
+  @apply bg-grey-input rounded-lg w-[300px] h-[48px] xl:w-[500px] xl:h-[60px] max-lg:h-[48px] max-md:landscape:h-[30px] max-lg:landscape:h-[40px] bg-opacity-30 placeholder-white pl-4;
+}

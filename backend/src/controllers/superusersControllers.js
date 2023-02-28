@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.nounous
+  models.superusers
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +13,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.nounous
+  models.superusers
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -29,14 +29,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const nounous = req.body;
+  const superusers = req.body;
 
   // TODO validations (length, format...)
 
-  nounous.idnounous = parseInt(req.params.id, 10);
+  superusers.idsuperusers = parseInt(req.params.id, 10);
 
-  models.nounous
-    .update(nounous)
+  models.superusers
+    .update(superusers)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -51,14 +51,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const nounous = req.body;
+  const superusers = req.body;
 
   // TODO validations (length, format...)
 
-  models.nounous
-    .insert(nounous)
+  models.superusers
+    .insert(superusers)
     .then(([result]) => {
-      res.location(`/nounous/${result.insertId}`).sendStatus(201);
+      res.location(`/superusers/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,7 +67,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.nounous
+  models.superusers
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {

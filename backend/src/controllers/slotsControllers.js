@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.crenaux
+  models.slots
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +13,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.crenaux
+  models.slots
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -29,14 +29,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const crenaux = req.body;
+  const slots = req.body;
 
   // TODO validations (length, format...)
 
-  crenaux.idcreneaux = parseInt(req.params.id, 10);
+  slots.idslots = parseInt(req.params.id, 10);
 
-  models.crenaux
-    .update(crenaux)
+  models.slots
+    .update(slots)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -51,14 +51,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const crenaux = req.body;
+  const slots = req.body;
 
   // TODO validations (length, format...)
 
-  models.crenaux
-    .insert(crenaux)
+  models.slots
+    .insert(slots)
     .then(([result]) => {
-      res.location(`/crenaux/${result.insertId}`).sendStatus(201);
+      res.location(`/slots/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,7 +67,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.crenaux
+  models.slots
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
