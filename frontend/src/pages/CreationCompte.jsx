@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+// import { useUserContext } from "../contexts/UserContext";
 import chevron from "../assets/chevron-left.svg";
 
 function CreationCompte() {
+  // const { userId, setUserId } = useUserContext();
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +16,10 @@ function CreationCompte() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // try{
+    //   const response =await axios.post
+    // }
 
     const dossierCreation = {
       firstname,
