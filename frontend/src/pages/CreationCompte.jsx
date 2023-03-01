@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import chevron from "../assets/chevron-left.svg";
+import hero from "../assets/hero-lg.svg";
+import logo from "../assets/logo.svg";
 
 function CreationCompte() {
   const [firstname, setFirstname] = useState("");
@@ -41,13 +43,12 @@ function CreationCompte() {
   };
 
   return (
-    <div>
-      <div className="flex justify-center text-center font-nunito text-black font-semibold text-3xl py-8">
+    <div className=" gradient-linear h-screen lg:grid lg:justify-items-center lg:grid-cols-2 lg:row-span-4 lg:items-center max-md:landscape:h-max max-lg:landscape:h-max  ">
+      <div className="flex justify-center text-center font-nunito text-black font-semibold text-3xl py-8 lg:col-start-2 lg:row-start-1 lg:mr-18">
         <img src={chevron} alt="chevron" />
         <p>Création de compte</p>
       </div>
-
-      <div>
+      <div className="lg:col-start-2 lg:row-start-2 lg:row-span-5 ">
         <form
           className="text-grey-input grid gap-7 space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto "
           onSubmit={handleSubmit}
@@ -117,10 +118,26 @@ function CreationCompte() {
             required
             placeholder="Mot de passe"
           />
-          <button className="btn-purple md:ml-auto" type="submit">
+          <button className="btn-purple md:ml-auto lg:hidden " type="submit">
             Créer mon compte
           </button>
         </form>
+        <div className="lg:pt-8">
+          <button
+            className="btn-purple md:ml-auto hidden lg:block "
+            type="submit"
+          >
+            Créer mon compte
+          </button>
+        </div>
+      </div>
+      <div className="lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-6 lg:ml-8 ">
+        <img src={logo} alt="logo" className="hidden lg:block " />
+        <img
+          src={hero}
+          alt="hero"
+          className="hidden lg:block lg:row-start-2 lg:row-span-4 lg:scale-90"
+        />
       </div>
     </div>
   );
