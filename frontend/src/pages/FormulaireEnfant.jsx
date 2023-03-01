@@ -15,10 +15,9 @@ function FormulaireEnfant() {
   const [birthdate, setBirthDate] = useState("");
   const [canwalk, setCanWalk] = useState("");
   const [allergie, setAllergie] = useState("");
-  const [medecinTraitant, setMedecinTraitant] = useState("");
-  const [assurance, setAssurance] = useState(null);
-  const [carnetsante, setCarnetSante] = useState(null);
-  const [idchildren, setIdChildren] = useState(null);
+  const [insurance, setInsurance] = useState(null);
+  const [healthbook, setHealthBook] = useState(null);
+  const [idchildren, setIdChildren] = useState("");
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -31,9 +30,8 @@ function FormulaireEnfant() {
     birthdate,
     canwalk,
     allergie,
-    medecinTraitant,
-    assurance,
-    carnetsante,
+    insurance,
+    healthbook,
   };
 
   useEffect(() => {
@@ -47,7 +45,8 @@ function FormulaireEnfant() {
           setBirthDate(data.birthdate);
           setCanWalk(data.canwalk);
           setAllergie(data.allergie);
-          setMedecinTraitant(data.medecinTraitant);
+          setInsurance(data.insurance);
+          setHealthBook(data.healthbook);
         })
         .catch((error) => {
           console.error(error);
@@ -60,9 +59,9 @@ function FormulaireEnfant() {
 
   useEffect(() => {
     const formData = new FormData();
-    formData.append("assurance", assurance);
+    formData.append("insurance", insurance);
 
-    if (idchildren && assurance) {
+    if (idchildren && insurance) {
       axios
         .post(`/api/enfants/${idchildren}/upload`, formData)
         .then(() => alert("Le fichier a été enregistré avec succès !"))
@@ -71,7 +70,7 @@ function FormulaireEnfant() {
           alert("Une erreur est survenue lors de l'enregistrement du fichier.");
         });
     }
-  }, [idchildren, assurance]);
+  }, [idchildren, insurance]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -82,8 +81,8 @@ function FormulaireEnfant() {
       birthdate,
       canwalk,
       allergie,
-      assurance,
-      carnetsante,
+      insurance,
+      healthbook,
     };
 
     axios
@@ -100,8 +99,8 @@ function FormulaireEnfant() {
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
-    setAssurance(file);
-    setCarnetSante(file);
+    setInsurance(file);
+    setHealthBook(file);
   };
 
   return (
@@ -196,46 +195,32 @@ function FormulaireEnfant() {
         </label>
 
         <label
-          htmlFor="medecinTraitant"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
-        >
-          <Validation isValid={medecinTraitant !== ""} />
-          <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem] "
-            type="text"
-            id="medecinTraitant"
-            value={medecinTraitant}
-            onChange={(event) => setMedecinTraitant(event.target.value)}
-            placeholder="médecin traitant"
-          />
-        </label>
-        <label
-          htmlFor="Assurance"
+          htmlFor="insurance"
           className="flex flex-row justify-evenly md:ml-[1.75rem] mds:justify-evenky lg:ml-[5.75rem] "
         >
-          <Validation isValid={assurance !== null} />
+          <Validation isValid={insurance !== null} />
           <input
             className="w-3/5 p-3 border-solid border-2 border-grey-input rounded-lg md:ml-10 mds:w-10/12 lg:w-8/12 lg:ml-[7rem] lg:mr-[12rem] "
             type="file"
-            id="assurance"
+            id="insurance"
             onChange={handleUpload}
-            placeholder="assurance"
+            placeholder="Assurance"
           />
-          <UploadValidation isValidate={assurance !== null} />
+          <UploadValidation isValidate={insurance !== null} />
         </label>
         <label
-          htmlFor="carnetsante"
+          htmlFor="healthbook"
           className="flex flex-row justify-evenly md:ml-[1.75rem] lg:ml-[5.75rem]"
         >
-          <Validation isValid={carnetsante !== null} />
+          <Validation isValid={healthbook !== null} />
           <input
             className="w-3/5 p-3 border-solid border-2 border-grey-input rounded-lg md:ml-10 mds:w-10/12  lg:w-8/12 lg:ml-[7rem] lg:mr-[12rem]"
             type="file"
-            id="carnetsante"
+            id="healthbook"
             onChange={handleUpload}
             placeholder="carnet santé"
           />
-          <UploadValidation isValidate={carnetsante !== null} />
+          <UploadValidation isValidate={healthbook !== null} />
         </label>
         <button
           className="btn-rounded-purple ml-44 lg:ml-[75%]"

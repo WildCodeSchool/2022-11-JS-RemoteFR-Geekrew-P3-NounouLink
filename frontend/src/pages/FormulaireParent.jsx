@@ -4,19 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
-import btnbaby1 from "../assets/formulaire/Baby1.svg";
-import btnbaby2 from "../assets/formulaire/Baby2.svg";
-import plusCircle from "../assets/formulaire/plus-circle.svg";
 
 function FormulaireParent() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [kind, setKind] = useState("");
   const [email, setEmail] = useState("");
   const [adress, setAdress] = useState("");
-  const [codePostal, setCodePostal] = useState("");
-  const [ville, setVille] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [idparents, setIdParents] = useState(null);
+  const [phone, setPhone] = useState("");
+  const [idparents, setIdParents] = useState("");
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -31,11 +27,10 @@ function FormulaireParent() {
           const { data } = response;
           setFirstname(data.firstname);
           setLastname(data.lastname);
+          setKind(data.kind);
           setEmail(data.email);
           setAdress(data.adress);
-          setCodePostal(data.codePostal);
-          setVille(data.ville);
-          setTelephone(data.telephone);
+          setPhone(data.phone);
         })
         .catch((error) => {
           console.error(error);
@@ -52,11 +47,11 @@ function FormulaireParent() {
     const parentFile = {
       firstname,
       lastname,
+      kind,
       email,
       adress,
-      codePostal,
-      ville,
-      telephone,
+
+      phone,
     };
 
     axios
@@ -99,11 +94,7 @@ function FormulaireParent() {
       <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20 ">
         Dossier Parent
       </p>
-      <div className="flex flex-row justify-between pb-5 mx-5 lg:mx-24 lg:pb-10 lg:justify-evenly">
-        <img src={btnbaby1} alt="button baby 1" />
-        <img src={btnbaby2} alt="button baby 2" />
-        <img src={plusCircle} alt="plus circle" />
-      </div>
+
       <form
         className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto"
         onSubmit={handleSubmit}
@@ -139,7 +130,21 @@ function FormulaireParent() {
           />
         </label>
         <label
-          htmlFor="birthdate"
+          htmlFor="kind"
+          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
+        >
+          <Validation isValid={kind !== ""} />
+          <input
+            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
+            type="text"
+            id="kind"
+            value={kind}
+            onChange={(event) => setKind(event.target.value)}
+            placeholder="civilité"
+          />
+        </label>
+        <label
+          htmlFor="email"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
           <Validation isValid={email !== ""} />
@@ -164,50 +169,21 @@ function FormulaireParent() {
             id="adress"
             checked={adress}
             onChange={(event) => setAdress(event.target.value)}
-            placeholder="N°et nom de rue"
-          />
-        </label>
-        <label
-          htmlFor="codePostal"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
-        >
-          <Validation isValid={codePostal !== ""} />
-          <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
-            type="text"
-            id="codePostal"
-            value={codePostal}
-            onChange={(event) => setCodePostal(event.target.value)}
-            placeholder="Code Postal"
+            placeholder="N°et nom de rue, Cp, Ville"
           />
         </label>
 
         <label
-          htmlFor="ville"
+          htmlFor="phone"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
-          <Validation isValid={ville !== ""} />
+          <Validation isValid={phone !== ""} />
           <input
             className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
             type="text"
-            id="ville"
-            value={ville}
-            onChange={(event) => setVille(event.target.value)}
-            placeholder="Ville"
-          />
-        </label>
-
-        <label
-          htmlFor="telephone"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
-        >
-          <Validation isValid={telephone !== ""} />
-          <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
-            type="text"
-            id="telephone"
-            value={telephone}
-            onChange={(event) => setTelephone(event.target.value)}
+            id="phone"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
             placeholder="Numéro de téléphone"
           />
         </label>

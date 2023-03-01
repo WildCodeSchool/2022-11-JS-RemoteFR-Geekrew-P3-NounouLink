@@ -4,29 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
-import btnbaby1 from "../assets/formulaire/Baby1.svg";
-import btnbaby2 from "../assets/formulaire/Baby2.svg";
-import plusCircle from "../assets/formulaire/plus-circle.svg";
 
 function FormulaireInscription() {
-  /* const [currentPage, setCurrentPage] = useState(1); 
-  const [babyPage, setBabyPage] = useState(10); */
-  const [numcaf, setNumcaf] = useState("");
-  const [autsortie, setAutsortie] = useState("");
-  const [droitimage, setDroitimage] = useState("");
-  const [personneConfiance, setPersonneConfiance] = useState("");
-  const [idparents, setIdParents] = useState(null);
-  /* const [enfants, setEnfants] = useState([]); */
+  const [cafNumber, setCafNumber] = useState("");
+  const [exitPermit, setExitPermit] = useState("");
+  const [imageRights, setImageRights] = useState("");
+  const [idparents, setIdParents] = useState("");
+
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/Recherche");
   };
 
   const inscriptionFile = {
-    numcaf,
-    autsortie,
-    droitimage,
-    personneConfiance,
+    cafNumber,
+    exitPermit,
+    imageRights,
   };
 
   useEffect(() => {
@@ -35,10 +28,9 @@ function FormulaireInscription() {
         .get(`/api/parents/${idparents}`, inscriptionFile)
         .then((response) => {
           const { data } = response;
-          setNumcaf(data.numcaf);
-          setAutsortie(data.autsortie);
-          setDroitimage(data.droitimage);
-          setPersonneConfiance(data.personneConfiance);
+          setCafNumber(data.cafNumber);
+          setExitPermit(data.exitPermit);
+          setImageRights(data.imageRights);
           setIdParents(data.idparents);
         })
         .catch((error) => {
@@ -54,10 +46,9 @@ function FormulaireInscription() {
     event.preventDefault();
 
     const parentsFile = {
-      numcaf,
-      autsortie,
-      droitimage,
-      personneConfiance,
+      cafNumber,
+      exitPermit,
+      imageRights,
     };
 
     axios
@@ -100,75 +91,57 @@ function FormulaireInscription() {
       <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20 ">
         Dossier Inscription
       </p>
-      <div className="flex flex-row justify-between pb-5 mx-5 lg:mx-24 lg:pb-10 lg:justify-evenly">
-        <img src={btnbaby1} alt="button baby 1" />
-        <img src={btnbaby2} alt="button baby 2" />
-        <img src={plusCircle} alt="plus circle" />
-      </div>
+
       <form
         className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto"
         onSubmit={handleSubmit}
       >
         <label
-          htmlFor="numcaf"
+          htmlFor="cafNumber"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
-          <Validation isValid={numcaf !== ""} />
+          <Validation isValid={cafNumber !== ""} />
           <input
             className="w-4/6 ml-6  p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
-            id="numcaf"
-            value={numcaf}
-            onChange={(event) => setNumcaf(event.target.value)}
+            id="cafNumber"
+            value={cafNumber}
+            onChange={(event) => setCafNumber(event.target.value)}
             required
             placeholder="Numéro Allocataire CAF"
           />
         </label>
         <label
-          htmlFor="droitimage"
+          htmlFor="exitPermit"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
-          <Validation isValid={droitimage !== ""} />
+          <Validation isValid={exitPermit !== ""} />
           <input
             className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
-            id="droitimage"
-            value={droitimage}
-            onChange={(event) => setDroitimage(event.target.value)}
-            required
-            placeholder="Autorisation droit à l'image"
-          />
-        </label>
-        <label
-          htmlFor="autsortie"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
-        >
-          <Validation isValid={autsortie !== ""} />
-          <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
-            type="text"
-            id="autsortie"
-            value={autsortie}
-            onChange={(event) => setAutsortie(event.target.value)}
+            id="exitPermit"
+            value={exitPermit}
+            onChange={(event) => setExitPermit(event.target.value)}
             required
             placeholder="Autorisation de sortie"
           />
         </label>
-
         <label
-          htmlFor="personneconfiance"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
+          htmlFor="imageRights"
+          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
-          <Validation isValid={personneConfiance !== ""} />
+          <Validation isValid={imageRights !== ""} />
           <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
+            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
-            id="personneconfiance"
-            value={personneConfiance}
-            onChange={(event) => setPersonneConfiance(event.target.value)}
-            placeholder="Personne de confiance"
+            id="imageRights"
+            value={imageRights}
+            onChange={(event) => setImageRights(event.target.value)}
+            required
+            placeholder="Autorisation droit à l'image"
           />
         </label>
+
         <button
           className="btn-rounded-purple ml-44 lg:ml-[50%]"
           type="submit"

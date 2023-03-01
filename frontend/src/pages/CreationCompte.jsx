@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import chevron from "../assets/chevron-left.svg";
 import hero from "../assets/hero-lg.svg";
@@ -13,6 +14,12 @@ function CreationCompte() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/connexion");
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,6 +43,7 @@ function CreationCompte() {
         console.error(error);
         alert("Une erreur est survenue lors de l'enregistrement du compte.");
       });
+    navigate("/FormulaireEnfant");
   };
 
   const handleChange = (event) => {
@@ -45,14 +53,13 @@ function CreationCompte() {
   return (
     <div className=" gradient-linear grow h-screen lg:grid lg:justify-items-center lg:grid-cols-2 lg:row-span-4 lg:items-center max-md:landscape:h-max max-lg:landscape:h-max lg:h-max ">
       <div className="flex justify-center text-center font-nunito text-black font-semibold text-3xl py-8 lg:col-start-2 lg:row-start-1 lg:mr-18">
-        <img src={chevron} alt="chevron" />
+        <button type="button" onClick={handleClick}>
+          <img src={chevron} alt="chevron" />
+        </button>
         <p>Création de compte</p>
       </div>
       <div className="lg:col-start-2 lg:row-start-2 lg:row-span-5 ">
-        <form
-          className="text-grey-input grid gap-3  space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto lg:gap-7"
-          onSubmit={handleSubmit}
-        >
+        <form className="placeholder:text-grey-input text-black grid gap-3  space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto lg:gap-7">
           <select
             className="p-3 border-solid border-2 border-grey-input rounded-lg"
             value={type}
@@ -126,6 +133,7 @@ function CreationCompte() {
           <button
             className="btn-purple md:ml-auto hidden lg:block "
             type="submit"
+            onClick={handleSubmit}
           >
             Créer mon compte
           </button>
