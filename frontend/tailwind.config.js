@@ -22,8 +22,6 @@ module.exports = {
         "dark-purple": "#882BFF",
         pink: "#F063A7",
         green: "#2DCD7A",
-        "purple-linear":
-          "linear-gradient(148.74deg, rgba(71, 79, 255, 0.9) 2.49%, #E37ACC 99.05%)",
         orange: "#FFA84C",
         "light-grey": "#E8E8E8",
         "purple-toggle": "#BB6BD9",
@@ -35,12 +33,12 @@ module.exports = {
         "gradient-pink": "#E37ACC",
         black: "#1D0042",
         darkPurple: "#882AFF",
+        "gradient-light": "rgba(98, 113, 253, 0.2)",
+        "gradient-orange": "rgba(204, 121, 255, 0.2)",
       },
       dropShadow: {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",
-      },
-      dropShadow: {
-        button: "0 20px 40px rgba(0, 0, 0, 0.1)",
+        filter: "0px 7px 15px rgba(0, 0, 0, 0.05)",
       },
       gridTemplateRows: {
         7: "repeat(7, minmax(0, 1fr))",

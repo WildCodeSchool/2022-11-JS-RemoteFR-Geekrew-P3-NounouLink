@@ -4,6 +4,7 @@ import Accueil from "./pages/Accueil";
 import CreationCompte from "./pages/CreationCompte";
 import ConfirmationcreationCompteB from "./pages/ConfirmationcreationcompteB";
 import Connexion from "./pages/Connexion";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/creationCompte" element={<CreationCompte />} />
         <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
+        <Route path="/resultats-recherche" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
   );
