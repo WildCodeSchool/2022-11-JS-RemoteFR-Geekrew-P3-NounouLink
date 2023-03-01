@@ -7,7 +7,7 @@ import Next from "../assets/Next.svg";
 function ConfirmationcréationcompteB() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("");
+    navigate("formulaireenfants");
   };
   const linkTo = (e) => {
     e.preventDefault();

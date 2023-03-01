@@ -9,10 +9,10 @@ class FavoritesManager extends AbstractManager {
     return this.database.query(
       `insert into ${this.table} (parents_idparents, parents_users_idusers, nannies_idnannies, nannies_users_idusers) values (?,?,?,?)`,
       [
-        favorites.parents_idparents,
-        favorites.parents_users_idusers,
-        favorites.nannies_idnannies,
-        favorites.nannies_users_idusers,
+        favorites.parentsIdparents,
+        favorites.parentsUsersIdusers,
+        favorites.nanniesIdnannies,
+        favorites.nanniesUsersIdusers,
       ]
     );
   }
@@ -21,10 +21,10 @@ class FavoritesManager extends AbstractManager {
     return this.database.query(
       `update ${this.table} set parents_idparents = ?, parents_users_idusers = ?, nannies_idnannies = ?, nannies_users_idusers= ? , where idfavorites = ?`,
       [
-        favorites.parents_idparents,
-        favorites.parents_users_idusers,
-        favorites.nannies_idnannies,
-        favorites.nannies_users_idusers,
+        favorites.parentsIdparents,
+        favorites.parentsUsersIdusers,
+        favorites.nanniesIdnannies,
+        favorites.nanniesUsersIdusers,
         favorites.idfavorites,
       ]
     );

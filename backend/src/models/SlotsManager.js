@@ -13,12 +13,12 @@ class SlotsManager extends AbstractManager {
 , place_number
 ) values (?, ?, ?, ?, ?, ?)`,
       [
-        slots.nannies_idnannies,
-        slots.nannies_users_idusers,
-        slots.caption_day,
-        slots.beginning_hour,
-        slots.end_time,
-        slots.place_number,
+        slots.nanniesIdnannies,
+        slots.nanniesUsersIdusers,
+        slots.captionDay,
+        slots.beginningHour,
+        slots.endTime,
+        slots.placeNumber,
       ]
     );
   }
@@ -32,12 +32,12 @@ class SlotsManager extends AbstractManager {
  = ? where idusers = ?`,
       [
         slots.idslots,
-        slots.nannies_idnannies,
-        slots.nannies_users_idusers,
-        slots.caption_day,
-        slots.beginning_hour,
-        slots.end_time,
-        slots.place_number,
+        slots.nanniesIdnannies,
+        slots.nanniesUsersIdusers,
+        slots.captionDay,
+        slots.beginningHour,
+        slots.endTime,
+        slots.placeNumber,
         slots.idusers,
       ]
     );

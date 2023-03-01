@@ -29,22 +29,22 @@ function Connexion() {
   };
 
   const handleSubmit = () => {
-    navigate("/creation-compte");
+    navigate("/creationcompte");
   };
 
   return (
-    <div className="gradient-linear grid grid-rows-connexion lg:grid-rows-none lg:grid-cols-3 max-lg:landscape:grid-rows-5 lg:landscape:grid-rows-none items-center justify-center h-full w-full font-nunito text-white">
+    <div className="gradient-linear grow grid grid-rows-connexion lg:grid-rows-none lg:grid-cols-3 max-lg:landscape:grid-rows-5 lg:landscape:grid-rows-none items-center justify-center h-full w-full font-nunito text-white">
       <img
         src={logo}
         alt="logo NounouLink"
-        className="max-md:landscape:scale-50 max-lg:landscape:scale-75 justify-self-center lg:self-start lg:p-8 row-start-1  lg:col-start-1 lg:col-span-1 "
+        className="max-md:landscape:scale-50 max-lg:landscape:scale-75  justify-self-center  lg:self-start lg:p-8 row-start-1  lg:col-start-1 lg:col-span-1 "
       />
       <img
         src={hero}
         alt="hero NounouLink"
-        className="hidden lg:flex max-lg:landscape:scale-50 justify-self-center row-start-1 lg:self-end lg:col-start-1 lg:col-span-2"
+        className="hidden lg:flex max-lg:landscape:scale-50 lg:scale-[0.7] justify-self-center row-start-1 lg:self-end lg:col-start-1 lg:col-span-2"
       />
-      <form className="flex flex-col items-center justify-evenly w-full h-full lg:h-[60%] lg:self-end row-start-2 lg:row-start-auto max-lg:landscape:row-span-3">
+      <form className="flex flex-col items-center justify-evenly w-full h-full lg:h-[60%]  row-start-2 lg:row-start-auto max-lg:landscape:row-span-3">
         <label className="mix-blend-screen" htmlFor="email">
           <input
             className="bg-grey-input rounded-lg w-[300px] h-[60px] max-md:landscape:h-[40px] bg-opacity-30 placeholder-white pl-4"
