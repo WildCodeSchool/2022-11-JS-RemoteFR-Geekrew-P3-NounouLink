@@ -21,7 +21,7 @@ function FormulaireEnfant() {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/FormulaireParent");
+    navigate("/formulaireparent");
   };
 
   const dossierParent = {

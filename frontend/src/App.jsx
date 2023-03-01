@@ -14,16 +14,16 @@ function App() {
       <Routes>
         <Route path="/accueil" element={<Accueil />} />
         <Route path="/connexion" element={<Connexion />} />
-        <Route path="/creationCompte" element={<CreationCompte />} />
+        <Route path="/creationcompte" element={<CreationCompte />} />
         <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
-        <Route path="/FormulaireEnfant" element={<FormulaireEnfant />} />
-        <Route path="/FormulaireParent" element={<FormulaireParent />} />
+        <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
+        <Route path="/formulaireparent" element={<FormulaireParent />} />
         <Route
-          path="/FormulaireInscription"
+          path="/formulaireinscription"
           element={<FormulaireInscription />}
         />
         <Route
-          path="/FormulaireInscriotion"
+          path="/formulaireinscriotion"
           element={<FormulaireInscription />}
         />
       </Routes>

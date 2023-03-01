@@ -13,7 +13,7 @@ function FormulaireInscription() {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/Recherche");
+    navigate("/recherche");
   };
 
   const inscriptionFile = {
@@ -62,28 +62,6 @@ function FormulaireInscription() {
         alert("Une erreur est survenue lors de l'enregistrement du dossier.");
       });
   };
-  /* if (idenfants) {
-      axios
-        .put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/enfants/${idenfants}`,
-          dossierEnfant
-        )
-        .then(() => alert("Le dossier a été modifié avec succès !"))
-        .catch((error) => {
-          console.error(error);
-          alert("Une erreur est survenue lors de la modification du dossier.");
-        }); */
-  /* } else {
-      window.confirm("Êtes-vous sûr de vouloir supprimer cet enfant ?");
-      axios
-        .delete(`/api/enfants/${idenfants}`)
-        .then(() => alert("L'enfant a été supprimé avec succès !"))
-        .catch((error) => {
-          console.error(error);
-          alert("Une erreur est survenue lors de la suppression de l'enfant.");
-        });
-    }
-  }; */
 
   return (
     <div>
