@@ -24,7 +24,6 @@ function Accueil() {
         src={logo}
         alt="logo"
       />
-
       <h1 className="scale-105 font-nunito font-bold text-white text-lg xl:scale-110 xl:row-end-4 xl:col-start-2 max-md:landscape:scale-75 max-lg:landscape:scale-90">
         Garde d'enfant à la demande
       </h1>

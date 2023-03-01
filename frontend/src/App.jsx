@@ -4,6 +4,9 @@ import Accueil from "./pages/Accueil";
 import CreationCompte from "./pages/CreationCompte";
 import ConfirmationcreationCompteB from "./pages/ConfirmationcreationcompteB";
 import Connexion from "./pages/Connexion";
+import FormulaireEnfant from "./pages/FormulaireEnfant";
+import FormulaireParent from "./pages/FormulaireParent";
+import FormulaireInscription from "./pages/FormulaireInscription";
 
 function App() {
   return (
@@ -11,8 +14,18 @@ function App() {
       <Routes>
         <Route path="/accueil" element={<Accueil />} />
         <Route path="/connexion" element={<Connexion />} />
-        <Route path="/creationCompte" element={<CreationCompte />} />
+        <Route path="/creationcompte" element={<CreationCompte />} />
         <Route path="/confirmation" element={<ConfirmationcreationCompteB />} />
+        <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
+        <Route path="/formulaireparent" element={<FormulaireParent />} />
+        <Route
+          path="/formulaireinscription"
+          element={<FormulaireInscription />}
+        />
+        <Route
+          path="/formulaireinscriotion"
+          element={<FormulaireInscription />}
+        />
       </Routes>
     </BrowserRouter>
   );
