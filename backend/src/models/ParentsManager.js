@@ -12,10 +12,10 @@ class ParentsManager extends AbstractManager {
 ,image_rights
 , users_idusers) values (?,?,?,?)`,
       [
-        parents.caf_number,
-        parents.exit_permit,
-        parents.image_rights,
-        parents.users_idusers,
+        parents.cafNumber,
+        parents.exitPermit,
+        parents.imageRights,
+        parents.usersIdusers,
       ]
     );
   }
@@ -27,10 +27,10 @@ class ParentsManager extends AbstractManager {
  = ? ,image_rights
  = ?, users_idusers = ?  where idparents = ?`,
       [
-        parents.caf_number,
-        parents.exit_permit,
-        parents.image_rights,
-        parents.users_idusers,
+        parents.cafNumber,
+        parents.exitPermit,
+        parents.imageRights,
+        parents.usersIdusers,
         parents.idparents,
       ]
     );
