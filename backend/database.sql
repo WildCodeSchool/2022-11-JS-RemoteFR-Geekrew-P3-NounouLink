@@ -314,7 +314,7 @@ CREATE TABLE `users` (
   `email` varchar(155) COLLATE utf8mb4_general_ci NOT NULL,
   `adress` varchar(155) COLLATE utf8mb4_general_ci NOT NULL,
   `phone` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `hashedPassword` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`idusers`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
