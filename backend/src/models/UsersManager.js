@@ -22,10 +22,11 @@ class UsersManager extends AbstractManager {
     );
   }
 
-  findgetUserByEmailWithPasswordAndPassToNext(users) {
-    return this.database.query("select * from users where email = ?", [
-      users.email,
-    ]);
+  login(users) {
+    return this.database.query(
+      "select * from users where email = ? and hashedPassword = ?",
+      [users.email, users.hashedPassword]
+    );
   }
 
   update(users) {
