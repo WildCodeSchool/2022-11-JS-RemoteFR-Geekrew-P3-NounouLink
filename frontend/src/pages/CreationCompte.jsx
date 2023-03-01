@@ -43,14 +43,14 @@ function CreationCompte() {
   };
 
   return (
-    <div className=" gradient-linear h-screen lg:grid lg:justify-items-center lg:grid-cols-2 lg:row-span-4 lg:items-center max-md:landscape:h-max max-lg:landscape:h-max  ">
+    <div className=" gradient-linear grow h-screen lg:grid lg:justify-items-center lg:grid-cols-2 lg:row-span-4 lg:items-center max-md:landscape:h-max max-lg:landscape:h-max lg:h-max ">
       <div className="flex justify-center text-center font-nunito text-black font-semibold text-3xl py-8 lg:col-start-2 lg:row-start-1 lg:mr-18">
         <img src={chevron} alt="chevron" />
         <p>Création de compte</p>
       </div>
       <div className="lg:col-start-2 lg:row-start-2 lg:row-span-5 ">
         <form
-          className="text-grey-input grid gap-7 space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto "
+          className="text-grey-input grid gap-3  space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto lg:gap-7"
           onSubmit={handleSubmit}
         >
           <select
