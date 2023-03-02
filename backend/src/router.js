@@ -74,6 +74,6 @@ router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
 router.post("/users", hashPassword, usersControllers.add);
-router.delete("/users/:id", usersControllers.destroy);
+router.delete("/users/:id", hashPassword, usersControllers.destroy);
 
 module.exports = router;
