@@ -43,17 +43,17 @@ const edit = (req, res) => {
     }
   });
 };
-const login = (req, res) => {
-  const users = req.body;
 
+const getUserByEmailAndPasswordAndNext = (req, res, next) => {
   models.users
-    .login(users)
+    .login(req.body.email)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        [req.users] = rows;
       }
+      next();
     })
     .catch((err) => {
       console.error(err);
@@ -99,5 +99,5 @@ module.exports = {
   edit,
   add,
   destroy,
-  login,
+  getUserByEmailAndPasswordAndNext,
 };

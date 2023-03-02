@@ -22,10 +22,10 @@ class UsersManager extends AbstractManager {
     );
   }
 
-  login(users) {
+  login(email) {
     return this.database.query(
-      "select * from users where email = ? and hashedPassword = ?",
-      [users.email, users.hashedPassword]
+      `select email, hashedPassword from ${this.table} where email = ?`,
+      [email]
     );
   }
 

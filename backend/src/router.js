@@ -14,7 +14,11 @@ const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword } = require("./auth");
 
-router.post("/login", usersControllers.login, verifyPassword);
+router.post(
+  "/login",
+  usersControllers.getUserByEmailAndPasswordAndNext,
+  verifyPassword
+);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
