@@ -11,11 +11,11 @@
 html,
 body,
 #root {
-  @apply h-full;
+  @apply h-full w-full;
 }
 
 #root {
-  @apply flex flex-col;
+  @apply flex flex-col w-full;
 }
 
 .gradient-linear {
@@ -23,11 +23,11 @@ body,
 }
 
 .btn-purple {
-  @apply bg-purple rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+  @apply bg-purple rounded-xl text-white w-full h-[4.375rem] landscape:max-md:h-[3.5rem]  drop-shadow-button font-nunito font-extrabold text-2xl;
 }
 
 .btn-orange {
-  @apply bg-orange rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+  @apply bg-orange rounded-xl text-white w-full h-[4.375rem] landscape:max-md:h-[3.5rem] drop-shadow-button font-nunito font-extrabold text-2xl;
 }
 
 .btn-rounded-purple {

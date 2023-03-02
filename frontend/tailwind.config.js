@@ -38,20 +38,21 @@ module.exports = {
       dropShadow: {
         button: "0 20px 40px rgba(0, 0, 0, 0.1)",
       },
-      dropShadow: {
-        button: "0 20px 40px rgba(0, 0, 0, 0.1)",
-      },
       gridTemplateRows: {
         7: "repeat(7, minmax(0, 1fr))",
         8: "repeat(8, minmax(0, 1fr))",
         10: "repeat(10, minmax(0, 1fr))",
         // Complex site-specific row configuration
         connexion: "9.8rem minmax(0, 1fr) 6.25rem",
+        mobile: "0.5fr 1fr repeat(2, 0.3fr)",
+        desktop: "0.5fr 1fr 0.3fr",
       },
       gridTemplateCols: {
         // Simple 8 row grid
         8: "repeat(8, minmax(0, 1fr))",
         10: "repeat(10, minmax(0, 1fr))",
+        mobile: "0.05fr 1fr 0.05fr",
+        tab: "0.5fr repeat(2, 1fr) 0.5fr",
       },
       gridRowStart: {
         8: "8",

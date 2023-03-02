@@ -13,35 +13,27 @@ function Accueil() {
   };
 
   return (
-    <div className="flex flex-col justify-evenly items-center gradient-linear h-screen xl:grid xl:justify-items-center xl:grid-cols-2 xl:row-span-4 xl:items-center max-md:h-f max-md:landscape:h-max max-lg:landscape:h-max">
+    <div className="justify-center w-full grow grid grid-rows-mobile grid-cols-mobile md:grid-cols-5 lg:landscape:grid-cols-7 lg:landscape:grid-rows-desktop gradient-linear font-nunito text-white">
+      <div className="col-start-2 lg:landscape:col-start-1 md:col-end-5 row-start-1 row-end-1 flex flex-col items-center justify-evenly">
+        <img className="lg:justify-self-start" src={logo} alt="logo" />
+        <h1 className="text-xl md:text-2xl lg:landscape:text-3xl xl:text-4xl">
+          Garde d'enfant à la demande
+        </h1>
+      </div>
       <img
-        className="scale-105 xl:scale-150  xl:row-start-1 xl:row-span-4 xl:col-start-1 max-md:landscape:scale-75 max-lg:landscape:scale-90"
+        className="col-span-3 md:col-start-2 lg:landscape:col-start-1 lg:landscape:col-end-5 row-start-2 row-end-2 lg:landscape:row-end-4 flex w-full lg:landscape:w-11/12 self-center justify-self-center lg:landscape:justify-self-start"
         src={hero}
         alt="hero"
       />
-      <img
-        className="scale-105  xl:ml-14 xl:row-start-0 xl:row-span-2 xl:col-start-2 xl:scale-150 xl:pr-8 max-md:landscape:scale-75 max-lg:landscape:scale-90"
-        src={logo}
-        alt="logo"
-      />
-      <h1 className="scale-105 font-nunito font-bold text-white text-lg xl:scale-110 xl:row-end-4 xl:col-start-2 max-md:landscape:scale-75 max-lg:landscape:scale-90">
-        Garde d'enfant à la demande
-      </h1>
 
-      <button
-        type="button"
-        className="btn-purple xl:col-start-2 xl:row-start-4 max-md:landscape:scale-75 max-lg:landscape:scale-75"
-        onClick={handleConnect}
-      >
-        Me connecter
-      </button>
-      <button
-        type="button"
-        className="btn-orange xl:col-start-2 xl:row-start-5 max-md:landscape:scale-75 max-lg:landscape:scale-75"
-        onClick={handleCreate}
-      >
-        Créer mon compte
-      </button>
+      <div className="col-start-2 md:col-start-2 md:col-span-3 lg:landscape:col-start-5 row-start-3 row-end-5 lg:landscape:row-start-2 lg:landscape:row-end-4 lg:landscape:self-end lg:landscape:justify-self-center flex flex-col justify-evenly lg:landscape:justify-betwwen w-full lg:landscape:landscape:w-3/4 lg:landscape:h-3/4">
+        <button type="button" className="btn-purple" onClick={handleConnect}>
+          Me connecter
+        </button>
+        <button type="button" className="btn-orange" onClick={handleCreate}>
+          Créer mon compte
+        </button>
+      </div>
     </div>
   );
 }
