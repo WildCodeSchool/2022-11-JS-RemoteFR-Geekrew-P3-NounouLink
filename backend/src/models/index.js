@@ -79,8 +79,6 @@ const ServicesManager = require("./ServicesManager");
 models.services = new ServicesManager();
 models.services.setDatabase(pool);
 
-// export models
-
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
@@ -100,5 +98,7 @@ const handler = {
     );
   },
 };
+
+// export models
 
 module.exports = new Proxy(models, handler);
