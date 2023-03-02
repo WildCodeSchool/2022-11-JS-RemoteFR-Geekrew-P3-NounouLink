@@ -1,39 +1,44 @@
 import React, { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 
+import { useUserContext } from "../contexts/UserContext";
+
 function Search() {
   const [type, setType] = useState("text");
   const [dataChildren, setDataChildren] = useState([]);
   const [dataAdress, setDataAdress] = useState([]);
+  const [childName, setChildName] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [search, setSearch] = useState([
+    childName,
+    dataAdress,
+    startDate,
+    endDate,
+  ]);
 
+  const { parentId, userId } = useUserContext();
+
+  // console.log(userId);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
       .then((response) => {
-        setDataChildren(response.data);
-        return response.data;
+        setDataChildren(
+          response.data.filter((child) => child.parents_idparents === parentId)
+        );
       });
-
-    // .catch((error) => {
-    //   console.log(error.request);
-    // });
 
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}api/users`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`)
       .then((response) => {
-        return setDataAdress(response.adress);
+        setDataAdress(response.data.adress);
+        // return console.log(response.data);
       });
-    // .catch((error) => {
-    //   console.log(error.request);
-    // });
-
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}api/reservations`);
-    // .then((response) => {
-    //   console.log(response.data);
-    // })
     // .catch((error) => {
     //   console.log(error.request);
     // });
@@ -45,6 +50,8 @@ function Search() {
   const handleTypeBlur = (e) => {
     setType((e.target.type = "text"));
   };
+
+  const handleSubmitSearch = () => {};
 
   return (
     <div className="gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
@@ -63,14 +70,35 @@ function Search() {
       />
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center">
         <label htmlFor="child">
-          <select name="child" id="child" className="input">
+          <select
+            name="child"
+            id="child"
+            className="input"
+            value={childName}
+            onChange={(e) => {
+              const selectedChildName = e.target.value;
+              setChildName(selectedChildName);
+              const newSearch = search.slice(0, 0).concat(selectedChildName); // créer une nouvelle copie de search avec la valeur sélectionnée
+              setSearch(newSearch); // affecter la nouvelle copie à l'état
+              localStorage.setItem("search", JSON.stringify(newSearch)); // stocker la nouvelle copie dans le local storage
+              // console.log(`voici le tableau search:  ${newSearch}`);
+              // console.log(
+              //   `et dans le local storage:  ${localStorage.getItem("search")}`
+              // );
+            }}
+          >
             {dataChildren.map((child) => (
-              <option className="text-white" value={child.firstname}>
+              <option
+                className="text-black"
+                value={child.firstname}
+                key={child.idchildren}
+              >
                 {child.firstname}
               </option>
             ))}
           </select>
         </label>
+
         <label htmlFor="address">
           <input
             name="address"
@@ -82,7 +110,8 @@ function Search() {
         </label>
         <label htmlFor="frequency">
           <select name="frequency" id="frequency" className="input">
-            <option className="text-white">Récurrent</option>
+            <option className="text-black">Récurrent</option>
+            <option className="text-black">Flexible</option>
           </select>
         </label>
         <label htmlFor="starting-date">
@@ -94,6 +123,12 @@ function Search() {
             onFocus={handleTypeFocus}
             onBlur={handleTypeBlur}
             className="input"
+            value={startDate}
+            onChange={(e) => {
+              setStartDate(e.target.value);
+              // console.log(startDate);
+              setSearch((search[2] = e.target.value));
+            }}
           />
         </label>
         <label htmlFor="ending-date">
@@ -105,6 +140,8 @@ function Search() {
             onFocus={handleTypeFocus}
             onBlur={handleTypeBlur}
             className="input"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
           />
         </label>
         <label
@@ -123,6 +160,7 @@ function Search() {
       <button
         className="btn-purple col-start-2 lg:col-start-3 col-end-10 row-start-9 lg:row-start-10 lg:row-end-11 justify-self-center lg:self-end"
         type="button"
+        onClick={handleSubmitSearch}
       >
         Rechercher
       </button>

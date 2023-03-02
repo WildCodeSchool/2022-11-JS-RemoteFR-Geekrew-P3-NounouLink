@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import next from "../assets/Next.svg";
 import hero from "../assets/hero-lg.svg";
+// import { useUserContext } from "../contexts/UserContext";
 
 function Connexion() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ function Connexion() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  // const { setUserId } = useUserContext();
 
   const isValidEmail = (mail) => {
     return /^[\w-_.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(mail);
@@ -29,6 +31,7 @@ function Connexion() {
   };
 
   const handleSubmit = () => {
+    // setUserId(users.idusers) methode à definir quand la connection sera valide
     navigate("/creationcompte");
   };
 

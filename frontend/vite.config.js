@@ -13,4 +13,7 @@ export default defineConfig({
       "@services": path.resolve(__dirname, "src/services"),
     },
   },
+  server: {
+    port: 3000,
+  },
 });

@@ -7,7 +7,7 @@ class ChildrenManager extends AbstractManager {
 
   insert(children) {
     return this.database.query(
-      `insert into ${this.table} (firstname,lastname,birthdate,canwalk,allergie,insurance,healthbook) values (?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (firstname,lastname,birthdate,canwalk,allergie,insurance,healthbook, parents_idparents, parents_users_idusers ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         children.firstname,
         children.lastname,
@@ -16,6 +16,8 @@ class ChildrenManager extends AbstractManager {
         children.allergie,
         children.insurance,
         children.healthbook,
+        children.parentsIdparents,
+        children.parentsUsersIdusers,
       ]
     );
   }
