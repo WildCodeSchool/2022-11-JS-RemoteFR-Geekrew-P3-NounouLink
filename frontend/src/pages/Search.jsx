@@ -14,12 +14,6 @@ function Search() {
   const [childName, setChildName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [search, setSearch] = useState([
-    // childName,
-    // dataAdress,
-    // startDate,
-    // endDate,
-  ]);
 
   const { parentId, userId } = useUserContext();
 
@@ -38,7 +32,7 @@ function Search() {
       .then((response) => {
         setDataAdress(response.data.adress);
 
-        // return console.log(response.data);
+        //  return console.log(response.data);
       });
     //  .catch((error) => {
     //    console.log(error.request);
@@ -57,7 +51,10 @@ function Search() {
   const handleChangeName = (e) => {
     setChildName(e.target.value);
   };
-  // console.log(childName);
+  //  console.log(`prenom:  ${childName}`);
+  //  console.log(`adresse: ${dataAdress}`);
+  //  console.log(`debut du creneau ${startDate}`);
+  //  console.log(`fin du creneau ${endDate}`);
   return (
     <div className="gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
       <h1 className="font-bold text-3xl col-start-2 lg:col-start-3 col-end-10 row-start-2 lg:row-start-1 lg:row-end-3 justify-self-center lg:self-center">
@@ -76,26 +73,10 @@ function Search() {
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center">
         <label htmlFor="child">
           <select onChange={handleChangeName}>
-            <option value="">---</option>
-            {/* name="child"
-            id="child"
-            className="input"
-            value={childName}
-            onChange={handleChangeName} */}
-            {/* // {(e) => {
-              // const selectedChildName = e.target.value;
-              // setChildName(selectedChildName);
-              // const newSearch = search.slice(0,0).concat(selectedChildName); // créer une nouvelle copie de search avec la valeur sélectionnée
-              // setSearch(newSearch); // affecter la nouvelle copie à l'état
-              // localStorage.setItem("search", JSON.stringify(newSearch)); // stocker la nouvelle copie dans le local storage
-              // console.log(`voici le tableau search:  ${newSearch}`);
-              // console.log(
-              //   `et dans le local storage:  ${localStorage.getItem("search")}`
-              // );
-            //   setChildName(e.target.value);
-            //   console.log(childName);
-            // }}
-          > */}
+            <option value="" className="text-black">
+              ---
+            </option>
+
             {dataChildren.map((child) => (
               <option
                 className="text-black"
@@ -135,8 +116,6 @@ function Search() {
             value={startDate}
             onChange={(e) => {
               setStartDate(e.target.value);
-              // console.log(startDate);
-              setSearch((search[2] = e.target.value));
             }}
           />
         </label>
@@ -150,7 +129,9 @@ function Search() {
             onBlur={handleTypeBlur}
             className="input"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            onChange={(e) => {
+              setEndDate(e.target.value);
+            }}
           />
         </label>
         <label
