@@ -11,7 +11,10 @@ const parentsControllers = require("./controllers/parentsControllers");
 const reservationsControllers = require("./controllers/reservationsControllers");
 const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
-const userControllers = require("./controllers/userControllers");
+const usersControllers = require("./controllers/usersControllers");
+const { hashPassword, verifyPassword } = require("./auth");
+
+router.post("/login", usersControllers.login, verifyPassword);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -67,10 +70,10 @@ router.put("/superutilisateurs/:id", superusersControllers.edit);
 router.post("/superutilisateurs", superusersControllers.add);
 router.delete("/superutilisateurs/:id", superusersControllers.destroy);
 
-router.get("/users", userControllers.browse);
-router.get("/users/:id", userControllers.read);
-router.put("/users/:id", userControllers.edit);
-router.post("/users", userControllers.add);
-router.delete("/users/:id", userControllers.destroy);
+router.get("/users", usersControllers.browse);
+router.get("/users/:id", usersControllers.read);
+router.put("/users/:id", hashPassword, usersControllers.edit);
+router.post("/users", hashPassword, usersControllers.add);
+router.delete("/users/:id", hashPassword, usersControllers.destroy);
 
 module.exports = router;
