@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import next from "../assets/next.svg";
+import next from "../assets/Next.svg";
 import hero from "../assets/hero-lg.svg";
 
 function Connexion() {
