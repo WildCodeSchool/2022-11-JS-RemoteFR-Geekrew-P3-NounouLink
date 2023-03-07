@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -37,11 +39,13 @@ function CreationCompte() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/users`, dossierCreation)
       .then(() => {
-        alert("La création a réussi !");
+        toast.success("La création a réussi !");
       })
       .catch((error) => {
         console.error(error);
-        alert("Une erreur est survenue lors de l'enregistrement du compte.");
+        toast.error(
+          "Une erreur est survenue lors de l'enregistrement du compte."
+        );
       });
     navigate("/formulaireenfant");
   };

@@ -12,13 +12,19 @@ const reservationsControllers = require("./controllers/reservationsControllers")
 const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
-const { hashPassword, verifyPassword } = require("./auth");
+const { hashPassword, verifyPassword, verifyToken } = require("./auth");
 
+// the public routes
 router.post(
   "/login",
   usersControllers.getUserByEmailAndPasswordAndNext,
   verifyPassword
 );
+router.post("/users", hashPassword, usersControllers.add);
+
+// then the routes to protect
+
+router.use(verifyToken);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
@@ -77,7 +83,6 @@ router.delete("/superutilisateurs/:id", superusersControllers.destroy);
 router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
-router.post("/users", hashPassword, usersControllers.add);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
 
 module.exports = router;

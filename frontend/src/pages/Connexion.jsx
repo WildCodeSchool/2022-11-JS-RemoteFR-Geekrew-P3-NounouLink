@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import next from "../assets/next.svg";
@@ -23,7 +25,7 @@ function Connexion() {
     if (!isValidEmail(event.target.value)) {
       setError("Email is invalid");
     } else {
-      setError(null);
+      toast.success("Content de vous revoir");
     }
     setEmail(event.target.value);
   };
