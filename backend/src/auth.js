@@ -34,7 +34,8 @@ const verifyPassword = (req, res) => {
         });
 
         delete req.users.hashedPassword;
-        res.send({ token, users: req.users });
+        res.cookie("auth_token", token, { httpOnly: true, secure: false });
+        res.sendStatus(200);
       } else {
         res.sendStatus(401);
       }
@@ -47,13 +48,13 @@ const verifyPassword = (req, res) => {
 
 const verifyToken = (req, res, next) => {
   try {
-    const authorizationHeader = req.get("Authorization");
-    if (authorizationHeader == null) {
-      throw new Error("Authorization header is missing");
+    const authorizationCookie = req.cookie("Authorization");
+    if (authorizationCookie == null) {
+      throw new Error("Authorization cookie is missing");
     }
-    const [type, token] = authorizationHeader.split(" ");
+    const [type, token] = authorizationCookie.split(" ");
     if (type !== "Bearer") {
-      throw new Error("Authorization header has not the 'Bearer' type");
+      throw new Error("Authorization cookie has not the 'Bearer' type");
     }
     req.payload = jwt.verify(token, process.env.JWT_SECRET);
     next();
