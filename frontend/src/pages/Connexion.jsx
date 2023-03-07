@@ -13,6 +13,10 @@ function Connexion() {
 
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("/ConfirmationcreationcompteB");
+  };
+
   const isValidEmail = (mail) => {
     return /^[\w-_.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(mail);
   };
@@ -70,7 +74,7 @@ function Connexion() {
             onChange={handlePasswordChange}
           />
         </label>
-        <button className="btn-purple" type="button">
+        <button className="btn-purple" type="button" onClick={handleClick}>
           Me connecter
         </button>
         <p>J'ai oublié mon mot de passe</p>
