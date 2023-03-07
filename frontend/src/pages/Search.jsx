@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 
@@ -16,8 +16,7 @@ function Search() {
   const [endDate, setEndDate] = useState("");
 
   const { parentId, userId } = useUserContext();
-
-  // console.log(userId);
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
@@ -31,12 +30,7 @@ function Search() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`)
       .then((response) => {
         setDataAdress(response.data.adress);
-
-        //  return console.log(response.data);
       });
-    //  .catch((error) => {
-    //    console.log(error.request);
-    //  });
   }, []);
 
   const handleTypeFocus = (e) => {
@@ -46,15 +40,18 @@ function Search() {
     setType((e.target.type = "text"));
   };
 
-  const handleSubmitSearch = () => {};
+  const handleSubmitSearch = () => {
+    localStorage.setItem(
+      "matchSearch",
+      JSON.stringify([childName, dataAdress, startDate, endDate])
+    );
+    navigate("/resultats-recherche");
+  };
 
   const handleChangeName = (e) => {
     setChildName(e.target.value);
   };
-  //  console.log(`prenom:  ${childName}`);
-  //  console.log(`adresse: ${dataAdress}`);
-  //  console.log(`debut du creneau ${startDate}`);
-  //  console.log(`fin du creneau ${endDate}`);
+
   return (
     <div className="gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
       <h1 className="font-bold text-3xl col-start-2 lg:col-start-3 col-end-10 row-start-2 lg:row-start-1 lg:row-end-3 justify-self-center lg:self-center">
