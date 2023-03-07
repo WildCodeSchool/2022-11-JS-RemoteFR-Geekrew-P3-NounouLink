@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Accueil from "./pages/Accueil";
 import CreationCompte from "./pages/CreationCompte";
 
-import ConfirmationcreationCompteB from "./pages/ConfirmationcreationcompteB";
+import ConfirmationcreationCompte from "./pages/Confirmationcreationcompte";
 import Connexion from "./pages/Connexion";
 import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
@@ -20,7 +20,7 @@ function App() {
           <Route path="/creationcompte" element={<CreationCompte />} />
           <Route
             path="/confirmation"
-            element={<ConfirmationcreationCompteB />}
+            element={<ConfirmationcreationCompte />}
           />
           <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
           <Route path="/formulaireparent" element={<FormulaireParent />} />

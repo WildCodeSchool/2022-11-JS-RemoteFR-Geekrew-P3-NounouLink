@@ -43,7 +43,7 @@ function CreationCompte() {
         console.error(error);
         alert("Une erreur est survenue lors de l'enregistrement du compte.");
       });
-    navigate("/formulaireenfant");
+    navigate("/confirmation");
   };
 
   const handleChange = (event) => {
