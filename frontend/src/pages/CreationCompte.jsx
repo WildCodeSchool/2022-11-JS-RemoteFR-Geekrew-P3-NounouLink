@@ -47,7 +47,7 @@ function CreationCompte() {
             "Une erreur est survenue lors de l'enregistrement du compte."
           );
         });
-    navigate("/ConfirmationcreationcompteB");
+    navigate("/confirmation");
   };
 
   const handleChange = (event) => {
