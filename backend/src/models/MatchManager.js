@@ -1,7 +1,5 @@
 const AbstractManager = require("./AbstractManager");
 
-// ${this.table}.idslots, ${this.table}.beginning_hour, ${this.table}.end_time, ${this.table}.place_number, ${this.table}.nannies_idnannies, ${this.table}.nannies_users_idusers
-
 class MatchManager extends AbstractManager {
   constructor() {
     super({ table: "slots" });
