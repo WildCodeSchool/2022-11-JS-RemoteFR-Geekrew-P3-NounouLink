@@ -129,7 +129,11 @@ function CreationCompte() {
             required
             placeholder="Mot de passe"
           />
-          <button className="btn-purple md:ml-auto lg:hidden " type="submit">
+          <button
+            className="btn-purple md:ml-auto lg:hidden "
+            type="submit"
+            onClick={handleSubmit}
+          >
             Créer mon compte
           </button>
         </form>
