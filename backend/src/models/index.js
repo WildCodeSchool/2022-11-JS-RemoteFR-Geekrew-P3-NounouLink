@@ -79,6 +79,11 @@ const ServicesManager = require("./ServicesManager");
 models.services = new ServicesManager();
 models.services.setDatabase(pool);
 
+const MatchManager = require("./MatchManager");
+
+models.match = new MatchManager();
+models.match.setDatabase(pool);
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 

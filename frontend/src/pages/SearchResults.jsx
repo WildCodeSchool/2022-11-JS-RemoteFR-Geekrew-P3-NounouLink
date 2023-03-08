@@ -1,31 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
+import star from "../assets/star.svg";
 
 function SearchResults() {
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [infosNanny, setInfosNanny] = useState([]);
+  const test = [];
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/creneaux`)
       .then((response) => {
         const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
-        // console.log(`matchsearch : ${matchSearch}`);
-        // console.log(`creneaux debut nanny: ${response.data[0].beginning_hour}`);
-        // console.log(`creneaux fin nanny: ${response.data[0].end_time}`);
-
-        // const beginNanny = Date.parse(response.data[0].beginning_hour);
-
-        // .getTimezoneOffset() c est ca qui deconne
-        // et si on tente getTime()
-        const beginNanny = new Date(
-          response.data[0].beginning_hour
-        ).toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
-
-        const endNanny = new Date(response.data[0].end_time).toLocaleString(
-          "fr-FR",
-          { timeZone: "Europe/Paris" }
-        );
-
         const beginParent = new Date(matchSearch[2]).toLocaleString("fr-FR", {
           timeZone: "Europe/Paris",
         });
@@ -33,27 +20,34 @@ function SearchResults() {
           timeZone: "Europe/Paris",
         });
 
-        // console.log(`beginNanny: ${beginNanny}`);
-        // console.log(`endNanny: ${endNanny}`);
-        // console.log(`beginParent: ${beginParent}`);
-        // console.log(`endParent: ${endParent}`);
+        const slots = [];
+        for (let i = 0; i < response.data.length; i += 1) {
+          const beginNanny = new Date(
+            response.data[i].beginning_hour
+          ).toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
 
-        // console.log(beginNanny, endNanny, beginParent, endParent);
+          const endNanny = new Date(response.data[i].end_time).toLocaleString(
+            "fr-FR",
+            { timeZone: "Europe/Paris" }
+          );
 
-        if (beginNanny <= beginParent && endNanny >= endParent) {
-          alert("Youpi go faire un brunch");
-        } else {
-          alert("bon ben on commande un pizza");
+          if (beginNanny <= beginParent && endNanny >= endParent) {
+            slots.push(response.data[i].idslots);
+          }
         }
-        // return response.data
 
-        // tu y arrives? oui mais il faut voir avec le decalage horaire
-        // t'es un génie
-        // c est toi le genie
+        setAvailableSlots(slots);
+      });
 
-        // tu obtiens un GTM +2 pour la nounou ?
-        // je crois pas, enfin je sais pas , le time de la nounou est entre 6h et 10h au lieu de 8h 12h
-        // Avec new Date(response.blabla) j'arrive à obtenir 8h et 12h mais avec un GTM+2 ...
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/match`)
+      .then((response) => {
+        for (let i = 0; i < response.data.length; i += 1) {
+          if (availableSlots.includes(response.data[i].idslots)) {
+            test.push(response.data[i]);
+          }
+        }
+        setInfosNanny(test);
       });
   }, []);
 
@@ -82,11 +76,44 @@ function SearchResults() {
         </div>
         <p> Carte</p>
       </div>
-      <div className="gradient-blue h-full">
-        <div className="grid grid-rows-auto grid-cols-1 gap-2 h-full flex-col justify-center">
-          <div className="bg-white rounded-3xl w-4/5 justify-self-center" />
-          <div>card</div>
-          <div>card</div>
+      <div className="gradient-blue h-full py-4">
+        <div className="grid grid-rows-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 flex-col justify-center">
+          {" "}
+          {infosNanny.map((nannyCard) => {
+            return (
+              <div
+                className="bg-white rounded-3xl w-4/5 justify-self-center flex flex-col p-4 max-w-sm"
+                key={nannyCard.id}
+              >
+                <img
+                  src={nannyCard.pictures}
+                  alt={nannyCard.pictures}
+                  className="aspect-video"
+                />
+                <div className="flex flex-row w-full justify-between items-center">
+                  <h1 className="text-xl">{`${nannyCard.firstname} ${nannyCard.lastname}`}</h1>
+                  <div className="bg-purple flex flex-row rounded-full text-white justify-between px-2">
+                    <p>{nannyCard.ranking}</p>
+                    <img src={star} alt="rating" />
+                  </div>
+                </div>
+                <div className="flex flex-row w-full justify-between items-center">
+                  {nannyCard.place_number > 1 ? (
+                    <p className="text-green font-semibold text-lg">
+                      {`${nannyCard.place_number} places disponibles`}
+                    </p>
+                  ) : (
+                    <p className="text-green font-semibold text-lg">
+                      {`${nannyCard.place_number} place disponible`}
+                    </p>
+                  )}
+                  <h3 className="text-black font-extrabold text-2xl">
+                    {nannyCard.hourly_rate}€
+                  </h3>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
