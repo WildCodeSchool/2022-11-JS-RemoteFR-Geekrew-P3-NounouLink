@@ -10,9 +10,7 @@ const passwordValidator = Joi.string()
 const usersValidator = Joi.object({
   firstname: Joi.string().min(3).max(45).required(),
   lastname: Joi.string().min(3).max(45).required(),
-  kind: Joi.array()
-    .items(Joi.string().valid("parent", "ass_mat", "superusers"))
-    .min(1),
+  kind: Joi.string().min(1),
   email: Joi.string().email().required(),
   adress: Joi.string().min(3).max(155).required(),
   phone: Joi.string().min(9).max(45).required(),

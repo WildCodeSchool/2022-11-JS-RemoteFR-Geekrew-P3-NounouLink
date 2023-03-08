@@ -48,15 +48,13 @@ const verifyPassword = (req, res) => {
 
 const verifyToken = (req, res, next) => {
   try {
-    const authorizationCookie = req.cookie("Authorization");
-    if (authorizationCookie == null) {
+    const authorizationCookie = req.cookies.auth_token;
+
+    if (!authorizationCookie) {
       throw new Error("Authorization cookie is missing");
     }
-    const [type, token] = authorizationCookie.split(" ");
-    if (type !== "Bearer") {
-      throw new Error("Authorization cookie has not the 'Bearer' type");
-    }
-    req.payload = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.payload = jwt.verify(authorizationCookie, process.env.JWT_SECRET);
     next();
   } catch (err) {
     console.error(err);
