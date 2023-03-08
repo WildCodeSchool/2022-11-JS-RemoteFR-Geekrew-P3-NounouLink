@@ -13,6 +13,7 @@ const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword, verifyToken } = require("./auth");
+const matchControllers = require("./controllers/matchControllers");
 
 // the public routes
 router.post(
@@ -80,5 +81,7 @@ router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
+
+router.get("/match", matchControllers.browse);
 
 module.exports = router;

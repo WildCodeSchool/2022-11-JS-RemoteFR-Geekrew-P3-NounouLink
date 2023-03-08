@@ -10,7 +10,6 @@ class UsersManager extends AbstractManager {
       `insert into ${this.table} (idusers, firstname, lastname, kind
 , email, adress, phone, hashedPassword) values (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        users.idusers,
         users.firstname,
         users.lastname,
         users.kind,

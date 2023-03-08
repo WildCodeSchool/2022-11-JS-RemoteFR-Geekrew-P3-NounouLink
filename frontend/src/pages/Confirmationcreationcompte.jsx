@@ -4,7 +4,7 @@ import logogroupe from "../assets/logogroupe.svg";
 import hero from "../assets/hero.svg";
 import Next from "../assets/next.svg";
 
-function ConfirmationcréationcompteB() {
+function Confirmationcréationcompte() {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/formulaireenfant");
@@ -59,4 +59,4 @@ function ConfirmationcréationcompteB() {
   );
 }
 
-export default ConfirmationcréationcompteB;
+export default Confirmationcréationcompte;
