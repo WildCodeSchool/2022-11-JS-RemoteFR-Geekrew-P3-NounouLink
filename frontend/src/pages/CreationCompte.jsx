@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import userAPI from "../services/userAPI";
 
 import chevron from "../assets/chevron-left.svg";
 import hero from "../assets/hero-lg.svg";
@@ -15,7 +15,7 @@ function CreationCompte() {
   const [adress, setAdress] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [type, setType] = useState("");
+  const [kind, setKind] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,32 +26,32 @@ function CreationCompte() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const dossierCreation = {
-      firstname,
-      lastname,
-      email,
-      adress,
-      phone,
-      password,
-      type,
-    };
-
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/users`, dossierCreation)
-      .then(() => {
-        toast.success("La création a réussi !");
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error(
-          "Une erreur est survenue lors de l'enregistrement du compte."
-        );
-      });
-    navigate("/formulaireenfant");
+    if (firstname && lastname && kind && email && adress && phone && password)
+      userAPI
+        .post("/api/users", {
+          firstname,
+          lastname,
+          kind,
+          email,
+          adress,
+          phone,
+          password,
+        })
+        .then((res) => {
+          console.warn(res);
+          toast.success("La création a réussi !");
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error(
+            "Une erreur est survenue lors de l'enregistrement du compte."
+          );
+        });
+    navigate("/confirmation");
   };
 
   const handleChange = (event) => {
-    setType(event.target.value);
+    setKind(event.target.value);
   };
 
   return (
@@ -66,13 +66,13 @@ function CreationCompte() {
         <form className="placeholder:text-grey-input text-black grid gap-3  space-between justify-center md:grid md:grid-cols-1 md:gap-10 md:w-4/5 ml-auto mr-auto lg:gap-7">
           <select
             className="p-3 border-solid border-2 border-grey-input rounded-lg"
-            value={type}
+            value={kind}
             onChange={handleChange}
           >
             <option value="Vous êtes ?">Vous êtes ?</option>
             <option value="parent">Parent</option>
-            <option value="assistanteMaternelle">Assistante maternelle</option>
-            <option value="admin">Admin</option>
+            <option value="ass_mat">Assistante maternelle</option>
+            <option value="supeusers">Admin</option>
           </select>
 
           <input
@@ -129,7 +129,11 @@ function CreationCompte() {
             required
             placeholder="Mot de passe"
           />
-          <button className="btn-purple md:ml-auto lg:hidden " type="submit">
+          <button
+            className="btn-purple md:ml-auto lg:hidden "
+            type="submit"
+            onClick={handleSubmit}
+          >
             Créer mon compte
           </button>
         </form>
