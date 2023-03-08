@@ -7,6 +7,7 @@ import Connexion from "./pages/Connexion";
 import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
 import FormulaireInscription from "./pages/FormulaireInscription";
+import SearchResults from "./pages/SearchResults";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 
@@ -29,6 +30,7 @@ function App() {
             path="/formulaireinscription"
             element={<FormulaireInscription />}
           />
+          <Route path="/resultat" element={<SearchResults />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>

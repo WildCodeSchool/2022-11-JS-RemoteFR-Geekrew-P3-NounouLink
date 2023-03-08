@@ -44,7 +44,7 @@ function Search() {
       "matchSearch",
       JSON.stringify([childName, dataAdress, startDate, endDate])
     );
-    navigate("/resultats-recherche");
+    navigate("/resultat");
   };
 
   const handleChangeName = (e) => {
@@ -92,6 +92,7 @@ function Search() {
             placeholder="Adresse"
             className="input"
             value={dataAdress}
+            onChange={(event) => setDataAdress(event.target.value)}
           />
         </label>
         <label htmlFor="frequency">

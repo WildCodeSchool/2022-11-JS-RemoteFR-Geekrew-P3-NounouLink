@@ -13,6 +13,7 @@ const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword } = require("./auth");
+const matchControllers = require("./controllers/matchControllers");
 
 router.post("/login", usersControllers.login, verifyPassword);
 
@@ -75,5 +76,7 @@ router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
 router.post("/users", hashPassword, usersControllers.add);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
+
+router.get("/match", matchControllers.browse);
 
 module.exports = router;
