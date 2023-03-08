@@ -53,7 +53,6 @@ const verifyToken = (req, res, next) => {
     if (!authorizationCookie) {
       throw new Error("Authorization cookie is missing");
     }
-
     req.payload = jwt.verify(authorizationCookie, process.env.JWT_SECRET);
     next();
   } catch (err) {

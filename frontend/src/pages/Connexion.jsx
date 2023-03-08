@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
@@ -12,14 +12,6 @@ function Connexion() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
-  const [setUser] = useState("");
-
-  useEffect(() => {
-    userAPI
-      .get("./api/user")
-      .then((res) => setUser(res.data))
-      .catch((err) => console.error(err));
-  }, []);
 
   const navigate = useNavigate();
 
@@ -28,7 +20,7 @@ function Connexion() {
   };
 
   const isValidEmail = (mail) => {
-    return /^[\w-_.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(mail);
+    return /^[\w-_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
   };
 
   const handleEmailChange = (event) => {
