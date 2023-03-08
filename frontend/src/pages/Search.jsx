@@ -104,6 +104,7 @@ function Search() {
         <label htmlFor="starting-date">
           <input
             type={type}
+            step="1800"
             name="starting-date"
             id="starting-date"
             placeholder="Date & heure de début"

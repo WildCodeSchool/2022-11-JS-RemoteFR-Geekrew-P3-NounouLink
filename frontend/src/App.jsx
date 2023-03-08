@@ -10,6 +10,7 @@ import FormulaireInscription from "./pages/FormulaireInscription";
 import SearchResults from "./pages/SearchResults";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
+import Menu from "./pages/Menu";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             element={<FormulaireInscription />}
           />
           <Route path="/resultat" element={<SearchResults />} />
+          <Route path="/menu" element={<Menu />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>
