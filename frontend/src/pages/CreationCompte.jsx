@@ -71,8 +71,8 @@ function CreationCompte() {
           >
             <option value="Vous êtes ?">Vous êtes ?</option>
             <option value="parent">Parent</option>
-            <option value="assistanteMaternelle">Assistante maternelle</option>
-            <option value="admin">Admin</option>
+            <option value="ass_mat">Assistante maternelle</option>
+            <option value="supeusers">Admin</option>
           </select>
 
           <input

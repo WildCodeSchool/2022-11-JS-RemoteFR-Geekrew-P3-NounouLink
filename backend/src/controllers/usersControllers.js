@@ -69,7 +69,6 @@ const getUserByEmailAndPasswordAndNext = (req, res, next) => {
 
 const add = (req, res) => {
   const users = req.body;
-
   // TODO validations (length, format...)
   const validationResult = validateUsers(users);
 
