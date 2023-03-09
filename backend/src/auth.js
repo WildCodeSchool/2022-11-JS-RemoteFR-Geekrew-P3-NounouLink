@@ -24,16 +24,18 @@ const hashPassword = (req, res, next) => {
 
 const verifyPassword = (req, res) => {
   argon2
-    .verify(req.user.hashedPassword, req.body.password)
+    .verify(req.users.hashedPassword, req.body.password)
     .then((isVerified) => {
       if (isVerified) {
-        const payload = { sub: req.user.id };
+        const payload = { sub: req.users.idusers };
+
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
-          expireIn: "1h",
+          expiresIn: "1h",
         });
 
-        delete req.user.hashedPassword;
-        res.send({ token, user: req.user });
+        delete req.users.hashedPassword;
+        res.cookie("auth_token", token, { httpOnly: true, secure: false });
+        res.sendStatus(200);
       } else {
         res.sendStatus(401);
       }
@@ -44,7 +46,23 @@ const verifyPassword = (req, res) => {
     });
 };
 
+const verifyToken = (req, res, next) => {
+  try {
+    const authorizationCookie = req.cookies.auth_token;
+
+    if (!authorizationCookie) {
+      throw new Error("Authorization cookie is missing");
+    }
+    req.payload = jwt.verify(authorizationCookie, process.env.JWT_SECRET);
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
+
 module.exports = {
+  verifyToken,
   hashPassword,
   verifyPassword,
 };

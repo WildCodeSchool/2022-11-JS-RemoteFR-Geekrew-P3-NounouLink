@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +51,7 @@ function FormulaireEnfant() {
         })
         .catch((error) => {
           console.error(error);
-          alert(
+          toast.error(
             "Une erreur est survenue lors de la récupération des données de l'enfant."
           );
         });
@@ -64,10 +65,12 @@ function FormulaireEnfant() {
     if (idchildren && insurance) {
       axios
         .post(`/api/enfants/${idchildren}/upload`, formData)
-        .then(() => alert("Le fichier a été enregistré avec succès !"))
+        .then(() => toast.success("Le fichier a été enregistré avec succès !"))
         .catch((error) => {
           console.error(error);
-          alert("Une erreur est survenue lors de l'enregistrement du fichier.");
+          toast.error(
+            "Une erreur est survenue lors de l'enregistrement du fichier."
+          );
         });
     }
   }, [idchildren, insurance]);
@@ -89,11 +92,13 @@ function FormulaireEnfant() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
       .then((response) => {
         setIdChildren(response.data.id);
-        alert("Le dossier a été enregistré avec succès !");
+        toast.success("Le dossier a été enregistré avec succès !");
       })
       .catch((error) => {
         console.error(error);
-        alert("Une erreur est survenue lors de l'enregistrement du dossier.");
+        toast.error(
+          "Une erreur est survenue lors de l'enregistrement du dossier."
+        );
       });
   };
 

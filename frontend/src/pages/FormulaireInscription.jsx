@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +37,7 @@ function FormulaireInscription() {
         })
         .catch((error) => {
           console.error(error);
-          alert(
+          toast.error(
             "Une erreur est survenue lors de la récupération des données de l'enfant."
           );
         });
@@ -55,11 +57,13 @@ function FormulaireInscription() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, parentsFile)
       .then((response) => {
         setIdParents(response.data.id);
-        alert("Le dossier a été enregistré avec succès !");
+        toast.success("Le dossier a été enregistré avec succès !");
       })
       .catch((error) => {
         console.error(error);
-        alert("Une erreur est survenue lors de l'enregistrement du dossier.");
+        toast.error(
+          "Une erreur est survenue lors de l'enregistrement du dossier."
+        );
       });
   };
 
