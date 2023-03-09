@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Accueil from "./pages/Accueil";
 import CreationCompte from "./pages/CreationCompte";
 
@@ -17,7 +20,7 @@ function App() {
     <UserContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Accueil />} />
+          <Route path="/accueil" element={<Accueil />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/creationcompte" element={<CreationCompte />} />
           <Route
@@ -35,6 +38,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </UserContextProvider>
   );
 }
