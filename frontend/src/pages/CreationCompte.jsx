@@ -113,7 +113,7 @@ function CreationCompte() {
           />
           <input
             className="p-3 border-solid border-2 border-grey-input rounded-lg"
-            type="text"
+            type="tel"
             id="phone"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
@@ -122,7 +122,7 @@ function CreationCompte() {
           />
           <input
             className="p-3 border-solid border-2 border-grey-input rounded-lg"
-            type="text"
+            type="password"
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
