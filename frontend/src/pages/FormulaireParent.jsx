@@ -8,31 +8,32 @@ import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
 
 function FormulaireParent() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [kind, setKind] = useState("");
-  const [email, setEmail] = useState("");
-  const [adress, setAdress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [cafNumber, setCafNumber] = useState("");
+  const [exitPermit, setExitPermit] = useState("");
+  const [imageRights, setImageRights] = useState("");
   const [idparents, setIdParents] = useState("");
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/formulaireinscription");
+    navigate("/recherche");
+  };
+
+  const inscriptionFile = {
+    cafNumber,
+    exitPermit,
+    imageRights,
   };
 
   useEffect(() => {
     if (idparents) {
       axios
-        .get(`/api/parents/${idparents}`)
+        .get(`/api/parents/${idparents}`, inscriptionFile)
         .then((response) => {
           const { data } = response;
-          setFirstname(data.firstname);
-          setLastname(data.lastname);
-          setKind(data.kind);
-          setEmail(data.email);
-          setAdress(data.adress);
-          setPhone(data.phone);
+          setCafNumber(data.cafNumber);
+          setExitPermit(data.exitPermit);
+          setImageRights(data.imageRights);
+          setIdParents(data.idparents);
         })
         .catch((error) => {
           console.error(error);
@@ -46,18 +47,14 @@ function FormulaireParent() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const parentFile = {
-      firstname,
-      lastname,
-      kind,
-      email,
-      adress,
-
-      phone,
+    const parentsFile = {
+      cafNumber,
+      exitPermit,
+      imageRights,
     };
 
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, parentFile)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, parentsFile)
       .then((response) => {
         setIdParents(response.data.id);
         toast.success("Le dossier a été enregistré avec succès !");
@@ -74,7 +71,7 @@ function FormulaireParent() {
     <div>
       <Navbar />
       <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20 ">
-        Dossier Parent
+        Dossier Inscription
       </p>
 
       <form
@@ -82,93 +79,51 @@ function FormulaireParent() {
         onSubmit={handleSubmit}
       >
         <label
-          htmlFor="firstname"
+          htmlFor="cafNumber"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
-          <Validation isValid={firstname !== ""} />
+          <Validation isValid={cafNumber !== ""} />
           <input
             className="w-4/6 ml-6  p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
-            id="firstname"
-            value={firstname}
-            onChange={(event) => setFirstname(event.target.value)}
+            id="cafNumber"
+            value={cafNumber}
+            onChange={(event) => setCafNumber(event.target.value)}
             required
-            placeholder="nom"
+            placeholder="Numéro Allocataire CAF"
           />
         </label>
         <label
-          htmlFor="lastname"
+          htmlFor="exitPermit"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
-          <Validation isValid={lastname !== ""} />
+          <Validation isValid={exitPermit !== ""} />
           <input
             className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
-            id="lastname"
-            value={lastname}
-            onChange={(event) => setLastname(event.target.value)}
+            id="exitPermit"
+            value={exitPermit}
+            onChange={(event) => setExitPermit(event.target.value)}
             required
-            placeholder="Prénom"
+            placeholder="Autorisation de sortie"
           />
         </label>
         <label
-          htmlFor="kind"
+          htmlFor="imageRights"
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
-          <Validation isValid={kind !== ""} />
+          <Validation isValid={imageRights !== ""} />
           <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
+            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
-            id="kind"
-            value={kind}
-            onChange={(event) => setKind(event.target.value)}
-            placeholder="civilité"
-          />
-        </label>
-        <label
-          htmlFor="email"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
-        >
-          <Validation isValid={email !== ""} />
-          <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
-            type="text"
-            id="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            id="imageRights"
+            value={imageRights}
+            onChange={(event) => setImageRights(event.target.value)}
             required
-            placeholder="Email"
-          />
-        </label>
-        <label
-          htmlFor="adress"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
-        >
-          <Validation isValid={adress !== ""} />{" "}
-          <input
-            className="w-4/6 ml-7 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
-            type="text"
-            id="adress"
-            checked={adress}
-            onChange={(event) => setAdress(event.target.value)}
-            placeholder="N°et nom de rue, Cp, Ville"
+            placeholder="Autorisation droit à l'image"
           />
         </label>
 
-        <label
-          htmlFor="phone"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
-        >
-          <Validation isValid={phone !== ""} />
-          <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem] "
-            type="text"
-            id="phone"
-            value={phone}
-            onChange={(event) => setPhone(event.target.value)}
-            placeholder="Numéro de téléphone"
-          />
-        </label>
         <button
           className="btn-rounded-purple ml-44 lg:ml-[50%]"
           type="submit"
