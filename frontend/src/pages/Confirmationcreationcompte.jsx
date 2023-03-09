@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import logogroupe from "../assets/logogroupe.svg";
 import hero from "../assets/hero.svg";
-import Next from "../assets/Next.svg";
+import next from "../assets/next.svg";
 
 function Confirmationcréationcompte() {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ function Confirmationcréationcompte() {
           {" "}
           <div className=" flex flex-row w-full justify-end align-middle">
             <p className="mr-2">Je complèterai plus tard</p>
-            <img className="mr-5" src={Next} alt="Next" />
+            <img className="mr-5" src={next} alt="Next" />
           </div>
         </button>
       </div>
