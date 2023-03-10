@@ -1,13 +1,12 @@
 const Joi = require("joi");
 
 const passwordValidator = Joi.string()
-  .min(8)
-  .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
+  .pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{3,}$/)
   .message(
-    "Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre."
+    "Le mot de passe doit contenir une minuscule, une majuscule et un chiffre et 3 caractéres minimum."
   );
 
-const usersValidator = Joi.object({
+const usersShema = Joi.object({
   firstname: Joi.string().min(3).max(45).required(),
   lastname: Joi.string().min(3).max(45).required(),
   kind: Joi.string().min(1),
@@ -18,7 +17,7 @@ const usersValidator = Joi.object({
 });
 
 const validateUsers = (users) => {
-  const result = usersValidator.validate(users, { abortEarly: false });
+  const result = usersShema.validate(users, { abortEarly: true });
   if (result.error) {
     return result.error.details.map((error) => ({
       property: error.path[0],

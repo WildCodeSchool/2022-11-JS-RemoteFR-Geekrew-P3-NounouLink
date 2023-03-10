@@ -36,18 +36,20 @@ const edit = (req, res) => {
   if (validateResult) {
     return res.status(400).send(validateResult);
   }
-  // TODO validations (length, format...)
   users.idusers = parseInt(req.params.id, 10);
-  return models.users.update(users).then(([result]) => {
-    if (result.affectedRows === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(204).catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-    }
-  });
+  return models.users
+    .update(users)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 };
 
 const getUserByEmailAndPasswordAndNext = (req, res, next) => {

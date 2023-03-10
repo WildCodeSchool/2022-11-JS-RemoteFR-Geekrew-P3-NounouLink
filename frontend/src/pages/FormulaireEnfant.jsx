@@ -9,6 +9,7 @@ import btnbaby1 from "../assets/formulaire/Baby1.svg";
 import btnbaby2 from "../assets/formulaire/Baby2.svg";
 import plusCircle from "../assets/formulaire/plus-circle.svg";
 import Navbar from "../components/Navbar";
+import userAPI from "../services/userAPI";
 
 function FormulaireEnfant() {
   const [firstname, setFirstname] = useState("");
@@ -18,45 +19,45 @@ function FormulaireEnfant() {
   const [allergie, setAllergie] = useState("");
   const [insurance, setInsurance] = useState(null);
   const [healthbook, setHealthBook] = useState(null);
-  const [idchildren, setIdChildren] = useState("");
+  const [idchildren] = useState("");
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/formulaireparent");
-  };
+  // const handleClick = () => {
+  //   navigate("/formulaireparent");
+  // };
 
-  const dossierParent = {
-    firstname,
-    lastname,
-    birthdate,
-    canwalk,
-    allergie,
-    insurance,
-    healthbook,
-  };
+  // const dossierParent = {
+  //   firstname,
+  //   lastname,
+  //   birthdate,
+  //   canwalk,
+  //   allergie,
+  //   insurance,
+  //   healthbook,
+  // };
 
-  useEffect(() => {
-    if (idchildren) {
-      axios
-        .get(`/api/enfants/${idchildren}`, dossierParent)
-        .then((response) => {
-          const { data } = response;
-          setFirstname(data.firstname);
-          setLastname(data.lastname);
-          setBirthDate(data.birthdate);
-          setCanWalk(data.canwalk);
-          setAllergie(data.allergie);
-          setInsurance(data.insurance);
-          setHealthBook(data.healthbook);
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error(
-            "Une erreur est survenue lors de la récupération des données de l'enfant."
-          );
-        });
-    }
-  }, [idchildren]);
+  // useEffect(() => {
+  //   if (idchildren) {
+  //     axios
+  //       .get(`/api/enfants/${idchildren}`, dossierParent)
+  //       .then((response) => {
+  //         const { data } = response;
+  //         setFirstname(data.firstname);
+  //         setLastname(data.lastname);
+  //         setBirthDate(data.birthdate);
+  //         setCanWalk(data.canwalk);
+  //         setAllergie(data.allergie);
+  //         setInsurance(data.insurance);
+  //         setHealthBook(data.healthbook);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //         toast.error(
+  //           "Une erreur est survenue lors de la récupération des données de l'enfant."
+  //         );
+  //       });
+  //   }
+  // }, [idchildren]);
 
   useEffect(() => {
     const formData = new FormData();
@@ -75,31 +76,66 @@ function FormulaireEnfant() {
     }
   }, [idchildren, insurance]);
 
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   const childrenFile = {
+  //     firstname,
+  //     lastname,
+  //     birthdate,
+  //     canwalk,
+  //     allergie,
+  //     insurance,
+  //     healthbook,
+  //   };
+
+  //   axios
+  //     .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
+  //     .then((response) => {
+  //       setIdChildren(response.data.id);
+  //       toast.success("Le dossier a été enregistré avec succès !");
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       toast.error(
+  //         "Une erreur est survenue lors de l'enregistrement du dossier."
+  //       );
+  //     });
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const childrenFile = {
-      firstname,
-      lastname,
-      birthdate,
-      canwalk,
-      allergie,
-      insurance,
-      healthbook,
-    };
-
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
-      .then((response) => {
-        setIdChildren(response.data.id);
-        toast.success("Le dossier a été enregistré avec succès !");
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error(
-          "Une erreur est survenue lors de l'enregistrement du dossier."
-        );
-      });
+    if (
+      firstname &&
+      lastname &&
+      birthdate &&
+      canwalk &&
+      allergie
+      // insurance &&
+      // healthbook
+    )
+      userAPI
+        .post("/api/enfants", {
+          firstname,
+          lastname,
+          birthdate,
+          canwalk,
+          allergie,
+          // insurance,
+          // healthbook,
+        })
+        .then((res) => {
+          console.warn(res);
+          toast.success("La création a réussi !");
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error(
+            "Une erreur est survenue lors de l'enregistrement du compte."
+          );
+        });
+    navigate("/formulaireparent");
   };
 
   const handleUpload = (event) => {
@@ -122,7 +158,7 @@ function FormulaireEnfant() {
       </div>
       <form
         className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto"
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
       >
         <label
           htmlFor="firstname"
@@ -230,7 +266,7 @@ function FormulaireEnfant() {
         <button
           className="btn-rounded-purple ml-44 lg:ml-[75%]"
           type="submit"
-          onClick={handleClick}
+          onClick={handleSubmit}
         >
           Enregistrer
         </button>
