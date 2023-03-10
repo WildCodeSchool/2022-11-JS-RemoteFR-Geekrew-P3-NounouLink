@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import logogroupe from "../assets/logogroupe.svg";
 import hero from "../assets/hero.svg";
-import Next from "../assets/Next.svg";
+import Next from "../assets/next.svg";
 
 function Confirmationcréationcompte() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("formulaireenfants");
+    navigate("/formulaireenfant");
   };
   const linkTo = (e) => {
     e.preventDefault();

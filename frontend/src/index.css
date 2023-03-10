@@ -37,3 +37,7 @@ body,
 .input {
   @apply bg-grey-input rounded-lg w-[18rem] h-[3rem] max-lg:landscape:h-[2rem]  bg-opacity-30 placeholder-white pl-4;
 }
+
+.gradient-blue {
+  @apply bg-gradient-to-br from-gradient-light to-gradient-orange;
+}

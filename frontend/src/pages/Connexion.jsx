@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
+import userAPI from "../services/userAPI";
+
 import logo from "../assets/logo.svg";
-import next from "../assets/Next.svg";
+import next from "../assets/next.svg";
 import hero from "../assets/hero-lg.svg";
 
 function Connexion() {
@@ -11,15 +15,19 @@ function Connexion() {
 
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("/CreationCompte");
+  };
+
   const isValidEmail = (mail) => {
-    return /^[\w-_.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(mail);
+    return /^[\w-_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
   };
 
   const handleEmailChange = (event) => {
     if (!isValidEmail(event.target.value)) {
       setError("Email is invalid");
     } else {
-      setError(null);
+      toast.success("Content de vous revoir");
     }
     setEmail(event.target.value);
   };
@@ -28,8 +36,19 @@ function Connexion() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = () => {
-    navigate("/creationcompte");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      userAPI
+        .post("/api/login", { email, password })
+        .then((res) => {
+          console.warn(res);
+          navigate("/Home");
+        })
+        .catch((err) => console.error(err));
+    } else {
+      toast.error("Please specify email and password");
+    }
   };
 
   return (
@@ -68,20 +87,20 @@ function Connexion() {
             onChange={handlePasswordChange}
           />
         </label>
-        <button className="btn-purple" type="button">
+        <button className="btn-purple" type="button" onClick={handleSubmit}>
           Me connecter
         </button>
         <p>J'ai oublié mon mot de passe</p>
         <div className="hidden lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-4 lg:mb-8">
           <p>Créer mon compte</p>
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" onClick={handleClick}>
             <img src={next} alt="go next" />
           </button>
         </div>
       </form>
       <div className="lg:hidden flex flex-row items-center justify-center gap-4">
         <p>Créer mon compte</p>
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit" onClick={handleClick}>
           <img src={next} alt="go next" />
         </button>
       </div>
