@@ -31,18 +31,21 @@ function NannyInfoCard() {
       </header>
       <div className="bg-white h-full m-7 rounded-2xl">
         <img
-          src={nannyCard.map((img) => `/resultat/2/${img.pictures}`)}
+          src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+            nannyCard[0]?.pictures
+          }`}
           alt="annonce"
+          className="aspect-video rounded-t-2xl"
         />
-        <div>
+        <div className="p-2">
           <h3 className="font-nunito font-bold text-2xl text-black">
             Présentation
           </h3>
-          <p className="font-normal text-base text-grey">
+          <p className="font-normal text-base text-grey px-4 py-1">
             {nannyCard.map((nanny) => nanny.presentation)}
           </p>
           <h3 className="font-nunito font-bold text-2xl text-black">Accueil</h3>
-          <p className="font-normal text-base text-grey">
+          <h4 className="font-normal text-base text-grey">
             {nannyServices
               .filter(
                 (service) =>
@@ -51,13 +54,13 @@ function NannyInfoCard() {
                   service.services_idservices === 5
               )
               .map((service) => (
-                <p>{service.serviceName}</p>
+                <p className="px-4 py-1">{service.serviceName}</p>
               ))}
-          </p>
+          </h4>
           <h3 className="font-nunito font-bold text-2xl text-black">
             Activité
           </h3>
-          <p className="font-normal text-base text-grey">
+          <h4 className="font-normal text-base text-grey">
             {nannyServices
               .filter(
                 (service) =>
@@ -66,9 +69,9 @@ function NannyInfoCard() {
                   service.services_idservices === 9
               )
               .map((service) => (
-                <p>{service.serviceName}</p>
+                <p className="px-4 py-1">{service.serviceName}</p>
               ))}
-          </p>
+          </h4>
         </div>
         <div className="flex justify-between items-center">
           <p className="text-black font-semibold text-2xl">

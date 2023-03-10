@@ -97,24 +97,26 @@ function SearchResults() {
           {infosNanny.map((nannyCard) => {
             return (
               <button
-                className="bg-white rounded-3xl w-4/5 justify-self-center flex flex-col p-4 max-w-sm"
+                className="bg-white rounded-3xl w-4/5 justify-self-center flex flex-col max-w-sm"
                 key={nannyCard.idnannies}
                 type="button"
                 onClick={() => navigate(`/resultat/${nannyCard.idnannies}`)}
               >
                 <img
-                  src={nannyCard.pictures}
+                  src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                    nannyCard.pictures
+                  }`}
                   alt={nannyCard.pictures}
-                  className="aspect-video"
+                  className="aspect-video rounded-t-3xl w-full"
                 />
-                <div className="flex flex-row w-full justify-between items-center">
+                <div className="flex flex-row w-full justify-between items-center p-4">
                   <h1 className="text-xl">{`${nannyCard.firstname} ${nannyCard.lastname}`}</h1>
                   <div className="bg-purple flex flex-row rounded-full text-white justify-between px-2">
                     <p>{nannyCard.ranking}</p>
                     <img src={star} alt="rating" />
                   </div>
                 </div>
-                <div className="flex flex-row w-full justify-between items-center">
+                <div className="flex flex-row w-full justify-between items-center p-4">
                   {nannyCard.place_number > 1 ? (
                     <p className="text-green font-semibold text-lg">
                       {`${nannyCard.place_number} places disponibles`}
