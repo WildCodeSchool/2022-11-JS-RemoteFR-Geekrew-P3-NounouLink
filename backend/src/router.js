@@ -50,6 +50,7 @@ router.delete("/favoris/:id", favoritesControllers.destroy);
 
 router.get("/nounous", nanniesControllers.browse);
 router.get("/nounous/:id", nanniesControllers.read);
+router.get("/nounous/infos/:id", nanniesControllers.getNannyByIdUser);
 router.put("/nounous/:id", nanniesControllers.edit);
 
 router.delete("/nounous/:id", nanniesControllers.destroy);

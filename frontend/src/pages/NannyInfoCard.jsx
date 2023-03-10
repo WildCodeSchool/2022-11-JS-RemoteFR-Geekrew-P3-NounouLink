@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
-// import { useUserContext } from "../contexts/UserContext";
+import { useUserContext } from "../contexts/UserContext";
 
 import back from "../assets/chevron-white.svg";
+import info from "../assets/pricing.svg";
 
 function NannyInfoCard() {
   const [nannyCard, setNannyCard] = useState([]);
   const [nannyServices, setNannyServices] = useState([]);
+  const [nannyDetails, setNannyDetails] = useState([]);
 
+  const { parentId, userId } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -23,6 +26,10 @@ function NannyInfoCard() {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/servicesNounous/${id}`)
       .then((res) => setNannyServices(res.data));
+
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/nounous/infos/${id}`)
+      .then((res) => setNannyDetails([res.data]));
   }, []);
 
   const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
@@ -34,15 +41,40 @@ function NannyInfoCard() {
 
   const total = ((endParent - beginParent) / 1000 / 60 / 60) * hourlyRate;
 
+  // const reservationData = {
+
+  // };
+
+  // console.log(reservationData);
+
+  const handleReservation = () => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`, {
+        parentsIdparents: parentId,
+        parentsUsersIdusers: userId,
+        nanniesIdnannies: id,
+        nanniesUsersIdusers: nannyDetails.map((nanny) => nanny.users_idusers),
+        startdate: matchSearch[2],
+        enddate: matchSearch[3],
+      })
+      .then((res) => {
+        console.warn(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    navigate("/confirmationreservation");
+  };
+
   return (
-    <main className="gradient-linear">
+    <main className="gradient-linear h-full flex flex-col items-center">
       <header className="text-white font-bold font-nunito text-3xl flex justify-center">
         <button type="button" onClick={() => navigate(-1)}>
           <img src={back} alt="Revenir en arrière" />{" "}
         </button>
         <h2 className="px-auto"> {nannyCard.map((nanny) => nanny.ad_name)}</h2>
       </header>
-      <div className="bg-white h-full m-7 rounded-2xl">
+      <div className="bg-white m-7 rounded-2xl flex flex-col h-full max-w-lg">
         <img
           src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
             nannyCard[0]?.pictures
@@ -54,47 +86,116 @@ function NannyInfoCard() {
           <h3 className="font-nunito font-bold text-2xl text-black">
             Présentation
           </h3>
-          <p className="font-normal text-base text-grey px-4 py-1">
+          <p className="font-normal font-nunito text-base text-grey px-4 py-1">
             {nannyCard.map((nanny) => nanny.presentation)}
           </p>
+
+          {nannyDetails.map((details) => (
+            <div
+              className="flex w-full justify-evenly gradient-blue text-black font-nunito font-semibold"
+              key={details.idnannies}
+            >
+              <img src={info} alt="personnal details" />
+              <div className="flex flex-col">
+                <p> Mail: {details.email}</p>
+                <p> Tél: {details.phone}</p>
+              </div>
+            </div>
+          ))}
+
+          <h3 className="font-nunito font-bold text-2xl text-black">
+            Expérience
+          </h3>
+          {nannyCard.map((nanny) => (
+            <p className="font-normal font-nunito text-base text-grey px-4 py-1">
+              {nanny.psc1 ? <p>Formation Premiers Secours</p> : null}
+              {nanny.pedagogy ? <p>Pédagogie Montessori</p> : null}
+            </p>
+          ))}
+
           <h3 className="font-nunito font-bold text-2xl text-black">Accueil</h3>
-          <h4 className="font-normal text-base text-grey">
+          <h4 className="font-normal font-nunito text-base text-grey">
             {nannyServices
-              .filter(
-                (service) =>
-                  service.services_idservices === 3 ||
-                  service.services_idservices === 1 ||
-                  service.services_idservices === 5
-              )
+              .filter((service) => service.services_idservices <= 6)
               .map((service) => (
-                <p className="px-4 py-1">{service.serviceName}</p>
+                <h6 className="px-4 py-1" key={service.services_idservices}>
+                  {service.serviceName === "sortie" && (
+                    <p>Sorties extérieures possibles</p>
+                  )}
+                  {service.serviceName === "jardin" && <p>Jardin</p>}
+                  {service.serviceName === "animaux" && (
+                    <p>Animal domestique</p>
+                  )}
+                  {service.serviceName === "repas" && <p>Repas proposés</p>}
+                  {service.serviceName === "non_fumeur" && (
+                    <p>Foyer Non-Fumeur</p>
+                  )}
+                  {service.serviceName === "hygiene" && <p>Couches fournies</p>}
+                </h6>
               ))}
           </h4>
           <h3 className="font-nunito font-bold text-2xl text-black">
             Activité
           </h3>
-          <h4 className="font-normal text-base text-grey">
+          <h4 className="font-normal font-nunito text-base text-grey">
             {nannyServices
-              .filter(
-                (service) =>
-                  service.services_idservices === 7 ||
-                  service.services_idservices === 8 ||
-                  service.services_idservices === 9
-              )
+              .filter((service) => service.services_idservices > 6)
               .map((service) => (
-                <p className="px-4 py-1">{service.serviceName}</p>
+                <p className="px-4 py-1" key={service.services_idservices}>
+                  {service.serviceName === "promenade" && <p>Promenades</p>}
+                  {service.serviceName === "art" && (
+                    <p>Activités artistiques</p>
+                  )}
+                  {service.serviceName === "bibliothèque" && (
+                    <p>Bibliothèque / Ludothèque / RAM</p>
+                  )}
+                  {service.serviceName === "transport" && <p>Transport</p>}
+                  {service.serviceName === "langue" && (
+                    <p>Possibilité d'échanger dans une autre langue</p>
+                  )}
+                  {service.serviceName === "eveil" && <p>Activités d'éveil</p>}
+                  {service.serviceName === "musique" && (
+                    <p>Ateliers de musique</p>
+                  )}
+                </p>
               ))}
           </h4>
         </div>
-        <div className="flex justify-between items-center">
-          <p className="text-black font-semibold text-2xl">
-            Coût Total : {parseInt(total, 10)}€
-          </p>
-          <button type="button" className="btn-purple max-w-[200px]">
+        <div className="flex font-nunito justify-between items-center w-full p-2">
+          <div className="flex flex-col">
+            <h5 className="text-black font-semibold text-lg flex">
+              Coût Total:<p> {parseInt(total, 10)}€</p>
+            </h5>
+          </div>
+
+          <button
+            type="button"
+            className="btn-purple max-w-[130px]"
+            onClick={handleReservation}
+          >
             Réserver
           </button>
         </div>
       </div>
+      {nannyCard.map((options) => (
+        <div
+          className=" flex p-4 flex-wrap justify-between font-nunito"
+          key={options.id}
+        >
+          <h5 className="text-black font-normal text-sm flex">
+            Indemnités /km: {options.price_kilometre}€
+          </h5>
+          <h5 className="text-black font-normal text-sm flex">
+            Option repas: {options.meal_price}€
+          </h5>
+          <h5 className="text-black font-normal text-sm flex">
+            Heures suppl.: {options.overtime}€
+          </h5>
+          <h5 className="text-black font-normal text-sm flex">
+            Dimanches & jours fériés: {options.tariff_major}€
+          </h5>
+        </div>
+      ))}
     </main>
   );
 }

@@ -73,6 +73,13 @@ class NanniesManager extends AbstractManager {
       ]
     );
   }
+
+  findNannyByUserId(id) {
+    return this.database.query(
+      `SELECT nannies.idnannies, users.email, users.phone, nannies.users_idusers FROM ${this.table} JOIN users ON nannies.users_idusers = users.idusers WHERE nannies.idnannies = ?`,
+      [id]
+    );
+  }
 }
 
 module.exports = NanniesManager;
