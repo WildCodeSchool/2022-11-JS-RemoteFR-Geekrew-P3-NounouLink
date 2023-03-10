@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // import { useUserContext } from "../contexts/UserContext";
 
@@ -11,6 +11,8 @@ function NannyInfoCard() {
   const [nannyServices, setNannyServices] = useState([]);
 
   const { id } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/nounous/${id}`)
@@ -26,7 +28,9 @@ function NannyInfoCard() {
   return (
     <main className="gradient-linear">
       <header className="text-white font-bold font-nunito text-3xl flex justify-center">
-        <img src={back} alt="Revenir en arrière" />
+        <button type="button" onClick={() => navigate(-1)}>
+          <img src={back} alt="Revenir en arrière" />{" "}
+        </button>
         <h2 className="px-auto"> {nannyCard.map((nanny) => nanny.ad_name)}</h2>
       </header>
       <div className="bg-white h-full m-7 rounded-2xl">

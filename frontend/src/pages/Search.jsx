@@ -68,7 +68,7 @@ function Search() {
       />
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center">
         <label htmlFor="child">
-          <select onChange={handleChangeName}>
+          <select onChange={handleChangeName} className="input">
             <option value="" className="text-black">
               ---
             </option>
