@@ -5,6 +5,7 @@ const path = require("path");
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: { port: 3000 },
   plugins: [react()],
   resolve: {
     alias: {
@@ -13,8 +14,5 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "src/pages"),
       "@services": path.resolve(__dirname, "src/services"),
     },
-  },
-  server: {
-    port: 3000,
   },
 });

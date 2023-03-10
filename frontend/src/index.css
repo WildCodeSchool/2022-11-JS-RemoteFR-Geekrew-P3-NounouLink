@@ -11,11 +11,11 @@
 html,
 body,
 #root {
-  @apply h-full w-full;
+  @apply h-full;
 }
 
 #root {
-  @apply flex flex-col h-full overscroll-auto;
+  @apply flex flex-col;
 }
 
 .gradient-linear {

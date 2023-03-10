@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
 import star from "../assets/star.svg";
@@ -8,6 +10,8 @@ function SearchResults() {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [infosNanny, setInfosNanny] = useState([]);
   const test = [];
+
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/creneaux`)
@@ -38,7 +42,9 @@ function SearchResults() {
 
         setAvailableSlots(slots);
       });
+  }, []);
 
+  useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/match`)
       .then((response) => {
@@ -49,7 +55,16 @@ function SearchResults() {
         }
         setInfosNanny(test);
       });
-  }, [infosNanny]);
+  }, [availableSlots]);
+
+  // pour  ca je voulais récuperer ses infos depuis ici à partir  du handlecardDisplay
+  // const handleCardDisplay = (e) => {
+  //   // localStorage.setItem(
+  //   //   "infosNanny",
+  //   //   JSON.stringify([childName, dataAdress, startDate, endDate])
+  //   // );
+  //   navigate(`/resultat/${e.key}`);
+  // };
 
   return (
     <>
@@ -81,9 +96,11 @@ function SearchResults() {
           {" "}
           {infosNanny.map((nannyCard) => {
             return (
-              <div
+              <button
                 className="bg-white rounded-3xl w-4/5 justify-self-center flex flex-col p-4 max-w-sm"
-                key={nannyCard.id}
+                key={nannyCard.idnannies}
+                type="button"
+                onClick={() => navigate(`/resultat/${nannyCard.idnannies}`)}
               >
                 <img
                   src={nannyCard.pictures}
@@ -111,7 +128,7 @@ function SearchResults() {
                     {nannyCard.hourly_rate}€
                   </h3>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
