@@ -25,6 +25,15 @@ function NannyInfoCard() {
       .then((res) => setNannyServices(res.data));
   }, []);
 
+  const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
+  const beginParent = new Date(matchSearch[2]).getTime();
+
+  const endParent = new Date(matchSearch[3]).getTime();
+
+  const hourlyRate = nannyCard.map((prix) => parseInt(prix.hourly_rate, 10));
+
+  const total = ((endParent - beginParent) / 1000 / 60 / 60) * hourlyRate;
+
   return (
     <main className="gradient-linear">
       <header className="text-white font-bold font-nunito text-3xl flex justify-center">
@@ -79,7 +88,7 @@ function NannyInfoCard() {
         </div>
         <div className="flex justify-between items-center">
           <p className="text-black font-semibold text-2xl">
-            {nannyCard.map((prix) => prix.hourly_rate)}€
+            Coût Total : {parseInt(total, 10)}€
           </p>
           <button type="button" className="btn-purple max-w-[200px]">
             Réserver
