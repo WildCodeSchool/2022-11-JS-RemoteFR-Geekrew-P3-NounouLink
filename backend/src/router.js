@@ -38,6 +38,7 @@ router.delete("/creneaux/:id", slotsControllers.destroy);
 
 router.get("/enfants", childrenControllers.browse);
 router.get("/enfants/:id", childrenControllers.read);
+router.post("/enfants", childrenControllers.add);
 router.put("/enfants/:id", childrenControllers.edit);
 router.delete("/enfants/:id", childrenControllers.destroy);
 

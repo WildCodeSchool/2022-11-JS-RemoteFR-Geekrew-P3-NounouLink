@@ -43,7 +43,7 @@ function Connexion() {
         .post("/api/login", { email, password })
         .then((res) => {
           console.warn(res);
-          navigate("/Home");
+          navigate("/recherche");
         })
         .catch((err) => console.error(err));
     } else {

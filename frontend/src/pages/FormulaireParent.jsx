@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useUserContext } from "../contexts/UserContext";
 import userAPI from "../services/userAPI";
 import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
@@ -12,53 +11,57 @@ function FormulaireParent() {
   const [cafNumber, setCafNumber] = useState("");
   const [exitPermit, setExitPermit] = useState("");
   const [imageRights, setImageRights] = useState("");
-  const [setIdParents] = useState("");
-  const [usersIduser] = useState("");
+  // const [idparents, setIdParents] = useState("");
+
+  const { userId, parentId, setParentId } = useUserContext();
+
+  const usersIdusers = userId;
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/recherche");
-  };
 
-  // const inscriptionFile = {
-  //   cafNumber,
-  //   exitPermit,
-  //   imageRights,
+  // const handleClick = () => {
+  //   navigate("/recherche");
   // };
 
-  // useEffect(() => {
-  //   if (idparents) {
-  //     axios
-  //       .get(`/api/parents/${idparents}`, inscriptionFile)
-  //       .then((response) => {
-  //         const { data } = response;
-  //         setCafNumber(data.cafNumber);
-  //         setExitPermit(data.exitPermit);
-  //         setImageRights(data.imageRights);
-  //         setIdParents(data.idparents);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         toast.error(
-  //           "Une erreur est survenue lors de la récupération des données de l'enfant."
-  //         );
-  //       });
-  //   }
-  // }, [idparents]);
+  const inscriptionFile = {
+    cafNumber,
+    exitPermit,
+    imageRights,
+  };
+
+  useEffect(() => {
+    if (parentId !== 0) {
+      axios
+        .get(`/api/parents/${parentId}`, inscriptionFile)
+        .then((response) => {
+          const { data } = response;
+          setCafNumber(data.cafNumber);
+          setExitPermit(data.exitPermit);
+          setImageRights(data.imageRights);
+          setParentId(data.idparents);
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error(
+            "Une erreur est survenue lors de la récupération des données du dossier parent."
+          );
+        });
+    }
+  }, [parentId]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (cafNumber && exitPermit && imageRights && usersIduser)
+    if (cafNumber && exitPermit && imageRights && userId)
       userAPI
         .post("/api/parents", {
           cafNumber,
           exitPermit,
           imageRights,
-          usersIduser,
+          usersIdusers,
         })
         .then((response) => {
-          setIdParents(response.data.id);
+          setParentId(response.data.parentId);
           toast.success("Le dossier a été enregistré avec succès !");
         })
         .catch((error) => {
@@ -130,7 +133,7 @@ function FormulaireParent() {
         <button
           className="btn-rounded-purple ml-44 lg:ml-[50%]"
           type="submit"
-          onClick={handleClick}
+          // onClick={handleClick}
         >
           Enregistrer
         </button>
