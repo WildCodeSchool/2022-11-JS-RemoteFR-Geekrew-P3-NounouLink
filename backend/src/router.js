@@ -81,6 +81,7 @@ router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
+router.get("/users/email/:email", usersControllers.getEmail);
 
 router.get("/match", matchControllers.browse);
 
