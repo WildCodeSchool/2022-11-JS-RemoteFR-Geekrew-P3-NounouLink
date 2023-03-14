@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../contexts/UserContext";
+
 import Validation from "../components/Validation";
 import UploadValidation from "../components/UploadValidation";
 import btnbaby1 from "../assets/formulaire/Baby1.svg";
@@ -18,18 +18,14 @@ function FormulaireEnfant() {
   const [allergie, setAllergie] = useState("");
   const [insurance, setInsurance] = useState(null);
   const [healthbook, setHealthBook] = useState(null);
-  // const [idchildren, setIdChildren] = useState("");
-  const { userId, parentId, childrenId, setChildrenId } = useUserContext();
-
-  const parentsUsersIdusers = userId;
-  const parentsIdparents = parentId;
+  const [idchildren, setIdChildren] = useState("");
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/recherche");
+    navigate("/formulaireparent");
   };
 
-  const childrenFile = {
+  const dossierParent = {
     firstname,
     lastname,
     birthdate,
@@ -37,17 +33,14 @@ function FormulaireEnfant() {
     allergie,
     insurance,
     healthbook,
-    parentsUsersIdusers,
-    parentsIdparents,
   };
 
   useEffect(() => {
-    if (childrenId !== 0) {
+    if (idchildren) {
       axios
-        .get(`/api/enfants/${childrenId}`, childrenFile)
+        .get(`/api/enfants/${idchildren}`, dossierParent)
         .then((response) => {
           const { data } = response;
-
           setFirstname(data.firstname);
           setLastname(data.lastname);
           setBirthDate(data.birthdate);
@@ -63,15 +56,15 @@ function FormulaireEnfant() {
           );
         });
     }
-  }, [childrenId]);
+  }, [idchildren]);
 
   useEffect(() => {
     const formData = new FormData();
     formData.append("insurance", insurance);
 
-    if (childrenId && insurance && healthbook) {
+    if (idchildren && insurance) {
       axios
-        .post(`/api/enfants/${childrenId}/upload`, formData)
+        .post(`/api/enfants/${idchildren}/upload`, formData)
         .then(() => toast.success("Le fichier a été enregistré avec succès !"))
         .catch((error) => {
           console.error(error);
@@ -80,15 +73,25 @@ function FormulaireEnfant() {
           );
         });
     }
-  }, [childrenId, insurance, healthbook]);
+  }, [idchildren, insurance]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const childrenFile = {
+      firstname,
+      lastname,
+      birthdate,
+      canwalk,
+      allergie,
+      insurance,
+      healthbook,
+    };
+
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
       .then((response) => {
-        setChildrenId(response.data.childrenId);
+        setIdChildren(response.data.id);
         toast.success("Le dossier a été enregistré avec succès !");
       })
       .catch((error) => {

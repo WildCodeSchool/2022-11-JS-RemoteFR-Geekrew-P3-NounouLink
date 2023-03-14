@@ -58,8 +58,7 @@ const add = (req, res) => {
   models.parents
     .insert(parents)
     .then(([result]) => {
-      // res.location(`/parents/${result.insertId}`).sendStatus(201);
-      res.status(201).send({ parentId: result.insertId });
+      res.location(`/parents/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);

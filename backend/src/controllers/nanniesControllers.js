@@ -58,7 +58,7 @@ const add = (req, res) => {
   models.nannies
     .insert(nannies)
     .then(([result]) => {
-      res.status(201).send({ nanniesId: result.insertId });
+      res.location(`/nannies/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
