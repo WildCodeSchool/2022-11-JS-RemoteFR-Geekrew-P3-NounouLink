@@ -2,16 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import logogroupe from "../assets/logogroupe.svg";
 import hero from "../assets/hero.svg";
-import Next from "../assets/Next.svg";
+import Next from "../assets/next.svg";
 
 function Confirmationcréationcompte() {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/formulaireenfant");
+    navigate("/connexion");
   };
   const linkTo = (e) => {
     e.preventDefault();
-    navigate("");
+    navigate("/connexion");
   };
   return (
     <div className="gradient-linear flex flex-col  lg:flex lg:flex-row max-lg:landscape:flex-row lg:landscape:flex-row items-center justify-center h-full w-full font-nunito lg:landscape:text-xl  text-white">

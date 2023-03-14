@@ -26,7 +26,7 @@ router.post(
   usersControllers.getUserByEmailAndPasswordAndNext,
   verifyPassword
 );
-router.post("/users", hashPassword, createToken, usersControllers.add);
+router.post("/users", hashPassword, usersControllers.add, createToken);
 router.post("/parents", parentsControllers.add);
 router.post("/nounous", nanniesControllers.add);
 router.post("/superutilisateurs", superusersControllers.add);

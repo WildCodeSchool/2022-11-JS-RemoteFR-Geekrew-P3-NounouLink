@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 // import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 import userAPI from "../services/userAPI";
 import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
 
 function FormulaireParent() {
+  const { userId, setParentId } = useUserContext();
   const [cafNumber, setCafNumber] = useState("");
   const [exitPermit, setExitPermit] = useState("");
   const [imageRights, setImageRights] = useState("");
-  const [setIdParents] = useState("");
-  const [usersIduser] = useState("");
 
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/formulaireenfant");
-  };
+  const usersIduser = userId;
+  // const navigate = useNavigate();
+  // const handleClick = () => {
+  //   navigate("/formulaireenfant");
+  // };
 
   // const inscriptionFile = {
   //   cafNumber,
@@ -58,7 +58,8 @@ function FormulaireParent() {
           usersIduser,
         })
         .then((response) => {
-          setIdParents(response.data.id);
+          // console.log(response);
+          setParentId(response.data.id);
           toast.success("Le dossier a été enregistré avec succès !");
         })
         .catch((error) => {
@@ -67,8 +68,11 @@ function FormulaireParent() {
             "Une erreur est survenue lors de l'enregistrement du dossier."
           );
         });
-    navigate("/formulaireenfant");
+    // navigate("/formulaireenfant");
   };
+
+  // console.log(parentId);
+  // console.log(userId);
 
   return (
     <div>
@@ -127,11 +131,7 @@ function FormulaireParent() {
           />
         </label>
 
-        <button
-          className="btn-rounded-purple ml-44 lg:ml-[50%]"
-          type="submit"
-          onClick={handleClick}
-        >
+        <button className="btn-rounded-purple ml-44 lg:ml-[50%]" type="submit">
           Enregistrer
         </button>
       </form>

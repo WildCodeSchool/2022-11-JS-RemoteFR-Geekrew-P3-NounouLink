@@ -47,13 +47,6 @@ const verifyPassword = (req, res) => {
 };
 
 const createToken = (req, res) => {
-  // console.log(req.body)
-  // console.log("req.users below")
-  // console.log(req.users)
-  // console.log("req.users below")
-  // console.log(req.user)
-  // console.log("userId")
-  // console.log(userId)
   const payload = { sub: req.users.idusers };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
