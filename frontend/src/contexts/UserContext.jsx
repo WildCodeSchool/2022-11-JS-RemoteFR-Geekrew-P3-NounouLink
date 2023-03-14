@@ -20,7 +20,7 @@ export function UserContextProvider({ children }) {
       childrenId,
       setChildrenId,
     }),
-    [userId, parentId, nannyId]
+    [userId, parentId, nannyId, childrenId]
   );
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
 }

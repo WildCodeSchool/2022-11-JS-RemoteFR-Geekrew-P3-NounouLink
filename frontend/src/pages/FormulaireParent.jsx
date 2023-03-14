@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 // import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import userAPI from "../services/userAPI";
 import Navbar from "../components/Navbar";
@@ -14,8 +14,8 @@ function FormulaireParent() {
   const [exitPermit, setExitPermit] = useState("");
   const [imageRights, setImageRights] = useState("");
 
-  const usersIduser = userId;
-  // const navigate = useNavigate();
+  const usersIdusers = userId;
+  const navigate = useNavigate();
   // const handleClick = () => {
   //   navigate("/formulaireenfant");
   // };
@@ -49,17 +49,17 @@ function FormulaireParent() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (cafNumber && exitPermit && imageRights && usersIduser)
+    if (cafNumber && exitPermit && imageRights && usersIdusers)
       userAPI
         .post("/api/parents", {
           cafNumber,
           exitPermit,
           imageRights,
-          usersIduser,
+          usersIdusers,
         })
         .then((response) => {
-          // console.log(response);
-          setParentId(response.data.id);
+          // console.log(response.data);
+          setParentId(response.data.parentsId);
           toast.success("Le dossier a été enregistré avec succès !");
         })
         .catch((error) => {
@@ -68,7 +68,7 @@ function FormulaireParent() {
             "Une erreur est survenue lors de l'enregistrement du dossier."
           );
         });
-    // navigate("/formulaireenfant");
+    navigate("/formulaireenfant");
   };
 
   // console.log(parentId);

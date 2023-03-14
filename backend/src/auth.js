@@ -12,7 +12,7 @@ const hashPassword = (req, res, next) => {
   argon2
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
-      req.body.hashedPassword = hashedPassword;
+      req.body.password = hashedPassword;
       delete req.body.password;
       next();
     })
@@ -33,9 +33,10 @@ const verifyPassword = (req, res) => {
           expiresIn: "1h",
         });
 
+        delete req.users.password;
         delete req.users.hashedPassword;
         res.cookie("auth_token", token, { httpOnly: true, secure: false });
-        res.sendStatus(200);
+        res.status(200).send(req.users);
       } else {
         res.sendStatus(401);
       }
@@ -53,7 +54,9 @@ const createToken = (req, res) => {
     expiresIn: "1h",
   });
 
-  delete req.users.hashedPassword;
+  // delete req.users.hashedPassword;
+  delete req.body.password;
+
   res.cookie("auth_token", token, { httpOnly: true, secure: false });
   res.sendStatus(200);
 };

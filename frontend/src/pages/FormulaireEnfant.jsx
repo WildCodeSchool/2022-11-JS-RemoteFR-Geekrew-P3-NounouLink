@@ -27,7 +27,7 @@ function FormulaireEnfant() {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/formulaireparent");
+    navigate("/recherche");
   };
 
   const childrenFile = {
@@ -42,28 +42,30 @@ function FormulaireEnfant() {
     parentsUsersIdusers,
   };
 
-  useEffect(() => {
-    if (childrenId) {
-      axios
-        .get(`/api/enfants/${childrenId}`, childrenFile)
-        .then((response) => {
-          const { data } = response;
-          setFirstname(data.firstname);
-          setLastname(data.lastname);
-          setBirthDate(data.birthdate);
-          setCanWalk(data.canwalk);
-          setAllergie(data.allergie);
-          setInsurance(data.insurance);
-          setHealthBook(data.healthbook);
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error(
-            "Une erreur est survenue lors de la récupération des données de l'enfant."
-          );
-        });
-    }
-  }, [childrenId]);
+  // useEffect(() => {
+  //   if (childrenId) {
+  //     axios
+  //       .get(`/api/enfants/${childrenId}`, childrenFile)
+  //       .then((response) => {
+  //         console.log(response);
+  //         console.log(data);
+  //         const { data } = response;
+  //         setFirstname(data.firstname);
+  //         setLastname(data.lastname);
+  //         setBirthDate(data.birthdate);
+  //         setCanWalk(data.canwalk);
+  //         setAllergie(data.allergie);
+  //         setInsurance(data.insurance);
+  //         setHealthBook(data.healthbook);
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //         toast.error(
+  //           "Une erreur est survenue lors de la récupération des données de l'enfant."
+  //         );
+  //       });
+  //   }
+  // }, [childrenId]);
 
   useEffect(() => {
     const formData = new FormData();
@@ -88,7 +90,7 @@ function FormulaireEnfant() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
       .then((response) => {
-        setChildrenId(response.data.idchildren);
+        setChildrenId(response.data.childrenId);
         toast.success("Le dossier a été enregistré avec succès !");
       })
       .catch((error) => {
@@ -104,6 +106,8 @@ function FormulaireEnfant() {
     setInsurance(file);
     setHealthBook(file);
   };
+
+  // console.log(childrenId);
 
   return (
     <div>

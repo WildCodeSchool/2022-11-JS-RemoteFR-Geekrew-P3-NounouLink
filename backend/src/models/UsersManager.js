@@ -15,14 +15,14 @@ class UsersManager extends AbstractManager {
         users.email,
         users.adress,
         users.phone,
-        users.hashedPassword,
+        users.password,
       ]
     );
   }
 
   login(email) {
     return this.database.query(
-      `select email, hashedPassword from ${this.table} where email = ?`,
+      `select email, hashedPassword, idusers from ${this.table} where email = ?`,
       [email]
     );
   }
@@ -38,7 +38,7 @@ class UsersManager extends AbstractManager {
         users.email,
         users.adress,
         users.phone,
-        users.hashedPassword,
+        users.password,
         users.idusers,
       ]
     );

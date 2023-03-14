@@ -28,6 +28,7 @@ router.post(
 );
 router.post("/users", hashPassword, usersControllers.add, createToken);
 router.post("/parents", parentsControllers.add);
+router.post("/enfants", childrenControllers.add);
 router.post("/nounous", nanniesControllers.add);
 router.post("/superutilisateurs", superusersControllers.add);
 
