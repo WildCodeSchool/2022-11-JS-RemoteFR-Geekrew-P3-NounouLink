@@ -16,11 +16,11 @@ function Connexion() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/CreationCompte");
+    navigate("/recherche");
   };
 
   const isValidEmail = (mail) => {
-    return /^[\w-_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
+    return /^[\w_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
   };
 
   const handleEmailChange = (event) => {

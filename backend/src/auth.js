@@ -46,6 +46,25 @@ const verifyPassword = (req, res) => {
     });
 };
 
+const createToken = (req, res) => {
+  // console.log(req.body)
+  // console.log("req.users below")
+  // console.log(req.users)
+  // console.log("req.users below")
+  // console.log(req.user)
+  // console.log("userId")
+  // console.log(userId)
+  const payload = { sub: req.users.idusers };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  delete req.users.hashedPassword;
+  res.cookie("auth_token", token, { httpOnly: true, secure: false });
+  res.sendStatus(200);
+};
+
 const verifyToken = (req, res, next) => {
   try {
     const authorizationCookie = req.cookies.auth_token;
@@ -65,4 +84,5 @@ module.exports = {
   verifyToken,
   hashPassword,
   verifyPassword,
+  createToken,
 };

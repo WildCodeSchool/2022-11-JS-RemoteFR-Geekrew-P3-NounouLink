@@ -73,12 +73,13 @@ const add = (req, res) => {
   const validationResult = validateUsers(users);
 
   if (validationResult.length) {
-    return res.status(400).send(validationResult);
+    res.status(400).send(validationResult);
   }
 
   return models.users
     .insert(users)
     .then(([result]) => {
+      // console.log(result);
       res.status(201).send({ userId: result.insertId });
     })
     .catch((err) => {

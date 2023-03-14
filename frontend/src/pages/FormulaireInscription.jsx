@@ -1,73 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import userAPI from "../services/userAPI";
 import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
 
-function FormulaireParent() {
+function FormulaireInscription() {
   const [cafNumber, setCafNumber] = useState("");
   const [exitPermit, setExitPermit] = useState("");
   const [imageRights, setImageRights] = useState("");
-  const [setIdParents] = useState("");
-  const [usersIduser] = useState("");
+  const [idparents, setIdParents] = useState("");
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/formulaireenfant");
+    navigate("/recherche");
   };
 
-  // const inscriptionFile = {
-  //   cafNumber,
-  //   exitPermit,
-  //   imageRights,
-  // };
+  const inscriptionFile = {
+    cafNumber,
+    exitPermit,
+    imageRights,
+  };
 
-  // useEffect(() => {
-  //   if (idparents) {
-  //     axios
-  //       .get(`/api/parents/${idparents}`, inscriptionFile)
-  //       .then((response) => {
-  //         const { data } = response;
-  //         setCafNumber(data.cafNumber);
-  //         setExitPermit(data.exitPermit);
-  //         setImageRights(data.imageRights);
-  //         setIdParents(data.idparents);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         toast.error(
-  //           "Une erreur est survenue lors de la récupération des données de l'enfant."
-  //         );
-  //       });
-  //   }
-  // }, [idparents]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (cafNumber && exitPermit && imageRights && usersIduser)
-      userAPI
-        .post("/api/parents", {
-          cafNumber,
-          exitPermit,
-          imageRights,
-          usersIduser,
-        })
+  useEffect(() => {
+    if (idparents) {
+      axios
+        .get(`/api/parents/${idparents}`, inscriptionFile)
         .then((response) => {
-          setIdParents(response.data.id);
-          toast.success("Le dossier a été enregistré avec succès !");
+          const { data } = response;
+          setCafNumber(data.cafNumber);
+          setExitPermit(data.exitPermit);
+          setImageRights(data.imageRights);
+          setIdParents(data.idparents);
         })
         .catch((error) => {
           console.error(error);
           toast.error(
-            "Une erreur est survenue lors de l'enregistrement du dossier."
+            "Une erreur est survenue lors de la récupération des données de l'enfant."
           );
         });
-    navigate("/formulaireenfant");
+    }
+  }, [idparents]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const parentsFile = {
+      cafNumber,
+      exitPermit,
+      imageRights,
+    };
+
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/parents`, parentsFile)
+      .then((response) => {
+        setIdParents(response.data.id);
+        toast.success("Le dossier a été enregistré avec succès !");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(
+          "Une erreur est survenue lors de l'enregistrement du dossier."
+        );
+      });
   };
 
   return (
@@ -138,4 +135,4 @@ function FormulaireParent() {
     </div>
   );
 }
-export default FormulaireParent;
+export default FormulaireInscription;
