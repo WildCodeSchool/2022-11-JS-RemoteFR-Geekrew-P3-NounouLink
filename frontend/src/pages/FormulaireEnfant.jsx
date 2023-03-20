@@ -26,9 +26,6 @@ function FormulaireEnfant() {
   const parentsUsersIdusers = userId;
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/recherche");
-  };
 
   const childrenFile = {
     firstname,
@@ -92,6 +89,7 @@ function FormulaireEnfant() {
       .then((response) => {
         setChildrenId(response.data.childrenId);
         toast.success("Le dossier a été enregistré avec succès !");
+        navigate("/recherche");
       })
       .catch((error) => {
         console.error(error);
@@ -226,11 +224,7 @@ function FormulaireEnfant() {
           />
           <UploadValidation isValidate={healthbook !== null} />
         </label>
-        <button
-          className="btn-rounded-purple ml-44 lg:ml-[75%]"
-          type="submit"
-          onClick={handleClick}
-        >
+        <button className="btn-rounded-purple ml-44 lg:ml-[75%]" type="submit">
           Enregistrer
         </button>
       </form>
