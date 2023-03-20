@@ -21,7 +21,7 @@ function Search() {
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
       .then((response) => {
         setDataChildren(
-          response.data.filter((child) => child.parentsIdparents === parentId)
+          response.data.filter((child) => child.parents_idparents === parentId)
         );
       });
 

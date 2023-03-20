@@ -107,8 +107,6 @@ function FormulaireEnfant() {
     setHealthBook(file);
   };
 
-  // console.log(childrenId);
-
   return (
     <div>
       <Navbar />
