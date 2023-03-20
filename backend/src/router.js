@@ -12,12 +12,7 @@ const reservationsControllers = require("./controllers/reservationsControllers")
 const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
-const {
-  hashPassword,
-  verifyPassword,
-  verifyToken,
-  createToken,
-} = require("./auth");
+const { hashPassword, verifyPassword, createToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
 
 // the public routes
@@ -36,16 +31,16 @@ router.post("/superutilisateurs", superusersControllers.add);
 
 // router.use(verifyToken);
 
-router.get("/creneaux", verifyToken, slotsControllers.browse);
-router.get("/creneaux/:id", verifyToken, slotsControllers.read);
+router.get("/creneaux", slotsControllers.browse);
+router.get("/creneaux/:id", slotsControllers.read);
 router.put("/creneaux/:id", slotsControllers.edit);
 router.post("/creneaux", slotsControllers.add);
 router.delete("/creneaux/:id", slotsControllers.destroy);
 
-router.get("/enfants", verifyToken, childrenControllers.browse);
-router.get("/enfants/:id", verifyToken, childrenControllers.read);
-router.put("/enfants/:id", verifyToken, childrenControllers.edit);
-router.delete("/enfants/:id", verifyToken, childrenControllers.destroy);
+router.get("/enfants", childrenControllers.browse);
+router.get("/enfants/:id", childrenControllers.read);
+router.put("/enfants/:id", childrenControllers.edit);
+router.delete("/enfants/:id", childrenControllers.destroy);
 
 router.get("/favoris", favoritesControllers.browse);
 router.get("/favoris/:id", favoritesControllers.read);
@@ -59,11 +54,11 @@ router.put("/nounous/:id", nanniesControllers.edit);
 
 router.delete("/nounous/:id", nanniesControllers.destroy);
 
-router.get("/parents", verifyToken, parentsControllers.browse);
-router.get("/parents/:id", verifyToken, parentsControllers.read);
-router.put("/parents/:id", verifyToken, parentsControllers.edit);
+router.get("/parents", parentsControllers.browse);
+router.get("/parents/:id", parentsControllers.read);
+router.put("/parents/:id", parentsControllers.edit);
 
-router.delete("/parents/:id", verifyToken, parentsControllers.destroy);
+router.delete("/parents/:id", parentsControllers.destroy);
 
 router.get("/reservations", reservationsControllers.browse);
 router.get("/reservations/:id", reservationsControllers.read);
@@ -83,16 +78,11 @@ router.put("/superutilisateurs/:id", superusersControllers.edit);
 
 router.delete("/superutilisateurs/:id", superusersControllers.destroy);
 
-router.get("/users", verifyToken, usersControllers.browse);
-router.get("/users/:id", verifyToken, usersControllers.read);
-router.put("/users/:id", verifyToken, hashPassword, usersControllers.edit);
-router.delete(
-  "/users/:id",
-  verifyToken,
-  hashPassword,
-  usersControllers.destroy
-);
-router.get("/users/email/:email", verifyToken, usersControllers.getEmail);
+router.get("/users", usersControllers.browse);
+router.get("/users/:id", usersControllers.read);
+router.put("/users/:id", hashPassword, usersControllers.edit);
+router.delete("/users/:id", hashPassword, usersControllers.destroy);
+router.get("/users/email/:email", usersControllers.getEmail);
 
 router.get("/match", matchControllers.browse);
 

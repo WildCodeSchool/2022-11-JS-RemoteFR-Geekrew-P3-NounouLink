@@ -20,7 +20,7 @@ function Connexion() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // navigate("/creationcompte");
+    navigate("/creationcompte");
   };
 
   const isValidEmail = (mail) => {

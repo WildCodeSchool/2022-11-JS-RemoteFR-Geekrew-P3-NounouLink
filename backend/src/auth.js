@@ -13,7 +13,6 @@ const hashPassword = (req, res, next) => {
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
       req.body.password = hashedPassword;
-      delete req.body.password;
       next();
     })
     .catch((err) => {
@@ -28,7 +27,6 @@ const verifyPassword = (req, res) => {
     .then((isVerified) => {
       if (isVerified) {
         const payload = { sub: req.users.idusers };
-
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
