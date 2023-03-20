@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
+import userAPI from "../services/userAPI";
 
 import Validation from "../components/Validation";
 import UploadValidation from "../components/UploadValidation";
@@ -12,11 +13,11 @@ import plusCircle from "../assets/formulaire/plus-circle.svg";
 import Navbar from "../components/Navbar";
 
 function FormulaireEnfant() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [birthdate, setBirthDate] = useState("");
-  const [canwalk, setCanWalk] = useState("");
-  const [allergie, setAllergie] = useState("");
+  const [firstname, setFirstname] = useState(null);
+  const [lastname, setLastname] = useState(null);
+  const [birthdate, setBirthDate] = useState(null);
+  const [canwalk, setCanWalk] = useState(null);
+  const [allergie, setAllergie] = useState(null);
   const [insurance, setInsurance] = useState(null);
   const [healthbook, setHealthBook] = useState(null);
 
@@ -39,30 +40,27 @@ function FormulaireEnfant() {
     parentsUsersIdusers,
   };
 
-  // useEffect(() => {
-  //   if (childrenId) {
-  //     axios
-  //       .get(`/api/enfants/${childrenId}`, childrenFile)
-  //       .then((response) => {
-  //         console.log(response);
-  //         console.log(data);
-  //         const { data } = response;
-  //         setFirstname(data.firstname);
-  //         setLastname(data.lastname);
-  //         setBirthDate(data.birthdate);
-  //         setCanWalk(data.canwalk);
-  //         setAllergie(data.allergie);
-  //         setInsurance(data.insurance);
-  //         setHealthBook(data.healthbook);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         toast.error(
-  //           "Une erreur est survenue lors de la récupération des données de l'enfant."
-  //         );
-  //       });
-  //   }
-  // }, [childrenId]);
+  useEffect(() => {
+    if (childrenId) {
+      userAPI
+        .get(`/api/enfants/${childrenId}`)
+        .then((response) => {
+          setFirstname(response.data.firstname);
+          setLastname(response.data.lastname);
+          setBirthDate(response.data.birthdate);
+          setCanWalk(response.data.canwalk);
+          setAllergie(response.data.allergie);
+          setInsurance(response.data.insurance);
+          setHealthBook(response.data.healthbook);
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error(
+            "Une erreur est survenue lors de la récupération des données de l'enfant."
+          );
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const formData = new FormData();

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-
-// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import { useUserContext } from "../contexts/UserContext";
+
 import userAPI from "../services/userAPI";
 import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
 
 function FormulaireParent() {
-  const { userId, setParentId } = useUserContext();
+  const { userId, setParentId, parentId } = useUserContext();
   const [cafNumber, setCafNumber] = useState("");
   const [exitPermit, setExitPermit] = useState("");
   const [imageRights, setImageRights] = useState("");
@@ -26,25 +26,24 @@ function FormulaireParent() {
   //   imageRights,
   // };
 
-  // useEffect(() => {
-  //   if (idparents) {
-  //     axios
-  //       .get(`/api/parents/${idparents}`, inscriptionFile)
-  //       .then((response) => {
-  //         const { data } = response;
-  //         setCafNumber(data.cafNumber);
-  //         setExitPermit(data.exitPermit);
-  //         setImageRights(data.imageRights);
-  //         setIdParents(data.idparents);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //         toast.error(
-  //           "Une erreur est survenue lors de la récupération des données de l'enfant."
-  //         );
-  //       });
-  //   }
-  // }, [idparents]);
+  useEffect(() => {
+    if (parentId !== null) {
+      userAPI
+        .get(`/api/parents/${parentId}`)
+        .then((response) => {
+          const { data } = response;
+          setCafNumber(data.caf_number);
+          setExitPermit(data.exit_permit);
+          setImageRights(data.image_rights);
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error(
+            "Une erreur est survenue lors de la récupération des données de l'enfant."
+          );
+        });
+    }
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +57,6 @@ function FormulaireParent() {
           usersIdusers,
         })
         .then((response) => {
-          // console.log(response.data);
           setParentId(response.data.parentsId);
           toast.success("Le dossier a été enregistré avec succès !");
         })
@@ -70,9 +68,6 @@ function FormulaireParent() {
         });
     navigate("/formulaireenfant");
   };
-
-  // console.log(parentId);
-  // console.log(userId);
 
   return (
     <div>

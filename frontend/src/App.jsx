@@ -16,25 +16,27 @@ import Menu from "./pages/Menu";
 
 function App() {
   return (
-    <UserContextProvider>
+    <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Accueil />} />
-          <Route path="/connexion" element={<Connexion />} />
-          <Route path="/creationcompte" element={<CreationCompte />} />
-          <Route
-            path="/confirmation"
-            element={<ConfirmationcreationCompte />}
-          />
-          <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
-          <Route path="/formulaireparent" element={<FormulaireParent />} />
-          <Route path="/recherche" element={<Search />} />
-          <Route path="/resultat" element={<SearchResults />} />
-          <Route path="/menu" element={<Menu />} />
-        </Routes>
+        <UserContextProvider>
+          <Routes>
+            <Route path="/" element={<Accueil />} />
+            <Route path="/connexion" element={<Connexion />} />
+            <Route path="/creationcompte" element={<CreationCompte />} />
+            <Route
+              path="/confirmation"
+              element={<ConfirmationcreationCompte />}
+            />
+            <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
+            <Route path="/formulaireparent" element={<FormulaireParent />} />
+            <Route path="/recherche" element={<Search />} />
+            <Route path="/resultat" element={<SearchResults />} />
+            <Route path="/menu" element={<Menu />} />
+          </Routes>
+        </UserContextProvider>
       </BrowserRouter>
       <ToastContainer />
-    </UserContextProvider>
+    </>
   );
 }
 
