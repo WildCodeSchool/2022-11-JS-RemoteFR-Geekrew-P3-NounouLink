@@ -3,12 +3,14 @@ import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 import userAPI from "../services/userAPI";
+import { useUserContext } from "../contexts/UserContext";
 
 import chevron from "../assets/chevron-left.svg";
 import hero from "../assets/hero-lg.svg";
 import logo from "../assets/logo.svg";
 
 function CreationCompte() {
+  const { setUserId } = useUserContext();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -37,10 +39,13 @@ function CreationCompte() {
           phone,
           password,
         })
+
         .then((res) => {
+          setUserId(res.data.userId);
           console.warn(res);
           toast.success("La création a réussi !");
         })
+
         .catch((error) => {
           console.error(error);
           toast.error(

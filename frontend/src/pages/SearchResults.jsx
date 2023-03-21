@@ -49,7 +49,7 @@ function SearchResults() {
         }
         setInfosNanny(test);
       });
-  }, []);
+  }, [infosNanny]);
 
   return (
     <>

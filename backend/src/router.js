@@ -12,7 +12,7 @@ const reservationsControllers = require("./controllers/reservationsControllers")
 const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
-const { hashPassword, verifyPassword, verifyToken } = require("./auth");
+const { hashPassword, verifyPassword, createToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
 
 // the public routes
@@ -21,14 +21,13 @@ router.post(
   usersControllers.getUserByEmailAndPasswordAndNext,
   verifyPassword
 );
-router.post("/users", hashPassword, usersControllers.add);
+router.post("/users", hashPassword, usersControllers.add, createToken);
 router.post("/parents", parentsControllers.add);
+router.post("/enfants", childrenControllers.add);
 router.post("/nounous", nanniesControllers.add);
 router.post("/superutilisateurs", superusersControllers.add);
 
 // then the routes to protect
-
-router.use(verifyToken);
 
 router.get("/creneaux", slotsControllers.browse);
 router.get("/creneaux/:id", slotsControllers.read);
@@ -81,6 +80,7 @@ router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
+router.get("/users/email/:email", usersControllers.getEmail);
 
 router.get("/match", matchControllers.browse);
 
