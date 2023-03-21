@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
 import { useNavigate } from "react-router-dom";
+
+import { useUserContext } from "../contexts/UserContext";
+
 import userAPI from "../services/userAPI";
 
 import logo from "../assets/logo.svg";
@@ -13,14 +15,16 @@ function Connexion() {
   const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
 
+  const { setUserId } = useUserContext();
+
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/CreationCompte");
+    navigate("/creationcompte");
   };
 
   const isValidEmail = (mail) => {
-    return /^[\w-_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
+    return /^[\w_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
   };
 
   const handleEmailChange = (event) => {
@@ -42,14 +46,16 @@ function Connexion() {
       userAPI
         .post("/api/login", { email, password })
         .then((res) => {
-          console.warn(res);
-          navigate("/Home");
+          setUserId(res.data.idusers);
+          navigate("/formulaireparent");
         })
         .catch((err) => console.error(err));
     } else {
       toast.error("Please specify email and password");
     }
   };
+
+  // console.log(userId);
 
   return (
     <div className="gradient-linear grow grid grid-rows-connexion lg:grid-rows-none lg:grid-cols-3 max-lg:landscape:grid-rows-5 lg:landscape:grid-rows-none items-center justify-center h-full w-full font-nunito text-white">

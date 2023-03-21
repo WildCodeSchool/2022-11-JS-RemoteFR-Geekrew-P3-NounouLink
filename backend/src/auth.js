@@ -12,8 +12,7 @@ const hashPassword = (req, res, next) => {
   argon2
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
-      req.body.hashedPassword = hashedPassword;
-      delete req.body.password;
+      req.body.password = hashedPassword;
       next();
     })
     .catch((err) => {
@@ -28,14 +27,14 @@ const verifyPassword = (req, res) => {
     .then((isVerified) => {
       if (isVerified) {
         const payload = { sub: req.users.idusers };
-
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
 
+        delete req.users.password;
         delete req.users.hashedPassword;
         res.cookie("auth_token", token, { httpOnly: true, secure: false });
-        res.sendStatus(200);
+        res.status(200).send(req.users);
       } else {
         res.sendStatus(401);
       }
@@ -44,6 +43,19 @@ const verifyPassword = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
+};
+
+const createToken = (req, res) => {
+  const payload = { sub: req.users.idusers };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  delete req.body.password;
+
+  res.cookie("auth_token", token, { httpOnly: true, secure: false });
+  res.sendStatus(200);
 };
 
 const verifyToken = (req, res, next) => {
@@ -65,4 +77,5 @@ module.exports = {
   verifyToken,
   hashPassword,
   verifyPassword,
+  createToken,
 };

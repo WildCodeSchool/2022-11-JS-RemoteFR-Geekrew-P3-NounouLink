@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
+import userAPI from "../services/userAPI";
 
 import Validation from "../components/Validation";
 import UploadValidation from "../components/UploadValidation";
@@ -11,21 +13,22 @@ import plusCircle from "../assets/formulaire/plus-circle.svg";
 import Navbar from "../components/Navbar";
 
 function FormulaireEnfant() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [birthdate, setBirthDate] = useState("");
-  const [canwalk, setCanWalk] = useState("");
-  const [allergie, setAllergie] = useState("");
+  const [firstname, setFirstname] = useState(null);
+  const [lastname, setLastname] = useState(null);
+  const [birthdate, setBirthDate] = useState(null);
+  const [canwalk, setCanWalk] = useState(null);
+  const [allergie, setAllergie] = useState(null);
   const [insurance, setInsurance] = useState(null);
   const [healthbook, setHealthBook] = useState(null);
-  const [idchildren, setIdChildren] = useState("");
+
+  const { userId, parentId, childrenId, setChildrenId } = useUserContext();
+
+  const parentsIdparents = parentId;
+  const parentsUsersIdusers = userId;
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/formulaireparent");
-  };
 
-  const dossierParent = {
+  const childrenFile = {
     firstname,
     lastname,
     birthdate,
@@ -33,21 +36,22 @@ function FormulaireEnfant() {
     allergie,
     insurance,
     healthbook,
+    parentsIdparents,
+    parentsUsersIdusers,
   };
 
   useEffect(() => {
-    if (idchildren) {
-      axios
-        .get(`/api/enfants/${idchildren}`, dossierParent)
+    if (childrenId) {
+      userAPI
+        .get(`/api/enfants/${childrenId}`)
         .then((response) => {
-          const { data } = response;
-          setFirstname(data.firstname);
-          setLastname(data.lastname);
-          setBirthDate(data.birthdate);
-          setCanWalk(data.canwalk);
-          setAllergie(data.allergie);
-          setInsurance(data.insurance);
-          setHealthBook(data.healthbook);
+          setFirstname(response.data.firstname);
+          setLastname(response.data.lastname);
+          setBirthDate(response.data.birthdate);
+          setCanWalk(response.data.canwalk);
+          setAllergie(response.data.allergie);
+          setInsurance(response.data.insurance);
+          setHealthBook(response.data.healthbook);
         })
         .catch((error) => {
           console.error(error);
@@ -56,15 +60,15 @@ function FormulaireEnfant() {
           );
         });
     }
-  }, [idchildren]);
+  }, []);
 
   useEffect(() => {
     const formData = new FormData();
     formData.append("insurance", insurance);
 
-    if (idchildren && insurance) {
+    if (childrenId && insurance) {
       axios
-        .post(`/api/enfants/${idchildren}/upload`, formData)
+        .post(`/api/enfants/${childrenId}/upload`, formData)
         .then(() => toast.success("Le fichier a été enregistré avec succès !"))
         .catch((error) => {
           console.error(error);
@@ -73,26 +77,17 @@ function FormulaireEnfant() {
           );
         });
     }
-  }, [idchildren, insurance]);
+  }, [childrenId, insurance]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const childrenFile = {
-      firstname,
-      lastname,
-      birthdate,
-      canwalk,
-      allergie,
-      insurance,
-      healthbook,
-    };
-
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
       .then((response) => {
-        setIdChildren(response.data.id);
+        setChildrenId(response.data.childrenId);
         toast.success("Le dossier a été enregistré avec succès !");
+        navigate("/recherche");
       })
       .catch((error) => {
         console.error(error);
@@ -227,11 +222,7 @@ function FormulaireEnfant() {
           />
           <UploadValidation isValidate={healthbook !== null} />
         </label>
-        <button
-          className="btn-rounded-purple ml-44 lg:ml-[75%]"
-          type="submit"
-          onClick={handleClick}
-        >
+        <button className="btn-rounded-purple ml-44 lg:ml-[75%]" type="submit">
           Enregistrer
         </button>
       </form>

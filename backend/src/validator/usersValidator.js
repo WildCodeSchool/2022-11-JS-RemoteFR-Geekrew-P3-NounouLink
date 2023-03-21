@@ -1,12 +1,5 @@
 const Joi = require("joi");
 
-const passwordValidator = Joi.string()
-  .min(8)
-  .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
-  .message(
-    "Le mot de passe doit contenir au moins une minuscule, une majuscule et un chiffre."
-  );
-
 const usersValidator = Joi.object({
   firstname: Joi.string().min(3).max(45).required(),
   lastname: Joi.string().min(3).max(45).required(),
@@ -14,7 +7,10 @@ const usersValidator = Joi.object({
   email: Joi.string().email().required(),
   adress: Joi.string().min(3).max(155).required(),
   phone: Joi.string().min(9).max(45).required(),
-  hashedPassword: passwordValidator.required(),
+  password: Joi.string()
+    .min(8)
+    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
+    .required(),
 });
 
 const validateUsers = (users) => {

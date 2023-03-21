@@ -75,11 +75,10 @@ const add = (req, res) => {
   if (validationResult.length) {
     return res.status(400).send(validationResult);
   }
-
   return models.users
     .insert(users)
     .then(([result]) => {
-      res.location(`/users/${result.insertId}`).sendStatus(201);
+      res.status(201).send({ userId: result.insertId });
     })
     .catch((err) => {
       console.error(err);
@@ -102,6 +101,21 @@ const destroy = (req, res) => {
       res.sendStatus(500);
     });
 };
+const getEmail = (req, res) => {
+  models.users
+    .getUserByEmail(req.params.email)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 module.exports = {
   browse,
@@ -110,4 +124,5 @@ module.exports = {
   add,
   destroy,
   getUserByEmailAndPasswordAndNext,
+  getEmail,
 };
