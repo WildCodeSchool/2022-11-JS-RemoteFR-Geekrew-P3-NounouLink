@@ -52,7 +52,6 @@ const createToken = (req, res) => {
     expiresIn: "1h",
   });
 
-  // delete req.users.hashedPassword;
   delete req.body.password;
 
   res.cookie("auth_token", token, { httpOnly: true, secure: false });
