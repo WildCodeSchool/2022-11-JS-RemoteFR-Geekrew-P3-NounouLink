@@ -16,15 +16,6 @@ function FormulaireParent() {
 
   const usersIdusers = userId;
   const navigate = useNavigate();
-  // const handleClick = () => {
-  //   navigate("/formulaireenfant");
-  // };
-
-  // const inscriptionFile = {
-  //   cafNumber,
-  //   exitPermit,
-  //   imageRights,
-  // };
 
   useEffect(() => {
     if (parentId !== null) {

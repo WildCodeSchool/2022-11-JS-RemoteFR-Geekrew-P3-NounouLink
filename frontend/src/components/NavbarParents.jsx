@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-// import grid from "../assets/grid.svg";
 import search from "../assets/search.svg";
 import file from "../assets/file-text.svg";
 import heart from "../assets/heart.svg";

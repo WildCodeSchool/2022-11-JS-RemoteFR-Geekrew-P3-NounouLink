@@ -30,7 +30,7 @@ function Navbar() {
         <NavLink
           className="flex flex-row justify-center  text-white  pt-10"
           activeclassname="active"
-          to="/Connexion"
+          navigate="-1"
         >
           <img src={chevronWhite} alt="chevron" />
           <p className="text-2xl">
