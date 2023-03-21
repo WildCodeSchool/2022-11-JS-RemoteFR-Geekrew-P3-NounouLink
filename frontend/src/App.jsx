@@ -14,6 +14,8 @@ import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
 
+import AccueilProNounou from "./pages/Nannys/AccueilProNounou";
+
 function App() {
   return (
     <>
@@ -32,6 +34,8 @@ function App() {
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
             <Route path="/menu" element={<Menu />} />
+
+            <Route path="/pro" element={<AccueilProNounou />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>
