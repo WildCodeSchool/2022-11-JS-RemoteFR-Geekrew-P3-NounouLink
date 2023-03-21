@@ -131,7 +131,7 @@ function FormulaireEnfant() {
             value={firstname}
             onChange={(event) => setFirstname(event.target.value)}
             required
-            placeholder="nom"
+            placeholder="Prénom"
           />
         </label>
         <label
@@ -146,7 +146,7 @@ function FormulaireEnfant() {
             value={lastname}
             onChange={(event) => setLastname(event.target.value)}
             required
-            placeholder="Prénom"
+            placeholder="Nom"
           />
         </label>
         <label

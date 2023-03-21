@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
 import star from "../assets/star.svg";
@@ -8,6 +9,9 @@ function SearchResults() {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [infosNanny, setInfosNanny] = useState([]);
   const test = [];
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/creneaux`)
@@ -50,6 +54,11 @@ function SearchResults() {
         setInfosNanny(test);
       });
   }, [infosNanny]);
+
+  const HandleClick = (e) => {
+    e.preventDefault();
+    navigate("/Reservation");
+  };
 
   return (
     <>
@@ -111,6 +120,9 @@ function SearchResults() {
                     {nannyCard.hourly_rate}€
                   </h3>
                 </div>
+                <button type="button" onClick={HandleClick}>
+                  reservation
+                </button>
               </div>
             );
           })}
