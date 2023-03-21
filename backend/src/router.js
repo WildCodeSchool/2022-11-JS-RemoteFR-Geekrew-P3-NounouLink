@@ -29,8 +29,6 @@ router.post("/superutilisateurs", superusersControllers.add);
 
 // then the routes to protect
 
-// router.use(verifyToken);
-
 router.get("/creneaux", slotsControllers.browse);
 router.get("/creneaux/:id", slotsControllers.read);
 router.put("/creneaux/:id", slotsControllers.edit);
