@@ -51,21 +51,21 @@ function AccueilProNounou() {
           </div>
         </div>
       </div>
-      <div className="hidden gradient-linear w-full lg:flex flex-col justify-between h-full p-4 grow">
+      <div className="hidden gradient-linear w-full lg:flex flex-col justify-between h-full p-8 grow">
         <img className="max-w-[200px]" src={logoWhite} alt="NounouLink Pro" />
-        <h3 className="text-white">
-          <span className="bg-white text-purple-pro p-1">Gérez votre </span>
-          <br />
-          <span className="bg-white text-purple-pro p-1">
+        <h3 className="text-white flex flex-col gap-2">
+          <span className="bg-white max-w-fit text-purple-pro p-1 w-auto">
+            Gérez votre
+          </span>
+          <span className="bg-white max-w-fit text-purple-pro p-1 block">
             Agenda professionnel
           </span>
-          <br />
           24h/24 7j/7
         </h3>
         <img
           src={hero}
           alt="fille avec des lunettes travaillant"
-          className="max-w-[90%]"
+          className=" lg:max-w-lg 2xl:max-w-xl"
         />
       </div>
     </div>
