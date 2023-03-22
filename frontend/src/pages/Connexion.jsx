@@ -13,7 +13,77 @@ function Connexion() {
   const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
 
-  const { setUserId, setParentId } = useUserContext();
+  const {
+    setUserId,
+
+    setParentId,
+
+    setNannyId,
+
+    setFirstname,
+
+    setLastname,
+
+    setAdress,
+
+    setAggregationNumber,
+
+    setCafNumber,
+
+    setCarInsurance,
+
+    setUserEmail,
+
+    setCustodyAdress,
+
+    setDateAgrement,
+
+    setDegreeLevel,
+
+    setDiploma,
+
+    setExitPermit,
+
+    setExperience,
+
+    setHomeInsurance,
+
+    setHourlyRate,
+
+    setHygiene,
+
+    setImageRights,
+
+    setKind,
+
+    setMealPrice,
+
+    setOvertime,
+
+    setPedagogy,
+
+    setPhone,
+
+    setPictures,
+
+    setPlacesMax,
+
+    setPresentation,
+
+    setPriceKilometre,
+
+    setProfilPicture,
+
+    setProofOfResidence,
+
+    setPsc1,
+
+    setRanking,
+
+    setSecuCertificate,
+
+    setTariffMajor,
+  } = useUserContext();
 
   const navigate = useNavigate();
 
@@ -45,8 +115,45 @@ function Connexion() {
         const res = await userAPI.post("/api/login", { email, password });
 
         // console.log(res.data);
-        setUserId(res.data.userId);
-        setParentId(res.data.idparents);
+        const dataSet = () => {
+          setUserId(res.data.userId);
+          setParentId(res.data.idparents);
+          setNannyId(res.data.idnannies);
+          setFirstname(res.data.firstname);
+          setLastname(res.data.lastname);
+          setAdress(res.data.adress);
+          setAggregationNumber(res.data.aggregation_number);
+          setCafNumber(res.data.caf_number);
+          setCarInsurance(res.data.car_insurance);
+          setUserEmail(res.data.email);
+          setCustodyAdress(res.data.custody_address);
+          setDateAgrement(res.data.date_agreement);
+          setDegreeLevel(res.data.degree_level);
+          setDiploma(res.data.diploma);
+          setExitPermit(res.data.exit_permit);
+          setExperience(res.data.experience);
+          setHomeInsurance(res.data.home_insurance);
+          setHourlyRate(res.data.hourly_rate);
+          setHygiene(res.data.hygiene);
+          setImageRights(res.data.image_rights);
+          setKind(res.data.kind);
+          setMealPrice(res.data.meal_price);
+          setOvertime(res.data.overtime);
+          setPedagogy(res.data.pedagogy);
+          setPhone(res.data.phone);
+          setPictures(res.data.pictures);
+          setPlacesMax(res.data.places_max);
+          setPresentation(res.data.presentation);
+          setPriceKilometre(res.data.price_kilometre);
+          setProfilPicture(res.data.profile_picture);
+          setProofOfResidence(res.data.proof_of_residence);
+          setPsc1(res.data.psc1);
+          setRanking(res.data.ranking);
+          setSecuCertificate(res.data.secu_certificate);
+          setTariffMajor(res.data.tariff_major);
+        };
+        dataSet();
+        // console.log(kind);
         // navigate("/formulaireparent");
       } catch (err) {
         console.error(err);

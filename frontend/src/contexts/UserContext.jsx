@@ -12,7 +12,7 @@ export function UserContextProvider({ children }) {
   const [aggregationNumber, setAggregationNumber] = useState(null);
   const [cafNumber, setCafNumber] = useState(null);
   const [carInsurance, setCarInsurance] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [custodyAdress, setCustodyAdress] = useState(null);
   const [dateAgrement, setDateAgrement] = useState(null);
   const [degreeLevel, setDegreeLevel] = useState(null);
@@ -64,8 +64,8 @@ export function UserContextProvider({ children }) {
       setCafNumber,
       carInsurance,
       setCarInsurance,
-      email,
-      setEmail,
+      userEmail,
+      setUserEmail,
       custodyAdress,
       setCustodyAdress,
       dateAgrement,
@@ -128,7 +128,7 @@ export function UserContextProvider({ children }) {
       aggregationNumber,
       cafNumber,
       carInsurance,
-      email,
+      userEmail,
       custodyAdress,
       dateAgrement,
       degreeLevel,
