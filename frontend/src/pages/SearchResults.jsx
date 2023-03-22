@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
 import star from "../assets/star.svg";
@@ -57,6 +58,7 @@ function SearchResults() {
 
   const HandleClick = (e) => {
     e.preventDefault();
+
     navigate("/Reservation");
   };
 
@@ -103,6 +105,7 @@ function SearchResults() {
                   <h1 className="text-xl">{`${nannyCard.firstname} ${nannyCard.lastname}`}</h1>
                   <div className="bg-purple flex flex-row rounded-full text-white justify-between px-2">
                     <p>{nannyCard.ranking}</p>
+                    console.log(nannyCard)
                     <img src={star} alt="rating" />
                   </div>
                 </div>

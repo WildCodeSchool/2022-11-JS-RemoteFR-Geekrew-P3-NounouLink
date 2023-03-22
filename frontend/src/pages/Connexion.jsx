@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 import { useUserContext } from "../contexts/UserContext";
-
 import userAPI from "../services/userAPI";
 
 import logo from "../assets/logo.svg";
@@ -15,7 +13,7 @@ function Connexion() {
   const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
 
-  const { setUserId } = useUserContext();
+  const { setUserId, setParentId } = useUserContext();
 
   const navigate = useNavigate();
 
@@ -40,16 +38,19 @@ function Connexion() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      userAPI
-        .post("/api/login", { email, password })
-        .then((res) => {
-          setUserId(res.data.idusers);
-          navigate("/formulaireparent");
-        })
-        .catch((err) => console.error(err));
+      try {
+        const res = await userAPI.post("/api/login", { email, password });
+
+        // console.log(res.data);
+        setUserId(res.data.userId);
+        setParentId(res.data.idparents);
+        // navigate("/formulaireparent");
+      } catch (err) {
+        console.error(err);
+      }
     } else {
       toast.error("Please specify email and password");
     }
