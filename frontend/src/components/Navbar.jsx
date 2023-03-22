@@ -4,7 +4,6 @@ import { useUserContext } from "../contexts/UserContext";
 import chevronWhite from "../assets/chevron-white.svg";
 import blocParent from "../assets/formulaire/Brique-Parents.svg";
 import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
-import blocInscription from "../assets/formulaire/Brique-Inscription.svg";
 
 function Navbar() {
   const [blur, setBlur] = useState(false);
@@ -58,14 +57,6 @@ function Navbar() {
             to="/FormulaireEnfant"
           >
             <img src={blocEnfant} alt="bloc enfant" />
-          </NavLink>
-          <NavLink
-            style={getActiveLinkStyle(
-              location.pathname === "/FormulaireInscription"
-            )}
-            to="/recherche"
-          >
-            <img src={blocInscription} alt="bloc inscription" />
           </NavLink>
         </div>
       </nav>
