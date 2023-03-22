@@ -161,8 +161,6 @@ function Connexion() {
     }
   };
 
-  // console.log(userId);
-
   return (
     <div className="gradient-linear grow grid grid-rows-connexion lg:grid-rows-none lg:grid-cols-3 max-lg:landscape:grid-rows-5 lg:landscape:grid-rows-none items-center justify-center h-full w-full font-nunito text-white">
       <img
