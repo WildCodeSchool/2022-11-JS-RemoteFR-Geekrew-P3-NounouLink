@@ -36,7 +36,6 @@ function Navbar() {
           <p className="text-2xl">
             {" "}
             Ed Canaan <br />
-            Papa Poule
           </p>
         </NavLink>
 
@@ -58,14 +57,6 @@ function Navbar() {
             to="/FormulaireEnfant"
           >
             <img src={blocEnfant} alt="bloc enfant" />
-          </NavLink>
-          <NavLink
-            style={getActiveLinkStyle(
-              location.pathname === "/FormulaireInscription"
-            )}
-            to="/FormulaireInscription"
-          >
-            <img src={blocInscription} alt="bloc inscription" />
           </NavLink>
         </div>
       </nav>

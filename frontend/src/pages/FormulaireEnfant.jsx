@@ -28,18 +28,6 @@ function FormulaireEnfant() {
 
   const navigate = useNavigate();
 
-  const childrenFile = {
-    firstname,
-    lastname,
-    birthdate,
-    canwalk,
-    allergie,
-    // insurance,
-    // healthbook,
-    parentsIdparents,
-    parentsUsersIdusers,
-  };
-
   useEffect(() => {
     if (childrenId) {
       userAPI
@@ -62,6 +50,15 @@ function FormulaireEnfant() {
     }
   }, []);
 
+  const childrenFile = {
+    firstname,
+    lastname,
+    birthdate,
+    canwalk,
+    allergie,
+    parentsIdparents,
+    parentsUsersIdusers,
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -79,23 +76,25 @@ function FormulaireEnfant() {
         );
       });
   };
-
   const uploadInsurance = (evt) => {
     evt.preventDefault();
-
     const formData = new FormData();
     formData.append("firstname", firstname);
     formData.append("lastname", lastname);
     formData.append("birthdate", birthdate);
-    // formData.append("canwalk", canwalk);
+    formData.append("canwalk", canwalk);
     formData.append("allergie", allergie);
     formData.append("insurance", insurance);
     formData.append("healthbook", healthbook);
     formData.append("parentsIdparents", parentsIdparents);
     formData.append("parentsUsersIdusers", parentsUsersIdusers);
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(() => {
+        navigate("/recherche");
+      });
   };
 
   return (
@@ -164,10 +163,10 @@ function FormulaireEnfant() {
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
           <Validation isValid={canwalk !== ""} />{" "}
-          <p className="ml-6 lg:ml-[6.5rem]">MARCHE </p>
+          <p className="ml-6 lg:ml-[6.5rem]" />
           <input
             className=" w-4/6 h-5 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem] "
-            type="checkbox"
+            type="text"
             id="canWalk"
             checked={canwalk}
             onChange={(event) => setCanWalk(event.target.checked)}

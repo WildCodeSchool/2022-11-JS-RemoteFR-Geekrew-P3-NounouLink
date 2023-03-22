@@ -27,7 +27,7 @@ CREATE TABLE `children` (
   `firstname` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `lastname` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
-  `canwalk` tinyint DEFAULT NULL,
+  `canwalk` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `allergie` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `insurance` text COLLATE utf8mb4_general_ci,
   `healthbook` text COLLATE utf8mb4_general_ci,
