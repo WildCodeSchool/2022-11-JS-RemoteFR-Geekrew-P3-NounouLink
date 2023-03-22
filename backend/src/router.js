@@ -14,6 +14,7 @@ const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword, createToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
+const fileUpload = require("./middleware/multer");
 
 // the public routes
 router.post(
@@ -23,7 +24,7 @@ router.post(
 );
 router.post("/users", hashPassword, usersControllers.add, createToken);
 router.post("/parents", parentsControllers.add);
-router.post("/enfants", childrenControllers.add);
+router.post("/enfants", fileUpload, childrenControllers.add);
 router.post("/nounous", nanniesControllers.add);
 router.post("/superutilisateurs", superusersControllers.add);
 
