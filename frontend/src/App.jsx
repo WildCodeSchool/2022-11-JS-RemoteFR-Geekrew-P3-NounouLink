@@ -13,6 +13,8 @@ import SearchResults from "./pages/SearchResults";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
+import NannyInfoCard from "./pages/NannyInfoCard";
+import Dashbord from "./pages/Dashboard";
 
 function App() {
   return (
@@ -31,7 +33,9 @@ function App() {
             <Route path="/formulaireparent" element={<FormulaireParent />} />
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
+            <Route path="/resultat/:id" element={<NannyInfoCard />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/dashboard" element={<Dashbord />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>
