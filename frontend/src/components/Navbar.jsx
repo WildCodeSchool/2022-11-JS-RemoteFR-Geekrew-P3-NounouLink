@@ -4,7 +4,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import chevronWhite from "../assets/chevron-white.svg";
 import blocParent from "../assets/formulaire/Brique-Parents.svg";
 import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
-import blocInscription from "../assets/formulaire/Brique-Inscription.svg";
 
 function Navbar() {
   const [blur, setBlur] = useState(false);
