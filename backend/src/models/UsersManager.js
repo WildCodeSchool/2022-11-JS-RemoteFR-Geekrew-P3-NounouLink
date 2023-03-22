@@ -22,7 +22,7 @@ class UsersManager extends AbstractManager {
 
   findkind(iduser) {
     return this.database.query(
-      ` SELECT * FROM users LEFT JOIN parents ON parents.users_idusers = users.idusers LEFT JOIN nannies ON nannies.users_idusers = users.idusers WHERE idusers = ?`,
+      ` SELECT * FROM users LEFT JOIN parents ON parents.users_idusers = users.idusers LEFT JOIN nannies ON nannies.users_idusers = users.idusers  WHERE idusers = ?`,
       [iduser]
     );
   }

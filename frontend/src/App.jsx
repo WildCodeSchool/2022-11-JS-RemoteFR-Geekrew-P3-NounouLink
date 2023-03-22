@@ -11,6 +11,7 @@ import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
 import SearchResults from "./pages/SearchResults";
 import Reservation from "./pages/Reservation";
+import NannyInfoCard from "./pages/NannyInfoCard";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
@@ -32,8 +33,10 @@ function App() {
             <Route path="/formulaireparent" element={<FormulaireParent />} />
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
+
             <Route path="/menu" element={<Menu />} />
             <Route path="/reservation" element={<Reservation />} />
+            <Route path="/resultat/:id" element={<NannyInfoCard />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>

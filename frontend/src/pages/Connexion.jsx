@@ -113,8 +113,6 @@ function Connexion() {
     if (email && password) {
       try {
         const res = await userAPI.post("/api/login", { email, password });
-
-        // console.log(res.data);
         const dataSet = () => {
           setUserId(res.data.userId);
           setParentId(res.data.idparents);
@@ -153,8 +151,8 @@ function Connexion() {
           setTariffMajor(res.data.tariff_major);
         };
         dataSet();
-        // console.log(kind);
-        // navigate("/formulaireparent");
+
+        navigate("/formulaireparent");
       } catch (err) {
         console.error(err);
       }

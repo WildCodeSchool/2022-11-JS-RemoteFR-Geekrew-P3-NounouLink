@@ -41,6 +41,12 @@ function NannyInfoCard() {
 
   const total = ((endParent - beginParent) / 1000 / 60 / 60) * hourlyRate;
 
+  // const reservationData = {
+
+  // };
+
+  // console.log(reservationData);
+
   const handleReservation = () => {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`, {
