@@ -57,15 +57,6 @@ function SearchResults() {
       });
   }, [availableSlots]);
 
-  // pour  ca je voulais récuperer ses infos depuis ici à partir  du handlecardDisplay
-  // const handleCardDisplay = (e) => {
-  //   // localStorage.setItem(
-  //   //   "infosNanny",
-  //   //   JSON.stringify([childName, dataAdress, startDate, endDate])
-  //   // );
-  //   navigate(`/resultat/${e.key}`);
-  // };
-
   return (
     <>
       <label htmlFor="child">
