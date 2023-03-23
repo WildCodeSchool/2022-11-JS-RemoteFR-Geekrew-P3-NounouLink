@@ -17,6 +17,13 @@ class ParentsManager extends AbstractManager {
     );
   }
 
+  find(id) {
+    return this.database.query(
+      `select * from  ${this.table} WHERE id${this.table} = ?`,
+      [id]
+    );
+  }
+
   update(parents) {
     return this.database.query(
       `update ${this.table} set caf_number = ? , exit_permit = ? ,image_rights = ?, users_idusers = ?  where idparents = ?`,
@@ -30,5 +37,4 @@ class ParentsManager extends AbstractManager {
     );
   }
 }
-
 module.exports = ParentsManager;

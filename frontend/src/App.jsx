@@ -10,10 +10,12 @@ import Connexion from "./pages/Connexion";
 import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
 import SearchResults from "./pages/SearchResults";
+
+import NannyInfoCard from "./pages/NannyInfoCard";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
-import NannyInfoCard from "./pages/NannyInfoCard";
+
 import Dashbord from "./pages/Dashboard";
 
 function App() {

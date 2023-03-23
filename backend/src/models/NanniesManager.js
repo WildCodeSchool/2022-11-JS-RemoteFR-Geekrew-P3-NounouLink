@@ -39,6 +39,13 @@ class NanniesManager extends AbstractManager {
     );
   }
 
+  findNannyByUserId(id) {
+    return this.database.query(
+      `SELECT nannies.idnannies, users.email, users.phone, nannies.users_idusers FROM ${this.table} JOIN users ON nannies.users_idusers = users.idusers WHERE nannies.idnannies = ?`,
+      [id]
+    );
+  }
+
   update(nannies) {
     return this.database.query(
       `update ${this.table} set users_idusers = ?, ranking = ?, pictures = ?, hourly_rate = ?, ad_name = ?, custody_address = ?, profile_picture = ?, presentation = ?, psc1 = ?, pedagogy = ?, degree_level= ?, experience = ?, hygiene = ?, overtime= ?, tariff_major= ?, price_kilometre = ?, meal_price = ?, home_insurance = ?, car_insurance = ?, id = ?, secu_certificate = ?, proof_of_residence = ?, diploma = ?, aggregation_number = ?, date_agreement = ?, places_max = ?, where idnannies = ?`,

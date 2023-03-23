@@ -32,7 +32,7 @@ class ReservationsManager extends AbstractManager {
        startdate = ?,
        enddate = ?,
        frequence = ?,
-       flexibility = ?,
+       flexibility = ?
        where idreservations = ?`,
       [
         reservations.parentsIdparents,

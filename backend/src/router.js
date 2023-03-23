@@ -50,6 +50,7 @@ router.delete("/favoris/:id", favoritesControllers.destroy);
 router.get("/nounous", nanniesControllers.browse);
 router.get("/nounous/:id", nanniesControllers.read);
 router.put("/nounous/:id", nanniesControllers.edit);
+router.get("/nounous/infos/:id", nanniesControllers.getNannyByIdUser);
 
 router.delete("/nounous/:id", nanniesControllers.destroy);
 
@@ -82,7 +83,6 @@ router.get("/users/:id", usersControllers.read);
 router.put("/users/:id", hashPassword, usersControllers.edit);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
 router.get("/users/email/:email", usersControllers.getEmail);
-
 router.get("/match", matchControllers.browse);
 
 module.exports = router;

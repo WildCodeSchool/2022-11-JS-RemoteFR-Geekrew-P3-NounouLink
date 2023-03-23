@@ -9,13 +9,14 @@ import { useUserContext } from "../contexts/UserContext";
 function Search() {
   const [type, setType] = useState("text");
   const [dataChildren, setDataChildren] = useState([]);
-  const [dataAdress, setDataAdress] = useState([]);
+
   const [childName, setChildName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { parentId, userId } = useUserContext();
+  const { parentId, adress, setAdress, userId } = useUserContext();
   const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
@@ -23,12 +24,6 @@ function Search() {
         setDataChildren(
           response.data.filter((child) => child.parents_idparents === parentId)
         );
-      });
-
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`)
-      .then((response) => {
-        setDataAdress(response.data.adress);
       });
   }, []);
 
@@ -42,7 +37,7 @@ function Search() {
   const handleSubmitSearch = () => {
     localStorage.setItem(
       "matchSearch",
-      JSON.stringify([childName, dataAdress, startDate, endDate])
+      JSON.stringify([childName, adress, startDate, endDate])
     );
     navigate("/resultat");
   };
@@ -91,8 +86,8 @@ function Search() {
             id="address"
             placeholder="Adresse"
             className="input"
-            value={dataAdress}
-            onChange={(event) => setDataAdress(event.target.value)}
+            value={adress}
+            onChange={(event) => setAdress(event.target.value)}
           />
         </label>
         <label htmlFor="frequency">

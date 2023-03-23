@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 import { useUserContext } from "../contexts/UserContext";
-
 import userAPI from "../services/userAPI";
 
 import logo from "../assets/logo.svg";
@@ -15,7 +13,77 @@ function Connexion() {
   const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
 
-  const { setUserId } = useUserContext();
+  const {
+    setUserId,
+
+    setParentId,
+
+    setNannyId,
+
+    setFirstname,
+
+    setLastname,
+
+    setAdress,
+
+    setAggregationNumber,
+
+    setCafNumber,
+
+    setCarInsurance,
+
+    setUserEmail,
+
+    setCustodyAdress,
+
+    setDateAgrement,
+
+    setDegreeLevel,
+
+    setDiploma,
+
+    setExitPermit,
+
+    setExperience,
+
+    setHomeInsurance,
+
+    setHourlyRate,
+
+    setHygiene,
+
+    setImageRights,
+
+    setKind,
+
+    setMealPrice,
+
+    setOvertime,
+
+    setPedagogy,
+
+    setPhone,
+
+    setPictures,
+
+    setPlacesMax,
+
+    setPresentation,
+
+    setPriceKilometre,
+
+    setProfilPicture,
+
+    setProofOfResidence,
+
+    setPsc1,
+
+    setRanking,
+
+    setSecuCertificate,
+
+    setTariffMajor,
+  } = useUserContext();
 
   const navigate = useNavigate();
 
@@ -40,22 +108,59 @@ function Connexion() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      userAPI
-        .post("/api/login", { email, password })
-        .then((res) => {
+      try {
+        const res = await userAPI.post("/api/login", { email, password });
+
+        const dataSet = () => {
           setUserId(res.data.idusers);
-          navigate("/formulaireparent");
-        })
-        .catch((err) => console.error(err));
+          setParentId(res.data.idparents);
+          setNannyId(res.data.idnannies);
+          setFirstname(res.data.firstname);
+          setLastname(res.data.lastname);
+          setAdress(res.data.adress);
+          setAggregationNumber(res.data.aggregation_number);
+          setCafNumber(res.data.caf_number);
+          setCarInsurance(res.data.car_insurance);
+          setUserEmail(res.data.email);
+          setCustodyAdress(res.data.custody_address);
+          setDateAgrement(res.data.date_agreement);
+          setDegreeLevel(res.data.degree_level);
+          setDiploma(res.data.diploma);
+          setExitPermit(res.data.exit_permit);
+          setExperience(res.data.experience);
+          setHomeInsurance(res.data.home_insurance);
+          setHourlyRate(res.data.hourly_rate);
+          setHygiene(res.data.hygiene);
+          setImageRights(res.data.image_rights);
+          setKind(res.data.kind);
+          setMealPrice(res.data.meal_price);
+          setOvertime(res.data.overtime);
+          setPedagogy(res.data.pedagogy);
+          setPhone(res.data.phone);
+          setPictures(res.data.pictures);
+          setPlacesMax(res.data.places_max);
+          setPresentation(res.data.presentation);
+          setPriceKilometre(res.data.price_kilometre);
+          setProfilPicture(res.data.profile_picture);
+          setProofOfResidence(res.data.proof_of_residence);
+          setPsc1(res.data.psc1);
+          setRanking(res.data.ranking);
+          setSecuCertificate(res.data.secu_certificate);
+          setTariffMajor(res.data.tariff_major);
+        };
+        dataSet();
+
+        navigate("/formulaireparent");
+      } catch (err) {
+        console.error(err);
+      }
     } else {
       toast.error("Please specify email and password");
     }
   };
-
-  // console.log(userId);
 
   return (
     <div className="gradient-linear grow grid grid-rows-connexion lg:grid-rows-none lg:grid-cols-3 max-lg:landscape:grid-rows-5 lg:landscape:grid-rows-none items-center justify-center h-full w-full font-nunito text-white">
