@@ -7,7 +7,7 @@ class NanniesManager extends AbstractManager {
 
   insert(nannies) {
     return this.database.query(
-      `insert into ${this.table} (users_idusers,ranking,pictures,hourly_rate,ad_name,custody_adresse,profile_picture,presentation,psc1,pedagogy,degree_level,experience,hygiene,overtime,tariff_major,price_kilometre,meal_price,home_insurance,car_insurance,id,secu_certificate,proof_of_residence,diploma,aggregation_number,date_agreement,places_max) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `insert into ${this.table} (users_idusers,ranking,pictures,hourly_rate,ad_name,custody_address,profile_picture,presentation,psc1,pedagogy,degree_level,experience,hygiene,overtime,tariff_major,price_kilometre,meal_price,home_insurance,car_insurance,id,secu_certificate,proof_of_residence,diploma,aggregation_number,date_agreement,places_max) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         nannies.usersIdusers,
         nannies.ranking,
