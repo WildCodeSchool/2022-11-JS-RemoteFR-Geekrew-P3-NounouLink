@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import userAPI from "../services/userAPI";
@@ -21,7 +20,7 @@ function FormulaireEnfant() {
   const [insurance, setInsurance] = useState([]);
   const [healthbook, setHealthBook] = useState([]);
 
-  const { userId, parentId, childrenId, setChildrenId } = useUserContext();
+  const { userId, parentId, childrenId } = useUserContext();
 
   const parentsIdparents = parentId;
   const parentsUsersIdusers = userId;
@@ -50,32 +49,32 @@ function FormulaireEnfant() {
     }
   }, []);
 
-  const childrenFile = {
-    firstname,
-    lastname,
-    birthdate,
-    canwalk,
-    allergie,
-    parentsIdparents,
-    parentsUsersIdusers,
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const childrenFile = {
+  //   firstname,
+  //   lastname,
+  //   birthdate,
+  //   canwalk,
+  //   allergie,
+  //   parentsIdparents,
+  //   parentsUsersIdusers,
+  // };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
 
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
-      .then((response) => {
-        setChildrenId(response.data.childrenId);
-        toast.success("Le dossier a été enregistré avec succès !");
-        navigate("/recherche");
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error(
-          "Une erreur est survenue lors de l'enregistrement du dossier."
-        );
-      });
-  };
+  //   userAPI
+  //     .post(`/api/enfants`, childrenFile)
+  //     .then((response) => {
+  //       setChildrenId(response.data.childrenId);
+  //       toast.success("Le dossier a été enregistré avec succès !");
+  //       navigate("/recherche");
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       toast.error(
+  //         "Une erreur est survenue lors de l'enregistrement du dossier."
+  //       );
+  //     });
+  // };
   const uploadInsurance = (evt) => {
     evt.preventDefault();
     const formData = new FormData();
@@ -88,19 +87,24 @@ function FormulaireEnfant() {
     formData.append("healthbook", healthbook);
     formData.append("parentsIdparents", parentsIdparents);
     formData.append("parentsUsersIdusers", parentsUsersIdusers);
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, formData, {
+    userAPI
+      .post(`/api/enfants`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(() => {
         navigate("/recherche");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(
+          "Une erreur est survenue lors de l'enregistrement du dossier."
+        );
       });
   };
 
   return (
     <div>
       <Navbar />
-
       <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20  ">
         Dossier enfants
       </p>
@@ -111,7 +115,7 @@ function FormulaireEnfant() {
       </div>
       <form
         className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto"
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
       >
         <label
           htmlFor="firstname"

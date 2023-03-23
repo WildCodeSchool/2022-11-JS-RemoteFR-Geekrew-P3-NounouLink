@@ -56,7 +56,6 @@ const add = (req, res) => {
   const fileHealthbook = req.files.healthbook[0].filename;
   const childrenBis = { ...children, file, fileHealthbook };
   // console.log(req.files.insurance[0]);
-  // TODO validations (length, format...)
   models.children
     .insert(childrenBis)
     .then(([result]) => {

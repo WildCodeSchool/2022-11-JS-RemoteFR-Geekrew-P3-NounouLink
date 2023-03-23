@@ -31,10 +31,10 @@ const verifyPassword = (req, res) => {
           expiresIn: "1h",
         });
 
-        delete req.users.password;
+        // delete req.users.password;
         delete req.users.hashedPassword;
         res.cookie("auth_token", token, { httpOnly: true, secure: false });
-        res.status(200).send(req.users);
+        res.status(200).json(req.users);
       } else {
         res.sendStatus(401);
       }
@@ -45,24 +45,23 @@ const verifyPassword = (req, res) => {
     });
 };
 
-const createToken = (req, res) => {
-  const payload = { sub: req.users.idusers };
+// const createToken = (req, res) => {
+//   const payload = { sub: req.users.idusers };
 
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+//   const token = jwt.sign(payload, process.env.JWT_SECRET, {
+//     expiresIn: "1h",
+//   });
 
-  delete req.body.password;
+//   delete req.body.password;
 
-  res.cookie("auth_token", token, { httpOnly: true, secure: false });
-  res.sendStatus(200);
-};
+//   res.cookies("auth_token", token, { httpOnly: true, secure: false });
+//   res.sendStatus(200);
+// };
 
 const verifyToken = (req, res, next) => {
   try {
     const authorizationCookie = req.cookies.auth_token;
-
-    if (!authorizationCookie) {
+    if (authorizationCookie == null) {
       throw new Error("Authorization cookie is missing");
     }
     req.payload = jwt.verify(authorizationCookie, process.env.JWT_SECRET);
@@ -77,5 +76,5 @@ module.exports = {
   verifyToken,
   hashPassword,
   verifyPassword,
-  createToken,
+  // createToken,
 };
