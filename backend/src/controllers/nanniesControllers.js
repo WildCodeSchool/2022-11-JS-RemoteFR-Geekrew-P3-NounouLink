@@ -30,13 +30,14 @@ const read = (req, res) => {
 
 const edit = (req, res) => {
   const nannies = req.body;
+  const idnannies = parseInt(req.params.id, 10);
+  const profilePicNanny = req.files.profilePicNanny[0].filename;
+  const nanniesAll = { ...nannies, profilePicNanny, idnannies };
 
   // TODO validations (length, format...)
 
-  nannies.idnannies = parseInt(req.params.id, 10);
-
   models.nannies
-    .update(nannies)
+    .update(nanniesAll)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -52,11 +53,13 @@ const edit = (req, res) => {
 
 const add = (req, res) => {
   const nannies = req.body;
+  const profilePicNanny = req.files[0].filename;
+  const nanniesAll = { ...nannies, profilePicNanny };
 
   // TODO validations (length, format...)
 
   models.nannies
-    .insert(nannies)
+    .insert(nanniesAll)
     .then(([result]) => {
       res.location(`/nannies/${result.insertId}`).sendStatus(201);
     })

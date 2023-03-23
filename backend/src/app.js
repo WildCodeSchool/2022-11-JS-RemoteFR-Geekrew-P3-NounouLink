@@ -50,6 +50,11 @@ if (fs.existsSync(reactIndexFile)) {
   // serve REACT resources
 
   app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+  // app.use("/", express.static(path.join(__dirname, "../public")));
+  app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "../public/uploads"))
+  );
 
   // redirect all requests to the REACT index file
 

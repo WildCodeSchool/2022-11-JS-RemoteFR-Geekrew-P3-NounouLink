@@ -14,6 +14,7 @@ const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword, createToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
+const fileUpload = require("./middleware/multer");
 
 // the public routes
 router.post(
@@ -48,7 +49,7 @@ router.delete("/favoris/:id", favoritesControllers.destroy);
 
 router.get("/nounous", nanniesControllers.browse);
 router.get("/nounous/:id", nanniesControllers.read);
-router.put("/nounous/:id", nanniesControllers.edit);
+router.put("/nounous/:id", fileUpload, nanniesControllers.edit);
 
 router.delete("/nounous/:id", nanniesControllers.destroy);
 
@@ -78,7 +79,7 @@ router.delete("/superutilisateurs/:id", superusersControllers.destroy);
 
 router.get("/users", usersControllers.browse);
 router.get("/users/:id", usersControllers.read);
-router.put("/users/:id", hashPassword, usersControllers.edit);
+router.put("/users/:id", usersControllers.edit);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
 router.get("/users/email/:email", usersControllers.getEmail);
 

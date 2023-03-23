@@ -15,6 +15,9 @@ import Search from "./pages/Search";
 import Menu from "./pages/Menu";
 
 import AccueilProNounou from "./pages/Nannys/AccueilProNounou";
+import ModeAccueilNounou from "./pages/Nannys/ModeAccueilNounou";
+import LocalisationNounou from "./pages/Nannys/LocalisationNounou";
+import PhotosNounou from "./pages/Nannys/PhotosNounou";
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
             <Route path="/menu" element={<Menu />} />
 
             <Route path="/pro" element={<AccueilProNounou />} />
+            <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
+            <Route path="/pro-localisation" element={<LocalisationNounou />} />
+            <Route path="/pro-photos" element={<PhotosNounou />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>
