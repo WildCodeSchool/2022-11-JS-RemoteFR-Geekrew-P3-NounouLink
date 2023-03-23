@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import userAPI from "../../services/userAPI";
 
 import { useUserContext } from "../../contexts/UserContext";
 import arrow from "../../assets/pro/arrowRight.svg";
-import creerAnnonce from "../../assets/pro/creerAnnonce.svg";
+import creerAnnonce from "../../assets/pro/heroAnnonce.svg";
 import back from "../../assets/pro/chevron-left.svg";
 
 import NavbarNounou from "../../components/NavbarNounou";
 
-function PhotosNounou() {
+function PhotosAnnonceNounou() {
   const [profilePicNanny, setProfilePicNanny] = useState([]);
-  const { nannyId, setProfilPicture, profilPicture } = useUserContext();
+  const { nannyId } = useUserContext();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    userAPI
-      .get(`/api/nounous/${nannyId}`)
-      .then((res) => setProfilPicture(res.data.profile_picture));
-  }, [nannyId]);
 
   const handleFileUpload = (event) => {
     const selectedFile = event.target.files;
@@ -38,42 +32,26 @@ function PhotosNounou() {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => res.data);
-
-    navigate("/pro-photosannonce");
   };
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="20%" link="Photos" />
+      <NavbarNounou progress="30%" link="Photos" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">
-            Ajoutez votre photo de profil
+            Égayez votre annonce avec des photos
           </h3>
           <p className="text-black font-regular text-base">
-            Veillez à ce que votre photo montre clairement votre visage
+            Prenez des photos avec un téléphone ou un appareil photo.
+            Téléchargez au moins une photo pour publier votre annonce. Vous
+            pourrez toujours en ajouter d'autres ou apporter des modifications
+            par la suite.
           </p>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col justify-between items-center w-full"
           >
-            <div className=" border-4 border-purple-pro text-purple-pro rounded-full h-28 w-28 flex items-center justify-center">
-              {!profilePicNanny.length ? (
-                <img
-                  className="max-h-24 max-w-24 self-center  rounded-full"
-                  src={`${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/uploads/${profilPicture}`}
-                  alt="test"
-                />
-              ) : (
-                <img
-                  className="max-h-24 max-w-24 self-center  rounded-full"
-                  src={URL.createObjectURL(profilePicNanny[0])}
-                  alt="test"
-                />
-              )}
-            </div>
             <label className="text-purple-pro flex flex-col" htmlFor="">
               Télécharger une photo
               <input
@@ -110,7 +88,17 @@ function PhotosNounou() {
               alt="créer une annonce"
               className="justify-self-center "
             />
-            <p>Veillez à ce que votre photo montre clairement votre visage</p>
+            <h2 className="font-medium text-base">
+              Conseils rapides pour des photos de qualité
+            </h2>
+            <p className=" ">
+              Désencombrez votre pièce Utilisez la lumière naturelle du jour et
+              évitez le flash Prenez des photos en mode paysage depuis les coins
+              des pièces Centrez la prise de vue à égale distance entre le sol
+              et le plafond Mettez en valeur les équipements et jeux d’éveil
+              Ajoutez des photos de toutes les pièces auxquelles les enfants ont
+              accès
+            </p>
           </div>
         </div>
       </div>
@@ -118,4 +106,4 @@ function PhotosNounou() {
   );
 }
 
-export default PhotosNounou;
+export default PhotosAnnonceNounou;

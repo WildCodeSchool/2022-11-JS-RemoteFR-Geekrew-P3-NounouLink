@@ -153,7 +153,11 @@ function Connexion() {
         };
         dataSet();
 
-        navigate("/formulaireparent");
+        if (res.data.kind === "ass_mat") {
+          navigate("/pro");
+        } else {
+          navigate("/formulaireparent");
+        }
       } catch (err) {
         console.error(err);
       }

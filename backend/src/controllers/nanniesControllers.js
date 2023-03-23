@@ -31,8 +31,8 @@ const read = (req, res) => {
 const edit = (req, res) => {
   const nannies = req.body;
   const idnannies = parseInt(req.params.id, 10);
-  const profilePicNanny = req.files.profilePicNanny[0].filename;
-  const nanniesAll = { ...nannies, profilePicNanny, idnannies };
+  const profilePicture = req.files.profilePicNanny[0].filename;
+  const nanniesAll = { ...nannies, profilePicture, idnannies };
 
   // TODO validations (length, format...)
 
@@ -52,16 +52,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const nannies = req.body;
-  const profilePicNanny = req.files[0].filename;
-  const nanniesAll = { ...nannies, profilePicNanny };
+  const nannies = { usersIdusers: req.body.userId };
 
   // TODO validations (length, format...)
 
   models.nannies
-    .insert(nanniesAll)
+    .insert(nannies)
     .then(([result]) => {
-      res.location(`/nannies/${result.insertId}`).sendStatus(201);
+      res.status(201).send({ nannyId: result.insertId });
     })
     .catch((err) => {
       console.error(err);

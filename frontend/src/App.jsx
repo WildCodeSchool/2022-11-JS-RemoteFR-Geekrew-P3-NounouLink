@@ -20,6 +20,7 @@ import AccueilProNounou from "./pages/Nannys/AccueilProNounou";
 import ModeAccueilNounou from "./pages/Nannys/ModeAccueilNounou";
 import LocalisationNounou from "./pages/Nannys/LocalisationNounou";
 import PhotosNounou from "./pages/Nannys/PhotosNounou";
+import PhotosAnnonceNounou from "./pages/Nannys/PhotosAnnonceNounou";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
             <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
             <Route path="/pro-localisation" element={<LocalisationNounou />} />
             <Route path="/pro-photos" element={<PhotosNounou />} />
+            <Route
+              path="/pro-photosannonce"
+              element={<PhotosAnnonceNounou />}
+            />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>

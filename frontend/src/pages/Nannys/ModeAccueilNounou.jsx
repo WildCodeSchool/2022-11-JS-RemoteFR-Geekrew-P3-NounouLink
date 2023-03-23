@@ -11,14 +11,9 @@ import creerAnnonce from "../../assets/pro/creerAnnonce.svg";
 function ModeAccueilNounou() {
   const [lastname, setLastname] = useState([]);
   const [phone, setPhone] = useState([]);
-  const { setUserId, userId } = useUserContext();
+  const { userId, setNannyId, nannyId } = useUserContext();
 
   const navigate = useNavigate();
-  useEffect(() => {
-    userAPI.get(`/api/nounous/${2}`).then((res) => {
-      setUserId(res.data.users_idusers);
-    });
-  }, []);
 
   useEffect(() => {
     if (userId !== null)
@@ -31,6 +26,11 @@ function ModeAccueilNounou() {
   const handleSubmit = (e) => {
     e.preventDefault();
     userAPI.put(`/api/users/${userId}`, { phone });
+    if (!nannyId) {
+      userAPI
+        .post(`api/nounous`, { userId })
+        .then((res) => setNannyId(res.data.nannyId));
+    }
     navigate("/pro-localisation");
   };
 

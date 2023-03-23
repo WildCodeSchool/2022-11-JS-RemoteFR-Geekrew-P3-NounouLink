@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import logoPro from "../../assets/pro/nounouLinkPro.svg";
 import home from "../../assets/pro/home.svg";
@@ -26,16 +27,24 @@ function AccueilProNounou() {
           </h3>
         </div>
         <div className="font-nunito font-semibold text-xl text-black flex flex-col justify-evenly w-full gap-8">
-          <div className="flex w-full">
-            <img src={home} alt="maison" />{" "}
-            <h4 className="pl-8">Mode d’accueil</h4>
+          <div>
+            <NavLink to="/pro-modeaccueil" className="flex w-full">
+              <img src={home} alt="maison" />{" "}
+              <h4 className="pl-8">Mode d’accueil</h4>
+            </NavLink>
           </div>
-          <div className="flex w-full">
-            <img src={localisation} alt="localisation" />{" "}
-            <h4 className="pl-8">Localisation</h4>
+
+          <div>
+            <NavLink to="/pro-localisation" className="flex w-full">
+              <img src={localisation} alt="localisation" />{" "}
+              <h4 className="pl-8">Localisation</h4>
+            </NavLink>
           </div>
-          <div className="flex  w-full">
-            <img src={camera} alt="appareil" /> <h4 className="pl-8">Photo</h4>
+          <div>
+            <NavLink to="/pro-localisation" className="flex w-full">
+              <img src={camera} alt="appareil" />{" "}
+              <h4 className="pl-8">Photo</h4>
+            </NavLink>
           </div>
           <div className="flex  w-full">
             <img src={presentation} alt="avatar" />{" "}

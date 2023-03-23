@@ -15,11 +15,11 @@ function LocalisationNounou() {
   const [adresse, setAdresse] = useState([]);
   const [zip, setZip] = useState([]);
   const [city, setCity] = useState([]);
-  const { setUserId, userId } = useUserContext();
+  const { setUserId, userId, nannyId } = useUserContext();
 
   const navigate = useNavigate();
   useEffect(() => {
-    userAPI.get(`/api/nounous/${2}`).then((res) => {
+    userAPI.get(`/api/nounous/${nannyId}`).then((res) => {
       setUserId(res.data.users_idusers);
     });
   }, []);
