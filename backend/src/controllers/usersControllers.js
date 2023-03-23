@@ -77,9 +77,17 @@ const getUserByEmailAndPasswordAndNext = (req, res, next) => {
         res.sendStatus(404);
       } else {
         [req.users] = rows;
+        models.users.findkind(req.users.idusers).then(([row]) => {
+          if (row[0] == null) {
+            res.sendStatus(404);
+          } else {
+            [req.users] = row;
+            next();
+          }
+        });
       }
-      next();
     })
+
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);

@@ -18,8 +18,8 @@ function FormulaireEnfant() {
   const [birthdate, setBirthDate] = useState(null);
   const [canwalk, setCanWalk] = useState(null);
   const [allergie, setAllergie] = useState(null);
-  const [insurance, setInsurance] = useState(null);
-  const [healthbook, setHealthBook] = useState(null);
+  const [insurance, setInsurance] = useState([]);
+  const [healthbook, setHealthBook] = useState([]);
 
   const { userId, parentId, childrenId, setChildrenId } = useUserContext();
 
@@ -27,18 +27,6 @@ function FormulaireEnfant() {
   const parentsUsersIdusers = userId;
 
   const navigate = useNavigate();
-
-  const childrenFile = {
-    firstname,
-    lastname,
-    birthdate,
-    canwalk,
-    allergie,
-    insurance,
-    healthbook,
-    parentsIdparents,
-    parentsUsersIdusers,
-  };
 
   useEffect(() => {
     if (childrenId) {
@@ -62,23 +50,15 @@ function FormulaireEnfant() {
     }
   }, []);
 
-  useEffect(() => {
-    const formData = new FormData();
-    formData.append("insurance", insurance);
-
-    if (childrenId && insurance) {
-      axios
-        .post(`/api/enfants/${childrenId}/upload`, formData)
-        .then(() => toast.success("Le fichier a été enregistré avec succès !"))
-        .catch((error) => {
-          console.error(error);
-          toast.error(
-            "Une erreur est survenue lors de l'enregistrement du fichier."
-          );
-        });
-    }
-  }, [childrenId, insurance]);
-
+  const childrenFile = {
+    firstname,
+    lastname,
+    birthdate,
+    canwalk,
+    allergie,
+    parentsIdparents,
+    parentsUsersIdusers,
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -96,11 +76,25 @@ function FormulaireEnfant() {
         );
       });
   };
-
-  const handleUpload = (event) => {
-    const file = event.target.files[0];
-    setInsurance(file);
-    setHealthBook(file);
+  const uploadInsurance = (evt) => {
+    evt.preventDefault();
+    const formData = new FormData();
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("birthdate", birthdate);
+    formData.append("canwalk", canwalk);
+    formData.append("allergie", allergie);
+    formData.append("insurance", insurance);
+    formData.append("healthbook", healthbook);
+    formData.append("parentsIdparents", parentsIdparents);
+    formData.append("parentsUsersIdusers", parentsUsersIdusers);
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(() => {
+        navigate("/recherche");
+      });
   };
 
   return (
@@ -131,7 +125,7 @@ function FormulaireEnfant() {
             value={firstname}
             onChange={(event) => setFirstname(event.target.value)}
             required
-            placeholder="nom"
+            placeholder="Prénom"
           />
         </label>
         <label
@@ -146,7 +140,7 @@ function FormulaireEnfant() {
             value={lastname}
             onChange={(event) => setLastname(event.target.value)}
             required
-            placeholder="Prénom"
+            placeholder="Nom"
           />
         </label>
         <label
@@ -169,10 +163,10 @@ function FormulaireEnfant() {
           className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
           <Validation isValid={canwalk !== ""} />{" "}
-          <p className="ml-6 lg:ml-[6.5rem]">MARCHE </p>
+          <p className="ml-6 lg:ml-[6.5rem]" />
           <input
             className=" w-4/6 h-5 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem] "
-            type="checkbox"
+            type="text"
             id="canWalk"
             checked={canwalk}
             onChange={(event) => setCanWalk(event.target.checked)}
@@ -203,9 +197,10 @@ function FormulaireEnfant() {
             className="w-3/5 p-3 border-solid border-2 border-grey-input rounded-lg md:ml-10 mds:w-10/12 lg:w-8/12 lg:ml-[7rem] lg:mr-[12rem] "
             type="file"
             id="insurance"
-            onChange={handleUpload}
+            onChange={(evt) => setInsurance(evt.target.files[0])}
             placeholder="Assurance"
           />
+
           <UploadValidation isValidate={insurance !== null} />
         </label>
         <label
@@ -217,12 +212,16 @@ function FormulaireEnfant() {
             className="w-3/5 p-3 border-solid border-2 border-grey-input rounded-lg md:ml-10 mds:w-10/12  lg:w-8/12 lg:ml-[7rem] lg:mr-[12rem]"
             type="file"
             id="healthbook"
-            onChange={handleUpload}
+            onChange={(evt) => setHealthBook(evt.target.files[0])}
             placeholder="carnet santé"
           />
           <UploadValidation isValidate={healthbook !== null} />
         </label>
-        <button className="btn-rounded-purple ml-44 lg:ml-[75%]" type="submit">
+        <button
+          className="btn-rounded-purple ml-44 lg:ml-[75%] mt-1"
+          type="submit"
+          onClick={uploadInsurance}
+        >
           Enregistrer
         </button>
       </form>

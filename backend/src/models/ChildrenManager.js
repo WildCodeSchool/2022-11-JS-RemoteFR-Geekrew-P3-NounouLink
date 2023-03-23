@@ -14,8 +14,8 @@ class ChildrenManager extends AbstractManager {
         children.birthdate,
         children.canwalk,
         children.allergie,
-        children.insurance,
-        children.healthbook,
+        children.file,
+        children.fileHealthbook,
         children.parentsIdparents,
         children.parentsUsersIdusers,
       ]
