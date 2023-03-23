@@ -168,7 +168,7 @@ function FormulaireEnfant() {
             className=" w-4/6 h-5 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem] "
             type="text"
             id="canWalk"
-            checked={canwalk}
+            value={canwalk}
             onChange={(event) => setCanWalk(event.target.checked)}
             placeholder="marche"
           />
