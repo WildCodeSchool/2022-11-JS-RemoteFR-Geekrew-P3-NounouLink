@@ -1,13 +1,23 @@
 import React from "react";
-import NavbarParents from "../components/NavbarParents";
-import Header from "../components/Header";
+import { NavLink } from "react-router-dom";
+import Navbar from "../components/Navbar";
+// import { useUserContext } from "../contexts/UserContext";
 
 function Menu() {
-  return (
-    <div className="flex flex-col h-full justify-between ">
-      <Header />
+  // const { firstname, lastname } = useUserContext();
 
-      <NavbarParents />
+  return (
+    <div className="flex flex-col h-full  ">
+      <Navbar />
+      <nav>
+        <NavLink to="/formulaireparent">Mettre à jour mes documents</NavLink>
+      </nav>
+      <nav>
+        <NavLink to="/formulaireenfant">ajouter un enfant</NavLink>
+      </nav>
+      <nav>
+        <NavLink to="/recherche">rechercher une nounou</NavLink>
+      </nav>
     </div>
   );
 }

@@ -119,7 +119,7 @@ function Connexion() {
         };
         dataSet();
         if (res.data.kind === "parent") {
-          navigate("/formulaireparent");
+          navigate("/menu");
         }
         if (res.data.kind === "ass_mat") {
           navigate("/");

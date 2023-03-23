@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
-import chevronWhite from "../assets/chevron-white.svg";
 import blocParent from "../assets/formulaire/Brique-Parents.svg";
 import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
 
@@ -31,11 +30,9 @@ function Navbar() {
           activeclassname="active"
           navigate="-1"
         >
-          <img src={chevronWhite} alt="chevron" />
           <p className="text-2xl">
-            {" "}
-            {`${lastname}  ${firstname}`} <br />
-            Bienvenue Dans le menu
+            Menu Principal <br />
+            {`${lastname}  ${firstname}`}
           </p>
         </NavLink>
 
@@ -57,6 +54,12 @@ function Navbar() {
             to="/FormulaireEnfant"
           >
             <img src={blocEnfant} alt="bloc enfant" />
+          </NavLink>
+          <NavLink
+            style={getActiveLinkStyle(location.pathname === "/Search")}
+            to="/recherche"
+          >
+            recherche
           </NavLink>
         </div>
       </nav>
