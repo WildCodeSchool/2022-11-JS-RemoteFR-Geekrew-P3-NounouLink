@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-
+import { useUserContext } from "../contexts/UserContext";
 import chevronWhite from "../assets/chevron-white.svg";
 import blocParent from "../assets/formulaire/Brique-Parents.svg";
 import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
@@ -8,7 +8,7 @@ import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
 function Navbar() {
   const [blur, setBlur] = useState(false);
   const location = useLocation();
-
+  const { lastname, firstname } = useUserContext();
   const getActiveLinkStyle = (isActive) => {
     if (isActive) {
       return { filter: "blur(0px)" };
@@ -34,7 +34,8 @@ function Navbar() {
           <img src={chevronWhite} alt="chevron" />
           <p className="text-2xl">
             {" "}
-            Ed Canaan <br />
+            {`${lastname}  ${firstname}`} <br />
+            Bienvenue Dans le menu
           </p>
         </NavLink>
 
