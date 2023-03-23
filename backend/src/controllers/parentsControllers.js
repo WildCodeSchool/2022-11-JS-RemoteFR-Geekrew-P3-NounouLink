@@ -34,7 +34,6 @@ const edit = (req, res) => {
   // TODO validations (length, format...)
 
   parents.idparents = parseInt(req.params.id, 10);
-
   models.parents
     .update(parents)
     .then(([result]) => {
