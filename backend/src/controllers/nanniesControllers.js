@@ -30,13 +30,23 @@ const read = (req, res) => {
 
 const edit = (req, res) => {
   const nannies = req.body;
+  let nanniesAll = null;
   const idnannies = parseInt(req.params.id, 10);
-  const profilePicture = req.files.profilePicNanny[0].filename;
-  const nanniesAll = { ...nannies, profilePicture, idnannies };
+
+  if (!req.files.profilePicNanny && !req.files.pictures) {
+    nanniesAll = { ...nannies };
+  } else if (!req.files.pictures) {
+    const profilePicture = req.files.profilePicNanny[0].filename;
+    nanniesAll = { ...nannies, profilePicture, idnannies };
+  } else if (!req.files.profilePicNanny) {
+    const pictures = req.files.pictures[0].filename;
+
+    nanniesAll = { ...nannies, pictures, idnannies };
+  }
 
   // TODO validations (length, format...)
 
-  models.nannies
+  return models.nannies
     .update(nanniesAll)
     .then(([result]) => {
       if (result.affectedRows === 0) {

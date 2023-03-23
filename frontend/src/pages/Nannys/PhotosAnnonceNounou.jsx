@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import userAPI from "../../services/userAPI";
@@ -11,21 +11,20 @@ import back from "../../assets/pro/chevron-left.svg";
 import NavbarNounou from "../../components/NavbarNounou";
 
 function PhotosAnnonceNounou() {
-  const [profilePicNanny, setProfilePicNanny] = useState([]);
-  const { nannyId } = useUserContext();
+  const { nannyId, pictures, setPictures } = useUserContext();
 
   const navigate = useNavigate();
 
   const handleFileUpload = (event) => {
     const selectedFile = event.target.files;
-    setProfilePicNanny(selectedFile);
+    setPictures(selectedFile);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("profilePicNanny", profilePicNanny[0]);
+    formData.append("pictures", pictures[0]);
 
     userAPI
       .put(`/api/nounous/${nannyId}`, formData, {
@@ -65,7 +64,7 @@ function PhotosAnnonceNounou() {
           <div className="flex justify-between">
             <button
               type="button"
-              onClick={() => navigate("/pro-modeaccueil")}
+              onClick={() => navigate("/pro-photos")}
               className="text-purple flex items-center"
             >
               <img src={back} alt="chevron retour en arrière" />
