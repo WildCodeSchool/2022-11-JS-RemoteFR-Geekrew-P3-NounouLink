@@ -33,16 +33,21 @@ const edit = (req, res) => {
   let nanniesAll = null;
   const idnannies = parseInt(req.params.id, 10);
 
-  if (!req.files.profilePicNanny && !req.files.pictures) {
-    nanniesAll = { ...nannies };
-  } else if (!req.files.pictures) {
+  if (!req.files) {
+    nanniesAll = { ...nannies, idnannies };
+  } else if (!req.files.pictures && !!req.files.profilePicNanny) {
     const profilePicture = req.files.profilePicNanny[0].filename;
     nanniesAll = { ...nannies, profilePicture, idnannies };
-  } else if (!req.files.profilePicNanny) {
+  } else if (!req.files.profilePicNanny && !!req.files.pictures) {
     const pictures = req.files.pictures[0].filename;
-
     nanniesAll = { ...nannies, pictures, idnannies };
-  }
+  } else
+    nanniesAll = {
+      ...nannies,
+      profilePicture: req.files.profilePicNanny[0].filename,
+      pictures: req.files.pictures[0].filename,
+      idnannies,
+    };
 
   // TODO validations (length, format...)
 

@@ -10,26 +10,16 @@ import back from "../../assets/pro/chevron-left.svg";
 
 import NavbarNounou from "../../components/NavbarNounou";
 
-function PhotosAnnonceNounou() {
-  const { nannyId, pictures, setPictures } = useUserContext();
+function PresentationNounou() {
+  const { nannyId, presentation, setPresentation } = useUserContext();
 
   const navigate = useNavigate();
-
-  const handleFileUpload = (event) => {
-    const selectedFile = event.target.files;
-    setPictures(selectedFile);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("pictures", pictures[0]);
-
     userAPI
-      .put(`/api/nounous/${nannyId}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
+      .put(`/api/nounous/${nannyId}`, { presentation })
       .then((res) => res.data);
 
     navigate("/pro-presentation");
@@ -37,28 +27,31 @@ function PhotosAnnonceNounou() {
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="30%" link="Photos" />
+      <NavbarNounou progress="45%" link="Présentation" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">
-            Égayez votre annonce avec des photos
+            Présentez vous auprès des parents{" "}
           </h3>
           <p className="text-black font-regular text-base">
-            Prenez des photos avec un téléphone ou un appareil photo.
-            Téléchargez au moins une photo pour publier votre annonce. Vous
-            pourrez toujours en ajouter d'autres ou apporter des modifications
-            par la suite.
+            Présentez vous et décrivez votre expérience. Indiquez les activités
+            d’éveil que vous proposez aux enfants, respect du rythme de
+            l’enfant, activités, sorties, pédagogie... Décrivez les espaces de
+            jeu, le lieu de sommeil, les équipements dont vous disposez
           </p>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col justify-between items-center w-full"
           >
-            <label className="text-purple-pro flex flex-col" htmlFor="">
-              Télécharger une photo
+            <label
+              className="text-purple-pro flex flex-col w-full"
+              htmlFor="presentation"
+            >
               <input
-                type="file"
-                className=" border-2 border-purple-pro text-purple-pro rounded-full "
-                onChange={handleFileUpload}
+                type="text"
+                value={presentation}
+                className=" border-2 border-purple-pro p-4 text-grey rounded-2xl w-full min-h-[10rem] md:min-h-[15rem]"
+                onChange={(e) => setPresentation(e.target.value)}
               />
             </label>
           </form>
@@ -83,22 +76,31 @@ function PhotosAnnonceNounou() {
           </div>
         </div>
         <div className="max-lg:hidden font-red-hat flex flex-col justify-between w-full grow h-full bg-greyish-blue">
-          <div className="rounded-3xl bg-white flex flex-col justify-center w-4/6 p-4 text-center self-center mt-8">
+          <div className="rounded-3xl bg-white flex flex-col justify-between w-4/6 gap-4 p-4 text-center self-center mt-8">
             <img
               src={creerAnnonce}
               alt="créer une annonce"
               className="justify-self-center "
             />
             <h2 className="font-medium text-base">
-              Conseils rapides pour des photos de qualité
+              Inspirez vous des annonces Babyplace
             </h2>
-            <p className=" ">
-              Désencombrez votre pièce Utilisez la lumière naturelle du jour et
-              évitez le flash Prenez des photos en mode paysage depuis les coins
-              des pièces Centrez la prise de vue à égale distance entre le sol
-              et le plafond Mettez en valeur les équipements et jeux d’éveil
-              Ajoutez des photos de toutes les pièces auxquelles les enfants ont
-              accès
+            <div className="flex flex-row items-center justify-center gap-4">
+              <div className="h-10 w-10 bg-grey rounded-full" />
+              <p>
+                Anne Testons
+                <br />
+                Assistante maternelle
+                <br />
+                Membre depuis 2019
+              </p>
+            </div>
+            <p className="w-5/6 self-center text-justify">
+              Assistante maternelle agrée 2013, je vous propose mes services
+              pour garder votre ou vos enfants à mon domicile, rez de chaussée
+              avec jardin, proche du tram. <br /> Je suis maman de 3 enfants et
+              mamie de 5 petits enfants de 3 mois à 12 ans. J'ai une expérience
+              en garde d'enfants de quelques années .
             </p>
           </div>
         </div>
@@ -106,5 +108,4 @@ function PhotosAnnonceNounou() {
     </div>
   );
 }
-
-export default PhotosAnnonceNounou;
+export default PresentationNounou;
