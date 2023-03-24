@@ -22,6 +22,7 @@ import LocalisationNounou from "./pages/Nannys/LocalisationNounou";
 import PhotosNounou from "./pages/Nannys/PhotosNounou";
 import PhotosAnnonceNounou from "./pages/Nannys/PhotosAnnonceNounou";
 import PresentationNounou from "./pages/Nannys/PresentationNounou";
+import DiplomePlusAccueil from "./pages/Nannys/DiplomePlusAccueil";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
               element={<PhotosAnnonceNounou />}
             />
             <Route path="/pro-presentation" element={<PresentationNounou />} />
+            <Route path="/pro-diplome" element={<DiplomePlusAccueil />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>

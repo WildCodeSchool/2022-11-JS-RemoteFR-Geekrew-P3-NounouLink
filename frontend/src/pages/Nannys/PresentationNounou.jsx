@@ -22,7 +22,7 @@ function PresentationNounou() {
       .put(`/api/nounous/${nannyId}`, { presentation })
       .then((res) => res.data);
 
-    navigate("/pro-presentation");
+    navigate("/pro-diplome");
   };
 
   return (
