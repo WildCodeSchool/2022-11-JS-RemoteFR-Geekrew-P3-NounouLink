@@ -19,7 +19,6 @@ function FormulaireEnfant() {
   const [allergie, setAllergie] = useState(null);
   const [insurance, setInsurance] = useState([]);
   const [healthbook, setHealthBook] = useState([]);
-
   const { userId, parentId, childrenId } = useUserContext();
 
   const parentsIdparents = parentId;
@@ -49,32 +48,6 @@ function FormulaireEnfant() {
     }
   }, []);
 
-  // const childrenFile = {
-  //   firstname,
-  //   lastname,
-  //   birthdate,
-  //   canwalk,
-  //   allergie,
-  //   parentsIdparents,
-  //   parentsUsersIdusers,
-  // };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   userAPI
-  //     .post(`/api/enfants`, childrenFile)
-  //     .then((response) => {
-  //       setChildrenId(response.data.childrenId);
-  //       toast.success("Le dossier a été enregistré avec succès !");
-  //       navigate("/recherche");
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       toast.error(
-  //         "Une erreur est survenue lors de l'enregistrement du dossier."
-  //       );
-  //     });
-  // };
   const uploadInsurance = (evt) => {
     evt.preventDefault();
     const formData = new FormData();
@@ -113,17 +86,14 @@ function FormulaireEnfant() {
         <img src={btnbaby2} alt="button baby 2" />
         <img src={plusCircle} alt="plus circle" />
       </div>
-      <form
-        className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto"
-        // onSubmit={handleSubmit}
-      >
+      <form className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto">
         <label
           htmlFor="firstname"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
+          className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
           <Validation isValid={firstname !== ""} />
           <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem]"
+            className=" w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
             type="text"
             id="firstname"
             value={firstname}
@@ -134,11 +104,11 @@ function FormulaireEnfant() {
         </label>
         <label
           htmlFor="lastname"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
+          className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
           <Validation isValid={lastname !== ""} />
           <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem]"
+            className=" w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
             type="text"
             id="lastname"
             value={lastname}
@@ -149,11 +119,11 @@ function FormulaireEnfant() {
         </label>
         <label
           htmlFor="birthdate"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
+          className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
           <Validation isValid={birthdate !== ""} />
           <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem]"
+            className=" w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
             type="date"
             id="birthdate"
             value={birthdate}
@@ -164,12 +134,11 @@ function FormulaireEnfant() {
         </label>
         <label
           htmlFor="canwalk"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
+          className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
           <Validation isValid={canwalk !== ""} />{" "}
-          <p className="ml-6 lg:ml-[6.5rem]" />
           <input
-            className=" w-4/6 h-5 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem] "
+            className="w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500 "
             type="text"
             id="canWalk"
             checked={canwalk}
@@ -179,11 +148,11 @@ function FormulaireEnfant() {
         </label>
         <label
           htmlFor="allergie"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
+          className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
           <Validation isValid={allergie !== ""} />
           <input
-            className=" w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 mds:ml-[2.5rem] mds:mr-[1rem] lg:ml-[6.5rem]"
+            className="w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
             type="text"
             id="allergie"
             value={allergie}
@@ -191,38 +160,43 @@ function FormulaireEnfant() {
             placeholder="allergies"
           />
         </label>
-
-        <label
-          htmlFor="insurance"
-          className="flex flex-row justify-evenly md:ml-[1.75rem] mds:justify-evenky lg:ml-[5.75rem] "
-        >
+        <div className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4">
           <Validation isValid={insurance !== null} />
-          <input
-            className="w-3/5 p-3 border-solid border-2 border-grey-input rounded-lg md:ml-10 mds:w-10/12 lg:w-8/12 lg:ml-[7rem] lg:mr-[12rem] "
-            type="file"
-            id="insurance"
-            onChange={(evt) => setInsurance(evt.target.files[0])}
-            placeholder="Assurance"
-          />
-
+          <label
+            htmlFor="insurance"
+            className="w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12"
+          >
+            <span className="text-grey"> Assurance </span>
+            <input
+              className="w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 hidden"
+              type="file"
+              id="insurance"
+              onChange={(evt) => setInsurance(evt.target.files[0])}
+              title="Assurance"
+              name="Assurance"
+            />
+          </label>
           <UploadValidation isValidate={insurance !== null} />
-        </label>
-        <label
-          htmlFor="healthbook"
-          className="flex flex-row justify-evenly md:ml-[1.75rem] lg:ml-[5.75rem]"
-        >
+        </div>
+        <div className="flex flex-row items-center mr-2 ml-7 lg:ml-24 lg:mr-4">
           <Validation isValid={healthbook !== null} />
-          <input
-            className="w-3/5 p-3 border-solid border-2 border-grey-input rounded-lg md:ml-10 mds:w-10/12  lg:w-8/12 lg:ml-[7rem] lg:mr-[12rem]"
-            type="file"
-            id="healthbook"
-            onChange={(evt) => setHealthBook(evt.target.files[0])}
-            placeholder="carnet santé"
-          />
-          <UploadValidation isValidate={healthbook !== null} />
-        </label>
+          <label
+            htmlFor="healthbook"
+            className="w-4/6 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12"
+          >
+            <span className="text-grey"> Carnet de santé </span>
+            <input
+              className="hidden"
+              type="file"
+              id="healthbook"
+              name="healthbook"
+              onChange={(evt) => setHealthBook(evt.target.files[0])}
+            />
+          </label>
+          <UploadValidation isValidate={insurance !== null} />
+        </div>
         <button
-          className="btn-rounded-purple ml-44 lg:ml-[75%] mt-1"
+          className="btn-rounded-purple "
           type="submit"
           onClick={uploadInsurance}
         >

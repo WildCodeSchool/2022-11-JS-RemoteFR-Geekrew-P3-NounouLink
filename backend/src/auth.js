@@ -30,8 +30,6 @@ const verifyPassword = (req, res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
-
-        // delete req.users.password;
         delete req.users.hashedPassword;
         res.cookie("auth_token", token, { httpOnly: true, secure: false });
         res.status(200).json(req.users);
@@ -44,19 +42,6 @@ const verifyPassword = (req, res) => {
       res.sendStatus(500);
     });
 };
-
-// const createToken = (req, res) => {
-//   const payload = { sub: req.users.idusers };
-
-//   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-//     expiresIn: "1h",
-//   });
-
-//   delete req.body.password;
-
-//   res.cookies("auth_token", token, { httpOnly: true, secure: false });
-//   res.sendStatus(200);
-// };
 
 const verifyToken = (req, res, next) => {
   try {
@@ -76,5 +61,4 @@ module.exports = {
   verifyToken,
   hashPassword,
   verifyPassword,
-  // createToken,
 };
