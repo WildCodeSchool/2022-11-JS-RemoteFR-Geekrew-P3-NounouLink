@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import userAPI from "../services/userAPI";
 
 import { useUserContext } from "../contexts/UserContext";
 
@@ -17,18 +17,16 @@ function NannyInfoCard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/nounous/${id}`)
-      .then((res) => setNannyCard([res.data]));
+    userAPI.get(`/api/nounous/${id}`).then((res) => setNannyCard([res.data]));
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/servicesNounous/${id}`)
+    userAPI
+      .get(`/api/servicesNounous/${id}`)
       .then((res) => setNannyServices(res.data));
 
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/nounous/infos/${id}`)
+    userAPI
+      .get(`/api/nounous/infos/${id}`)
       .then((res) => setNannyDetails([res.data]));
   }, []);
 
@@ -42,8 +40,8 @@ function NannyInfoCard() {
   const total = ((endParent - beginParent) / 1000 / 60 / 60) * hourlyRate;
 
   const handleReservation = () => {
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`, {
+    userAPI
+      .post(`/api/reservations`, {
         parentsIdparents: parentId,
         parentsUsersIdusers: userId,
         nanniesIdnannies: id,

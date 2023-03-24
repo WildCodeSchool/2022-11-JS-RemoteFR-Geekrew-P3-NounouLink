@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
+import userAPI from "../services/userAPI";
 
 import { useUserContext } from "../contexts/UserContext";
 
@@ -18,13 +18,11 @@ function Search() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
-      .then((response) => {
-        setDataChildren(
-          response.data.filter((child) => child.parents_idparents === parentId)
-        );
-      });
+    userAPI.get(`/api/enfants`).then((response) => {
+      setDataChildren(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+    });
   }, []);
 
   const handleTypeFocus = (e) => {
