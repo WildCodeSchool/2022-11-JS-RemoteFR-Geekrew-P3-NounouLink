@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
-import blocParent from "../assets/formulaire/Brique-Parents.svg";
-import blocEnfant from "../assets/formulaire/Brique-Enfants.svg";
+import Trombone from "../assets/trombone.svg";
+import Loupe from "../assets/Loupe.svg";
+import EnfantAdd from "../assets/enfantAdd.svg";
+import home from "../assets/home.svg";
 
 function Navbar() {
   const [blur, setBlur] = useState(false);
@@ -26,17 +28,19 @@ function Navbar() {
         />
 
         <NavLink
-          className="flex flex-row justify-center  text-white  pt-10"
+          className="flex flex-row  justify-end text-white   text-left pr-5"
           activeclassname="active"
-          navigate="-1"
         >
-          <p className="text-2xl">
-            Menu Principal <br />
-            {`${lastname}  ${firstname}`}
-          </p>
+          <p className="text-2xl ml-10 pb-5 ">{`${lastname}  ${firstname}`}</p>
         </NavLink>
 
-        <div className="flex flex-row justify-evenly pb-8 pt-2">
+        <div className="flex flex-row justify-evenly pb-2 pt-2 ">
+          <NavLink
+            style={getActiveLinkStyle(location.pathname === "/Menu")}
+            to="/menu"
+          >
+            <img alt="Menu principal" src={home} />
+          </NavLink>
           <NavLink
             style={getActiveLinkStyle(
               location.pathname === "/FormulaireParent"
@@ -44,7 +48,7 @@ function Navbar() {
             activeclassname="active"
             to="/FormulaireParent"
           >
-            <img src={blocParent} alt="bloc parent" />
+            <img alt="documents" src={Trombone} />
           </NavLink>
 
           <NavLink
@@ -53,13 +57,13 @@ function Navbar() {
             )}
             to="/FormulaireEnfant"
           >
-            <img src={blocEnfant} alt="bloc enfant" />
+            <img alt="ajouter un enfant" src={EnfantAdd} />
           </NavLink>
           <NavLink
             style={getActiveLinkStyle(location.pathname === "/Search")}
             to="/recherche"
           >
-            recherche
+            <img alt="rechercher une nounou" src={Loupe} />
           </NavLink>
         </div>
       </nav>
