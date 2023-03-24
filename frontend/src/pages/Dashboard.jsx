@@ -37,10 +37,9 @@ function Dashbord() {
 
   const [visible, setVisible] = useState(false);
   const [date, setDate] = useState(moment());
-  const [startTime, setStartTime] = useState(moment());
-  const [endTime, setEndTime] = useState(moment());
   const [tabIndex, setTabIndex] = useState(0); // Index de l'onglet actif
-
+  const endTime = moment();
+  const startTime = moment();
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("Nouvel événement :");
     if (title) {

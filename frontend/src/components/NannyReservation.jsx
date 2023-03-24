@@ -13,7 +13,8 @@ function NannyReservation() {
   return (
     <div>
       <p>
-        Ed Cannan <br></br>Profil 100%
+        Ed Cannan <br />
+        Profil 100%
       </p>
       {reservationCard.map((reservation, index) => {
         const formattedReservation = {
