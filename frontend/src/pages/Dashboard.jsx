@@ -7,11 +7,16 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Button, Modal, Form, DatePicker } from "antd";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+
 import EventCard from "../components/EventCard";
 import SideBar from "../components/Sidebar";
 import SearchBar from "../components/Searchbar";
+import NannyReservation from "../components/NannyReservation";
 
-import menu2 from "../assets/menu-2-line.svg";
+import Gris from "../assets/dashboard/Gris.svg";
+import Orange from "../assets/dashboard/Orange.svg";
+import Vert from "../assets/dashboard/Vert.svg";
+import Rose from "../assets/dashboard/Rose.svg";
 
 moment.locale("fr");
 
@@ -78,23 +83,14 @@ function Dashbord() {
     setDate(date);
   };
 
-  const handleStartTimeChange = () => {
-    setStartTime(startTime);
-  };
-
-  const handleEndTimeChange = () => {
-    setEndTime(endTime);
-  };
-
   return (
-    <div className="flex ">
+    <div className="flex">
       <div className="w-1/4">
         <SideBar />
       </div>
       <div className="flex flex-col w-full">
         <div className="">
           <SearchBar />
-          <img src={menu2} alt="menu2" />
         </div>
 
         <div className="p-6 w-full overflow-hidden">
@@ -111,16 +107,67 @@ function Dashbord() {
 
             <TabPanel>
               <div>
-                <ul>
-                  <li className="border-8">hello</li>
-                  <li className="border-8">world</li>
-                  <li>H1</li>
-                  <li>H2</li>
-                </ul>
+                <div className="flex flex-row  border-2  rounded-lg drop-shadow-md gap-8">
+                  <img
+                    className="flex justify-start h-20"
+                    src={Gris}
+                    alt="rectangle"
+                  />
+                  <p>
+                    Bébé 1 <br />
+                    18 mois
+                  </p>
+                  <NannyReservation />
+                  <p>Nombre d'heure : </p>
+                  <p>Prix total :</p>
+                </div>
+                <div className="flex flex-row  border-2  rounded-lg drop-shadow-md gap-8">
+                  <img
+                    className="flex justify-start h-20"
+                    src={Orange}
+                    alt="rectangle"
+                  />
+                  <p>
+                    Bébé 1 <br />
+                    18 mois
+                  </p>
+                  <NannyReservation />
+                  <p>Nombre d'heure : </p>
+                  <p>Prix total :</p>
+                </div>
+                <div className="flex flex-row  border-2  rounded-lg drop-shadow-md gap-8">
+                  <img
+                    className="flex justify-start h-20"
+                    src={Vert}
+                    alt="rectangle"
+                  />
+                  <p>
+                    Bébé 1 <br />
+                    18 mois
+                  </p>
+                  <NannyReservation />
+                  <p>Nombre d'heure : </p>
+                  <p>Prix total :</p>
+                </div>
+                <div className="flex flex-row  border-2  rounded-lg drop-shadow-md gap-8">
+                  <img
+                    className="flex justify-start h-20"
+                    src={Rose}
+                    alt="rectangle"
+                  />
+                  <p>
+                    Bébé 1 <br />
+                    18 mois
+                  </p>
+                  <NannyReservation />
+                  <p>Nombre d'heure : </p>
+                  <p>Prix total :</p>
+                </div>
               </div>
             </TabPanel>
             <TabPanel>
               <div className="bg-gray-100 h-screen">
+                <Button onClick={() => setEvents([])}>Clear</Button>
                 <Calendar
                   className=""
                   localizer={localizer}
@@ -139,15 +186,16 @@ function Dashbord() {
                       event.end
                     ).format("LT")}`}
                     onDelete={() => {
-                      const newEvents = events.filter((e) => e.id !== event.id);
-                      setEvents(newEvents);
+                      setEvents((preEvents) =>
+                        preEvents.filter((e) => e.id !== event.id)
+                      );
                     }}
                   />
                 ))}
               </div>
               <Button
-                className="bg-blue-500 text-white"
-                type="primary"
+                className="gradient-linear text-white"
+                type="button"
                 onClick={showModal}
               >
                 Disponibilité
@@ -167,15 +215,25 @@ function Dashbord() {
                     />
                   </Form.Item>
                   <Form.Item label="Heure de début">
-                    <DatePicker.TimePicker
-                      onChange={handleStartTimeChange}
-                      defaultValue={startTime}
+                    <input
+                      className="border-2  rounded-lg"
+                      type="time"
+                      id="appt"
+                      name="appt"
+                      min="09:00"
+                      max="18:00"
+                      required
                     />
                   </Form.Item>
                   <Form.Item label="Heure de fin">
-                    <DatePicker.TimePicker
-                      onChange={handleEndTimeChange}
-                      defaultValue={endTime}
+                    <input
+                      className="border-2  rounded-lg"
+                      type="time"
+                      id="appt"
+                      name="appt"
+                      min="09:00"
+                      max="18:00"
+                      required
                     />
                   </Form.Item>
                 </Form>

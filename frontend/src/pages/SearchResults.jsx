@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserAPI from "../services/userAPI";
 
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
@@ -13,9 +13,8 @@ function SearchResults() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/creneaux`)
-      .then((response) => {
+    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/creneaux`).then(
+      (response) => {
         const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
         const beginParent = new Date(matchSearch[2]).toLocaleString("fr-FR", {
           timeZone: "Europe/Paris",
@@ -41,20 +40,21 @@ function SearchResults() {
         }
 
         setAvailableSlots(slots);
-      });
+      }
+    );
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/match`)
-      .then((response) => {
+    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/match`).then(
+      (response) => {
         for (let i = 0; i < response.data.length; i += 1) {
           if (availableSlots.includes(response.data[i].idslots)) {
             test.push(response.data[i]);
           }
         }
         setInfosNanny(test);
-      });
+      }
+    );
   }, [availableSlots]);
 
   return (

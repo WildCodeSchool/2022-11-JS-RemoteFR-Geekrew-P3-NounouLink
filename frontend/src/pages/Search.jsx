@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserAPI from "../services/userAPI";
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 
@@ -14,17 +14,17 @@ function Search() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { parentId, adress, setAdress, userId } = useUserContext();
+  const { parentId, adress, setAdress } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`)
-      .then((response) => {
+    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`).then(
+      (response) => {
         setDataChildren(
           response.data.filter((child) => child.parents_idparents === parentId)
         );
-      });
+      }
+    );
   }, []);
 
   const handleTypeFocus = (e) => {

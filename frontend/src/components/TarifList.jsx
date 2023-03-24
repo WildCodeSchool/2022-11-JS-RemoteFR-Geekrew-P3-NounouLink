@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import UserAPI from "../services/userAPI";
 
 function TarifList() {
   const [tarifs, setTarifs] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/tarifs").then((response) => {
+    UserAPI.get("/api/tarifs").then((response) => {
       setTarifs(response.data);
     });
   }, []);

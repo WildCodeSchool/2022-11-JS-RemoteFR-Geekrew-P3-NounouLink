@@ -62,7 +62,7 @@ function FormulaireEnfant() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios
+    userAPI
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/enfants`, childrenFile)
       .then((response) => {
         setChildrenId(response.data.childrenId);

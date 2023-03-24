@@ -208,6 +208,7 @@ CREATE TABLE `reservations` (
   KEY `fk_parents_has_nannies_parents1_idx` (`parents_idparents`,`parents_users_idusers`),
   CONSTRAINT `fk_parents_has_nannies_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`),
   CONSTRAINT `fk_parents_has_nannies_parents1` FOREIGN KEY (`parents_idparents`, `parents_users_idusers`) REFERENCES `parents` (`idparents`, `users_idusers`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

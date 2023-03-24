@@ -23,21 +23,21 @@ const EventCard = ({ title, date, time, onDelete }) => {
     onDelete();
     setIsShown(false);
   };
+  const handleCancel = () => {
+    oncancel();
+    setIsShown(false);
+  };
 
   const card = isShown ? (
-    <Card className="w-full max-w-xs mx-auto p-4 rounded-md shadow-md">
+    <Card className="w-full max-w-xs mx-auto p-4 rounded-md shadow-md gradient-linear">
+      title={title}
+      extra{" "}
+      {
+        <Button size="small" onClick={onDelete}>
+          Supprimer
+        </Button>
+      }
       <Meta title={title} description={`${date} ${time}`} />
-      <div className="mt-4 flex justify-between">
-        <div className="text-sm font-medium text-gray-500">{title}</div>
-        <button
-          className="inline-flex items-center justify-center rounded-full w-8 h-8 text-gray-600 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          type="button"
-          onClick={() => handleDelete()}
-        >
-          <span className="sr-only">Supprimer</span>
-          <img src={supprimer} alt="supp" />
-        </button>
-      </div>
     </Card>
   ) : null;
 
