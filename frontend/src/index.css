@@ -27,7 +27,7 @@ body,
 }
 
 .btn-orange {
-  @apply bg-orange rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+  @apply bg-gradient-to-br rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
 }
 
 .btn-rounded-purple {

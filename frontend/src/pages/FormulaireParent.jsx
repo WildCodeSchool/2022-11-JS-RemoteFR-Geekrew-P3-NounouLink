@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 import { useUserContext } from "../contexts/UserContext";
 
 import userAPI from "../services/userAPI";
@@ -16,6 +15,7 @@ function FormulaireParent() {
 
   const usersIdusers = userId;
   const navigate = useNavigate();
+
   useEffect(() => {
     if (parentId !== null) {
       userAPI
@@ -29,7 +29,7 @@ function FormulaireParent() {
         .catch((error) => {
           console.error(error);
           toast.error(
-            "Une erreur est survenue lors de la récupération des données de l'enfant."
+            "Une erreur est survenue lors de la récupération des données du parent."
           );
         });
     }
@@ -37,26 +37,47 @@ function FormulaireParent() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (cafNumber && exitPermit && imageRights && usersIdusers)
-      userAPI
-        .post("/api/parents", {
-          cafNumber,
-          exitPermit,
-          imageRights,
-          usersIdusers,
-        })
-        .then((response) => {
-          setParentId(response.data.parentsId);
-          toast.success("Le dossier a été enregistré avec succès !");
-        })
-        .catch((error) => {
-          console.error(error);
-          toast.error(
-            "Une erreur est survenue lors de l'enregistrement du dossier."
-          );
-        });
-    navigate("/formulaireenfant");
+    if (parentId === null) {
+      if (cafNumber && exitPermit && imageRights && usersIdusers)
+        userAPI
+          .post("/api/parents", {
+            cafNumber,
+            exitPermit,
+            imageRights,
+            usersIdusers,
+          })
+          .then((response) => {
+            setParentId(response.data.parentsId);
+            toast.success("Le dossier a été enregistré avec succès !");
+          })
+          .catch((error) => {
+            console.error(error);
+            toast.error(
+              "Une erreur est survenue lors de l'enregistrement du dossier."
+            );
+          });
+    }
+    if (parentId !== null) {
+      if (cafNumber && exitPermit && imageRights && usersIdusers && parentId)
+        userAPI
+          .put(`/api/parents/:${parentId}`, {
+            cafNumber,
+            exitPermit,
+            imageRights,
+            usersIdusers,
+            parentId,
+          })
+          .then(() => {
+            toast.success("Le dossier a été modifié avec succès !");
+          })
+          .catch((error) => {
+            console.error(error);
+            toast.error(
+              "Une erreur est survenue lors de la modification du dossier."
+            );
+          });
+      navigate("/formulaireenfant");
+    }
   };
 
   return (
@@ -76,7 +97,7 @@ function FormulaireParent() {
         >
           <Validation isValid={cafNumber !== ""} />
           <input
-            className="w-4/6 ml-6  p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
+            className="w-4/6 ml-6  text-black p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
             id="cafNumber"
             value={cafNumber}
@@ -87,11 +108,11 @@ function FormulaireParent() {
         </label>
         <label
           htmlFor="exitPermit"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
+          className="flex flex-row text-black mr-2 ml-7 lg:ml-24 lg:mr-4"
         >
           <Validation isValid={exitPermit !== ""} />
           <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
+            className="w-4/6 ml-6 p-3 text-black border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
             id="exitPermit"
             value={exitPermit}
@@ -106,7 +127,7 @@ function FormulaireParent() {
         >
           <Validation isValid={imageRights !== ""} />
           <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
+            className="w-4/6 ml-6 p-3 border-solid border-2 text-black  border-grey-input rounded-lg lg:ml-[6.5rem]"
             type="text"
             id="imageRights"
             value={imageRights}
