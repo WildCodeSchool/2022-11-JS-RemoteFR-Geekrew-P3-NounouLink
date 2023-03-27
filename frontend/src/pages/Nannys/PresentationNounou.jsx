@@ -59,7 +59,7 @@ function PresentationNounou() {
           <div className="flex justify-between">
             <button
               type="button"
-              onClick={() => navigate("/pro-photos")}
+              onClick={() => navigate("/pro-photosannonce")}
               className="text-purple flex items-center"
             >
               <img src={back} alt="chevron retour en arrière" />

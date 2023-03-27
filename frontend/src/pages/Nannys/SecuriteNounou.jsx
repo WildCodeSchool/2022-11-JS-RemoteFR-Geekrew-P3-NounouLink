@@ -9,7 +9,7 @@ import creerAnnonce from "../../assets/pro/heroAnnonce.svg";
 import back from "../../assets/pro/chevron-left.svg";
 
 import NavbarNounou from "../../components/NavbarNounou";
-import SecuriteUpload from "@components/SecuriteUpload";
+import SecuriteUpload from "../../components/SecuriteUpload";
 
 function SecuriteNounou() {
   const { nannyId } = useUserContext();
@@ -22,7 +22,7 @@ function SecuriteNounou() {
   useEffect(() => {
     if (nannyId !== null)
       userAPI.get(`/api/nounous/${nannyId}`).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setHourlyRate(`${response.data.hourly_rate}`);
         setTariffMajor(`${response.data.tariff_major}`);
         setOvertime(`${response.data.overtime}`);

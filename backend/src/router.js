@@ -15,6 +15,7 @@ const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword, createToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
 const fileUpload = require("./middleware/multer");
+const servicesNounousControllers = require("./controllers/servicesNounousControllers");
 
 // the public routes
 router.post(
@@ -83,5 +84,7 @@ router.put("/users/:id", usersControllers.edit);
 router.delete("/users/:id", hashPassword, usersControllers.destroy);
 router.get("/users/email/:email", usersControllers.getEmail);
 router.get("/match", matchControllers.browse);
+router.get("/servicesnounous/:id", servicesNounousControllers.read);
+router.post("/servicesnounous/", servicesNounousControllers.add);
 
 module.exports = router;

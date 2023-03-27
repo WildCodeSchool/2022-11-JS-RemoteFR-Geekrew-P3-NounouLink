@@ -87,7 +87,7 @@ function PhotosNounou() {
           <div className="flex justify-between">
             <button
               type="button"
-              onClick={() => navigate("/pro-modeaccueil")}
+              onClick={() => navigate("/pro-localisation")}
               className="text-purple flex items-center"
             >
               <img src={back} alt="chevron retour en arrière" />

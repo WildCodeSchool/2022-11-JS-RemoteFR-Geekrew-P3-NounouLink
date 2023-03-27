@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+import PropTypes from "prop-types";
 import filePlus from "../assets/formulaire/grayVector.svg";
 import fileGreen from "../assets/formulaire/greenVector.svg";
 import userAPI from "../services/userAPI";
@@ -45,5 +47,9 @@ function SecuriteUpload({ AskedDoc }) {
     </div>
   );
 }
+
+SecuriteUpload.propTypes = {
+  AskedDoc: PropTypes.shape.isRequired,
+};
 
 export default SecuriteUpload;

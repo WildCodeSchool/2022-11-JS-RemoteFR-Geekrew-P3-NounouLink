@@ -41,7 +41,6 @@ class NanniesManager extends AbstractManager {
 
   update(nannies) {
     const sql = [];
-
     const data = Object.keys(nannies)
       .slice(0, -1)
       .map((elem) => {

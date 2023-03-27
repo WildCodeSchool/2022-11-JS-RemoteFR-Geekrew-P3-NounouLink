@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import userAPI from "../../services/userAPI";
+import userAPI from "../../services/userAPI";
 
-// import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/UserContext";
 import arrow from "../../assets/pro/arrowRight.svg";
 import creerAnnonce from "../../assets/pro/heroAnnonce.svg";
 import back from "../../assets/pro/chevron-left.svg";
@@ -121,16 +121,46 @@ function DiplomePlusAccueil() {
   const [exp, setExp] = useState("");
   const [diplome, setDiplome] = useState("");
 
-  // const { nannyId } = useUserContext();
+  const { nannyId } = useUserContext();
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // userAPI.put(`/api/nounous/${nannyId}`).then((res) => res.data);
+    userAPI
+      .put(`/api/nounous/${nannyId}`, {
+        psc1: diplomaList.filter(
+          (psc1) => psc1.value === "psc1" && psc1.pass === true
+        ).length,
+        hygiene: diplomaList.filter(
+          (hygiene) => hygiene.value === "hygiene" && hygiene.pass === true
+        ).length,
+        pedagogy: diplomaList.filter(
+          (pedagogy) => pedagogy.value === "pedagogy" && pedagogy.pass === true
+        ).length,
+        degreeLevel: diplome,
+        experience: exp,
+      })
+      .then((res) => res.data);
 
-    navigate("/pro-horaires");
+    userAPI
+      .put(`/api/nounous/${nannyId}`, {
+        psc1: diplomaList.filter(
+          (psc1) => psc1.value === "psc1" && psc1.pass === true
+        ).length,
+        hygiene: diplomaList.filter(
+          (hygiene) => hygiene.value === "hygiene" && hygiene.pass === true
+        ).length,
+        pedagogy: diplomaList.filter(
+          (pedagogy) => pedagogy.value === "pedagogy" && pedagogy.pass === true
+        ).length,
+        degreeLevel: diplome,
+        experience: exp,
+      })
+      .then((res) => res.data);
+
+    // navigate("/pro-horaires");
   };
 
   const handleToggleDiploma = (diplId, nextPass) => {
@@ -226,8 +256,8 @@ function DiplomePlusAccueil() {
                   <option value="2">2 années</option>
                   <option value="3">3 années</option>
                   <option value="4">4 années</option>
-                  <option value="5-10">5 à 10 années</option>
-                  <option value="10 et plus">10 années et plus</option>
+                  <option value="5">5 à 10 années</option>
+                  <option value="10">10 années et plus</option>
                 </select>
               </label>
             </div>
