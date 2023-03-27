@@ -232,12 +232,12 @@ function DiplomePlusAccueil() {
               </label>
             </div>
           </form>
-          <div>
+          <div className="my-4">
             <h2 className="text-lg font-medium text-black">Accueil</h2>
             <AccueilList accueil={accueilList} onToggle={handleToggleAccueil} />
           </div>
           <div>
-            <h2 className="text-lg font-medium text-black">Accueil</h2>
+            <h2 className="text-lg font-medium text-black">Activités</h2>
             <ActivityList
               activity={activityList}
               onToggle={handleToggleActivity}
@@ -256,7 +256,7 @@ function DiplomePlusAccueil() {
             <button
               type="submit"
               onClick={handleSubmit}
-              className=" flex items-center justify-between gap-2 self-end rounded-full bg-purple text-white font-nunito font-semibold text-base py-2 px-6 max-w-max"
+              className=" flex items-center justify-between gap-2 self-end rounded-full bg-purple text-white font-nunito font-semibold text-base py-2 px-6 max-w-max my-4"
             >
               Suivant
               <img src={arrow} alt="fleche" />
@@ -271,24 +271,16 @@ function DiplomePlusAccueil() {
               className="justify-self-center "
             />
             <h2 className="font-medium text-base">
-              Inspirez vous des annonces Babyplace
+              Valorisez votre expérience et vos services
             </h2>
             <div className="flex flex-row items-center justify-center gap-4">
               <div className="h-10 w-10 bg-grey rounded-full" />
-              <p>
-                Anne Testons
-                <br />
-                Assistante maternelle
-                <br />
-                Membre depuis 2019
-              </p>
             </div>
             <p className="w-5/6 self-center text-justify">
-              Assistante maternelle agrée 2013, je vous propose mes services
-              pour garder votre ou vos enfants à mon domicile, rez de chaussée
-              avec jardin, proche du tram. <br /> Je suis maman de 3 enfants et
-              mamie de 5 petits enfants de 3 mois à 12 ans. J'ai une expérience
-              en garde d'enfants de quelques années .
+              N’hésitez pas à expliquer en détail vos formations et tout votre
+              passé de garde d’enfants. Différenciez-vous par des compétences ou
+              des qualités inédites (blog de nounou, ménage écologique, ou
+              horaires décalés)
             </p>
           </div>
         </div>

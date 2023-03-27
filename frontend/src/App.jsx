@@ -23,6 +23,9 @@ import PhotosNounou from "./pages/Nannys/PhotosNounou";
 import PhotosAnnonceNounou from "./pages/Nannys/PhotosAnnonceNounou";
 import PresentationNounou from "./pages/Nannys/PresentationNounou";
 import DiplomePlusAccueil from "./pages/Nannys/DiplomePlusAccueil";
+import HorairesNounou from "./pages/Nannys/HorairesNounou";
+import TarifNounou from "./pages/Nannys/TarifNounou";
+import SecuriteNounou from "./pages/Nannys/SecuriteNounou";
 
 function App() {
   return (
@@ -56,6 +59,9 @@ function App() {
             />
             <Route path="/pro-presentation" element={<PresentationNounou />} />
             <Route path="/pro-diplome" element={<DiplomePlusAccueil />} />
+            <Route path="/pro-horaires" element={<HorairesNounou />} />
+            <Route path="/pro-tarif" element={<TarifNounou />} />
+            <Route path="/pro-securite" element={<SecuriteNounou />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>
