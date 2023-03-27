@@ -32,7 +32,7 @@ class ParentsManager extends AbstractManager {
         parents.exitPermit,
         parents.imageRights,
         parents.usersIdusers,
-        parents.idparents,
+        parents.parentId,
       ]
     );
   }
