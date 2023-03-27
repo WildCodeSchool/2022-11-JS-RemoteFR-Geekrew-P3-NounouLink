@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import UserAPI from "../services/userAPI";
+import userAPI from "../services/userAPI";
 
 import { useUserContext } from "../contexts/UserContext";
 
@@ -17,19 +17,17 @@ function NannyInfoCard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/nounous/${id}`).then(
-      (res) => setNannyCard([res.data])
-    );
+    userAPI.get(`/api/nounous/${id}`).then((res) => setNannyCard([res.data]));
   }, []);
 
   useEffect(() => {
-    UserAPI.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/servicesNounous/${id}`
-    ).then((res) => setNannyServices(res.data));
+    userAPI
+      .get(`/api/servicesNounous/${id}`)
+      .then((res) => setNannyServices(res.data));
 
-    UserAPI.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/nounous/infos/${id}`
-    ).then((res) => setNannyDetails([res.data]));
+    userAPI
+      .get(`/api/nounous/infos/${id}`)
+      .then((res) => setNannyDetails([res.data]));
   }, []);
 
   const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
@@ -42,14 +40,15 @@ function NannyInfoCard() {
   const total = ((endParent - beginParent) / 1000 / 60 / 60) * hourlyRate;
 
   const handleReservation = () => {
-    UserAPI.post(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`, {
-      parentsIdparents: parentId,
-      parentsUsersIdusers: userId,
-      nanniesIdnannies: id,
-      nanniesUsersIdusers: nannyDetails.map((nanny) => nanny.users_idusers),
-      startdate: matchSearch[2],
-      enddate: matchSearch[3],
-    })
+    userAPI
+      .post(`/api/reservations`, {
+        parentsIdparents: parentId,
+        parentsUsersIdusers: userId,
+        nanniesIdnannies: id,
+        nanniesUsersIdusers: nannyDetails.map((nanny) => nanny.users_idusers),
+        startdate: matchSearch[2],
+        enddate: matchSearch[3],
+      })
       .then((res) => {
         console.warn(res);
       })

@@ -12,7 +12,7 @@ const reservationsControllers = require("./controllers/reservationsControllers")
 const servicesControllers = require("./controllers/servicesControllers");
 const superusersControllers = require("./controllers/superusersControllers");
 const usersControllers = require("./controllers/usersControllers");
-const { hashPassword, verifyPassword, createToken } = require("./auth");
+const { hashPassword, verifyPassword, verifyToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
 const fileUpload = require("./middleware/multer");
 
@@ -22,67 +22,72 @@ router.post(
   usersControllers.getUserByEmailAndPasswordAndNext,
   verifyPassword
 );
-router.post("/users", hashPassword, usersControllers.add, createToken);
-router.post("/parents", parentsControllers.add);
-router.post("/enfants", fileUpload, childrenControllers.add);
-router.post("/nounous", nanniesControllers.add);
-router.post("/superutilisateurs", superusersControllers.add);
+router.post("/users", hashPassword, usersControllers.add);
+router.post("/parents", verifyToken, parentsControllers.add);
+router.post("/enfants", verifyToken, fileUpload, childrenControllers.add);
+router.post("/nounous", verifyToken, nanniesControllers.add);
+router.post("/superutilisateurs", verifyToken, superusersControllers.add);
 
 // then the routes to protect
 
-router.get("/creneaux", slotsControllers.browse);
-router.get("/creneaux/:id", slotsControllers.read);
-router.put("/creneaux/:id", slotsControllers.edit);
-router.post("/creneaux", slotsControllers.add);
-router.delete("/creneaux/:id", slotsControllers.destroy);
+router.get("/creneaux", verifyToken, slotsControllers.browse);
+router.get("/creneaux/:id", verifyToken, slotsControllers.read);
+router.put("/creneaux/:id", verifyToken, slotsControllers.edit);
+router.post("/creneaux", verifyToken, slotsControllers.add);
+router.delete("/creneaux/:id", verifyToken, slotsControllers.destroy);
 
-router.get("/enfants", childrenControllers.browse);
-router.get("/enfants/:id", childrenControllers.read);
-router.put("/enfants/:id", childrenControllers.edit);
-router.delete("/enfants/:id", childrenControllers.destroy);
+router.get("/enfants", verifyToken, childrenControllers.browse);
+router.get("/enfants/:id", verifyToken, childrenControllers.read);
+router.put("/enfants/:id", verifyToken, childrenControllers.edit);
+router.delete("/enfants/:id", verifyToken, childrenControllers.destroy);
 
-router.get("/favoris", favoritesControllers.browse);
-router.get("/favoris/:id", favoritesControllers.read);
-router.put("/favoris/:id", favoritesControllers.edit);
-router.post("/favoris", favoritesControllers.add);
-router.delete("/favoris/:id", favoritesControllers.destroy);
+router.get("/favoris", verifyToken, favoritesControllers.browse);
+router.get("/favoris/:id", verifyToken, favoritesControllers.read);
+router.put("/favoris/:id", verifyToken, favoritesControllers.edit);
+router.post("/favoris", verifyToken, favoritesControllers.add);
+router.delete("/favoris/:id", verifyToken, favoritesControllers.destroy);
 
-router.get("/nounous", nanniesControllers.browse);
-router.get("/nounous/:id", nanniesControllers.read);
-router.put("/nounous/:id", nanniesControllers.edit);
-router.get("/nounous/infos/:id", nanniesControllers.getNannyByIdUser);
+router.get("/nounous", verifyToken, nanniesControllers.browse);
+router.get("/nounous/:id", verifyToken, nanniesControllers.read);
+router.put("/nounous/:id", verifyToken, nanniesControllers.edit);
 
-router.delete("/nounous/:id", nanniesControllers.destroy);
+router.delete("/nounous/:id", verifyToken, nanniesControllers.destroy);
 
-router.get("/parents", parentsControllers.browse);
-router.get("/parents/:id", parentsControllers.read);
-router.put("/parents/:id", parentsControllers.edit);
+router.get("/parents", verifyToken, parentsControllers.browse);
+router.get("/parents/:id", verifyToken, parentsControllers.read);
+router.put("/parents/:id", verifyToken, parentsControllers.edit);
+router.delete("/parents/:id", verifyToken, parentsControllers.destroy);
 
-router.delete("/parents/:id", parentsControllers.destroy);
+router.get("/reservations", verifyToken, reservationsControllers.browse);
+router.get("/reservations/:id", verifyToken, reservationsControllers.read);
+router.put("/reservations/:id", verifyToken, reservationsControllers.edit);
+router.post("/reservations", verifyToken, reservationsControllers.add);
+router.delete(
+  "/reservations/:id",
+  verifyToken,
+  reservationsControllers.destroy
+);
 
-router.get("/reservations", reservationsControllers.browse);
-router.get("/reservations/:id", reservationsControllers.read);
-router.put("/reservations/:id", reservationsControllers.edit);
-router.post("/reservations", reservationsControllers.add);
-router.delete("/reservations/:id", reservationsControllers.destroy);
+router.get("/services", verifyToken, servicesControllers.browse);
+router.get("/services/:id", verifyToken, servicesControllers.read);
+router.put("/services/:id", verifyToken, servicesControllers.edit);
+router.post("/services", verifyToken, servicesControllers.add);
+router.delete("/services/:id", verifyToken, servicesControllers.destroy);
 
-router.get("/services", servicesControllers.browse);
-router.get("/services/:id", servicesControllers.read);
-router.put("/services/:id", servicesControllers.edit);
-router.post("/services", servicesControllers.add);
-router.delete("/services/:id", servicesControllers.destroy);
+router.get("/superutilisateurs", verifyToken, superusersControllers.browse);
+router.get("/superutilisateurs/:id", verifyToken, superusersControllers.read);
+router.put("/superutilisateurs/:id", verifyToken, superusersControllers.edit);
 
-router.get("/superutilisateurs", superusersControllers.browse);
-router.get("/superutilisateurs/:id", superusersControllers.read);
-router.put("/superutilisateurs/:id", superusersControllers.edit);
+router.delete(
+  "/superutilisateurs/:id",
+  verifyToken,
+  superusersControllers.destroy
+);
 
-router.delete("/superutilisateurs/:id", superusersControllers.destroy);
-
-router.get("/users", usersControllers.browse);
-router.get("/users/:id", usersControllers.read);
-router.put("/users/:id", hashPassword, usersControllers.edit);
-router.delete("/users/:id", hashPassword, usersControllers.destroy);
-router.get("/users/email/:email", usersControllers.getEmail);
-router.get("/match", matchControllers.browse);
+router.get("/users", verifyToken, usersControllers.browse);
+router.get("/users/:id", verifyToken, usersControllers.read);
+router.put("/users/:id", verifyToken, usersControllers.edit);
+router.delete("/users/:id", verifyToken, usersControllers.destroy);
+router.get("/match", verifyToken, matchControllers.browse);
 
 module.exports = router;

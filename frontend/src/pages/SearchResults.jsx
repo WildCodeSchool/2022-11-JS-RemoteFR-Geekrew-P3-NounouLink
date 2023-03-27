@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserAPI from "../services/userAPI";
+import userAPI from "../services/userAPI";
 
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
@@ -13,48 +13,44 @@ function SearchResults() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/creneaux`).then(
-      (response) => {
-        const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
-        const beginParent = new Date(matchSearch[2]).toLocaleString("fr-FR", {
-          timeZone: "Europe/Paris",
-        });
-        const endParent = new Date(matchSearch[3]).toLocaleString("fr-FR", {
-          timeZone: "Europe/Paris",
-        });
+    userAPI.get(`/api/creneaux`).then((response) => {
+      const matchSearch = JSON.parse(localStorage.getItem("matchSearch"));
+      const beginParent = new Date(matchSearch[2]).toLocaleString("fr-FR", {
+        timeZone: "Europe/Paris",
+      });
+      const endParent = new Date(matchSearch[3]).toLocaleString("fr-FR", {
+        timeZone: "Europe/Paris",
+      });
 
-        const slots = [];
-        for (let i = 0; i < response.data.length; i += 1) {
-          const beginNanny = new Date(
-            response.data[i].beginning_hour
-          ).toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
+      const slots = [];
+      for (let i = 0; i < response.data.length; i += 1) {
+        const beginNanny = new Date(
+          response.data[i].beginning_hour
+        ).toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
 
-          const endNanny = new Date(response.data[i].end_time).toLocaleString(
-            "fr-FR",
-            { timeZone: "Europe/Paris" }
-          );
+        const endNanny = new Date(response.data[i].end_time).toLocaleString(
+          "fr-FR",
+          { timeZone: "Europe/Paris" }
+        );
 
-          if (beginNanny <= beginParent && endNanny >= endParent) {
-            slots.push(response.data[i].idslots);
-          }
+        if (beginNanny <= beginParent && endNanny >= endParent) {
+          slots.push(response.data[i].idslots);
         }
-
-        setAvailableSlots(slots);
       }
-    );
+
+      setAvailableSlots(slots);
+    });
   }, []);
 
   useEffect(() => {
-    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/match`).then(
-      (response) => {
-        for (let i = 0; i < response.data.length; i += 1) {
-          if (availableSlots.includes(response.data[i].idslots)) {
-            test.push(response.data[i]);
-          }
+    userAPI.get(`/api/match`).then((response) => {
+      for (let i = 0; i < response.data.length; i += 1) {
+        if (availableSlots.includes(response.data[i].idslots)) {
+          test.push(response.data[i]);
         }
-        setInfosNanny(test);
       }
-    );
+      setInfosNanny(test);
+    });
   }, [availableSlots]);
 
   return (

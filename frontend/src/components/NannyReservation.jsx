@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import UserAPI from "../services/userAPI";
+import userAPI from "../services/userAPI";
 
 function NannyReservation() {
   const [reservationCard, setReservationCard] = useState([]);
 
   useEffect(() => {
-    UserAPI.get(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`).then(
-      (res) => setReservationCard(res.data)
-    );
+    userAPI
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`)
+      .then((res) => setReservationCard(res.data));
   }, []);
 
   return (
