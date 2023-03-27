@@ -15,73 +15,39 @@ function Connexion() {
 
   const {
     setUserId,
-
     setParentId,
-
     setNannyId,
-
     setFirstname,
-
     setLastname,
-
     setAdress,
-
     setAggregationNumber,
-
     setCafNumber,
-
     setCarInsurance,
-
     setUserEmail,
-
     setCustodyAdress,
-
     setDateAgrement,
-
     setDegreeLevel,
-
     setDiploma,
-
     setExitPermit,
-
     setExperience,
-
     setHomeInsurance,
-
     setHourlyRate,
-
     setHygiene,
-
     setImageRights,
-
     setKind,
-
     setMealPrice,
-
     setOvertime,
-
     setPedagogy,
-
     setPhone,
-
     setPictures,
-
     setPlacesMax,
-
     setPresentation,
-
     setPriceKilometre,
-
     setProfilPicture,
-
     setProofOfResidence,
-
     setPsc1,
-
     setRanking,
-
     setSecuCertificate,
-
     setTariffMajor,
   } = useUserContext();
 
@@ -152,11 +118,11 @@ function Connexion() {
           setTariffMajor(res.data.tariff_major);
         };
         dataSet();
-
+        if (res.data.kind === "parent") {
+          navigate("/menu");
+        }
         if (res.data.kind === "ass_mat") {
           navigate("/pro");
-        } else {
-          navigate("/formulaireparent");
         }
       } catch (err) {
         console.error(err);
