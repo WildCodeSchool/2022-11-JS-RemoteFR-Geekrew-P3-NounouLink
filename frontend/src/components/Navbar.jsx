@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import Trombone from "../assets/trombone.svg";
 import Loupe from "../assets/Loupe.svg";
 import EnfantAdd from "../assets/enfantAdd.svg";
-import home from "../assets/home.svg";
+import home from "../assets/home-white.svg";
 
 function Navbar() {
   const [blur, setBlur] = useState(false);
@@ -18,7 +18,7 @@ function Navbar() {
   };
 
   return (
-    <div className=" gradient-linear ">
+    <div className=" gradient-linear h-20 ">
       <nav>
         <NavLink
           className="focus:outline-none"
@@ -27,8 +27,8 @@ function Navbar() {
           to="/FormulaireEnfant"
         />
 
-        <div className="mb-8 mt-8">
-          <div className="flex flex-row justify-evenly pb-2 pt-2 ">
+        <div className="mb-8">
+          <div className="flex flex-row items-center justify-evenly  pt-[2rem]">
             <NavLink
               style={getActiveLinkStyle(location.pathname === "/Menu")}
               to="/menu"

@@ -15,6 +15,7 @@ module.exports = {
         "2xl": "1536px",
       },
       colors: {
+        pinkMenu: "#FDE8F5",
         grey: "#4B5D68",
         "dark-blue": "#212353",
         purple: "#7E72F2",
