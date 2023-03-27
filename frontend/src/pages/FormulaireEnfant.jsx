@@ -18,12 +18,21 @@ function FormulaireEnfant() {
   const [allergie, setAllergie] = useState(null);
   const [insurance, setInsurance] = useState([]);
   const [healthbook, setHealthBook] = useState([]);
+  const [dataChildren, setDataChildren] = useState([]);
   const { userId, parentId, childrenId } = useUserContext();
 
   const parentsIdparents = parentId;
   const parentsUsersIdusers = userId;
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    userAPI.get(`/api/enfants`).then((response) => {
+      setDataChildren(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+    });
+  }, []);
 
   useEffect(() => {
     if (childrenId) {
@@ -63,9 +72,7 @@ function FormulaireEnfant() {
       .post(`/api/enfants`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then(() => {
-        navigate("/recherche");
-      })
+
       .catch((error) => {
         console.error(error);
         toast.error(
@@ -74,15 +81,21 @@ function FormulaireEnfant() {
       });
   };
 
+  const handleSearch = (e) => {
+    e.prevent.default();
+    navigate("/recherche");
+  };
+
   return (
     <div className="bg-gray-100 grow ">
       <Navbar />
       <div className="flex flex-row ">
         <img alt="documents" src={image} className=" scale-100 mr-14  " />
+
         <div className="w-11/12">
           {" "}
           <p className="flex justify-center text-2xl font-nunito text-gradient-purple font-semibold py-8   ">
-            Ajouter un enfant
+            Ajouter un enfant :
           </p>
           <form className=" flex flex-col  items-center  ">
             <div className="flex flex-col justify-center text-grey-input gap-7 lg:gap-10 ">
@@ -196,6 +209,29 @@ function FormulaireEnfant() {
               </div>
             </div>
           </form>
+        </div>
+        <div className="flex flex-col w-4/12 mr-10">
+          <h2 className="flex justify-center  text-2xl font-nunito text-gradient-purple font-semibold py-8">
+            Enfants inscrits :
+          </h2>{" "}
+          {dataChildren.map((child) => (
+            <div
+              className="flex justify-center mb-8 text-xl border-solid border-2 border-grey-input rounded-lg text-black"
+              value={child.firstname}
+              key={child.idchildren}
+            >
+              {child.firstname} {child.lastname}
+            </div>
+          ))}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="btn-rounded-purple"
+              onClick={handleSearch}
+            >
+              chercher une nounou
+            </button>
+          </div>
         </div>
       </div>
     </div>
