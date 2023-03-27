@@ -82,7 +82,7 @@ function FormulaireEnfant() {
   };
 
   const handleSearch = (e) => {
-    e.prevent.default();
+    e.preventDefault();
     navigate("/recherche");
   };
 
@@ -90,8 +90,6 @@ function FormulaireEnfant() {
     <div className="bg-gray-100 grow ">
       <Navbar />
       <div className="flex flex-row ">
-        <img alt="documents" src={image} className=" scale-100 mr-14  " />
-
         <div className="w-11/12">
           {" "}
           <p className="flex justify-center text-2xl font-nunito text-gradient-purple font-semibold py-8   ">
@@ -210,7 +208,8 @@ function FormulaireEnfant() {
             </div>
           </form>
         </div>
-        <div className="flex flex-col w-4/12 mr-10">
+        <img alt="documents" src={image} className=" scale-100 mr-14  " />
+        <div className="flex flex-col w-8/12 mr-10">
           <h2 className="flex justify-center  text-2xl font-nunito text-gradient-purple font-semibold py-8">
             Enfants inscrits :
           </h2>{" "}
