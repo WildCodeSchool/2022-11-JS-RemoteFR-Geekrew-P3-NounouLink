@@ -65,9 +65,8 @@ function Connexion() {
     if (!isValidEmail(event.target.value)) {
       setError("Email is invalid");
     } else {
-      toast.success("Content de vous revoir");
+      setEmail(event.target.value);
     }
-    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -168,10 +167,9 @@ function Connexion() {
             onChange={handlePasswordChange}
           />
         </label>
-        <button className="btn-purple" type="button" onClick={handleSubmit}>
+        <button className="btn-gradient" type="button" onClick={handleSubmit}>
           Me connecter
         </button>
-        <p>J'ai oublié mon mot de passe</p>
         <div className="hidden lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-4 lg:mb-8">
           <p>Créer mon compte</p>
           <button type="submit" onClick={handleClick}>

@@ -137,7 +137,7 @@ function FormulaireParent() {
           />
         </label>
 
-        <button className="btn-rounded-purple ml-44 lg:ml-[50%]" type="submit">
+        <button className="btn-rounded-purple mx-auto " type="submit">
           Enregistrer
         </button>
       </form>

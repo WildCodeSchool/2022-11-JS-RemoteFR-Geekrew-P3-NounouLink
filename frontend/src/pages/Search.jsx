@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 import userAPI from "../services/userAPI";
+import chevron from "../assets/chevron-left.svg";
 
 import { useUserContext } from "../contexts/UserContext";
 
@@ -46,21 +47,29 @@ function Search() {
 
   return (
     <div className="gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
+      <NavLink to="/menu">
+        <button type="button" className="flex flex-row">
+          <img src={chevron} alt="chevron" />
+          <p className="flex flex-row">Retour</p>
+        </button>
+      </NavLink>
       <h1 className="font-bold text-3xl col-start-2 lg:col-start-3 col-end-10 row-start-2 lg:row-start-1 lg:row-end-3 justify-self-center lg:self-center">
         Garde d’enfant à la demande <br /> {`Enfant concerné: ${childName}`}
       </h1>
-      <img
-        src={logo}
-        alt="logo NounouLink"
-        className="hidden lg:flex max-md:landscape:scale-50 max-lg:landscape:scale-75 justify-self-center lg:self-start lg:justify-self-start row-start-1 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-span-1  "
-      />
+      <NavLink to="/menu">
+        <img
+          src={logo}
+          alt="logo NounouLink"
+          className="hidden lg:flex max-md:landscape:scale-50 max-lg:landscape:scale-75 justify-self-center lg:self-start lg:justify-self-start row-start-1 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-span-1  "
+        />
+      </NavLink>
       <img
         src={hero}
         alt="hero NounouLink"
         className="hidden lg:flex max-lg:landscape:scale-50 justify-self-center row-start-1 lg:row-start-3 lg:row-end-11 lg:self-end lg:col-start-1 lg:col-span-2"
       />
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center ">
-        <label htmlFor="child">
+        <label className="landscape:mt-5 " htmlFor="child">
           <select onChange={handleChangeName} className="text-black">
             <option value="">---</option>
 
@@ -119,7 +128,7 @@ function Search() {
         </label>
       </form>
       <button
-        className="btn-purple col-start-2 lg:col-start-3 col-end-10 row-start-9 lg:row-start-10 lg:row-end-11 justify-self-center lg:self-end"
+        className="btn-gradient col-start-2 lg:col-start-3 col-end-10 row-start-9 lg:row-start-10 lg:row-end-11 justify-self-center lg:self-end"
         type="button"
         onClick={handleSubmitSearch}
       >

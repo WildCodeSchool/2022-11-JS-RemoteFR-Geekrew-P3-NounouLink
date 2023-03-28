@@ -89,7 +89,7 @@ function FormulaireEnfant() {
   return (
     <div className="bg-gray-100 grow ">
       <Navbar />
-      <div className="flex flex-row ">
+      <div className="flex flex-col md:flex-row ">
         <div className="w-11/12">
           {" "}
           <p className="flex justify-center text-2xl font-nunito text-gradient-purple font-semibold py-8   ">
@@ -208,8 +208,12 @@ function FormulaireEnfant() {
             </div>
           </form>
         </div>
-        <img alt="documents" src={image} className=" scale-100 mr-14  " />
-        <div className="flex flex-col w-8/12 mr-10">
+        <img
+          alt="documents"
+          src={image}
+          className=" hidden lg:block scale-100 mr-14  "
+        />
+        <div className="flex flex-col md:w-8/12 mr-10">
           <h2 className="flex justify-center  text-2xl font-nunito text-gradient-purple font-semibold py-8">
             Enfants inscrits :
           </h2>{" "}
@@ -222,7 +226,7 @@ function FormulaireEnfant() {
               {child.firstname} {child.lastname}
             </div>
           ))}
-          <div className="flex justify-center">
+          <div className="flex md:justify-center mx-auto">
             <button
               type="submit"
               className="btn-rounded-purple"

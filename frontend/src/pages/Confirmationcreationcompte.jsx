@@ -43,7 +43,7 @@ function Confirmationcréationcompte() {
           </p>
         </div>
         <div className="flex justify-center mb-5  ">
-          <button type="button" className="btn-orange" onClick={handleClick}>
+          <button type="button" className="btn-gradient" onClick={handleClick}>
             {"Compléter mon dossier "}
           </button>
         </div>
