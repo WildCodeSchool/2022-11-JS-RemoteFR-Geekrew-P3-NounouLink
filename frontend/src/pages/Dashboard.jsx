@@ -112,10 +112,7 @@ function Dashbord() {
                     src={Gris}
                     alt="rectangle"
                   />
-                  <p>
-                    Bébé 1 <br />
-                    18 mois
-                  </p>
+
                   <NannyReservation />
                   <p>Nombre d'heure : </p>
                   <p>Prix total :</p>

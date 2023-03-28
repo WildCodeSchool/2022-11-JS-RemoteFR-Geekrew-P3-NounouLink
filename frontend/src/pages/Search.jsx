@@ -15,12 +15,18 @@ function Search() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { parentId, adress, setAdress } = useUserContext();
+  const { parentId, adress, setAdress, setChildrenId } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     userAPI.get(`/api/enfants`).then((response) => {
       setDataChildren(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+      setChildrenId(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+      console.log(
         response.data.filter((child) => child.parents_idparents === parentId)
       );
     });
@@ -72,6 +78,9 @@ function Search() {
                 key={child.idchildren}
               >
                 {child.firstname}
+                <span className="hidden">
+                  {setChildrenId(child.idchildren)}
+                </span>
               </option>
             ))}
           </select>

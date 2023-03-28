@@ -1,45 +1,62 @@
 import { useState, useEffect } from "react";
 import userAPI from "../services/userAPI";
+import moment from "moment";
 
 function NannyReservation() {
-  const [reservationCard, setReservationCard] = useState([]);
+  const [reservations, setReservations] = useState([]);
+  const [children, setChildren] = useState([]);
 
   useEffect(() => {
     userAPI
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/reservations`)
-      .then((res) => setReservationCard(res.data));
+      .get(`/api/reservations`)
+      .then((res) => {
+        setReservations(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
+
+  useEffect(() => {
+    userAPI
+      .get(`/api/enfants`)
+      .then((res) => {
+        setChildren(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  const getChildInfo = (childId) => {
+    const child = children.find((e) => e.childrenId === childId);
+    return child
+      ? `${child.firstname} ${child.lastname} (${new Date(
+          child.birthdate
+        ).toLocaleDateString("fr-FR", {
+          timeZone: "Europe/Paris",
+        })})`
+      : "";
+  };
 
   return (
     <div>
-      <p>
-        Ed Cannan <br />
-        Profil 100%
-      </p>
-      {reservationCard.map((reservation, index) => {
-        const formattedReservation = {
-          ...reservation,
-          startdate: new Date(reservation.startdate).toLocaleString("fr-FR", {
-            timeZone: "Europe/Paris",
-          }),
-          enddate: new Date(reservation.enddate).toLocaleString("fr-FR", {
-            timeZone: "Europe/Paris",
-          }),
-        };
+      {reservations.map((reservation, index) => (
+        <div
+          className="flex flex-row justify-"
+          key={reservation.idreservations ?? index}
+        >
+          <p>{getChildInfo(reservation.childrenId)}</p>
+          <p>{reservation.reservationok}</p>
+          <p>
+            Date d'arrivée :{moment(reservation.startdate).format("DD/MM/YYYY")}
+          </p>
 
-        return (
-          <div
-            className="flex flex-row justify-around"
-            key={reservation.id ?? index}
-          >
-            <p>{formattedReservation.reservationok}</p>
-            <p>Date d'arrivée : {formattedReservation.startdate}</p>
-            <p>Date de départ : {formattedReservation.enddate}</p>
-            <p>{formattedReservation.frequence}</p>
-            <p>{formattedReservation.flexibility}</p>
-          </div>
-        );
-      })}
+          <p>
+            Date de départ :{moment(reservation.enddate).format("DD/MM/YYYY")}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
