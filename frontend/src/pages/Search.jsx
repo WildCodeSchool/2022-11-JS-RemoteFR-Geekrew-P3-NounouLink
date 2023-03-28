@@ -26,9 +26,9 @@ function Search() {
       setChildrenId(
         response.data.filter((child) => child.parents_idparents === parentId)
       );
-      console.log(
-        response.data.filter((child) => child.parents_idparents === parentId)
-      );
+      // console.log(
+      //   response.data.filter((child) => child.parents_idparents === parentId)
+      // );
     });
   }, []);
 

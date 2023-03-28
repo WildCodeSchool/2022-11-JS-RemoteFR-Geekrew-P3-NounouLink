@@ -11,17 +11,13 @@ function NannyInfoCard() {
   const [nannyCard, setNannyCard] = useState([]);
   const [nannyServices, setNannyServices] = useState([]);
   const [nannyDetails, setNannyDetails] = useState([]);
-  const [nanniesUserId, setNanniesUserId] = useState([]);
-  const { parentId, userId, nannyId, setNannyId, childrenId } =
-    useUserContext();
+
+  const { parentId, userId } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    userAPI.get(`/api/nounous/${id}`).then((res) => {
-      setNannyId(id);
-      setNanniesUserId(res.data.usersIdusers);
-    });
+    userAPI.get(`/api/nounous/${id}`).then((res) => setNannyCard([res.data]));
   }, []);
 
   useEffect(() => {
@@ -30,7 +26,7 @@ function NannyInfoCard() {
       .then((res) => setNannyServices(res.data));
 
     userAPI
-      .get(`/api/users/${nanniesUserId}`)
+      .get(`/api/nounous/infos/${id}`)
       .then((res) => setNannyDetails([res.data]));
   }, []);
 
@@ -49,9 +45,7 @@ function NannyInfoCard() {
         parentsIdparents: parentId,
         parentsUsersIdusers: userId,
         nanniesIdnannies: id,
-        nanniesUsersIdusers: nanniesUserId,
-        childrenIdchildren: childrenId,
-
+        nanniesUsersIdusers: nannyDetails.map((nanny) => nanny.users_idusers),
         startdate: matchSearch[2],
         enddate: matchSearch[3],
       })
