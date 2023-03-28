@@ -25,6 +25,6 @@ const storage = multer.diskStorage({
 module.exports = multer({ storage }).fields([
   { name: "insurance", maxCount: 1 },
   { name: "healthbook", maxCount: 1 },
-  { name: "profilePicNanny", maxCount: 1 },
+  { name: "profilePicture", maxCount: 1 },
   { name: "pictures", maxCount: 1 },
 ]);

@@ -33,13 +33,13 @@ const edit = (req, res) => {
   let nanniesAll = null;
   const idnannies = parseInt(req.params.id, 10);
 
-  if (!req?.files) {
+  if (!req.files?.pictures) {
     nanniesAll = { ...nannies, idnannies };
-  } else if (!req.files?.pictures && !!req.files.profilePicNanny) {
+  } else if (!req.files.pictures && !!req.files.profilePicture) {
     const profilePicture = req.files.profilePicNanny[0].filename;
     nanniesAll = { ...nannies, profilePicture, idnannies };
-  } else if (!req.files?.profilePicNanny && !!req.files.pictures) {
-    const pictures = req.files?.pictures[0].filename;
+  } else if (!req.files?.profilePicture && !!req.files.pictures) {
+    const pictures = req.files.pictures[0].filename;
     nanniesAll = { ...nannies, pictures, idnannies };
   } else
     nanniesAll = {
