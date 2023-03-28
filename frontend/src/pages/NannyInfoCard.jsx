@@ -44,10 +44,13 @@ function NannyInfoCard() {
       .post(`/api/reservations`, {
         parentsIdparents: parentId,
         parentsUsersIdusers: userId,
-        nanniesIdnannies: id,
-        nanniesUsersIdusers: nannyDetails.map((nanny) => nanny.users_idusers),
+        nanniesIdnannies: nannyCard[0].idnannies,
+        nanniesUsersIdusers: nannyCard[0].users_idusers,
+        reservationok: false,
         startdate: matchSearch[2],
         enddate: matchSearch[3],
+        frequence: null,
+        flexibility: null,
       })
       .then((res) => {
         console.warn(res);
@@ -55,9 +58,9 @@ function NannyInfoCard() {
       .catch((error) => {
         console.error(error);
       });
-    navigate("/confirmationreservation");
+    navigate("/reservation");
   };
-
+  // console.log(nannyCard);
   return (
     <main className="gradient-linear h-full flex flex-col items-center">
       <header className="text-white font-bold font-nunito text-3xl flex justify-center">
