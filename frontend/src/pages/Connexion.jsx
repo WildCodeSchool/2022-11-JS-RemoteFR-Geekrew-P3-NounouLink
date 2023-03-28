@@ -122,7 +122,7 @@ function Connexion() {
           navigate("/menu");
         }
         if (res.data.kind === "ass_mat") {
-          navigate("/");
+          navigate("/pro");
         }
       } catch (err) {
         console.error(err);

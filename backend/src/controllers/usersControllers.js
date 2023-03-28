@@ -32,13 +32,27 @@ const read = (req, res) => {
 const edit = (req, res) => {
   const users = req.body;
 
-  const validateResult = validateUsers(users);
-  if (validateResult) {
-    return res.status(400).send(validateResult);
-  }
-  // TODO validations (length, format...)
   users.idusers = parseInt(req.params.id, 10);
-  return models.users.update(users).then(([result]) => {
+  return models.users
+    .update(users)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const editPhone = (req, res) => {
+  const user = req.body;
+  // TODO validations (length, format...)
+  user.idusers = parseInt(req.params.id, 10);
+  return models.users.updateNannyPhone(user).then(([result]) => {
     if (result.affectedRows === 0) {
       res.sendStatus(404);
     } else {
@@ -129,6 +143,7 @@ module.exports = {
   browse,
   read,
   edit,
+  editPhone,
   add,
   destroy,
   getUserByEmailAndPasswordAndNext,

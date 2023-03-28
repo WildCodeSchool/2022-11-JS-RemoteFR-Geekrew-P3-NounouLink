@@ -15,6 +15,7 @@ const usersControllers = require("./controllers/usersControllers");
 const { hashPassword, verifyPassword, verifyToken } = require("./auth");
 const matchControllers = require("./controllers/matchControllers");
 const fileUpload = require("./middleware/multer");
+const servicesNounousControllers = require("./controllers/servicesNounousControllers");
 
 // the public routes
 router.post(
@@ -49,7 +50,7 @@ router.delete("/favoris/:id", verifyToken, favoritesControllers.destroy);
 
 router.get("/nounous", verifyToken, nanniesControllers.browse);
 router.get("/nounous/:id", verifyToken, nanniesControllers.read);
-router.put("/nounous/:id", verifyToken, nanniesControllers.edit);
+router.put("/nounous/:id", verifyToken, fileUpload, nanniesControllers.edit);
 
 router.delete("/nounous/:id", verifyToken, nanniesControllers.destroy);
 
@@ -89,5 +90,6 @@ router.get("/users/:id", verifyToken, usersControllers.read);
 router.put("/users/:id", verifyToken, usersControllers.edit);
 router.delete("/users/:id", verifyToken, usersControllers.destroy);
 router.get("/match", verifyToken, matchControllers.browse);
-
+router.get("/servicesnounous/:id", servicesNounousControllers.read);
+router.post("/servicesnounous/", servicesNounousControllers.add);
 module.exports = router;

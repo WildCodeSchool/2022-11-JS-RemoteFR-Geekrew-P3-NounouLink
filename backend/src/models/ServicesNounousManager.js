@@ -18,6 +18,13 @@ class ServicesNounousManager extends AbstractManager {
       [id]
     );
   }
+
+  insert(item) {
+    return this.database.query(
+      `insert into ${this.table} (nannies_idnannies, nannies_users_idusers, services_idservices) values (?)`,
+      [item.idnannies, item.idusers, item.services]
+    );
+  }
 }
 
 module.exports = ServicesNounousManager;

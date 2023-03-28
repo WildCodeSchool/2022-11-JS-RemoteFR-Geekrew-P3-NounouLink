@@ -16,6 +16,17 @@ import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
 
+import AccueilProNounou from "./pages/Nannys/AccueilProNounou";
+import ModeAccueilNounou from "./pages/Nannys/ModeAccueilNounou";
+import LocalisationNounou from "./pages/Nannys/LocalisationNounou";
+import PhotosNounou from "./pages/Nannys/PhotosNounou";
+import PhotosAnnonceNounou from "./pages/Nannys/PhotosAnnonceNounou";
+import PresentationNounou from "./pages/Nannys/PresentationNounou";
+import DiplomePlusAccueil from "./pages/Nannys/DiplomePlusAccueil";
+import HorairesNounou from "./pages/Nannys/HorairesNounou";
+import TarifNounou from "./pages/Nannys/TarifNounou";
+import SecuriteNounou from "./pages/Nannys/SecuriteNounou";
+
 function App() {
   return (
     <>
@@ -33,10 +44,24 @@ function App() {
             <Route path="/formulaireparent" element={<FormulaireParent />} />
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
+            <Route path="/resultat/:id" element={<NannyInfoCard />} />
+            <Route path="/reservation" element={<Reservation />} />
 
             <Route path="/menu" element={<Menu />} />
-            <Route path="/reservation" element={<Reservation />} />
-            <Route path="/resultat/:id" element={<NannyInfoCard />} />
+
+            <Route path="/pro" element={<AccueilProNounou />} />
+            <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
+            <Route path="/pro-localisation" element={<LocalisationNounou />} />
+            <Route path="/pro-photos" element={<PhotosNounou />} />
+            <Route
+              path="/pro-photosannonce"
+              element={<PhotosAnnonceNounou />}
+            />
+            <Route path="/pro-presentation" element={<PresentationNounou />} />
+            <Route path="/pro-diplome" element={<DiplomePlusAccueil />} />
+            <Route path="/pro-horaires" element={<HorairesNounou />} />
+            <Route path="/pro-tarif" element={<TarifNounou />} />
+            <Route path="/pro-securite" element={<SecuriteNounou />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>
