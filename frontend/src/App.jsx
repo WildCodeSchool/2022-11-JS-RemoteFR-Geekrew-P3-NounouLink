@@ -40,14 +40,13 @@ function App() {
               path="/confirmation"
               element={<ConfirmationcreationCompte />}
             />
+            <Route path="/menu" element={<Menu />} />
             <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
             <Route path="/formulaireparent" element={<FormulaireParent />} />
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
             <Route path="/resultat/:id" element={<NannyInfoCard />} />
             <Route path="/reservation" element={<Reservation />} />
-
-            <Route path="/menu" element={<Menu />} />
 
             <Route path="/pro" element={<AccueilProNounou />} />
             <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />

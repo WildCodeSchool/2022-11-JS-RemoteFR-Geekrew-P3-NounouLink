@@ -101,7 +101,7 @@ function FormulaireEnfant() {
                 htmlFor="firstname"
                 className=" flex flex-row items-center  "
               >
-                <Validation isValid={firstname !== ""} />
+                <Validation isValid={firstname !== null} />
                 <input
                   className="  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="text"
@@ -113,7 +113,7 @@ function FormulaireEnfant() {
                 />
               </label>
               <label htmlFor="lastname" className="flex flex-row  ">
-                <Validation isValid={lastname !== ""} />
+                <Validation isValid={lastname !== null} />
                 <input
                   className="  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="text"
@@ -125,7 +125,7 @@ function FormulaireEnfant() {
                 />
               </label>
               <label htmlFor="canwalk" className="flex flex-row items-center  ">
-                <Validation isValid={canwalk !== ""} />
+                <Validation isValid={canwalk !== null} />
                 <input
                   className=" p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500 "
                   type="text"
@@ -136,7 +136,7 @@ function FormulaireEnfant() {
                 />
               </label>
               <label htmlFor="allergie" className="flex  w-full items-center ">
-                <Validation isValid={allergie !== ""} />
+                <Validation isValid={allergie !== null} />
                 <input
                   className=" w-full p-3 border-solid border-2 border-grey-input rounded-lg  placeholder-gray-500"
                   type="text"
@@ -194,7 +194,7 @@ function FormulaireEnfant() {
                     onChange={(evt) => setHealthBook(evt.target.files[0])}
                   />
                 </label>
-                <UploadValidation isValidate={insurance !== null} />
+                <UploadValidation isValidate={healthbook !== null} />
               </div>
               <div className="flex justify-center">
                 <button
