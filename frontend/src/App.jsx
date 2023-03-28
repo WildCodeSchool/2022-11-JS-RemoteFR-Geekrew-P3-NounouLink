@@ -11,12 +11,23 @@ import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
 import SearchResults from "./pages/SearchResults";
 
+import Dashboard from "./pages/Dashboard";
+
 import NannyInfoCard from "./pages/NannyInfoCard";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
 
-import Dashbord from "./pages/Dashboard";
+import AccueilProNounou from "./pages/Nannys/AccueilProNounou";
+import ModeAccueilNounou from "./pages/Nannys/ModeAccueilNounou";
+import LocalisationNounou from "./pages/Nannys/LocalisationNounou";
+import PhotosNounou from "./pages/Nannys/PhotosNounou";
+import PhotosAnnonceNounou from "./pages/Nannys/PhotosAnnonceNounou";
+import PresentationNounou from "./pages/Nannys/PresentationNounou";
+import DiplomePlusAccueil from "./pages/Nannys/DiplomePlusAccueil";
+import HorairesNounou from "./pages/Nannys/HorairesNounou";
+import TarifNounou from "./pages/Nannys/TarifNounou";
+import SecuriteNounou from "./pages/Nannys/SecuriteNounou";
 
 function App() {
   return (
@@ -36,8 +47,23 @@ function App() {
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
             <Route path="/resultat/:id" element={<NannyInfoCard />} />
+
             <Route path="/menu" element={<Menu />} />
-            <Route path="/dashboard" element={<Dashbord />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="/pro" element={<AccueilProNounou />} />
+            <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
+            <Route path="/pro-localisation" element={<LocalisationNounou />} />
+            <Route path="/pro-photos" element={<PhotosNounou />} />
+            <Route
+              path="/pro-photosannonce"
+              element={<PhotosAnnonceNounou />}
+            />
+            <Route path="/pro-presentation" element={<PresentationNounou />} />
+            <Route path="/pro-diplome" element={<DiplomePlusAccueil />} />
+            <Route path="/pro-horaires" element={<HorairesNounou />} />
+            <Route path="/pro-tarif" element={<TarifNounou />} />
+            <Route path="/pro-securite" element={<SecuriteNounou />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>
