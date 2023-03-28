@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.svg";
+// import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 import userAPI from "../services/userAPI";
 
@@ -44,16 +44,22 @@ function Search() {
     setChildName(e.target.value);
   };
 
+  // const handleMenu = (e) => {
+  //   e.preventDefault();
+  //   navigate("/Menu");
+  // };
+
   return (
-    <div className="gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
+    <div className=" gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
       <h1 className="font-bold text-3xl col-start-2 lg:col-start-3 col-end-10 row-start-2 lg:row-start-1 lg:row-end-3 justify-self-center lg:self-center">
         Garde d’enfant à la demande <br /> {`Enfant concerné: ${childName}`}
       </h1>
-      <img
+      {/* <img
+        onClick={handleMenu}
         src={logo}
         alt="logo NounouLink"
         className="hidden lg:flex max-md:landscape:scale-50 max-lg:landscape:scale-75 justify-self-center lg:self-start lg:justify-self-start row-start-1 lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-span-1  "
-      />
+      /> */}
       <img
         src={hero}
         alt="hero NounouLink"
