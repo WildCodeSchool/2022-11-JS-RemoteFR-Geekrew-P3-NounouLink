@@ -17,8 +17,10 @@ module.exports = {
       colors: {
         pinkMenu: "#FDE8F5",
         grey: "#4B5D68",
+        "greyish-blue": "#F9F9F9",
         "dark-blue": "#212353",
         purple: "#7E72F2",
+        "purple-pro": "#9C69E2",
         "dark-purple": "#882BFF",
         pink: "#F063A7",
         green: "#2DCD7A",

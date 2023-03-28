@@ -16,4 +16,20 @@ const read = (req, res) => {
     });
 };
 
-module.exports = { read };
+const add = (req, res) => {
+  const item = req.body;
+
+  // TODO validations (length, format...)
+
+  models.item
+    .insert(item)
+    .then(([result]) => {
+      res.location(`/items/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+module.exports = { read, add };
