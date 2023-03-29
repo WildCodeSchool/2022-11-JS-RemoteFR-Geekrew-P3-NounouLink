@@ -10,7 +10,9 @@ import Connexion from "./pages/Connexion";
 import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
 import SearchResults from "./pages/SearchResults";
-import Reservation from "./pages/Reservation";
+
+import Dashboard from "./pages/Dashboard";
+
 import NannyInfoCard from "./pages/NannyInfoCard";
 import { UserContextProvider } from "./contexts/UserContext";
 import Search from "./pages/Search";
@@ -45,9 +47,9 @@ function App() {
             <Route path="/recherche" element={<Search />} />
             <Route path="/resultat" element={<SearchResults />} />
             <Route path="/resultat/:id" element={<NannyInfoCard />} />
-            <Route path="/reservation" element={<Reservation />} />
 
             <Route path="/menu" element={<Menu />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
             <Route path="/pro" element={<AccueilProNounou />} />
             <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
