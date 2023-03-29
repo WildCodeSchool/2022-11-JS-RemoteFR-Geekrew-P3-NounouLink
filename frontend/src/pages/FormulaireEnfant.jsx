@@ -27,14 +27,6 @@ function FormulaireEnfant() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    userAPI.get(`/api/enfants`).then((response) => {
-      setDataChildren(
-        response.data.filter((child) => child.parents_idparents === parentId)
-      );
-    });
-  }, []);
-
-  useEffect(() => {
     if (childrenId) {
       userAPI
         .get(`/api/enfants/${childrenId}`)
@@ -85,6 +77,14 @@ function FormulaireEnfant() {
     e.preventDefault();
     navigate("/recherche");
   };
+
+  useEffect(() => {
+    userAPI.get(`/api/enfants`).then((response) => {
+      setDataChildren(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+    });
+  }, [uploadInsurance]);
 
   return (
     <div className="bg-gray-100 grow ">

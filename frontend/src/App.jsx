@@ -31,25 +31,24 @@ import SecuriteNounou from "./pages/Nannys/SecuriteNounou";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <UserContextProvider>
-          <Routes>
-            <Route path="/" element={<Accueil />} />
-            <Route path="/connexion" element={<Connexion />} />
-            <Route path="/creationcompte" element={<CreationCompte />} />
-            <Route
-              path="/confirmation"
-              element={<ConfirmationcreationCompte />}
-            />
-            <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
-            <Route path="/formulaireparent" element={<FormulaireParent />} />
-            <Route path="/recherche" element={<Search />} />
-            <Route path="/resultat" element={<SearchResults />} />
-            <Route path="/resultat/:id" element={<NannyInfoCard />} />
+    <BrowserRouter>
+      <UserContextProvider>
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/connexion" element={<Connexion />} />
+          <Route path="/creationcompte" element={<CreationCompte />} />
+          <Route
+            path="/confirmation"
+            element={<ConfirmationcreationCompte />}
+          />
+          <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
+          <Route path="/formulaireparent" element={<FormulaireParent />} />
+          <Route path="/recherche" element={<Search />} />
+          <Route path="/resultat" element={<SearchResults />} />
+          <Route path="/resultat/:id" element={<NannyInfoCard />} />
 
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/pro" element={<AccueilProNounou />} />
           <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />

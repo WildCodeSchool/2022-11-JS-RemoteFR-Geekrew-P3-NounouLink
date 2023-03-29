@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
 import { useNavigate, NavLink } from "react-router-dom";
-=======
-import { useNavigate } from "react-router-dom";
-
->>>>>>> dev
 import logo from "../assets/logo.svg";
 import hero from "../assets/hero-lg.svg";
 import userAPI from "../services/userAPI";
@@ -20,7 +15,7 @@ function Search() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { parentId, adress, setAdress, setChildrenId } = useUserContext();
+  const { parentId, adress, setAdress } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +23,6 @@ function Search() {
       setDataChildren(
         response.data.filter((child) => child.parents_idparents === parentId)
       );
-      setChildrenId(
-        response.data.filter((child) => child.parents_idparents === parentId)
-      );
-      // console.log(
-      //   response.data.filter((child) => child.parents_idparents === parentId)
-      // );
     });
   }, []);
 
@@ -83,7 +72,7 @@ function Search() {
         <label className="landscape:mt-5 " htmlFor="child">
           <select
             onChange={handleChangeName}
-            className="text-black rounded-md font-family:nunito"
+            className="text-black rounded-md "
           >
             <option value="">---</option>
 
@@ -94,9 +83,6 @@ function Search() {
                 key={child.idchildren}
               >
                 {child.firstname}
-                <span className="hidden">
-                  {setChildrenId(child.idchildren)}
-                </span>
               </option>
             ))}
           </select>
