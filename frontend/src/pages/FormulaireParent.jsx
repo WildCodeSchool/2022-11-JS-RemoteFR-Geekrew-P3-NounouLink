@@ -29,7 +29,7 @@ function FormulaireParent() {
         .catch((error) => {
           console.error(error);
           toast.error(
-            "Une erreur est survenue lors de la récupération des donnée."
+            "Une erreur est survenue lors de la récupération des données."
           );
         });
     }
@@ -77,7 +77,7 @@ function FormulaireParent() {
           .catch((error) => {
             console.error(error);
             toast.error(
-              `${firstname},une erreur est survenue lors de la modification de votre dossier.`
+              `${firstname}, une erreur est survenue lors de la modification de votre dossier.`
             );
           });
       navigate("/formulaireenfant");
