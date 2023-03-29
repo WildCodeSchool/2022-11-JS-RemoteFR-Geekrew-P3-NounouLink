@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import Validation from "../components/Validation";
 
 function FormulaireParent() {
-  const { userId, setParentId, parentId } = useUserContext();
+  const { userId, setParentId, parentId, firstname } = useUserContext();
   const [cafNumber, setCafNumber] = useState("");
   const [exitPermit, setExitPermit] = useState("");
   const [imageRights, setImageRights] = useState("");
@@ -29,7 +29,7 @@ function FormulaireParent() {
         .catch((error) => {
           console.error(error);
           toast.error(
-            "Une erreur est survenue lors de la récupération des données du parent."
+            "Une erreur est survenue lors de la récupération des données."
           );
         });
     }
@@ -48,7 +48,9 @@ function FormulaireParent() {
           })
           .then((response) => {
             setParentId(response.data.parentsId);
-            toast.success("Le dossier a été enregistré avec succès !");
+            toast.success(
+              `${firstname}, votre dossier a été enregistré avec succès !`
+            );
           })
           .catch((error) => {
             console.error(error);
@@ -68,12 +70,14 @@ function FormulaireParent() {
             parentId,
           })
           .then(() => {
-            toast.success("Le dossier a été modifié avec succès !");
+            toast.success(
+              `${firstname}, votre dossier a été modifié avec succès !`
+            );
           })
           .catch((error) => {
             console.error(error);
             toast.error(
-              "Une erreur est survenue lors de la modification du dossier."
+              `${firstname}, une erreur est survenue lors de la modification de votre dossier.`
             );
           });
       navigate("/formulaireenfant");
@@ -137,7 +141,7 @@ function FormulaireParent() {
           />
         </label>
 
-        <button className="btn-rounded-purple ml-44 lg:ml-[50%]" type="submit">
+        <button className="btn-rounded-purple mx-auto " type="submit">
           Enregistrer
         </button>
       </form>
