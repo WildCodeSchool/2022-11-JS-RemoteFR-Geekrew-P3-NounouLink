@@ -68,7 +68,7 @@ function DiplomePlusAccueil() {
     },
     {
       id: 6,
-      value: "hygiène",
+      value: "hygiene",
       label: "Je fournis les produits d’hyiène (changes et couches)",
       pass: false,
     },
@@ -121,9 +121,74 @@ function DiplomePlusAccueil() {
   const [exp, setExp] = useState("");
   const [diplome, setDiplome] = useState("");
 
-  const { nannyId } = useUserContext();
+  const { nannyId, userId } = useUserContext();
 
   const navigate = useNavigate();
+
+  const handleToggleDiploma = (diplId, nextPass) => {
+    setDiplomaList(
+      diplomaList.map((dipl) => {
+        if (dipl.id === diplId) {
+          return { ...dipl, pass: nextPass };
+        }
+        return dipl;
+      })
+    );
+  };
+
+  const handleToggleAccueil = (accId, nextPass) => {
+    setAccueilList(
+      accueilList.map((acc) => {
+        if (acc.id === accId) {
+          return {
+            ...acc,
+            idnannies: nannyId,
+            idusers: userId,
+            pass: nextPass,
+          };
+        }
+        return acc;
+      })
+    );
+  };
+
+  const handleToggleActivity = (actId, nextPass) => {
+    setActivityList(
+      activityList.map((act) => {
+        if (act.id === actId) {
+          return {
+            ...act,
+            idnannies: nannyId,
+            idusers: userId,
+            pass: nextPass,
+          };
+        }
+        return act;
+      })
+    );
+  };
+
+  const acc = accueilList
+    .filter((x) => x.pass === true)
+    .map((s) => [
+      {
+        idnannies: parseInt(nannyId, 10),
+        idusers: parseInt(userId, 10),
+        idservices: parseInt(s.id, 10),
+      },
+    ])
+    .flat(1);
+
+  const act = activityList
+    .filter((x) => x.pass === true)
+    .map((s) => [
+      {
+        idnannies: parseInt(nannyId, 10),
+        idusers: parseInt(userId, 10),
+        idservices: parseInt(s.id, 10),
+      },
+    ])
+    .flat(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -160,48 +225,16 @@ function DiplomePlusAccueil() {
       })
       .then((res) => res.data);
 
-    // navigate("/pro-horaires");
-  };
+    userAPI.post(`api/servicesnounous`, acc).then((res) => res.data);
 
-  const handleToggleDiploma = (diplId, nextPass) => {
-    setDiplomaList(
-      diplomaList.map((dipl) => {
-        if (dipl.id === diplId) {
-          // Create a *new* object with changes
-          return { ...dipl, pass: nextPass };
-        }
-        return dipl;
-      })
-    );
-  };
+    userAPI.post(`api/servicesnounous/`, act).then((res) => res.data);
 
-  const handleToggleAccueil = (accId, nextPass) => {
-    setAccueilList(
-      accueilList.map((acc) => {
-        if (acc.id === accId) {
-          // Create a *new* object with changes
-          return { ...acc, pass: nextPass };
-        }
-        return acc;
-      })
-    );
-  };
-
-  const handleToggleActivity = (actId, nextPass) => {
-    setActivityList(
-      activityList.map((act) => {
-        if (act.id === actId) {
-          // Create a *new* object with changes
-          return { ...act, pass: nextPass };
-        }
-        return act;
-      })
-    );
+    navigate("/pro-horaires");
   };
 
   return (
     <div className="font-red-hat flex flex-col w-full grow">
-      <NavbarNounou progress="55%" link="Diplôme et Services" />
+      <NavbarNounou progress="w-9/12" link="Diplôme et Services" />
       <div className="flex flex-row w-full h-full m-auto p-auto">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">

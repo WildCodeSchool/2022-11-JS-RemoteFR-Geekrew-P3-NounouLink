@@ -37,7 +37,7 @@ function PhotosAnnonceNounou() {
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="30%" link="Photos" />
+      <NavbarNounou progress="w-7/12" link="Photos" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">
