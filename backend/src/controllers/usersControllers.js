@@ -32,11 +32,6 @@ const read = (req, res) => {
 const edit = (req, res) => {
   const users = req.body;
 
-  // const validateResult = validateUsers(users);
-  // if (validateResult) {
-  //   return res.status(400).send(validateResult);
-  // }
-  // TODO validations (length, format...)
   users.idusers = parseInt(req.params.id, 10);
   return models.users
     .update(users)
