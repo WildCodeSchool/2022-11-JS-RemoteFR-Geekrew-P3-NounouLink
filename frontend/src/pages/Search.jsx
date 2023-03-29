@@ -54,7 +54,7 @@ function Search() {
         </button>
       </NavLink>
       <h1 className="font-bold text-3xl col-start-2 lg:col-start-3 col-end-10 row-start-2 lg:row-start-1 lg:row-end-3 justify-self-center lg:self-center">
-        Garde d’enfant à la demande <br /> {`Enfant concerné: ${childName}`}
+        Garde d’enfant à la demande. <br /> {`Enfant concerné: ${childName}`}
       </h1>
       <NavLink to="/menu">
         <img
@@ -66,11 +66,14 @@ function Search() {
       <img
         src={hero}
         alt="hero NounouLink"
-        className="hidden lg:flex max-lg:landscape:scale-50 justify-self-center row-start-1 lg:row-start-3 lg:row-end-11 lg:self-end lg:col-start-1 lg:col-span-2"
+        className="hidden lg:flex max-lg:landscape:scale-50 justify-self-center row-start-1  scale-75 lg:row-start-3 lg:row-end-11 lg:self-end lg:col-start-1 lg:col-span-2"
       />
       <form className=" col-start-2 col-end-10 row-start-3 row-end-9 lg:col-start-3 flex flex-col h-full lg:self-center justify-evenly justify-self-center ">
         <label className="landscape:mt-5 " htmlFor="child">
-          <select onChange={handleChangeName} className="text-black">
+          <select
+            onChange={handleChangeName}
+            className="text-black rounded-md font-family:nunito"
+          >
             <option value="">---</option>
 
             {dataChildren.map((child) => (

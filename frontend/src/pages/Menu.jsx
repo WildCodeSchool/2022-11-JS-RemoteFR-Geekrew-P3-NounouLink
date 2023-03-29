@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import Trombone from "../assets/trombone.svg";
 import Loupe from "../assets/Loupe.svg";
 import EnfantAdd from "../assets/enfantAdd.svg";
@@ -8,10 +8,6 @@ import ImageDeco from "../assets/ImageDeco.svg";
 import logo from "../assets/logo.svg";
 
 function Menu() {
-  useEffect(() => {
-    toast.success("Content de vous revoir !");
-  }, []);
-
   return (
     <div className="flex flex-row ">
       <div className=" hidden md:block md:w-1/2 md:bg-gray-100 ">
@@ -22,7 +18,7 @@ function Menu() {
           gratuitement en quelques clics.{" "}
         </p>
       </div>
-      <div className="w-full grow h-screen gradient-linear flex flex-col md:h-screen md:w-1/2 ">
+      <div className="w-full grow h-screen gradient-linear flex flex-col max-lg:landscape:h-full  md:h-screen md:w-1/2 ">
         <div className=" flex flex-col h-full items-center mt-20 ">
           <img
             src={logo}

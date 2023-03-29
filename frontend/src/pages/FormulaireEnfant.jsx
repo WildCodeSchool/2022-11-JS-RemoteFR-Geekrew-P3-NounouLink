@@ -198,7 +198,7 @@ function FormulaireEnfant() {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="btn-rounded-purple"
+                  className="btn-rounded-purple mb-5"
                   type="submit"
                   onClick={uploadInsurance}
                 >

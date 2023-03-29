@@ -29,43 +29,38 @@ import SecuriteNounou from "./pages/Nannys/SecuriteNounou";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <UserContextProvider>
-          <Routes>
-            <Route path="/" element={<Accueil />} />
-            <Route path="/connexion" element={<Connexion />} />
-            <Route path="/creationcompte" element={<CreationCompte />} />
-            <Route
-              path="/confirmation"
-              element={<ConfirmationcreationCompte />}
-            />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
-            <Route path="/formulaireparent" element={<FormulaireParent />} />
-            <Route path="/recherche" element={<Search />} />
-            <Route path="/resultat" element={<SearchResults />} />
-            <Route path="/resultat/:id" element={<NannyInfoCard />} />
-            <Route path="/reservation" element={<Reservation />} />
+    <BrowserRouter>
+      <UserContextProvider>
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/connexion" element={<Connexion />} />
+          <Route path="/creationcompte" element={<CreationCompte />} />
+          <Route
+            path="/confirmation"
+            element={<ConfirmationcreationCompte />}
+          />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/formulaireenfant" element={<FormulaireEnfant />} />
+          <Route path="/formulaireparent" element={<FormulaireParent />} />
+          <Route path="/recherche" element={<Search />} />
+          <Route path="/resultat" element={<SearchResults />} />
+          <Route path="/resultat/:id" element={<NannyInfoCard />} />
+          <Route path="/reservation" element={<Reservation />} />
 
-            <Route path="/pro" element={<AccueilProNounou />} />
-            <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
-            <Route path="/pro-localisation" element={<LocalisationNounou />} />
-            <Route path="/pro-photos" element={<PhotosNounou />} />
-            <Route
-              path="/pro-photosannonce"
-              element={<PhotosAnnonceNounou />}
-            />
-            <Route path="/pro-presentation" element={<PresentationNounou />} />
-            <Route path="/pro-diplome" element={<DiplomePlusAccueil />} />
-            <Route path="/pro-horaires" element={<HorairesNounou />} />
-            <Route path="/pro-tarif" element={<TarifNounou />} />
-            <Route path="/pro-securite" element={<SecuriteNounou />} />
-          </Routes>
-        </UserContextProvider>
-      </BrowserRouter>
-      <ToastContainer />
-    </>
+          <Route path="/pro" element={<AccueilProNounou />} />
+          <Route path="/pro-modeaccueil" element={<ModeAccueilNounou />} />
+          <Route path="/pro-localisation" element={<LocalisationNounou />} />
+          <Route path="/pro-photos" element={<PhotosNounou />} />
+          <Route path="/pro-photosannonce" element={<PhotosAnnonceNounou />} />
+          <Route path="/pro-presentation" element={<PresentationNounou />} />
+          <Route path="/pro-diplome" element={<DiplomePlusAccueil />} />
+          <Route path="/pro-horaires" element={<HorairesNounou />} />
+          <Route path="/pro-tarif" element={<TarifNounou />} />
+          <Route path="/pro-securite" element={<SecuriteNounou />} />
+        </Routes>
+        <ToastContainer />
+      </UserContextProvider>
+    </BrowserRouter>
   );
 }
 
