@@ -32,22 +32,25 @@ const edit = (req, res) => {
   const nannies = req.body;
   let nanniesAll = null;
   const idnannies = parseInt(req.params.id, 10);
-
-  if (!req.files?.pictures) {
+  if (!req.files?.pictures && !req.files?.profilePicture) {
     nanniesAll = { ...nannies, idnannies };
-  } else if (!req.files.pictures && !!req.files.profilePicture) {
-    const profilePicture = req.files.profilePicNanny[0].filename;
+  } else if (!req.files.pictures && req.files.profilePicture) {
+    const profilePicture = req.files.profilePicture[0].filename;
     nanniesAll = { ...nannies, profilePicture, idnannies };
-  } else if (!req.files?.profilePicture && !!req.files.pictures) {
+  } else if (!req.files?.profilePicture && req.files.pictures) {
     const pictures = req.files.pictures[0].filename;
     nanniesAll = { ...nannies, pictures, idnannies };
-  } else
+  } else if (req.files?.id) {
     nanniesAll = {
-      ...nannies,
-      profilePicture: req.files.profilePicNanny[0].filename,
-      pictures: req.files.pictures[0].filename,
-      idnannies,
+      nannies,
+      id: req.files.id[0].filename,
+      secuCertificate: req.files.profilePicture[0].filename,
+      proofOfResidence: req.files.proofOfResidence[0].filename,
+      diploma: req.files.diploma[0].filename,
+      homeInsurance: req.files.homeInsurance[0].filename,
+      carInsurance: req.files.carInsurance[0].filename,
     };
+  }
 
   // TODO validations (length, format...)
 

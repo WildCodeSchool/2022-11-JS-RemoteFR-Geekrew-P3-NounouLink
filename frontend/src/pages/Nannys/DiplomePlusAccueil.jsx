@@ -172,8 +172,8 @@ function DiplomePlusAccueil() {
     .filter((x) => x.pass === true)
     .map((s) => [
       {
-        idnannies: nannyId,
-        idusers: userId,
+        idnannies: parseInt(nannyId, 10),
+        idusers: parseInt(userId, 10),
         idservices: parseInt(s.id, 10),
       },
     ])
@@ -183,8 +183,8 @@ function DiplomePlusAccueil() {
     .filter((x) => x.pass === true)
     .map((s) => [
       {
-        idnannies: nannyId,
-        idusers: userId,
+        idnannies: parseInt(nannyId, 10),
+        idusers: parseInt(userId, 10),
         idservices: parseInt(s.id, 10),
       },
     ])
@@ -225,13 +225,16 @@ function DiplomePlusAccueil() {
       })
       .then((res) => res.data);
 
-    userAPI.post(`api/servicesnounous`, acc[0]).then((res) => res.data);
-    userAPI.put(`api/servicesnounous/${nannyId}`, act).then((res) => res.data);
+    userAPI.post(`api/servicesnounous`, acc).then((res) => res.data);
+
+    userAPI.post(`api/servicesnounous/`, act).then((res) => res.data);
+
+    navigate("/pro-horaires");
   };
 
   return (
     <div className="font-red-hat flex flex-col w-full grow">
-      <NavbarNounou progress="55%" link="Diplôme et Services" />
+      <NavbarNounou progress="w-9/12" link="Diplôme et Services" />
       <div className="flex flex-row w-full h-full m-auto p-auto">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">

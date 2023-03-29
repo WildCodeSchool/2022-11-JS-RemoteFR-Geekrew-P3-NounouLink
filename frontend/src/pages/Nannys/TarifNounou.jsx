@@ -35,12 +35,12 @@ function TarifNounou() {
       tariffMajor,
       overtime,
     });
-    navigate("/pro-localisation");
+    navigate("/pro-securite");
   };
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="80%" link="Tarif" />
+      <NavbarNounou progress="w-11/12" link="Tarif" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">
@@ -60,7 +60,7 @@ function TarifNounou() {
               Tarif horaire:
               <input
                 type="text"
-                value={`${hourlyRate}€`}
+                value={hourlyRate}
                 onChange={(e) => setHourlyRate(e.target.value)}
                 name="tarif horaire"
                 className="rounded-xl p-2 max-w-max ring ring-grey-input my-2"
@@ -73,7 +73,7 @@ function TarifNounou() {
               Heures spécifiques (horaire 22h-6h, dimanche,jour férié)
               <input
                 type="text"
-                value={`${tariffMajor}€`}
+                value={tariffMajor}
                 onChange={(e) => setTariffMajor(e.target.value)}
                 name="heures spécifiques"
                 className="rounded-xl p-2 max-w-max ring ring-grey-input my-2"
@@ -86,7 +86,7 @@ function TarifNounou() {
               Heures complémentaires majorées (au delà de 45h/semaine)
               <input
                 type="text"
-                value={`${overtime}€`}
+                value={overtime}
                 onChange={(e) => setOvertime(e.target.value)}
                 name="heures majorées"
                 className="rounded-xl p-2 max-w-max ring ring-grey-input my-2"

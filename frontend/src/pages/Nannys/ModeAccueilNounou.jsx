@@ -36,7 +36,7 @@ function ModeAccueilNounou() {
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="0%" link={"Mode d'accueil"} />
+      <NavbarNounou progress="w-2/12" link={"Mode d'accueil"} />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit">
           <h3 className="text-black font-medium text-lg px-8">

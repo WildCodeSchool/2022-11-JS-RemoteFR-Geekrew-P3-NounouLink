@@ -141,7 +141,6 @@ CREATE TABLE `nannies_has_services` (
   `nannies_idnannies` int NOT NULL,
   `nannies_users_idusers` int NOT NULL,
   `services_idservices` int NOT NULL,
-  PRIMARY KEY (`nannies_idnannies`,`nannies_users_idusers`,`services_idservices`),
   KEY `fk_nannies_has_services_services1_idx` (`services_idservices`),
   KEY `fk_nannies_has_services_nannies1_idx` (`nannies_idnannies`,`nannies_users_idusers`),
   CONSTRAINT `fk_nannies_has_services_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`),

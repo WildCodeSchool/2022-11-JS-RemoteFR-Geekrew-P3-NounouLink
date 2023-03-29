@@ -30,10 +30,12 @@ const read = (req, res) => {
 const add = (req, res) => {
   const item = req.body;
 
+  item.map((i) => Object.values(i));
+
   // TODO validations (length, format...)
 
   models.servicesNounous
-    .insert(item)
+    .insert([item.map((i) => Object.values(i))])
     .then(([result]) => {
       res.location(`/servicesnounous/${result.insertId}`).sendStatus(201);
     })

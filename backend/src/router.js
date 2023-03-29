@@ -93,6 +93,5 @@ router.get("/match", verifyToken, matchControllers.browse);
 router.get("/servicesnounous/:id", servicesNounousControllers.read);
 router.get("/servicesnounous/", servicesNounousControllers.browse);
 router.post("/servicesnounous/", servicesNounousControllers.add);
-router.put("/servicesnounous/:id", servicesNounousControllers.edit);
 
 module.exports = router;
