@@ -49,11 +49,13 @@ function NannyReservation() {
           <p>{getChildInfo(reservation.childrenId)}</p>
           <p>{reservation.reservationok}</p>
           <p>
-            Date d'arrivée :{moment(reservation.startdate).format("DD/MM/YYYY")}
+            Date d'arrivée :
+            {moment(reservation.startdate).format("DD/MM/YYYY HH:mm:ss")}
           </p>
 
           <p>
-            Date de départ :{moment(reservation.enddate).format("DD/MM/YYYY")}
+            Date de départ :
+            {moment(reservation.enddate).format("DD/MM/YYYY HH:mm:ss")}
           </p>
         </div>
       ))}
