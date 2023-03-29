@@ -12,7 +12,7 @@ function NannyInfoCard() {
   const [nannyServices, setNannyServices] = useState([]);
   const [nannyDetails, setNannyDetails] = useState([]);
 
-  const { parentId, userId } = useUserContext();
+  const { parentId, userId, childrenId } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -51,14 +51,18 @@ function NannyInfoCard() {
         enddate: matchSearch[3],
         frequence: null,
         flexibility: null,
+        childrenIdchildren: childrenId,
+        childrenParentsIdparents: parentId,
+        childrenParentsUsersIdusers: userId,
       })
       .then((res) => {
+        // console.log(res.data);
         console.warn(res);
       })
       .catch((error) => {
         console.error(error);
       });
-    navigate("/reservation");
+    navigate("/confirmationReservation");
   };
   // console.log(nannyCard);
   return (
