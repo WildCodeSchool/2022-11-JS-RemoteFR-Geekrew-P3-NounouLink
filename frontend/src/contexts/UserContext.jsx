@@ -30,7 +30,7 @@ export function UserContextProvider({ children }) {
   const [phone, setPhone] = useState(null);
   const [pictures, setPictures] = useState(null);
   const [placesMax, setPlacesMax] = useState(null);
-  const [presentation, setPresentation] = useState(null);
+  const [presentation, setPresentation] = useState("");
   const [priceKilometre, setPriceKilometre] = useState(null);
   const [profilPicture, setProfilPicture] = useState(null);
   const [proofOfResidence, setProofOfResidence] = useState(null);

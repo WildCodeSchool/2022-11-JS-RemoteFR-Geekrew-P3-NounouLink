@@ -28,7 +28,7 @@ function ModeAccueilNounou() {
     userAPI.put(`/api/users/${userId}`, { phone });
     if (!nannyId) {
       userAPI
-        .post(`api/nounous`, { userId })
+        .post(`api/nounous`, { userId, adName: lastname })
         .then((res) => setNannyId(res.data.nannyId));
     }
     navigate("/pro-localisation");

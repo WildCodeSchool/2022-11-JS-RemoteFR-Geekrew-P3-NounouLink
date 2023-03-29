@@ -22,7 +22,14 @@ function DiplomaList({ diplomas, onToggle }) {
 }
 
 DiplomaList.propTypes = {
-  diplomas: PropTypes.shape.isRequired,
+  diplomas: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      pass: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
   onToggle: PropTypes.func.isRequired,
 };
 
