@@ -7,7 +7,8 @@ class ReservationsManager extends AbstractManager {
 
   insert(reservations) {
     return this.database.query(
-      `insert into ${this.table} (parents_idparents,parents_users_idusers,nannies_idnannies,nannies_users_idusers,reservationok,startdate,enddate,frequence,flexibility) values (?,?,?,?,?,?,?,?,?)`,
+      `insert into ${this.table} (parents_idparents,parents_users_idusers,nannies_idnannies,nannies_users_idusers,reservationok,startdate,enddate,children_idchildren,children_parents_idparents,
+  children_parents_users_idusers) values (?,?,?,?,?,?,?,?,?,?)`,
       [
         reservations.parentsIdparents,
         reservations.parentsUsersIdusers,
@@ -16,8 +17,9 @@ class ReservationsManager extends AbstractManager {
         reservations.reservationok,
         reservations.startdate,
         reservations.enddate,
-        reservations.frequence,
-        reservations.flexibility,
+        reservations.childrenIdchildren,
+        reservations.childrenParentsIdparents,
+        reservations.childrenParentsUsersIdusers,
       ]
     );
   }
@@ -31,8 +33,7 @@ class ReservationsManager extends AbstractManager {
        reservationok = ?,
        startdate = ?,
        enddate = ?,
-       frequence = ?,
-       flexibility = ?
+       children_idchildren = ?
        where idreservations = ?`,
       [
         reservations.parentsIdparents,
@@ -42,8 +43,7 @@ class ReservationsManager extends AbstractManager {
         reservations.reservationok,
         reservations.startdate,
         reservations.enddate,
-        reservations.frequence,
-        reservations.flexibility,
+        reservations.childrenIdchildren,
         reservations.idreservations,
       ]
     );
