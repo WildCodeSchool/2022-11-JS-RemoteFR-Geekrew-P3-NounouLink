@@ -21,7 +21,6 @@ function TarifNounou() {
   useEffect(() => {
     if (nannyId !== null)
       userAPI.get(`/api/nounous/${nannyId}`).then((response) => {
-        // console.log(response.data);
         setHourlyRate(`${response.data.hourly_rate}`);
         setTariffMajor(`${response.data.tariff_major}`);
         setOvertime(`${response.data.overtime}`);
