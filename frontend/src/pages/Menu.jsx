@@ -56,7 +56,7 @@ function Menu() {
                 src={Loupe}
                 className=" scale-150 mr-20 "
               />
-              <NavLink to="/reservation">mes resas</NavLink>
+              <NavLink to="/reservation">Reservations</NavLink>
             </nav>
           </div>
         </div>
