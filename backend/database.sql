@@ -151,26 +151,28 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8mb4;
 
+LOCK TABLES `services` WRITE;
+/*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (1,'sortie'),(2,'jardin'),(3,'repas'),(4,'animaux'),(5,'non_fumeur'),(6,'hygiene'),(7,'promenade'),(8,'eveil'),(9,'musique'),(10,'art'),(11,'langue'),(12,'bibliotheque'),(13,'transport');
+/*!40000 ALTER TABLE `services` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- -----------------------------------------------------
 -- Table `baby_db`.`nannies_has_services`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baby_db`.`nannies_has_services` (
-  `nannies_idnannies` INT NOT NULL,
-  `nannies_users_idusers` INT NOT NULL,
-  `services_idservices` INT NOT NULL,
-  PRIMARY KEY (`nannies_idnannies`, `nannies_users_idusers`, `services_idservices`),
-  INDEX `fk_nannies_has_services_services1_idx` (`services_idservices` ASC) VISIBLE,
-  INDEX `fk_nannies_has_services_nannies1_idx` (`nannies_idnannies` ASC, `nannies_users_idusers` ASC) VISIBLE,
-  CONSTRAINT `fk_nannies_has_services_nannies1`
-    FOREIGN KEY (`nannies_idnannies` , `nannies_users_idusers`)
-    REFERENCES `baby_db`.`nannies` (`idnannies` , `users_idusers`),
-  CONSTRAINT `fk_nannies_has_services_services1`
-    FOREIGN KEY (`services_idservices`)
-    REFERENCES `baby_db`.`services` (`idservices`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
+DROP TABLE IF EXISTS `nannies_has_services`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `nannies_has_services` (
+  `nannies_idnannies` int NOT NULL,
+  `nannies_users_idusers` int NOT NULL,
+  `services_idservices` int NOT NULL,
+  KEY `fk_nannies_has_services_services1_idx` (`services_idservices`),
+  KEY `fk_nannies_has_services_nannies1_idx` (`nannies_idnannies`,`nannies_users_idusers`),
+  CONSTRAINT `fk_nannies_has_services_nannies1` FOREIGN KEY (`nannies_idnannies`, `nannies_users_idusers`) REFERENCES `nannies` (`idnannies`, `users_idusers`),
+  CONSTRAINT `fk_nannies_has_services_services1` FOREIGN KEY (`services_idservices`) REFERENCES `services` (`idservices`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 -- -----------------------------------------------------
 -- Table `baby_db`.`reservations`

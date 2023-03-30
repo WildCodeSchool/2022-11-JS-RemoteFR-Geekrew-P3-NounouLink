@@ -59,7 +59,7 @@ function HorairesNounou() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    navigate("/pro-tarifs");
+    navigate("/pro-tarif");
   };
 
   const handleToggleDay = (dayId, nextPass) => {
@@ -76,7 +76,7 @@ function HorairesNounou() {
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="45%" link="Présentation" />
+      <NavbarNounou progress="w-10/12" link="Horaires" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">

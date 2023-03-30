@@ -27,14 +27,6 @@ function FormulaireEnfant() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    userAPI.get(`/api/enfants`).then((response) => {
-      setDataChildren(
-        response.data.filter((child) => child.parents_idparents === parentId)
-      );
-    });
-  }, []);
-
-  useEffect(() => {
     if (childrenId) {
       userAPI
         .get(`/api/enfants/${childrenId}`)
@@ -86,10 +78,18 @@ function FormulaireEnfant() {
     navigate("/recherche");
   };
 
+  useEffect(() => {
+    userAPI.get(`/api/enfants`).then((response) => {
+      setDataChildren(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+    });
+  }, [uploadInsurance]);
+
   return (
     <div className="bg-gray-100 grow ">
       <Navbar />
-      <div className="flex flex-row ">
+      <div className="flex flex-col md:flex-row ">
         <div className="w-11/12">
           {" "}
           <p className="flex justify-center text-2xl font-nunito text-gradient-purple font-semibold py-8   ">
@@ -101,7 +101,7 @@ function FormulaireEnfant() {
                 htmlFor="firstname"
                 className=" flex flex-row items-center  "
               >
-                <Validation isValid={firstname !== ""} />
+                <Validation isValid={firstname !== null} />
                 <input
                   className="  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="text"
@@ -113,7 +113,7 @@ function FormulaireEnfant() {
                 />
               </label>
               <label htmlFor="lastname" className="flex flex-row  ">
-                <Validation isValid={lastname !== ""} />
+                <Validation isValid={lastname !== null} />
                 <input
                   className="  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="text"
@@ -125,7 +125,7 @@ function FormulaireEnfant() {
                 />
               </label>
               <label htmlFor="canwalk" className="flex flex-row items-center  ">
-                <Validation isValid={canwalk !== ""} />
+                <Validation isValid={canwalk !== null} />
                 <input
                   className=" p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500 "
                   type="text"
@@ -136,7 +136,7 @@ function FormulaireEnfant() {
                 />
               </label>
               <label htmlFor="allergie" className="flex  w-full items-center ">
-                <Validation isValid={allergie !== ""} />
+                <Validation isValid={allergie !== null} />
                 <input
                   className=" w-full p-3 border-solid border-2 border-grey-input rounded-lg  placeholder-gray-500"
                   type="text"
@@ -194,11 +194,11 @@ function FormulaireEnfant() {
                     onChange={(evt) => setHealthBook(evt.target.files[0])}
                   />
                 </label>
-                <UploadValidation isValidate={insurance !== null} />
+                <UploadValidation isValidate={healthbook !== null} />
               </div>
               <div className="flex justify-center">
                 <button
-                  className="btn-rounded-purple"
+                  className="btn-rounded-purple mb-5"
                   type="submit"
                   onClick={uploadInsurance}
                 >
@@ -208,8 +208,12 @@ function FormulaireEnfant() {
             </div>
           </form>
         </div>
-        <img alt="documents" src={image} className=" scale-100 mr-14  " />
-        <div className="flex flex-col w-8/12 mr-10">
+        <img
+          alt="documents"
+          src={image}
+          className=" hidden lg:block scale-100 mr-14  "
+        />
+        <div className="flex flex-col md:w-8/12 mr-10">
           <h2 className="flex justify-center  text-2xl font-nunito text-gradient-purple font-semibold py-8">
             Enfants inscrits :
           </h2>{" "}
@@ -222,7 +226,7 @@ function FormulaireEnfant() {
               {child.firstname} {child.lastname}
             </div>
           ))}
-          <div className="flex justify-center">
+          <div className="flex md:justify-center mx-auto">
             <button
               type="submit"
               className="btn-rounded-purple"

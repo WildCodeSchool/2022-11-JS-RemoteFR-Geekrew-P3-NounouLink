@@ -25,12 +25,11 @@ function LocalisationNounou() {
   }, []);
 
   useEffect(() => {
-    if (userId !== null)
-      userAPI.get(`/api/users/${userId}`).then((response) => {
-        setAdresse(`${response.data.adress}`.split(",")[0]);
-        setZip(`${response.data.adress}`.split(",")[1]);
-        setCity(`${response.data.adress}`.split(",")[2]);
-      });
+    userAPI.get(`/api/users/${userId}`).then((response) => {
+      setAdresse(`${response.data.adress}`.split(",")[0]);
+      setZip(`${response.data.adress}`.split(",")[1]);
+      setCity(`${response.data.adress}`.split(",")[2]);
+    });
   }, [userId]);
 
   const handleGeoLoc = () => {
@@ -57,7 +56,7 @@ function LocalisationNounou() {
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="15%" link="Localisation" />
+      <NavbarNounou progress="w-4/12" link="Localisation" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">
