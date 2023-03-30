@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
 import userAPI from "../services/userAPI";
+import { useUserContext } from "../contexts/UserContext";
 
 function NannyReservation() {
+  const { nannyId } = useUserContext();
   const [reservations, setReservations] = useState([]);
   const [children, setChildren] = useState([]);
 
@@ -10,12 +12,14 @@ function NannyReservation() {
     userAPI
       .get(`/api/reservations`)
       .then((res) => {
-        setReservations(res.data);
+        setReservations(
+          res.data.filter((reservation) => reservation.nannyId === nannyId)
+        );
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [nannyId]);
 
   useEffect(() => {
     userAPI

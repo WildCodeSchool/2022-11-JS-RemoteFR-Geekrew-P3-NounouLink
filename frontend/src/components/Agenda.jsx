@@ -4,26 +4,28 @@
 // import moment from "moment";
 // import "moment/locale/fr";
 // import "react-big-calendar/lib/css/react-big-calendar.css";
-// import { Button, Modal, Form, DatePicker, TimePicker } from "antd";
+// import { Button, Modal, Form, DatePicker } from "antd";
 // import userAPI from "../services/userAPI";
+// import { useUserContext } from "../contexts/UserContext";
 
 // import "react-tabs/style/react-tabs.css";
 
-// import EventCard from "../components/EventCard";
 // moment.locale("fr");
 
 // const localizer = momentLocalizer(moment);
-
 // function Agenda() {
 //   const [events, setEvents] = useState(
 //     JSON.parse(localStorage.getItem("events")) || []
 //   );
-//   const [nannyId, setNannyId] = useState("");
-//   const [idSlots, setIdslots] = useState("");
+
+//   const [idSlots, setIdslots] = useState(0);
+//   const [nanniesUsersIdusers, setNanniesUsersIdusers] = useState(0);
 //   const [captionDay, setCaptionDay] = useState("");
 //   const [beginningHour, setBeginningHour] = useState("");
 //   const [endTime, setEndTime] = useState("");
-//   const [placeNumber, setPlaceNumber] = useState("");
+//   const [placeNumber, setPlaceNumber] = useState(0);
+
+//   const { userId, nannyId } = useUserContext();
 
 //   useEffect(() => {
 //     try {
@@ -36,12 +38,13 @@
 //   const [visible, setVisible] = useState(false);
 //   const [date, setDate] = useState(moment());
 //   const [startTime, setStartTime] = useState("");
+//   const [endTime1, setEndTime1] = useState("");
 
 //   const handleSelect = ({ start, end }) => {
 //     const title = window.prompt("Nouvel événement :");
 //     if (title) {
 //       userAPI.get("/api/users").then((res) => {
-//         const userId = res.data.idusers;
+//         cons(res.data.idusers);
 //         const newEvent = {
 //           id: uuidv4(),
 //           start,
@@ -56,78 +59,48 @@
 //     }
 //   };
 
-//   const handleSlot = (event) => {
-//     event.preventDefault();
-//     if (nannyId === null) {
-//       if (
-//         nanniesUsersIdusers &&
-//         captionDay &&
-//         beginningHour &&
-//         endTime &&
-//         placeNumber
-//       )
-//         userAPI
-//           .post("/api/creneaux", {
-//             nanniesUsersIdusers,
-//             captionDay,
-//             beginningHour,
-//             endTime,
-//             placeNumber,
-//           })
-//           .then((response) => {
-//             setNannyId(response.data.nannyId);
-//           })
-//           .catch((error) => {
-//             console.error(error);
-//           });
-//     } else {
-//       {
-//         if (
-//           nanniesUsersIdusers &&
-//           captionDay &&
-//           beginningHour &&
-//           endTime &&
-//           placeNumber
-//         )
-//           userAPI
-//             .put(`/api/creneaux/:${idSlots}`, {
-//               nanniesUsersIdusers,
-//               captionDay,
-//               beginningHour,
-//               endTime,
-//               placeNumber,
-//             })
-//             .then((response) => {
-//               setNannyId(response.data.nannyId);
-//             })
-//             .catch((error) => {
-//               console.error(error);
-//             });
-//       }
-//     }
-//     const showModal = () => {
-//       setVisible(true);
-//     };
-
-//     const handleOk = () => {
-//       const endTimevalue = document.getElementById("endTime").value;
-//       const endTime = moment(endTimevalue, "HH:mm");
-//       const newEvent = {
-//         id: uuidv4(),
-//         start: moment(date).set({
-//           hour: moment(startTime, "LT").hours(),
-//           minute: moment(startTime, "LT").minutes(),
-//         }),
-//         end: moment(date).set({
-//           hour: endTime.hours(),
-//           minute: endTime.minutes(),
-//         }),
+//   const handleSlot = (newEvent) => {
+//     const startDateTime = newEvent.start.format("LT");
+//     const endDateTime = newEvent.end.format("LT");
+//     const dateFormatted = moment(date).format("YYYY-MM-DD");
+//     userAPI
+//       .post("/api/creneaux", {
+//         nanniesUsersIdusers,
+//         date: dateFormatted,
+//         startTime,
+//         endTime,
+//         placeNumber,
 //         title: "Disponibilité",
-//       };
+//       })
+//       .then((response) => {
+//         set(response);
+//         setVisible(false);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   };
+//   const showModal = () => {
+//     setVisible(true);
+//   };
 
-//       setEvents([...events, newEvent]);
-//       setVisible(false);
+//   const handleOk = () => {
+//     const newEvent = {
+//       id: uuidv4(),
+//       start: moment(date).set({
+//         hour: moment(startTime, "LT").hours(),
+//         minute: moment(startTime, "LT").minutes(),
+//       }),
+//       end: moment(date).set({
+//         hour: moment(endTime, "LT").hours(),
+//         minute: moment(endTime, "LT").minutes(),
+//       }),
+//       title: "Disponibilité",
 //     };
+
+//     handleSlot(newEvent);
+//     setEvents([...events, newEvent]);
+//     setVisible(false);
 //   };
 
 //   const handleCancel = () => {
@@ -135,20 +108,30 @@
 //   };
 
 //   const handleDateChange = (value) => {
-//     setDate(value);
+//     setDate(new Date(value));
 //   };
 
 //   const handleStartTimeChange = (time) => {
-//     setStartTime(moment(time).format("LT"));
+//     const startDateTime = new Date(date);
+//     startDateTime.setHours(new Date(time).getHours());
+//     startDateTime.setMinutes(new Date(time).getMinutes());
+//     setStartTime(moment(startDateTime).format("LT"));
+//     setBeginningHour(startDateTime.toISOString());
 //   };
 
 //   const handleEndTimeChange = (time) => {
-//     setEndTime(moment(time).format("LT"));
+//     const endDateTime = new Date(date);
+//     endDateTime.setHours(new Date(time).getHours());
+//     endDateTime.setMinutes(new Date(time).getMinutes());
+//     setEndTime(moment(endDateTime).format("LT"));
+//     setEndTime1(endDateTime.toISOString());
 //   };
+//   console.log(nanniesUsersIdusers);
 //   return (
 //     <div>
 //       <div className="bg-gray-100 h-screen">
 //         <Button onClick={() => setEvents([])}>Clear</Button>
+
 //         <Calendar
 //           className=""
 //           localizer={localizer}
@@ -156,24 +139,47 @@
 //           startAccessor="start"
 //           endAccessor="end"
 //           selectable
+//           views={["month", "agenda"]}
 //           onSelectSlot={handleSelect}
 //         />
-//         {events.map((event) => (
-//           <EventCard
-//             key={event.id}
-//             title={event.title}
-//             date={moment(event.start).format("L")}
-//             time={`${moment(event.start).format("LT")} - ${moment(
-//               event.end
-//             ).format("LT")}`}
-//             onDelete={() => {
-//               setEvents((preEvents) =>
-//                 preEvents.filter((e) => e.id !== event.id)
-//               );
-//             }}
-//           />
-//         ))}
 //       </div>
+
+//       <Modal
+//         title="Ajouter une disponibilité"
+//         open={visible}
+//         onOk={handleOk}
+//         onCancel={handleCancel}
+//         className="bg-white"
+//       >
+//         <Form>
+//           <Form.Item label="Date">
+//             <DatePicker onChange={handleDateChange} defaultValue={date} />
+//           </Form.Item>
+//           <Form.Item label="Heure de début">
+//             <DatePicker.TimePicker
+//               localizer={localizer}
+//               onChange={handleStartTimeChange}
+//               defaultVvalue={moment(startTime, "LT")}
+//             />
+//           </Form.Item>
+//           <Form.Item label="Heure de fin">
+//             <DatePicker.TimePicker
+//               localizer={localizer}
+//               onChange={handleEndTimeChange}
+//               defaulValue={moment(endTime, "LT")}
+//             />
+//           </Form.Item>
+//           <Form.Item label="Nombre de places">
+//             <input
+//               type="number"
+//               min="1"
+//               max="10"
+//               value={placeNumber}
+//               onChange={(e) => setPlaceNumber(e.target.value)}
+//             />
+//           </Form.Item>
+//         </Form>
+//       </Modal>
 //       <Button
 //         className="gradient-linear text-white"
 //         type="button"
@@ -181,37 +187,6 @@
 //       >
 //         Disponibilité
 //       </Button>
-//       <Modal
-//         title="Ajouter une disponibilité"
-//         open={visible}
-//         onClick={handleSlot}
-//         onOk={handleOk}
-//         onCancel={handleCancel}
-//         className="bg-white"
-//       >
-//         <Form>
-//           <Form.Item label="Date">
-//             <DatePicker value={date} onChange={handleDateChange} />
-//           </Form.Item>
-//           <Form.Item label="Date">
-//             <DatePicker value={date} onChange={handleDateChange} />
-//           </Form.Item>
-//           <Form.Item label="Heure de début">
-//             <TimePicker
-//               format="HH:mm"
-//               defaultValue={moment()}
-//               onChange={(time) => setStartTime(moment(time).format("LT"))}
-//             />
-//           </Form.Item>
-//           <Form.Item label="Heure de fin">
-//             <TimePicker
-//               format="HH:mm"
-//               defaultValue={moment()}
-//               onChange={(time) => setEndTime(moment(time).format("LT"))}
-//             />
-//           </Form.Item>
-//         </Form>
-//       </Modal>
 //     </div>
 //   );
 // }

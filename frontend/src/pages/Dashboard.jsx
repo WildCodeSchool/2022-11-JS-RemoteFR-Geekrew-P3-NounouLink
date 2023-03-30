@@ -6,6 +6,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
+import Agenda from "../components/Agenda";
 import SideBar from "../components/Sidebar";
 import SearchBar from "../components/Searchbar";
 import NannyReservation from "../components/NannyReservation";
@@ -97,7 +98,9 @@ function Dashboard() {
                 </div>
               </div>
             </TabPanel>
-            <TabPanel>{/* <Agenda /> */}</TabPanel>
+            <TabPanel>
+              <Agenda />
+            </TabPanel>
             <TabPanel />
             <TabPanel />
           </Tabs>
