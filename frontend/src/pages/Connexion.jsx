@@ -10,7 +10,6 @@ import hero from "../assets/hero-lg.svg";
 
 function Connexion() {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
   const [password, setPassword] = useState("");
 
   const {
@@ -53,20 +52,7 @@ function Connexion() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/creationcompte");
-  };
-
-  const isValidEmail = (mail) => {
-    return /^[\w_.]+@([\w-]+.)+[\w-]{2,4}$/g.test(mail);
-  };
-
   const handleEmailChange = (event) => {
-    if (!isValidEmail(event.target.value)) {
-      setError("Email is invalid");
-    } else {
-      toast.success("Content de vous revoir");
-    }
     setEmail(event.target.value);
   };
 
@@ -120,16 +106,20 @@ function Connexion() {
         dataSet();
         if (res.data.kind === "parent") {
           navigate("/menu");
+          toast.success("Bienvenue");
         }
         if (res.data.kind === "ass_mat") {
           navigate("/pro");
+          toast.success("Bienvenue");
         }
       } catch (err) {
         console.error(err);
+        toast.warning("Please specify a valid email and password");
       }
-    } else {
-      toast.error("Please specify email and password");
     }
+  };
+  const handleClick = () => {
+    navigate("/creationcompte");
   };
 
   return (
@@ -155,7 +145,6 @@ function Connexion() {
             value={email}
             onChange={handleEmailChange}
           />
-          {error && <h2 className="text-red-500">{error}</h2>}
         </label>
         <label className="mix-blend-screen" htmlFor="password">
           <input
@@ -168,10 +157,9 @@ function Connexion() {
             onChange={handlePasswordChange}
           />
         </label>
-        <button className="btn-purple" type="button" onClick={handleSubmit}>
+        <button className="btn-gradient" type="button" onClick={handleSubmit}>
           Me connecter
         </button>
-        <p>J'ai oublié mon mot de passe</p>
         <div className="hidden lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-4 lg:mb-8">
           <p>Créer mon compte</p>
           <button type="submit" onClick={handleClick}>

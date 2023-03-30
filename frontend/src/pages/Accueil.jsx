@@ -30,14 +30,14 @@ function Accueil() {
 
       <button
         type="button"
-        className="btn-purple xl:col-start-2 xl:row-start-4 max-md:landscape:scale-75 max-lg:landscape:scale-75"
+        className="btn-gradient xl:col-start-2 xl:row-start-4 max-md:landscape:scale-75 max-lg:landscape:scale-75"
         onClick={handleConnect}
       >
         Me connecter
       </button>
       <button
         type="button"
-        className="btn-orange xl:col-start-2 xl:row-start-5 max-md:landscape:scale-75 max-lg:landscape:scale-75"
+        className="btn-gradient xl:col-start-2 xl:row-start-5 max-md:landscape:scale-75 max-lg:landscape:scale-75"
         onClick={handleCreate}
       >
         Créer mon compte

@@ -11,7 +11,7 @@ import back from "../../assets/pro/chevron-left.svg";
 import NavbarNounou from "../../components/NavbarNounou";
 
 function PhotosNounou() {
-  const [profilePicNanny, setProfilePicNanny] = useState([]);
+  const [profilePicture, setProfilePicture] = useState([]);
   const { nannyId, setProfilPicture, profilPicture } = useUserContext();
 
   const navigate = useNavigate();
@@ -24,14 +24,14 @@ function PhotosNounou() {
 
   const handleFileUpload = (event) => {
     const selectedFile = event.target.files;
-    setProfilePicNanny(selectedFile);
+    setProfilePicture(selectedFile);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("profilePicNanny", profilePicNanny[0]);
+    formData.append("profilePicture", profilePicture[0]);
 
     userAPI
       .put(`/api/nounous/${nannyId}`, formData, {
@@ -44,7 +44,7 @@ function PhotosNounou() {
 
   return (
     <div className="font-red-hat flex flex-col w-full h-full grow">
-      <NavbarNounou progress="20%" link="Photos" />
+      <NavbarNounou progress="w-6/12" link="Photos" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">
@@ -58,7 +58,7 @@ function PhotosNounou() {
             className="flex flex-col justify-between items-center w-full"
           >
             <div className=" border-4 border-purple-pro text-purple-pro rounded-full h-28 w-28 flex items-center justify-center">
-              {!profilePicNanny.length ? (
+              {!profilePicture.length ? (
                 <img
                   className="max-h-24 max-w-24 self-center  rounded-full"
                   src={`${
@@ -69,7 +69,7 @@ function PhotosNounou() {
               ) : (
                 <img
                   className="max-h-24 max-w-24 self-center  rounded-full"
-                  src={URL.createObjectURL(profilePicNanny[0])}
+                  src={URL.createObjectURL(profilePicture[0])}
                   alt="test"
                 />
               )}
