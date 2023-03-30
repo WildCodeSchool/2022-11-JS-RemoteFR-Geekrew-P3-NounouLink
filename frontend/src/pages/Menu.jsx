@@ -50,11 +50,11 @@ function Menu() {
               />
               <NavLink to="/recherche">Trouver une nounou</NavLink>
             </nav>
-            <nav className="btn-orange shadow-xl flex xl:col-start-2 xl:row-start-5 max-md:landscape:scale-75 max-lg:landscape:scale-75 mt-10 text-center text-base items-center justify-center">
+            <nav className="btn-gradient shadow-xl flex xl:col-start-2 xl:row-start-5 max-md:landscape:scale-75 max-lg:landscape:scale-75 mt-10 text-center text-base items-center justify-center">
               <img
                 alt="rechercher une nounou"
                 src={Loupe}
-                className=" scale-150 mr-1 "
+                className=" scale-150 mr-20 "
               />
               <NavLink to="/reservation">mes resas</NavLink>
             </nav>

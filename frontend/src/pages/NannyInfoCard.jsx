@@ -181,12 +181,6 @@ function NannyInfoCard() {
           key={options.id}
         >
           <h5 className="text-black font-normal text-sm flex">
-            Indemnités /km: {options.price_kilometre}€
-          </h5>
-          <h5 className="text-black font-normal text-sm flex">
-            Option repas: {options.meal_price}€
-          </h5>
-          <h5 className="text-black font-normal text-sm flex">
             Heures suppl.: {options.overtime}€
           </h5>
           <h5 className="text-black font-normal text-sm flex">
