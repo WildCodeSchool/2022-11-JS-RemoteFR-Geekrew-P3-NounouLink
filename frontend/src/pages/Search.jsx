@@ -58,8 +58,10 @@ function Search() {
   return (
     <div className=" gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
       <h1 className="font-bold text-3xl col-start-2 lg:col-start-3 col-end-10 row-start-2 lg:row-start-1 lg:row-end-3 justify-self-center lg:self-center">
-        Garde d’enfant à la demande <br /> {`Enfant concerné: ${childName}`}
+        Garde d’enfant à la demande <br /> {"   "}{" "}
+        <div className="mt-5">{`Enfant concerné: ${childName}`}</div>
       </h1>
+
       {/* <img
         onClick={handleMenu}
         src={logo}
@@ -75,7 +77,7 @@ function Search() {
         <label htmlFor="child">
           <select
             onChange={handleChangeName}
-            className="text-black border-2 border-gray-300 p-2"
+            className="text-black border-2 bg-gray-200 shadow-lg shadow-blue-500/50 rounded-lg border-gray-300 p-2"
           >
             <option value="">---</option>
 
@@ -96,10 +98,10 @@ function Search() {
 
         <label htmlFor="address">
           <input
+            className="text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
             name="address"
             id="address"
             placeholder="Adresse"
-            className="input "
             value={adress}
             onChange={(event) => setAdress(event.target.value)}
           />
@@ -113,7 +115,7 @@ function Search() {
             placeholder="Date & heure de début"
             onFocus={handleTypeFocus}
             onBlur={handleTypeBlur}
-            className="input"
+            className="text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
             value={startDate}
             onChange={(e) => {
               setStartDate(e.target.value);
@@ -128,7 +130,7 @@ function Search() {
             placeholder="Date & heure de fin"
             onFocus={handleTypeFocus}
             onBlur={handleTypeBlur}
-            className="input"
+            className="text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
             value={endDate}
             onChange={(e) => {
               setEndDate(e.target.value);
@@ -137,7 +139,7 @@ function Search() {
         </label>
       </form>
       <button
-        className="btn-purple col-start-2 lg:col-start-3 col-end-10 row-start-9 lg:row-start-10 lg:row-end-11 justify-self-center lg:self-end"
+        className="btn-purple text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 col-start-2 lg:col-start-3 col-end-10 row-start-9 lg:row-start-10 lg:row-end-11 justify-self-center lg:self-end "
         type="button"
         onClick={handleSubmitSearch}
       >

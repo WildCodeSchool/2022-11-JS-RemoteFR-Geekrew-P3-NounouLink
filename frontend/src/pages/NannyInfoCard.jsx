@@ -56,7 +56,6 @@ function NannyInfoCard() {
         childrenParentsUsersIdusers: userId,
       })
       .then((res) => {
-        // console.log(res.data);
         console.warn(res);
       })
       .catch((error) => {
@@ -64,7 +63,7 @@ function NannyInfoCard() {
       });
     navigate("/confirmationReservation");
   };
-  // console.log(nannyCard);
+
   return (
     <main className="gradient-linear h-full flex flex-col items-center">
       <header className="text-white font-bold font-nunito text-3xl flex justify-center">

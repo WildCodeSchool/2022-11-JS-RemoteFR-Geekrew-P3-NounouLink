@@ -9,8 +9,8 @@ import ConfirmationcreationCompte from "./pages/Confirmationcreationcompte";
 import Connexion from "./pages/Connexion";
 import FormulaireEnfant from "./pages/FormulaireEnfant";
 import FormulaireParent from "./pages/FormulaireParent";
-import SearchResults from "./pages/SearchResults";
 import Reservation from "./pages/Reservation";
+import SearchResults from "./pages/SearchResults";
 import ConfirmationReservation from "./pages/ConfirmationReservation";
 
 import Dashboard from "./pages/Dashboard";
