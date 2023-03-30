@@ -65,16 +65,16 @@ function NannyInfoCard() {
   };
 
   return (
-    <main className="gradient-linear h-full flex flex-col items-center">
+    <main className="gradient-linear w-full flex flex-col items-center grow">
       <header className="text-white font-bold font-nunito text-3xl flex justify-center">
         <button type="button" onClick={() => navigate(-1)}>
           <img src={back} alt="Revenir en arrière" />{" "}
         </button>
-        <h2 className="px-auto"> {nannyCard.map((nanny) => nanny.ad_name)}</h2>
+        <h2 className="px-auto"> Revenir aux résultats</h2>
       </header>
       <div className="bg-white m-7 rounded-2xl flex flex-col h-full max-w-lg">
         <img
-          src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+          src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
             nannyCard[0]?.pictures
           }`}
           alt="annonce"

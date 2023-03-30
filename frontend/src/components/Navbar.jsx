@@ -18,7 +18,7 @@ function Navbar() {
   };
 
   return (
-    <div className=" gradient-linear h-20 ">
+    <div className=" gradient-linear h-[19] ">
       <nav>
         <NavLink
           className="focus:outline-none"
@@ -28,7 +28,7 @@ function Navbar() {
         />
 
         <div className="mb-8">
-          <div className="flex flex-row items-center justify-evenly  pt-[2rem]">
+          <div className="flex flex-row items-center justify-evenly pb-[1rem] pt-[1rem]">
             <NavLink
               style={getActiveLinkStyle(location.pathname === "/Menu")}
               to="/menu"

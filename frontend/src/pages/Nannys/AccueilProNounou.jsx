@@ -47,16 +47,22 @@ function AccueilProNounou() {
             </NavLink>
           </div>
           <div className="flex  w-full">
-            <img src={presentation} alt="avatar" />{" "}
-            <h4 className="pl-8">Présentation</h4>
+            <NavLink to="/pro-presentation" className="flex w-full">
+              <img src={presentation} alt="avatar" />{" "}
+              <h4 className="pl-8">Présentation</h4>
+            </NavLink>
           </div>
           <div className="flex  w-full">
-            <img src={calendar} alt="calendrier" />{" "}
-            <h4 className="pl-8">Calendrier et disponibilités</h4>
+            <NavLink to="/pro-horaires" className="flex w-full">
+              <img src={calendar} alt="calendrier" />{" "}
+              <h4 className="pl-8">Horaires et disponibilités</h4>
+            </NavLink>
           </div>
           <div className="flex  w-full">
-            <img src={admin} alt="boîte à dossier" />{" "}
-            <h4 className="pl-8">Administratif</h4>
+            <NavLink to="/pro-securite" className="flex w-full">
+              <img src={admin} alt="boîte à dossier" />
+              <h4 className="pl-8">Administratif</h4>
+            </NavLink>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ function SearchResults() {
                 onClick={() => navigate(`/resultat/${nannyCard.idnannies}`)}
               >
                 <img
-                  src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
+                  src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
                     nannyCard.pictures
                   }`}
                   alt={nannyCard.pictures}

@@ -9,39 +9,78 @@ import creerAnnonce from "../../assets/pro/heroAnnonce.svg";
 import back from "../../assets/pro/chevron-left.svg";
 
 import NavbarNounou from "../../components/NavbarNounou";
-import SecuriteUpload from "../../components/SecuriteUpload";
+import NounouUploadValidation from "../../components/NounouUploadValidation";
 
 function SecuriteNounou() {
+  const [numAgrement, setNumAgrement] = useState([]);
+  const [dateAgrement, setDateAgrement] = useState([]);
+  const [id, setId] = useState(null);
+  const [secuCertificate, setSecuCertificate] = useState(null);
+  const [proofOfResidence, setProofOfResidence] = useState(null);
+  const [diploma, setDiploma] = useState(null);
+  const [homeInsurance, setHomeInsurance] = useState(null);
+  const [carInsurance, setCarInsurance] = useState(null);
   const { nannyId } = useUserContext();
 
-  const [hourlyRate, setHourlyRate] = useState([]);
-  const [tariffMajor, setTariffMajor] = useState([]);
-  const [overtime, setOvertime] = useState([]);
-
   const navigate = useNavigate();
+
   useEffect(() => {
     if (nannyId !== null)
       userAPI.get(`/api/nounous/${nannyId}`).then((response) => {
-        // console.log(response.data);
-        setHourlyRate(`${response.data.hourly_rate}`);
-        setTariffMajor(`${response.data.tariff_major}`);
-        setOvertime(`${response.data.overtime}`);
+        setNumAgrement(response.data.aggregation_number);
+        setDateAgrement(response.data.date_agreement);
       });
   }, [nannyId]);
 
+  const handleInputChangeId = (e) => {
+    setId(e.target.files);
+  };
+
+  const handleInputChangeSecu = (e) => {
+    setSecuCertificate(e.target.files);
+  };
+
+  const handleInputChangeProofRes = (e) => {
+    setProofOfResidence(e.target.files);
+  };
+
+  const handleInputChangeDiploma = (e) => {
+    setDiploma(e.target.files);
+  };
+
+  const handleInputChangeInsurance = (e) => {
+    setHomeInsurance(e.target.files);
+  };
+
+  const handleInputChangeCarInsurance = (e) => {
+    setCarInsurance(e.target.files);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    userAPI.put(`/api/nounous/${nannyId}`, {
-      hourlyRate,
-      tariffMajor,
-      overtime,
-    });
-    navigate("/pro-localisation");
+
+    const formData = new FormData();
+
+    formData.append("aggregationNumber", numAgrement);
+    formData.append("dateAgreement", dateAgrement);
+
+    formData.append("id", id[0]);
+    formData.append("secuCertificate", secuCertificate[0]);
+    formData.append("proofOfResidence", proofOfResidence[0]);
+    formData.append("diploma", diploma[0]);
+    formData.append("homeInsurance", homeInsurance[0]);
+    formData.append("carInsurance", carInsurance[0]);
+
+    userAPI
+      .put(`/api/nounous/${nannyId}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => res.data);
   };
 
   return (
     <div className="font-red-hat flex flex-col w-full grow">
-      <NavbarNounou progress="80%" link="Tarif" />
+      <NavbarNounou progress="w-full" link="Securite" />
       <div className="flex flex-row w-full h-full">
         <div className="font-red-hat flex flex-col justify-evenly w-full min-h-fit px-8">
           <h3 className="text-black font-medium text-lg ">Vérifications </h3>
@@ -54,40 +93,100 @@ function SecuriteNounou() {
             className="flex flex-col w-full justify-around"
           >
             <label
-              htmlFor="tarif horaire"
+              htmlFor="numeroAgrement"
               className="flex flex-col w-full justify-evenly text-base"
             >
               Numéro d’aggrément
               <input
                 type="text"
-                value={`${hourlyRate}`}
-                onChange={(e) => setHourlyRate(e.target.value)}
-                name="tarif horaire"
+                value={numAgrement}
+                onChange={(e) => setNumAgrement(e.target.value)}
+                name="numeroAgrement"
                 className="rounded-xl p-2 max-w-max ring ring-grey-input my-2"
               />
             </label>
             <label
-              htmlFor="heures spécifiques"
+              htmlFor="dateAggrement"
               className="flex flex-col w-full justify-evenly text-base"
             >
               Date d’aggrément
               <input
                 type="text"
-                value={`${tariffMajor}`}
-                onChange={(e) => setTariffMajor(e.target.value)}
-                name="heures spécifiques"
+                value={dateAgrement}
+                onChange={(e) => setDateAgrement(e.target.value)}
+                name="dateAggrement"
                 className="rounded-xl p-2 max-w-max ring ring-grey-input my-2"
               />
             </label>
             <h3 className="text-black font-medium text-lg ">
               A préparer pour la signature du contrat
             </h3>
-            <SecuriteUpload AskedDoc="Carte d’identité ou passeport/ carte de résident ou titre de séjour et autorisation de travail. " />
-            <SecuriteUpload AskedDoc="Carte vitale ou attestation de sécurité sociale" />
-            <SecuriteUpload AskedDoc="Justificatif de domicile" />
-            <SecuriteUpload AskedDoc="Justificatifs de formations (Brevet de secourisme, CAP,…) et/ou d’expériences (certificats de travail)" />
-            <SecuriteUpload AskedDoc="Assurance responsabilité civile" />
-            <SecuriteUpload AskedDoc="Assurance auto" />
+            <label className="grid grid-cols-5 items-center">
+              <h4 className="col-start-1 col-span-4">
+                Carte d'identité, passeport, titre de séjour et/ou permis de
+                travail
+              </h4>
+              <NounouUploadValidation doc={id} />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleInputChangeId}
+              />
+            </label>
+            <label className="grid grid-cols-5 items-center">
+              <h4 className="col-start-1 col-span-4">
+                Carte vitale ou attestation de sécurité sociale
+              </h4>
+              <NounouUploadValidation doc={secuCertificate} />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleInputChangeSecu}
+              />
+            </label>
+            <label className="grid grid-cols-5 items-center">
+              <h4 className="col-start-1 col-span-4">
+                Justificatif de domicile
+              </h4>
+              <NounouUploadValidation doc={proofOfResidence} />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleInputChangeProofRes}
+              />
+            </label>
+            <label className="grid grid-cols-5 items-center">
+              <h4 className="col-start-1 col-span-4">
+                Justificatifs de formations (Brevet de secourisme, CAP,…) et/ou
+                d’expériences (certificats de travail)
+              </h4>
+              <NounouUploadValidation doc={diploma} />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleInputChangeDiploma}
+              />
+            </label>
+            <label className="grid grid-cols-5 items-center">
+              <h4 className="col-start-1 col-span-4">
+                Assurance responsabilité civile
+              </h4>
+              <NounouUploadValidation doc={homeInsurance} />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleInputChangeInsurance}
+              />
+            </label>
+            <label className="grid grid-cols-5 items-center">
+              <h4 className="col-start-1 col-span-4">Assurance auto</h4>
+              <NounouUploadValidation doc={carInsurance} />
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleInputChangeCarInsurance}
+              />
+            </label>
           </form>
 
           <div className="flex justify-between">

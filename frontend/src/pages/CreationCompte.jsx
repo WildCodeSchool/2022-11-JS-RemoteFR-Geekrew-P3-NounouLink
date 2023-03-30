@@ -43,9 +43,7 @@ function CreationCompte() {
         .then((res) => {
           setUserId(res.data.userId);
           console.warn(res);
-          toast.success("La création a réussi !");
         })
-
         .catch((error) => {
           console.error(error);
           toast.error(
@@ -137,7 +135,7 @@ function CreationCompte() {
             placeholder="Mot de passe"
           />
           <button
-            className="btn-purple md:ml-auto lg:hidden "
+            className="btn-gradient md:ml-auto lg:hidden "
             type="submit"
             onClick={handleSubmit}
           >
@@ -146,7 +144,7 @@ function CreationCompte() {
         </form>
         <div className="lg:pt-8">
           <button
-            className="btn-purple md:ml-auto hidden lg:block "
+            className="btn-gradient md:ml-auto hidden lg:block "
             type="submit"
             onClick={handleSubmit}
           >

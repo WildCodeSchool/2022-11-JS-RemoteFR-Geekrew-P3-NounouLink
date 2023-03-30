@@ -22,7 +22,14 @@ function ActivityList({ activity, onToggle }) {
 }
 
 ActivityList.propTypes = {
-  activity: PropTypes.shape.isRequired,
+  activity: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      pass: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
   onToggle: PropTypes.func.isRequired,
 };
 
