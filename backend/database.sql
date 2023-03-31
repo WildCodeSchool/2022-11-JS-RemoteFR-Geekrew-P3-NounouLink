@@ -190,7 +190,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`reservations` (
   `children_idchildren` INT NOT NULL,
   `children_parents_idparents` INT NOT NULL,
   `children_parents_users_idusers` INT NOT NULL,
-  PRIMARY KEY (`parents_idparents`, `parents_users_idusers`, `nannies_idnannies`, `nannies_users_idusers`),
   INDEX `fk_parents_has_nannies_nannies1_idx` (`nannies_idnannies` ASC, `nannies_users_idusers` ASC) VISIBLE,
   INDEX `fk_parents_has_nannies_parents1_idx` (`parents_idparents` ASC, `parents_users_idusers` ASC) VISIBLE,
   INDEX `fk_reservations_children1_idx` (`children_idchildren` ASC, `children_parents_idparents` ASC, `children_parents_users_idusers` ASC) VISIBLE,

@@ -12,10 +12,9 @@ function NannyInfoCard() {
   const [nannyServices, setNannyServices] = useState([]);
   const [nannyDetails, setNannyDetails] = useState([]);
 
-  const { parentId, userId } = useUserContext();
+  const { parentId, userId, childrenId } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
-
   useEffect(() => {
     userAPI.get(`/api/nounous/${id}`).then((res) => setNannyCard([res.data]));
   }, []);
@@ -44,10 +43,16 @@ function NannyInfoCard() {
       .post(`/api/reservations`, {
         parentsIdparents: parentId,
         parentsUsersIdusers: userId,
-        nanniesIdnannies: id,
-        nanniesUsersIdusers: nannyDetails.map((nanny) => nanny.users_idusers),
+        nanniesIdnannies: nannyCard[0].idnannies,
+        nanniesUsersIdusers: nannyCard[0].users_idusers,
+        reservationok: false,
         startdate: matchSearch[2],
         enddate: matchSearch[3],
+        frequence: null,
+        flexibility: null,
+        childrenIdchildren: childrenId,
+        childrenParentsIdparents: parentId,
+        childrenParentsUsersIdusers: userId,
       })
       .then((res) => {
         console.warn(res);
@@ -55,7 +60,7 @@ function NannyInfoCard() {
       .catch((error) => {
         console.error(error);
       });
-    navigate("/confirmationreservation");
+    navigate("/confirmationReservation");
   };
 
   return (
@@ -174,12 +179,6 @@ function NannyInfoCard() {
           className=" flex p-4 flex-wrap justify-between font-nunito"
           key={options.id}
         >
-          <h5 className="text-black font-normal text-sm flex">
-            Indemnités /km: {options.price_kilometre}€
-          </h5>
-          <h5 className="text-black font-normal text-sm flex">
-            Option repas: {options.meal_price}€
-          </h5>
           <h5 className="text-black font-normal text-sm flex">
             Heures suppl.: {options.overtime}€
           </h5>

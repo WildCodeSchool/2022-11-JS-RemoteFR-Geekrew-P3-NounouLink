@@ -50,7 +50,7 @@ function NannyReservation() {
     <div>
       {reservations.map((reservation, index) => (
         <div
-          className="flex flex-row justify-"
+          className="flex flex-row justify-center"
           key={reservation.idreservations ?? index}
         >
           <p>{getChildInfo(reservation.childrenId)}</p>

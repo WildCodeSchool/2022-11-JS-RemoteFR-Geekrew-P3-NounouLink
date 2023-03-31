@@ -15,7 +15,7 @@ function Search() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { parentId, adress, setAdress } = useUserContext();
+  const { parentId, adress, setAdress, setChildrenId } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function Search() {
         <label className="landscape:mt-5 " htmlFor="child">
           <select
             onChange={handleChangeName}
-            className="text-black rounded-md "
+            className="pl-2 text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
           >
             <option value="">---</option>
 
@@ -83,6 +83,9 @@ function Search() {
                 key={child.idchildren}
               >
                 {child.firstname}
+                <span className="hidden">
+                  {setChildrenId(child.idchildren)}
+                </span>
               </option>
             ))}
           </select>
@@ -90,10 +93,10 @@ function Search() {
 
         <label htmlFor="address">
           <input
+            className="pl-2 text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
             name="address"
             id="address"
             placeholder="Adresse"
-            className="input "
             value={adress}
             onChange={(event) => setAdress(event.target.value)}
           />
@@ -107,7 +110,7 @@ function Search() {
             placeholder="Date & heure de début"
             onFocus={handleTypeFocus}
             onBlur={handleTypeBlur}
-            className="input"
+            className="pl-2 text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
             value={startDate}
             onChange={(e) => {
               setStartDate(e.target.value);
@@ -122,7 +125,7 @@ function Search() {
             placeholder="Date & heure de fin"
             onFocus={handleTypeFocus}
             onBlur={handleTypeBlur}
-            className="input"
+            className="pl-2 text-black h-10 rounded-lg bg-gray-200 shadow-lg shadow-blue-500/50 "
             value={endDate}
             onChange={(e) => {
               setEndDate(e.target.value);

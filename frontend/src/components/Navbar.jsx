@@ -5,6 +5,7 @@ import Trombone from "../assets/trombone.svg";
 import Loupe from "../assets/Loupe.svg";
 import EnfantAdd from "../assets/enfantAdd.svg";
 import home from "../assets/home-white.svg";
+import calendarIcone from "../assets/calendarIcone.svg";
 
 function Navbar() {
   const [blur, setBlur] = useState(false);
@@ -64,6 +65,16 @@ function Navbar() {
               <img
                 alt="rechercher une nounou"
                 src={Loupe}
+                className="scale-150 "
+              />
+            </NavLink>
+            <NavLink
+              style={getActiveLinkStyle(location.pathname === "/Reservation")}
+              to="/reservation"
+            >
+              <img
+                alt="voir mes reservations"
+                src={calendarIcone}
                 className="scale-150 "
               />
             </NavLink>

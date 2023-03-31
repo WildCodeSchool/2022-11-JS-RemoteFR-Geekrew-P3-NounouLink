@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userAPI from "../services/userAPI";
+import Navbar from "../components/Navbar";
 
 import filter from "../assets/filter.svg";
 import trier from "../assets/trier.svg";
@@ -10,7 +11,6 @@ function SearchResults() {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [infosNanny, setInfosNanny] = useState([]);
   const test = [];
-
   const navigate = useNavigate();
   useEffect(() => {
     userAPI.get(`/api/creneaux`).then((response) => {
@@ -55,13 +55,15 @@ function SearchResults() {
 
   return (
     <>
+      <Navbar />
       <label htmlFor="child">
         <select
           name="child"
           id="child"
           className="text-black font-nunito text-md flex w-full drop-shadow-filter"
         >
-          <option className="">Ville - Date - heure début</option>
+          {/* <div>{localStorage.getItem()}</div> */}
+          <option className="flex flex-row ">Ville - Date - heure début</option>
         </select>
       </label>
       <div className="flex flex-row justify-between w-full px-2 py-4">
@@ -114,7 +116,7 @@ function SearchResults() {
                     </p>
                   )}
                   <h3 className="text-black font-extrabold text-2xl">
-                    {nannyCard.hourly_rate}€
+                    {nannyCard.hourly_rate} €
                   </h3>
                 </div>
               </button>
