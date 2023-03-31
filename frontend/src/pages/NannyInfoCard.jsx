@@ -15,7 +15,6 @@ function NannyInfoCard() {
   const { parentId, userId, childrenId } = useUserContext();
   const { id } = useParams();
   const navigate = useNavigate();
-
   useEffect(() => {
     userAPI.get(`/api/nounous/${id}`).then((res) => setNannyCard([res.data]));
   }, []);

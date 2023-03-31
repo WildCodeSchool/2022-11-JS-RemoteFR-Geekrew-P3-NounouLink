@@ -15,7 +15,7 @@ function Search() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { parentId, adress, setAdress } = useUserContext();
+  const { parentId, adress, setAdress, setChildrenId } = useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,6 +83,9 @@ function Search() {
                 key={child.idchildren}
               >
                 {child.firstname}
+                <span className="hidden">
+                  {setChildrenId(child.idchildren)}
+                </span>
               </option>
             ))}
           </select>
