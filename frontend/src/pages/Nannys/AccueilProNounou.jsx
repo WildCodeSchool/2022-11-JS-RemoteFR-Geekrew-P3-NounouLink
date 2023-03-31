@@ -64,6 +64,11 @@ function AccueilProNounou() {
               <h4 className="pl-8">Administratif</h4>
             </NavLink>
           </div>
+          <div className="flex  w-full">
+            <NavLink to="/dashboard" className="flex w-full">
+              <button type="button">Voir mon dashboard</button>
+            </NavLink>
+          </div>
         </div>
       </div>
       <div className="hidden gradient-linear w-full lg:flex flex-col justify-between h-full p-8 grow">
