@@ -17,6 +17,7 @@ function Agenda() {
   const [events, setEvents] = useState(
     JSON.parse(localStorage.getItem("events")) || []
   );
+
   const [beginningHour, setBeginningHour] = useState("");
   const [endTime, setEndTime] = useState("");
   const [placeNumber, setPlaceNumber] = useState(0);
@@ -35,6 +36,9 @@ function Agenda() {
   const [date, setDate] = useState(moment());
   const [startTime, setStartTime] = useState("");
 
+  const showModal = () => {
+    setVisible(true);
+  };
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("Nouvel événement :");
     if (title) {
@@ -46,54 +50,77 @@ function Agenda() {
       };
       setEvents((preEvents) => [...preEvents, newEvent]);
     }
-  };
-  const showModal = () => {
-    setVisible(true);
 
-    setStartTime(moment(startTime).format("LT"));
+    setStartTime(moment(start).format("LT"));
     showModal();
   };
 
   const handleSlot = () => {
+    const currentOffset = moment().utcOffset();
     const startDateTime = moment(date)
-      .utc()
+      .utcOffset(currentOffset)
       .set({
         hour: moment(startTime, "LT").hours(),
         minute: moment(startTime, "LT").minutes(),
       })
       .local();
     const endDateTime = moment(date)
-      .utc()
+      .utcOffset(currentOffset)
       .set({
         hour: moment(endTime, "LT").hours(),
         minute: moment(endTime, "LT").minutes(),
       })
       .local();
-    // const dateFormatted = moment(date).format("YYYY-MM-DD");
-    // const formatHour = () => {
-    //   const hour2 = (
-    //     parseInt(dateFormatted.toISOString().substring(11, 12), 10) + 2
-    //   )
-    //     .toString()
-    //     .padStart(2, "0");
+    const datebis = new Date(startDateTime.toISOString());
+    const formattedDate = datebis.toLocaleString("fr-FR", {
+      timeZone: "UTC",
+      dateStyle: "short",
+      timeStyle: "medium",
+    });
+    const dateTime = formattedDate.replace(",", "");
+    // console.log(dateTime); // Output: "3/31/2023, 5:00:24 AM"
+    const formattedDateTime = dateTime
+      .replace("/", "-")
+      .replace("/", "-")
+      .replace(",", "");
+    // console.log(formattedDateTime); // Output: "3-31-2023 5:00:24 AM"
 
-    //   return hour2.toString().padStart;
-    // };
+    const dateStr = formattedDateTime;
+    const parts = dateStr.split(" ");
+    const dateParts5 = parts[0].split("-");
+    const formattedDate5 = `${dateParts5[2]}-${dateParts5[1]}-${dateParts5[0]}`;
+    const formattedTime5 = parts[1];
+    const formattedDateTime5 = `${formattedDate5} ${formattedTime5}`;
+    // console.log(formattedDateTime5); // Output: "2023-03-31 04:00:35"
 
+    const datebis1 = new Date(endDateTime.toISOString());
+    const formattedDate1 = datebis1.toLocaleString("fr-FR", {
+      timeZone: "UTC",
+      dateStyle: "short",
+      timeStyle: "medium",
+    });
+    const dateTime1 = formattedDate1.replace(",", "");
+    // console.log(dateTime1); // Output: "3/31/2023, 5:00:24 AM"
+    const formattedDateTime1 = dateTime1
+      .replace("/", "-")
+      .replace("/", "-")
+      .replace(",", "");
+    // console.log(formattedDateTime1); // Output: "3-31-2023 5:00:24 AM"
+
+    const dateStr1 = formattedDateTime1;
+    const parts1 = dateStr1.split(" ");
+    const dateParts1 = parts1[0].split("-");
+    const formattedDate2 = `${dateParts1[2]}-${dateParts1[1]}-${dateParts1[0]}`;
+    const formattedTime1 = parts1[1];
+    const formattedDateTime2 = `${formattedDate2} ${formattedTime1}`;
+    // console.log(formattedDateTime2); // Output: "2023-03-31 04:00:35"
     userAPI
       .post("/api/creneaux", {
         nanniesIdnannies: nannyId,
         nanniesUsersIdusers: userId,
-        beginningHour: `${startDateTime.toISOString().substring(0, 10)} 
-${new Date(startDateTime.toISOString().substring(11, 19)).toLocaleTimeString(
-  "fr-FR",
-  {
-    timeZone: "Europe/Paris",
-  }
-)}`.toString(),
 
-        endTime: `${endDateTime.toISOString().substring(0, 10)} 
-          ${endDateTime.toISOString().substring(11, 19)}`,
+        beginningHour: formattedDateTime5,
+        endTime: formattedDateTime2,
         placeNumber,
         title: "Disponibilité",
       })
