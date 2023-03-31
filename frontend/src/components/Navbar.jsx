@@ -67,6 +67,18 @@ function Navbar() {
                 className="scale-150 "
               />
             </NavLink>
+            <NavLink
+              style={getActiveLinkStyle(
+                location.pathname === "/ConfirmationReservation"
+              )}
+              to="/confirmationReservation"
+            >
+              <img
+                alt="rechercher une nounou"
+                src={Loupe}
+                className="scale-150 "
+              />
+            </NavLink>
           </div>
         </div>
       </nav>

@@ -86,6 +86,14 @@ function FormulaireEnfant() {
     });
   }, [uploadInsurance]);
 
+  useEffect(() => {
+    userAPI.get(`/api/enfants`).then((response) => {
+      setDataChildren(
+        response.data.filter((child) => child.parents_idparents === parentId)
+      );
+    });
+  }, [uploadInsurance]);
+
   return (
     <div className="bg-gray-100 grow ">
       <Navbar />
@@ -96,14 +104,14 @@ function FormulaireEnfant() {
             Ajouter un enfant :
           </p>
           <form className=" flex flex-col  items-center  ">
-            <div className="flex flex-col justify-center text-grey-input gap-7 lg:gap-10 ">
+            <div className="flex flex-col justify-center text-black-input gap-7 lg:gap-10 ">
               <label
                 htmlFor="firstname"
                 className=" flex flex-row items-center  "
               >
                 <Validation isValid={firstname !== null} />
                 <input
-                  className="  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
+                  className="   bg-gray-200 shadow-lg shadow-blue-500/50 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="text"
                   id="firstname"
                   value={firstname}
@@ -115,7 +123,7 @@ function FormulaireEnfant() {
               <label htmlFor="lastname" className="flex flex-row  ">
                 <Validation isValid={lastname !== null} />
                 <input
-                  className="  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
+                  className=" bg-gray-200 shadow-lg shadow-blue-500/50  p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="text"
                   id="lastname"
                   value={lastname}
@@ -127,7 +135,7 @@ function FormulaireEnfant() {
               <label htmlFor="canwalk" className="flex flex-row items-center  ">
                 <Validation isValid={canwalk !== null} />
                 <input
-                  className=" p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500 "
+                  className=" bg-gray-200 shadow-lg shadow-blue-500/50 p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500 "
                   type="text"
                   id="canWalk"
                   checked={canwalk}
@@ -138,7 +146,7 @@ function FormulaireEnfant() {
               <label htmlFor="allergie" className="flex  w-full items-center ">
                 <Validation isValid={allergie !== null} />
                 <input
-                  className=" w-full p-3 border-solid border-2 border-grey-input rounded-lg  placeholder-gray-500"
+                  className=" bg-gray-200 shadow-lg shadow-blue-500/50 w-full p-3 border-solid border-2 border-grey-input rounded-lg  placeholder-gray-500"
                   type="text"
                   id="allergie"
                   value={allergie}
@@ -152,7 +160,7 @@ function FormulaireEnfant() {
               >
                 <Validation isValid={birthdate !== ""} />
                 <input
-                  className=" w-full p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
+                  className=" bg-gray-200 shadow-lg shadow-blue-500/50 w-full p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12 placeholder-gray-500"
                   type="date"
                   id="birthdate"
                   value={birthdate}
@@ -165,11 +173,11 @@ function FormulaireEnfant() {
                 <Validation isValid={insurance !== null} />
                 <label
                   htmlFor="insurance"
-                  className="  bg-white w-5/6 items-center p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12"
+                  className="   bg-gray-200 shadow-lg shadow-blue-500/50 w-5/6 items-center p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12"
                 >
                   <span className="text-grey"> Assurance </span>
                   <input
-                    className=" mds:w-10/12 hidden"
+                    className="   mds:w-10/12 hidden"
                     type="file"
                     id="insurance"
                     onChange={(evt) => setInsurance(evt.target.files[0])}
@@ -183,7 +191,7 @@ function FormulaireEnfant() {
                 <Validation isValid={healthbook !== null} />
                 <label
                   htmlFor="healthbook"
-                  className=" bg-white w-full items-center p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12"
+                  className="  bg-gray-200 shadow-lg shadow-blue-500/50 w-full items-center p-3 border-solid border-2 border-grey-input rounded-lg mds:w-10/12"
                 >
                   <span className="text-grey"> Carnet de santé </span>
                   <input
@@ -198,7 +206,7 @@ function FormulaireEnfant() {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="btn-rounded-purple mb-5"
+                  className="btn-rounded-purple bg-gray-200 shadow-lg shadow-blue-500/50 "
                   type="submit"
                   onClick={uploadInsurance}
                 >
@@ -219,7 +227,7 @@ function FormulaireEnfant() {
           </h2>{" "}
           {dataChildren.map((child) => (
             <div
-              className="flex justify-center mb-8 text-xl border-solid border-2 border-grey-input rounded-lg text-black"
+              className="flex justify-center  bg-gray-200 shadow-lg shadow-blue-500/50  mb-8 text-xl border-solid border-2 border-grey-input rounded-lg text-black"
               value={child.firstname}
               key={child.idchildren}
             >
@@ -229,7 +237,7 @@ function FormulaireEnfant() {
           <div className="flex md:justify-center mx-auto">
             <button
               type="submit"
-              className="btn-rounded-purple"
+              className="btn-rounded-purple  bg-gray-200 shadow-lg shadow-blue-500/50"
               onClick={handleSearch}
             >
               chercher une nounou

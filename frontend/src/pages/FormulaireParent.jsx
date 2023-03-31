@@ -85,23 +85,23 @@ function FormulaireParent() {
   };
 
   return (
-    <div>
+    <div className="h-full bg-gray-100">
       <Navbar />
       <p className="ml-9 text-xl font-nunito text-gradient-purple font-semibold py-8 lg:ml-20 ">
         Dossier Inscription
       </p>
 
       <form
-        className=" text-grey-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto"
+        className=" text-black-input grid  gap-7 space-between justify-center lg:grid lg:grid-cols-1 lg:gap-10 lg:w-4/5 ml-auto mr-auto "
         onSubmit={handleSubmit}
       >
         <label
           htmlFor="cafNumber"
-          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4"
+          className="flex flex-row mr-2 ml-7 lg:ml-24 lg:mr-4 "
         >
           <Validation isValid={cafNumber !== ""} />
           <input
-            className="w-4/6 ml-6  text-black p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
+            className="w-4/6 ml-6  text-black p-3 border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]  bg-gray-200 shadow-lg shadow-blue-500/50"
             type="text"
             id="cafNumber"
             value={cafNumber}
@@ -116,7 +116,7 @@ function FormulaireParent() {
         >
           <Validation isValid={exitPermit !== ""} />
           <input
-            className="w-4/6 ml-6 p-3 text-black border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]"
+            className="w-4/6 ml-6 p-3 text-black border-solid border-2 border-grey-input rounded-lg lg:ml-[6.5rem]  bg-gray-200 shadow-lg shadow-blue-500/50"
             type="text"
             id="exitPermit"
             value={exitPermit}
@@ -131,7 +131,7 @@ function FormulaireParent() {
         >
           <Validation isValid={imageRights !== ""} />
           <input
-            className="w-4/6 ml-6 p-3 border-solid border-2 text-black  border-grey-input rounded-lg lg:ml-[6.5rem]"
+            className="w-4/6 ml-6 p-3 border-solid border-2 text-black  border-grey-input rounded-lg lg:ml-[6.5rem]  bg-gray-200 shadow-lg shadow-blue-500/50"
             type="text"
             id="imageRights"
             value={imageRights}
@@ -141,7 +141,10 @@ function FormulaireParent() {
           />
         </label>
 
-        <button className="btn-rounded-purple mx-auto " type="submit">
+        <button
+          className="btn-rounded-purple ml-44 lg:ml-[50%]   shadow-lg shadow-blue-500/50"
+          type="submit"
+        >
           Enregistrer
         </button>
       </form>
