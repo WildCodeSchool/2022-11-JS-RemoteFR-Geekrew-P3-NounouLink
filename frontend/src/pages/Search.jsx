@@ -45,11 +45,6 @@ function Search() {
     setChildName(e.target.value);
   };
 
-  // const handleMenu = (e) => {
-  //   e.preventDefault();
-  //   navigate("/Menu");
-  // };
-  // console.log(dataChildren);
   return (
     <div className="gradient-linear grid grid-cols-10 grid-rows-10  lg:grid-cols-3 h-full text-white font-nunito lg:p-8">
       <NavLink to="/menu">
