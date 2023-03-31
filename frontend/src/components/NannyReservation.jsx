@@ -13,9 +13,12 @@ function NannyReservation() {
       .get(`/api/reservations`)
       .then((res) => {
         setReservations(
-          res.data.filter((reservation) => reservation.nannyId === nannyId)
+          res.data.filter(
+            (reservation) => reservation.nannies_idnannies === nannyId
+          )
         );
       })
+
       .catch((err) => {
         console.error(err);
       });

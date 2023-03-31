@@ -109,7 +109,7 @@ function Connexion() {
           toast.success("Bienvenue");
         }
         if (res.data.kind === "ass_mat") {
-          navigate("/pro");
+          navigate("/dashboard");
           toast.success("Bienvenue");
         }
       } catch (err) {
