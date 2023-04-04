@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema baby_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `baby_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `baby_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
 USE `baby_db` ;
 
 -- -----------------------------------------------------
@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`parents` (
   `image_rights` VARCHAR(45) CHARACTER SET 'utf8mb4' NULL DEFAULT NULL,
   `users_idusers` INT NOT NULL,
   PRIMARY KEY (`idparents`, `users_idusers`),
-  INDEX `fk_parent_users1_idx` (`users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_parent_users1`
     FOREIGN KEY (`users_idusers`)
     REFERENCES `baby_db`.`users` (`idusers`))
@@ -68,7 +67,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`children` (
   `parents_idparents` INT NOT NULL,
   `parents_users_idusers` INT NOT NULL,
   PRIMARY KEY (`idchildren`, `parents_idparents`, `parents_users_idusers`),
-  INDEX `fk_children_parents1_idx` (`parents_idparents` ASC, `parents_users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_children_parents1`
     FOREIGN KEY (`parents_idparents` , `parents_users_idusers`)
     REFERENCES `baby_db`.`parents` (`idparents` , `users_idusers`))
@@ -109,7 +107,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`nannies` (
   `date_agreement` DATE NULL DEFAULT NULL,
   `places_max` INT NULL DEFAULT NULL,
   PRIMARY KEY (`idnannies`, `users_idusers`),
-  INDEX `fk_nannies_users1_idx` (`users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_nannies_users1`
     FOREIGN KEY (`users_idusers`)
     REFERENCES `baby_db`.`users` (`idusers`))
@@ -128,8 +125,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`favorites` (
   `nannies_idnannies` INT NOT NULL,
   `nannies_users_idusers` INT NOT NULL,
   PRIMARY KEY (`idfavorites`, `parents_idparents`, `parents_users_idusers`, `nannies_idnannies`, `nannies_users_idusers`),
-  INDEX `fk_favorites_parents1_idx` (`parents_idparents` ASC, `parents_users_idusers` ASC) VISIBLE,
-  INDEX `fk_favorites_nannies1_idx` (`nannies_idnannies` ASC, `nannies_users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_favorites_nannies1`
     FOREIGN KEY (`nannies_idnannies` , `nannies_users_idusers`)
     REFERENCES `baby_db`.`nannies` (`idnannies` , `users_idusers`),
@@ -190,9 +185,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`reservations` (
   `children_idchildren` INT NOT NULL,
   `children_parents_idparents` INT NOT NULL,
   `children_parents_users_idusers` INT NOT NULL,
-  INDEX `fk_parents_has_nannies_nannies1_idx` (`nannies_idnannies` ASC, `nannies_users_idusers` ASC) VISIBLE,
-  INDEX `fk_parents_has_nannies_parents1_idx` (`parents_idparents` ASC, `parents_users_idusers` ASC) VISIBLE,
-  INDEX `fk_reservations_children1_idx` (`children_idchildren` ASC, `children_parents_idparents` ASC, `children_parents_users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_parents_has_nannies_nannies1`
     FOREIGN KEY (`nannies_idnannies` , `nannies_users_idusers`)
     REFERENCES `baby_db`.`nannies` (`idnannies` , `users_idusers`),
@@ -220,7 +212,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`slots` (
   `nannies_idnannies` INT NOT NULL,
   `nannies_users_idusers` INT NOT NULL,
   PRIMARY KEY (`idslots`, `nannies_idnannies`, `nannies_users_idusers`),
-  INDEX `fk_slots_nannies1_idx` (`nannies_idnannies` ASC, `nannies_users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_slots_nannies1`
     FOREIGN KEY (`nannies_idnannies` , `nannies_users_idusers`)
     REFERENCES `baby_db`.`nannies` (`idnannies` , `users_idusers`))
@@ -236,7 +227,6 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`superusers` (
   `idsuperusers` INT NOT NULL AUTO_INCREMENT,
   `users_idusers` INT NOT NULL,
   PRIMARY KEY (`idsuperusers`, `users_idusers`),
-  INDEX `fk_superusers_users1_idx` (`users_idusers` ASC) VISIBLE,
   CONSTRAINT `fk_superusers_users1`
     FOREIGN KEY (`users_idusers`)
     REFERENCES `baby_db`.`users` (`idusers`))
