@@ -33,7 +33,7 @@ const edit = (req, res) => {
 
   // TODO validations (length, format...)
 
-  reservations.id = parseInt(req.params.id, 10);
+  reservations.idreservations = parseInt(req.params.id, 10);
 
   models.reservations
     .update(reservations)

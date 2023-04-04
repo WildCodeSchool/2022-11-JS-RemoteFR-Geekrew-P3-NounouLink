@@ -36,13 +36,13 @@ function Reservation() {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 grow h-full">
       <Navbar />
       <div className="flex flex-col  rounded justify-center items-center mt-10  ">
         {reservation.map((resa) => (
           <div
             className={`flex flex-row items-center max-w-4xl mx-10 mt-5 h-32 border-2 rounded-lg shadow-md gap-10 text-lg ${
-              resa.reservationok === 0 ? "border-red-400" : "border-green-400"
+              resa.reservationok === 0 ? "border-red-400" : "border-green"
             }`}
             key={resa.idreservation}
           >
