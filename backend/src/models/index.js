@@ -34,52 +34,60 @@ const ItemManager = require("./ItemManager");
 models.item = new ItemManager();
 models.item.setDatabase(pool);
 
-const SuperutilisateurManager = require("./SuperutilisateurManager");
+const SuperusersManager = require("./SuperusersManager");
 
-models.superutilisateur = new SuperutilisateurManager();
-models.superutilisateur.setDatabase(pool);
+models.superusers = new SuperusersManager();
+models.superusers.setDatabase(pool);
 
 const UsersManager = require("./UsersManager");
 
 models.users = new UsersManager();
 models.users.setDatabase(pool);
 
-const NounousManager = require("./NounousManager");
+const NanniesManager = require("./NanniesManager");
 
-models.nounous = new NounousManager();
-models.nounous.setDatabase(pool);
+models.nannies = new NanniesManager();
+models.nannies.setDatabase(pool);
 
 const ParentsManager = require("./ParentsManager");
 
 models.parents = new ParentsManager();
 models.parents.setDatabase(pool);
 
-const EnfantsManager = require("./EnfantsManager");
+const ChildrenManager = require("./ChildrenManager");
 
-models.enfants = new EnfantsManager();
-models.enfants.setDatabase(pool);
+models.children = new ChildrenManager();
+models.children.setDatabase(pool);
 
 const ReservationsManager = require("./ReservationsManager");
 
-models.reservation = new ReservationsManager();
-models.reservation.setDatabase(pool);
+models.reservations = new ReservationsManager();
+models.reservations.setDatabase(pool);
 
-const FavorisManager = require("./FavorisManager");
+const FavoritesManager = require("./FavoritesManager");
 
-models.favoris = new FavorisManager();
-models.favoris.setDatabase(pool);
+models.favorites = new FavoritesManager();
+models.favorites.setDatabase(pool);
 
-const CrenauxManager = require("./CrenauxManager");
+const SlotsManager = require("./SlotsManager");
 
-models.crenaux = new CrenauxManager();
-models.crenaux.setDatabase(pool);
+models.slots = new SlotsManager();
+models.slots.setDatabase(pool);
 
 const ServicesManager = require("./ServicesManager");
 
 models.services = new ServicesManager();
 models.services.setDatabase(pool);
 
-// export models
+const MatchManager = require("./MatchManager");
+
+models.match = new MatchManager();
+models.match.setDatabase(pool);
+
+const ServicesNounousManager = require("./ServicesNounousManager");
+
+models.servicesNounous = new ServicesNounousManager();
+models.servicesNounous.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
@@ -100,5 +108,7 @@ const handler = {
     );
   },
 };
+
+// export models
 
 module.exports = new Proxy(models, handler);

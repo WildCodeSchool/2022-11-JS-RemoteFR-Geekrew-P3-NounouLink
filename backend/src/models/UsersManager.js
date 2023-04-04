@@ -7,12 +7,11 @@ class UsersManager extends AbstractManager {
 
   insert(users) {
     return this.database.query(
-      `insert into ${this.table} (iduser, firstname, lastname, type, email, adress, phone, password) values (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} ( firstname, lastname, kind, email, adress, phone, hashedPassword) values (?, ?, ?, ?, ?, ?, ?)`,
       [
-        users.iduser,
         users.firstname,
         users.lastname,
-        users.type,
+        users.kind,
         users.email,
         users.adress,
         users.phone,
@@ -21,19 +20,40 @@ class UsersManager extends AbstractManager {
     );
   }
 
-  update(users) {
+  findkind(iduser) {
     return this.database.query(
-      `update ${this.table} set firstname = ?, lastname = ?, type = ?, email = ?, adress = ?, phone = ?, password = ? where iduser = ?`,
-      [
-        users.firstname,
-        users.lastname,
-        users.type,
-        users.email,
-        users.adress,
-        users.phone,
-        users.password,
-        users.iduser,
-      ]
+      ` SELECT * FROM users LEFT JOIN parents ON parents.users_idusers = users.idusers LEFT JOIN nannies ON nannies.users_idusers = users.idusers  WHERE idusers = ?`,
+      [iduser]
+    );
+  }
+
+  login(email) {
+    return this.database.query(
+      `select email, idusers from ${this.table} where email = ?`,
+      [email]
+    );
+  }
+
+  update(users) {
+    const sql = [];
+
+    const data = Object.keys(users)
+      .slice(0, -1)
+      .map((elem) => {
+        sql.push(`${elem} = ?`);
+        return users[elem];
+      });
+
+    return this.database.query(
+      `update ${this.table} set ${sql.join(",")} where idusers = ?`,
+      [...data, users.idusers]
+    );
+  }
+
+  getUserByEmail(email) {
+    return this.database.query(
+      `SELECT idusers from ${this.table} WHERE email = ?`,
+      [email]
     );
   }
 }

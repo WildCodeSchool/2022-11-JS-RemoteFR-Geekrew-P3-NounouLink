@@ -34,7 +34,6 @@ const edit = (req, res) => {
   // TODO validations (length, format...)
 
   parents.idparents = parseInt(req.params.id, 10);
-
   models.parents
     .update(parents)
     .then(([result]) => {
@@ -58,7 +57,7 @@ const add = (req, res) => {
   models.parents
     .insert(parents)
     .then(([result]) => {
-      res.location(`/parents/${result.insertId}`).sendStatus(201);
+      res.status(201).send({ parentsId: result.insertId });
     })
     .catch((err) => {
       console.error(err);

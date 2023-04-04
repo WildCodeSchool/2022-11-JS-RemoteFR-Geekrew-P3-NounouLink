@@ -6,18 +6,21 @@ const path = require("node:path");
 // create express app
 
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 // use some application-level middlewares
 
 app.use(express.json());
+app.use(cookieParser());
 
 const cors = require("cors");
 
 app.use(
   cors({
     origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+    credentials: true,
     optionsSuccessStatus: 200,
   })
 );
@@ -47,6 +50,11 @@ if (fs.existsSync(reactIndexFile)) {
   // serve REACT resources
 
   app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+  // app.use("/", express.static(path.join(__dirname, "../public")));
+  app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "../public/uploads"))
+  );
 
   // redirect all requests to the REACT index file
 

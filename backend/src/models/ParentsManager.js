@@ -7,28 +7,34 @@ class ParentsManager extends AbstractManager {
 
   insert(parents) {
     return this.database.query(
-      `insert into ${this.table} (numcaf,autsortie,droitimage, users_iduser) values (?,?,?,?)`,
+      `insert into ${this.table} (caf_number, exit_permit, image_rights, users_idusers) values (?,?,?,?)`,
       [
-        parents.numcaf,
-        parents.autsortie,
-        parents.droitimage,
-        parents.users_iduser,
+        parents.cafNumber,
+        parents.exitPermit,
+        parents.imageRights,
+        parents.usersIdusers,
       ]
+    );
+  }
+
+  find(id) {
+    return this.database.query(
+      `select * from  ${this.table} WHERE id${this.table} = ?`,
+      [id]
     );
   }
 
   update(parents) {
     return this.database.query(
-      `update ${this.table} set numcaf = ? , autsortie = ? ,droitimage = ?, users_iduser = ?  where idparents = ?`,
+      `update ${this.table} set caf_number = ? , exit_permit = ? ,image_rights = ?, users_idusers = ?  where idparents = ?`,
       [
-        parents.numcaf,
-        parents.autsortie,
-        parents.droitimage,
-        parents.users_iduser,
-        parents.idparents,
+        parents.cafNumber,
+        parents.exitPermit,
+        parents.imageRights,
+        parents.usersIdusers,
+        parents.parentId,
       ]
     );
   }
 }
-
 module.exports = ParentsManager;

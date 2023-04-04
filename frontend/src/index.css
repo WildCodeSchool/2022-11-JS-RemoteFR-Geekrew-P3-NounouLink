@@ -3,3 +3,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply box-border m-0 p-0;
+}
+
+html,
+body,
+#root {
+  @apply h-full;
+}
+
+#root {
+  @apply flex flex-col;
+}
+
+.gradient-linear {
+  @apply bg-gradient-to-br from-gradient-purple to-gradient-pink;
+}
+
+.btn-purple {
+  @apply bg-purple rounded-xl text-white w-[300px] h-[70px] drop-shadow-button font-nunito font-extrabold text-2xl;
+}
+
+.btn-gradient {
+  @apply bg-gradient-to-br rounded-xl text-white w-[300px] h-[70px] drop-shadow-xl font-nunito font-extrabold text-2xl;
+}
+
+.btn-rounded-purple {
+  @apply bg-darkPurple rounded-full text-white w-[180px] h-[70px] drop-shadow-button font-nunito font-bold text-2xl;
+}
+
+.input {
+  @apply bg-grey-input rounded-lg w-[18rem] h-[3rem] max-lg:landscape:h-[2rem]  bg-opacity-30 placeholder-white pl-4;
+}
+
+.gradient-blue {
+  @apply bg-gradient-to-br from-gradient-light to-gradient-orange;
+}

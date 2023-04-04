@@ -7,45 +7,40 @@ class ReservationsManager extends AbstractManager {
 
   insert(reservations) {
     return this.database.query(
-      `insert into ${this.table} (parents_idparents,parents_users_iduser,nounous_idnounou,nounous_users_iduser,reservationok,startdate,enddate,frequence,flexibility) values (?,?,?,?,?,?,?,?,?)`,
+      `insert into ${this.table} (parents_idparents,parents_users_idusers,nannies_idnannies,nannies_users_idusers,reservationok,startdate,enddate,children_idchildren,children_parents_idparents,
+  children_parents_users_idusers) values (?,?,?,?,?,?,?,?,?,?)`,
       [
-        reservations.parents_idparents,
-        reservations.parents_users_iduser,
-        reservations.nounous_idnounou,
-        reservations.nounous_users_iduser,
+        reservations.parentsIdparents,
+        reservations.parentsUsersIdusers,
+        reservations.nanniesIdnannies,
+        reservations.nanniesUsersIdusers,
         reservations.reservationok,
         reservations.startdate,
         reservations.enddate,
-        reservations.frequence,
-        reservations.flexibility,
+        reservations.childrenIdchildren,
+        reservations.childrenParentsIdparents,
+        reservations.childrenParentsUsersIdusers,
       ]
     );
   }
 
   update(reservations) {
+    const sql = [];
+    const data = Object.keys(reservations)
+      .slice(0, -1)
+      .map((elem) => {
+        sql.push(
+          `${elem.replace(
+            /[A-Z]/g,
+            (letter) => `_${letter.toLowerCase()}`
+          )} = ?`
+        );
+        return reservations[elem];
+      });
+
     return this.database.query(
-      `update ${this.table} set parents_idparents = ? ,
-       parents_users_iduser = ? ,
-       nounous_idnounou = ?,
-       nounous_users_iduser = ? ,
-       reservationok = ?,
-       startdate = ?,
-       enddate = ?,
-       frequence = ?,
-       flexibility = ?,
-       where idreservations = ?`,
-      [
-        reservations.parents_idparents,
-        reservations.parents_users_iduser,
-        reservations.nounous_idnounou,
-        reservations.nounous_users_iduser,
-        reservations.reservationok,
-        reservations.startdate,
-        reservations.enddate,
-        reservations.frequence,
-        reservations.flexibility,
-        reservations.idreservations,
-      ]
+      `update ${this.table} set ${sql.join(",")} where idreservations = ?`,
+      [...data, reservations.idreservations]
     );
   }
 }
