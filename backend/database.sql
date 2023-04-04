@@ -173,6 +173,7 @@ CREATE TABLE `nannies_has_services` (
 -- Table `baby_db`.`reservations`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `baby_db`.`reservations` (
+    `idreservations` INT NOT NULL AUTO_INCREMENT,
   `parents_idparents` INT NOT NULL,
   `parents_users_idusers` INT NOT NULL,
   `nannies_idnannies` INT NOT NULL,

@@ -25,27 +25,22 @@ class ReservationsManager extends AbstractManager {
   }
 
   update(reservations) {
+    const sql = [];
+    const data = Object.keys(reservations)
+      .slice(0, -1)
+      .map((elem) => {
+        sql.push(
+          `${elem.replace(
+            /[A-Z]/g,
+            (letter) => `_${letter.toLowerCase()}`
+          )} = ?`
+        );
+        return reservations[elem];
+      });
+
     return this.database.query(
-      `update ${this.table} set parents_idparents = ? ,
-       parents_users_idusers = ? ,
-       nannies_idnannies = ?,
-       nannies_users_idusers = ? ,
-       reservationok = ?,
-       startdate = ?,
-       enddate = ?,
-       children_idchildren = ?
-       where idreservations = ?`,
-      [
-        reservations.parentsIdparents,
-        reservations.parentsUsersIdusers,
-        reservations.nanniesIdnannies,
-        reservations.nanniesUsersIdusers,
-        reservations.reservationok,
-        reservations.startdate,
-        reservations.enddate,
-        reservations.childrenIdchildren,
-        reservations.idreservations,
-      ]
+      `update ${this.table} set ${sql.join(",")} where idreservations = ?`,
+      [...data, reservations.idreservations]
     );
   }
 }

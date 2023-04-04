@@ -76,6 +76,7 @@ function SecuriteNounou() {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => res.data);
+    navigate("/dashboard");
   };
 
   return (
