@@ -186,6 +186,7 @@ CREATE TABLE IF NOT EXISTS `baby_db`.`reservations` (
   `children_idchildren` INT NOT NULL,
   `children_parents_idparents` INT NOT NULL,
   `children_parents_users_idusers` INT NOT NULL,
+  PRIMARY KEY (idreservations),
   CONSTRAINT `fk_parents_has_nannies_nannies1`
     FOREIGN KEY (`nannies_idnannies` , `nannies_users_idusers`)
     REFERENCES `baby_db`.`nannies` (`idnannies` , `users_idusers`),
